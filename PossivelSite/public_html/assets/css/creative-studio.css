@@ -25,6 +25,18 @@
   background-color: #9a0801;
   color: white;
 }
+#H6Slogan {
+  margin-bottom: 1.2rem;
+  font-weight: bold;
+}
+.menuInicial {
+  width: 80%;
+
+}
+#btnInicial {
+  margin-top: 1.5rem;
+  text-align: start;
+}
 
 
 
@@ -2795,8 +2807,8 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
   color: #fff;
-  background-color:#c53421;
-  border-color: #ed0031;
+  background-color:#770600;
+  border-color: #770600;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2812,8 +2824,8 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #ed0031;
-  border-color: #e0002e;
+  background-color: #9a0801;
+  border-color: #9a0801;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,

@@ -87,7 +87,7 @@
 	content: "\e614";
 }
 .ti-ruler-pencil:before {
-	content: "\e615";
+	content: "\e614";
 }
 .ti-ruler-alt:before {
 	content: "\e616";
@@ -114,7 +114,7 @@
 	content: "\e61d";
 }
 .ti-paint-roller:before {
-	content: "\e61e";
+	content: "\e63d";
 }
 .ti-paint-bucket:before {
 	content: "\e61f";
@@ -162,10 +162,10 @@
 	content: "\e62d";
 }
 .ti-layout:before {
-	content: "\e62e";
+	content: "\e62a";
 }
 .ti-layers:before {
-	content: "\e62f";
+	content: "\e678";
 }
 .ti-layers-alt:before {
 	content: "\e630";
@@ -360,7 +360,7 @@
 	content: "\e66f";
 }
 .ti-thumb-up:before {
-	content: "\e670";
+	content: "\e680";
 }
 .ti-thumb-down:before {
 	content: "\e671";
@@ -396,7 +396,7 @@
 	content: "\e67b";
 }
 .ti-notepad:before {
-	content: "\e67c";
+	content: "\e63c";
 }
 .ti-server:before {
 	content: "\e67d";
@@ -510,7 +510,7 @@
 	content: "\e6a1";
 }
 .ti-filter:before {
-	content: "\e6a2";
+	content: "\e64d";
 }
 .ti-files:before {
 	content: "\e6a3";

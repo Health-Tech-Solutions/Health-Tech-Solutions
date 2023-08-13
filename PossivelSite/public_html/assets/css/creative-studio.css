@@ -628,13 +628,17 @@ pre code {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  justify-content: center;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
 }
-
+/* Espaço para adicionar novidades de CSS, implementando nosssa versão; */
+.img-wrapper > h5 > span{
+  color: rgb(112, 20, 20);
+}
 .no-gutters {
   margin-right: 0;
   margin-left: 0;
@@ -11117,7 +11121,7 @@ p {
 .widget .widget-item:after {
   content: "\e649";
   font-family: 'themify';
-  font-size: 12px;
+  font-size: 15px;
   color: #9a0801;
   position: absolute;
   top: 50%;
@@ -11165,6 +11169,7 @@ p {
   position: relative;
   width: 100%;
   z-index: 8;
+  height: 50vh;
 }
 
 .img-wrapper .overlay {

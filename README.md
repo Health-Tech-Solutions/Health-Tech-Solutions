@@ -42,7 +42,7 @@
  <img style="border-radius: 50%;" src="https://media.licdn.com/dms/image/D4D03AQEZwRzE53hwPw/profile-displayphoto-shrink_400_400/0/1687270527990?e=1697068800&v=beta&t=PZ7JSCBqR3JmJnt4JBx_JxhzSZYpUO4udR9MTqt4sOo" width="100px;" alt=""/>
  <sub><b>Lucas Garcia</b></sub>
 
-[![Linkedin Badge](https://img.shields.io/badge/-Lucas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=www.linkedin.com/in/lucas-au-garcia)](www.linkedin.com/in/lucas-au-garcia) 
+[![Linkedin Badge](https://img.shields.io/badge/-Lucas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-au-garcia)](www.linkedin.com/in/lucas-au-garcia) 
 
 ---
 

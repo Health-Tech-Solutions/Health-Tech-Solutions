@@ -9,22 +9,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Health Tech Solutions</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="css/all.css" rel="stylesheet" type="text/css">
+
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
 
 </head>
 
 <body class="bg-gradient-primary">
 
-    <div class="container">
+    <div class="container container-center">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
@@ -32,52 +35,96 @@
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-7">
+                        <a href="../site/public_html/index.html" class="btn btn-goback">
+                            <img src="img/voltar.png" class="btn-goback-image">
+                            <p>Voltar</p>
+                        </a>
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4" id="tituloCadastro">Cadastre-se</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                            <div class="primeiroCadastro" id="primeiroCadastro">
+                                <form class="user">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="InputNome"
+                                            placeholder="Nome">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" id="InputEmail"
+                                            placeholder="Email">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="InputSenha" placeholder="Senha">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="password" class="form-control form-control-user"
+                                                id="InputConfirmacaoSenha" placeholder="Confirme a senha">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                    <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()">
+                                        Continuar
+                                    </a>
+                                </form>
+                            </div>
+                            <div class="segundoCadastro" id="segundoCadastro">
+                                <form class="user">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="InputNomeFantasia"
+                                            placeholder="Nome Fantasia">
                                     </div>
-                                </div>
-                                <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
-                                </a>
-                                <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
-                            </form>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="InputTelefone" placeholder="Telefone">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user"
+                                                id="InputCNPJ" placeholder="CNPJ">
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()">
+                                        Continuar
+                                    </a>
+                                </form>
+                            </div>
+                            <div class="terceiroCadastro" id="terceiroCadastro">
+                                <form class="user">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user"
+                                            id="InputCEP" placeholder="CEP">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user"
+                                            id="InputNumero" placeholder="Número">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="InputComplemento"
+                                            placeholder="Complemento">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Selecione o plano de interesse
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" onclick="planoPrata()">Prata</a>
+                                            <a class="dropdown-item" onclick="planoGold()">Gold</a>
+                                            <a class="dropdown-item" onclick="planoRubi()">Rubi</a>
+                                            </div>
+                                         </div>
+                                    </div>
+                                    <a class="btn btn-primary btn-user btn-block">
+                                        Cadastrar
+                                    </a>
+                                </form>
+                            </div>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small" href="login.html">Já possuí uma conta? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -96,6 +143,34 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    
+    <script src="../PossivelSite/public_html/assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="../PossivelSite/public_html/assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <script>
+    document.getElementById("primeiroCadastro").style.display = "block"; 
+
+        function planoPrata() {
+            dropdownMenuButton.innerHTML= 'Prata';
+        }
+        function planoGold() {
+            dropdownMenuButton.innerHTML= 'Gold';
+        }
+        function planoRubi() {
+            dropdownMenuButton.innerHTML= 'Rubi';
+        }
+        function trocarTela() {
+            if(primeiroCadastro.style.display == 'block') {
+                document.getElementById("primeiroCadastro").style.display = "none"; 
+                document.getElementById("segundoCadastro").style.display = "block"; 
+                tituloCadastro.innerHTML = 'Cadastre sua corporação';
+            } else if (segundoCadastro.style.display == 'block') {
+                document.getElementById("segundoCadastro").style.display = "none"; 
+                document.getElementById("terceiroCadastro").style.display = "block"; 
+                tituloCadastro.innerHTML = 'Cadastre seu endereço';
+            }
+        }
+    </script>
 
 </body>
 

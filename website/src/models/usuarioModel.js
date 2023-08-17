@@ -24,14 +24,14 @@ function cadastrar(nome, email, senha, empresaId) {
 
 function recuperar(email){
     const sql = `
-        SELECT count(*) total FROM funcionario WHERE email = '${email}'
+        SELECT idFuncionario FROM funcionario WHERE email = '${email}'
     `
     return database.executar(sql)
 }
 
 function alterarSenha(id, senha){
     const sql = ` 
-        UPDATE funcionario SET senha = '${senha}' WHERE idFuncionacio = ${id}
+        UPDATE funcionario SET senha = '${senha}' WHERE idFuncionario = ${id}
     `
     return database.executar(sql)
 }

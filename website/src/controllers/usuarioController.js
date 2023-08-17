@@ -98,10 +98,10 @@ function recuperar(req, res){
     }
     usuarioModel.recuperar(email)
         .then(function(resultado){
-            if(resultado[0].total > 0){
-                enviarEmail(email)
+            if(resultado.length > 0){
+                enviarEmail(email, resultado[0].idFuncionario)
                 resultado.status(200).json({msg: "Email enviado!"})
-            }    
+            }
         })
         .catch(function(erro){
             

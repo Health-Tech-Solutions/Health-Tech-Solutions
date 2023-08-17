@@ -6,5 +6,8 @@
     "start": "node ./website/app.js",
     "dev": "cd website && npm run dev",
     "postinstall": "cd website && npm install"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.4"
   }
 }

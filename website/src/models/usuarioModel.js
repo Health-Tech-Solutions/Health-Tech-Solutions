@@ -22,7 +22,23 @@ function cadastrar(nome, email, senha, empresaId) {
     return database.executar(instrucao);
 }
 
+function recuperar(email){
+    const sql = `
+        SELECT idFuncionario FROM funcionario WHERE email = '${email}'
+    `
+    return database.executar(sql)
+}
+
+function alterarSenha(id, senha){
+    const sql = ` 
+        UPDATE funcionario SET senha = '${senha}' WHERE idFuncionario = ${id}
+    `
+    return database.executar(sql)
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    recuperar,
+    alterarSenha
 };

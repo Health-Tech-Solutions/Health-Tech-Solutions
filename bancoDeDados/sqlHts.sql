@@ -6,7 +6,7 @@ create table endereco(
 	idEndereco int primary key auto_increment,
     cep char(9),
     numero varchar(10),
-    complmento varchar(10)
+    complemento varchar(10)
 );
 
 create table empresa(

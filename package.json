@@ -1,0 +1,13 @@
+{
+  "name": "website",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./website/app.js",
+    "dev": "cd website && npm run dev",
+    "postinstall": "cd website && npm install"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.4"
+  }
+}

@@ -63,7 +63,7 @@
                                                 id="InputConfirmacaoSenha" placeholder="Confirme a senha">
                                         </div>
                                     </div>
-                                    <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()">
+                                    <a class="btn btn-primary btn-user btn-block" onclick="verifEmail()">
                                         Continuar
                                     </a>
                                 </form>
@@ -76,12 +76,12 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="InputTelefone" placeholder="Telefone">
+                                            <input type="text" class="form-control form-control-user" id="InputTelefone"
+                                                placeholder="Telefone">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="InputCNPJ" placeholder="CNPJ">
+                                            <input type="text" class="form-control form-control-user" id="InputCNPJ"
+                                                placeholder="CNPJ">
                                         </div>
                                     </div>
                                     <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()">
@@ -93,12 +93,12 @@
                                 <form class="user">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                            id="InputCEP" placeholder="CEP">
+                                            <input type="text" class="form-control form-control-user" id="InputCEP"
+                                                placeholder="CEP">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user"
-                                            id="InputNumero" placeholder="Número">
+                                            <input type="text" class="form-control form-control-user" id="InputNumero"
+                                                placeholder="Número">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -107,17 +107,19 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="dropdown d-inline-block">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Selecione o plano de interesse
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Selecione o plano de interesse
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" onclick="planoPrata()">Prata</a>
-                                            <a class="dropdown-item" onclick="planoGold()">Gold</a>
-                                            <a class="dropdown-item" onclick="planoRubi()">Rubi</a>
+                                                <a class="dropdown-item" onclick="planoPrata()">Prata</a>
+                                                <a class="dropdown-item" onclick="planoGold()">Gold</a>
+                                                <a class="dropdown-item" onclick="planoRubi()">Rubi</a>
                                             </div>
-                                         </div>
+                                        </div>
                                     </div>
-                                    <a class="btn btn-primary btn-user btn-block">
+                                    <a class="btn btn-primary btn-user btn-block" onclick="cadastarEndereco()">
                                         Cadastrar
                                     </a>
                                 </form>
@@ -143,33 +145,384 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    
+
     <script src="../PossivelSite/public_html/assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="../PossivelSite/public_html/assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 
     <script>
-    document.getElementById("primeiroCadastro").style.display = "block"; 
+        var fkEndereco;
+        var fkEmpresa;
+        document.getElementById("primeiroCadastro").style.display = "block";
 
         function planoPrata() {
-            dropdownMenuButton.innerHTML= 'Prata';
+            dropdownMenuButton.innerHTML = 'Prata';
         }
         function planoGold() {
-            dropdownMenuButton.innerHTML= 'Gold';
+            dropdownMenuButton.innerHTML = 'Gold';
         }
         function planoRubi() {
-            dropdownMenuButton.innerHTML= 'Rubi';
+            dropdownMenuButton.innerHTML = 'Rubi';
         }
         function trocarTela() {
-            if(primeiroCadastro.style.display == 'block') {
-                document.getElementById("primeiroCadastro").style.display = "none"; 
-                document.getElementById("segundoCadastro").style.display = "block"; 
+            if (primeiroCadastro.style.display == 'block') {
+                document.getElementById("primeiroCadastro").style.display = "none";
+                document.getElementById("segundoCadastro").style.display = "block";
                 tituloCadastro.innerHTML = 'Cadastre sua corporação';
             } else if (segundoCadastro.style.display == 'block') {
-                document.getElementById("segundoCadastro").style.display = "none"; 
-                document.getElementById("terceiroCadastro").style.display = "block"; 
+                document.getElementById("segundoCadastro").style.display = "none";
+                document.getElementById("terceiroCadastro").style.display = "block";
                 tituloCadastro.innerHTML = 'Cadastre seu endereço';
             }
         }
+
+
+        function verifEmail() {
+            var erro = false;
+            var emailVar = InputEmail.value;
+            
+            if (InputNome.value == '') {
+                alert("Favor inserir o nome do usuário");
+                erro = true;
+            }
+            if (emailVar == "") {
+                alert("Favor fornecer um email");
+                erro = true;
+            }
+            if (InputConfirmacaoSenha.value != InputSenha.value) {
+                alert('As senhas não correspondem');
+                erro = true;
+            }
+            if (emailVar.indexOf("@") == -1) {
+                alert('Insira um email válido')
+                erro = true;
+            }
+            if (InputSenha.value == '' || InputConfirmacaoSenha.value == '') {
+                alert('Favor fornecer uma senha')
+                erro = true;
+            }
+            if (erro == false) {
+                // Enviando o valor da nova input
+                fetch("/usuarios/verifEmail", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        emailServer: emailVar,
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            console.log()
+                            resposta.json().then(json => {
+                                console.log(JSON.stringify(json));
+                                console.log(json)
+                                if (json[0] != undefined) {
+                                    alert('Este email já está registrado');
+                                }
+                                else {
+                                    trocarTela();
+                                }
+                            })
+                        } else {
+                            throw "Houve um erro ao tentar validar o email";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
+
+                return false;
+            }
+        }
+
+        function cadastarEndereco() {
+            var erro = false;
+            var cepVar = InputCEP.value;
+            var numeroVar = InputNumero.value;
+            var complementoVar = InputComplemento.value;
+
+            if (cepVar == undefined) {
+                alert("Favor inserir o CEP");
+                erro = true;
+            }
+            if (numeroVar == undefined) {
+                alert("Favor fornecer um número");
+                erro = true;
+            }
+            if (complementoVar == undefined) {
+                alert('Insira um complemento');
+                erro = true;
+            }
+            if (erro == false) {
+                fetch("/usuarios/cadastrarEndereco", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        cepServer: cepVar,
+                        numeroServer: numeroVar,
+                        complementoServer: complementoVar
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            console.log()
+                            console.log("Cadastro de Endereco realizado, prosseguindo para busca de fk")
+                            buscaFkEndereco();
+
+                        } else {
+                            throw "Houve um erro ao cadastrar endereço";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
+
+                return false;
+            }
+
+        }
+
+        function buscaFkEndereco() {
+            var erro = false;
+            var cepVar = InputCEP.value;
+            var numeroVar = InputNumero.value;
+            var complementoVar = InputComplemento.value;
+
+            if (cepVar == undefined) {
+                alert("Favor inserir o CEP");
+                erro = true;
+            }
+            if (numeroVar == undefined) {
+                alert("Favor fornecer um número");
+                erro = true;
+            }
+            if (complementoVar == undefined) {
+                alert('Insira um complemento');
+                erro = true;
+            }
+            if (erro == false) {
+                fetch("/usuarios/buscarFkEndereco", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        cepServer: cepVar,
+                        numeroServer: numeroVar,
+                        complementoServer: complementoVar
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            resposta.json().then(json => {
+                                console.log(JSON.stringify(json));
+                                if (json[0] != undefined) {
+                                    fkEndereco= json[0].idEndereco;
+                                    cadastarEmpresa();
+                                }
+                                else {
+                                    console.log("Não foi possível encontrar a fk de endereço")
+                                }
+                            })
+                        } else {
+                            throw "Houve um erro ao cadastrar endereco";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
+
+                return false;
+            }
+        }
+
+        function cadastarEmpresa() {
+            var erro = false;
+            var nomeFantasiaVar = InputNomeFantasia.value;
+            var telefoneVar = InputTelefone.value;
+            var cnpjVar = InputCNPJ.value;
+            var fkEnderecoVar = fkEndereco;
+
+            if (nomeFantasiaVar == undefined) {
+                alert("O nome fantasia esta undefined");
+                erro = true;
+            }
+            if (telefoneVar == undefined) {
+                alert("O número esta undefined");
+                erro = true;
+            }
+            if (cnpjVar == undefined) {
+                alert('O complemento esta undefined');
+                erro = true;
+            }
+            if (fkEnderecoVar == undefined) {
+                alert('O complemento esta undefined');
+                erro = true;
+            }
+            if (erro == false) {
+                fetch("/usuarios/cadastrarEmpresa", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        nomeFantasiaServer: nomeFantasiaVar,
+                        telefoneServer: telefoneVar,
+                        cnpjServer: cnpjVar,
+                        fkEnderecoServer: fkEnderecoVar
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            console.log("Cadastro de Empresa realizado, prosseguindo para busca de fk de empresa")
+                            buscarFkEmpresa();
+                        } else {
+                            throw "Houve um erro ao tentar cadastrar empresa";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
+
+                return false;
+            }
+        }
+
+        function buscarFkEmpresa() {
+            var erro = false;
+            var nomeFantasiaVar = InputNomeFantasia.value;
+            var telefoneVar = InputTelefone.value;
+            var cnpjVar = InputCNPJ.value;
+            var fkEnderecoVar = fkEndereco;
+
+            if (nomeFantasiaVar == undefined) {
+                alert("O nome fantasia esta undefined");
+                erro = true;
+            }
+            if (telefoneVar == undefined) {
+                alert("O número esta undefined");
+                erro = true;
+            }
+            if (cnpjVar == undefined) {
+                alert('O complemento esta undefined');
+                erro = true;
+            }
+            if (fkEnderecoVar == undefined) {
+                alert('O complemento esta undefined');
+                erro = true;
+            }
+            if (erro == false) {
+                fetch("/usuarios/buscarFkEmpresa", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        nomeFantasiaServer: nomeFantasiaVar,
+                        telefoneServer: telefoneVar,
+                        cnpjServer: cnpjVar,
+                        fkEnderecoServer: fkEnderecoVar
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            resposta.json().then(json => {
+                                console.log(JSON.stringify(json));
+                                if (json[0] != undefined) {
+                                    fkEmpresa= json[0].idEmpresa;
+                                    cadastrarFuncionario();
+                                }
+                                else {
+                                    console.log("Não foi possível encontrar a fk de empresa")
+                                }
+                            })} else {
+                            throw "Não foi possível localizar fk de Empresa";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
+
+                return false;
+            }
+        }
+
+        function cadastrarFuncionario() {
+            var erro = false;
+            var nomeVar = InputNome.value;
+            var emailVar = InputEmail.value;
+            var senhaVar = InputSenha.value;    
+            var fkEmpresaVar = fkEmpresa;
+
+            if (nomeVar == undefined) {
+                alert("O nome esta undefined");
+                erro = true;
+            }
+            if (emailVar == undefined) {
+                alert("O email esta undefined");
+                erro = true;
+            }
+            if (senhaVar == undefined) {
+                alert('A senha esta undefined');
+                erro = true;
+            }
+            if (fkEmpresaVar == undefined) {
+                alert('O fk esta undefined');
+                erro = true;
+            }
+            if (erro == false) {
+                fetch("/usuarios/cadastrarFuncionario", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        nomeServer: nomeVar,
+                        emailServer: emailVar,
+                        senhaServer: senhaVar,
+                        fkEmpresaServer: fkEmpresaVar
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            console.log("Cadastro de Funcionario realizado")
+                            InputComplemento.value = '';
+                            InputNumero.value = '';
+                            InputCEP.value = '';
+
+                        } else {
+                            throw "Houve um erro ao tentar cadastrar funcionario";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
+
+                return false;
+            }
+        }
+
     </script>
 
 </body>

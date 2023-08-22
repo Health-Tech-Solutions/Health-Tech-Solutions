@@ -13,6 +13,31 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/verifEmail", function (req, res) {
+    usuarioController.verifEmail(req, res);
+});
+
+router.post("/cadastrarEndereco", function (req, res) {
+    usuarioController.cadastrarEndereco(req, res);
+});
+
+router.post("/buscarFkEndereco", function (req, res) {
+    usuarioController.buscarFkEndereco(req, res);
+});
+
+
+router.post("/cadastrarEmpresa", function (req, res) {
+    usuarioController.cadastrarEmpresa(req, res);
+});
+
+router.post("/buscarFkEmpresa", function (req, res) {
+    usuarioController.buscarFkEmpresa(req, res);
+});
+
+router.post("/cadastrarFuncionario", function (req, res) {
+    usuarioController.cadastrarFuncionario(req, res);
+});
+
 router.post("/recuperar", function(req, res) {
     usuarioController.recuperar(req, res)
 })

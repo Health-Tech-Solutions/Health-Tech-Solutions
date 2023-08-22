@@ -151,6 +151,66 @@ function verifEmail(req, res) {
     }
 }
 
+function verifCNPJ(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var CNPJ = req.body.cnpjServer;
+
+    // Faça as validações dos valores
+    if (CNPJ == undefined) {
+        res.status(400).send("Seu CNPJ está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.verifCNPJ(CNPJ)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function cadastrarPlano(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var plano = req.body.planoEscolhidoServer;
+    var fkEmpresa = req.body.fkEmpresaServer;
+
+    // Faça as validações dos valores
+    if (plano == undefined) {
+        res.status(400).send("Seu plano está undefined!");
+    } 
+    if (fkEmpresa == undefined) {
+        res.status(400).send("Seu fkEmpresa está undefined!");
+    } else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrarPlano(plano, fkEmpresa)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function cadastrarEndereco(req, res) {
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
@@ -336,9 +396,11 @@ module.exports = {
     recuperar,
     alterarSenha,
     verifEmail,
+    verifCNPJ,
     cadastrarEndereco,
     cadastrarEmpresa,
     buscarFkEndereco,
     buscarFkEmpresa,
-    cadastrarFuncionario
+    cadastrarFuncionario,
+    cadastrarPlano
 }

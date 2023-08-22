@@ -34,13 +34,37 @@ function verifEmail(email) {
     return database.executar(instrucao);
 }
 
+function verifCNPJ(CNPJ) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function verifEmail():", CNPJ);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        SELECT idEmpresa FROM empresa WHERE cnpj = '${CNPJ}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function cadastrarEndereco(cep, numero, complemento) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarEndereco():", cep, numero, complemento);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO endereco (cep, numero, complmento) VALUES ('${cep}', '${numero}', '${complemento}');
+        INSERT INTO endereco (cep, numero, complemento) VALUES ('${cep}', '${numero}', '${complemento}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function cadastrarPlano(plano, fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarEndereco():", plano, fkEmpresa);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        INSERT INTO assinatura (fkIndustria, dataContrato, fkPlano, estado) VALUES ('${fkEmpresa}', date(now()), '${plano}', 'Pendente');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -52,7 +76,7 @@ function buscarFkEndereco(cep, numero, complemento) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        Select idEndereco FROM endereco WHERE cep = '${cep}' AND numero = '${numero}' AND complmento = '${complemento}';
+        Select idEndereco FROM endereco WHERE cep = '${cep}' AND numero = '${numero}' AND complemento = '${complemento}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -114,9 +138,11 @@ module.exports = {
     recuperar,
     alterarSenha,
     verifEmail,
+    verifCNPJ,
     cadastrarEndereco,
     cadastrarEmpresa,
     buscarFkEndereco,
     buscarFkEmpresa,
-    cadastrarFuncionario
+    cadastrarFuncionario,
+    cadastrarPlano
 };

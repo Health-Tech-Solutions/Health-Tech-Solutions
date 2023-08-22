@@ -17,6 +17,10 @@ router.post("/verifEmail", function (req, res) {
     usuarioController.verifEmail(req, res);
 });
 
+router.post("/verifCNPJ", function (req, res) {
+    usuarioController.verifCNPJ(req, res);
+});
+
 router.post("/cadastrarEndereco", function (req, res) {
     usuarioController.cadastrarEndereco(req, res);
 });
@@ -36,6 +40,10 @@ router.post("/buscarFkEmpresa", function (req, res) {
 
 router.post("/cadastrarFuncionario", function (req, res) {
     usuarioController.cadastrarFuncionario(req, res);
+});
+
+router.post("/cadastrarPlano", function (req, res) {
+    usuarioController.cadastrarPlano(req, res);
 });
 
 router.post("/recuperar", function(req, res) {

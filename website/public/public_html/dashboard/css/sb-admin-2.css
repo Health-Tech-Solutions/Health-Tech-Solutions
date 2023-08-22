@@ -11138,9 +11138,9 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #DA4931;
-  background-image: url(../img/background.png);
-  background-size: cover;
+  background-color: #030050;
+  /* background-image: url(../img/background.png);
+  background-size: cover; */
 }
 
 .bg-gradient-secondary {

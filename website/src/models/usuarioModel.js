@@ -22,6 +22,19 @@ function cadastrar(nome, email, senha, empresaId) {
     return database.executar(instrucao);
 }
 
+function buscarModelos(idEmpresa, fkTipo) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", idEmpresa, fkTipo);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        SELECT * FROM Modelo JOIN Tipo ON idTipo = fkTipo JOIN Maquinario ON idModelo = fkTipoMaquinario
+            JOIN Empresa ON idEmpresa = fkIndustria WHERE idEmpresa = ${idEmpresa} AND idTipo = ${fkTipo};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function recuperar(email){
     const sql = `
         SELECT idFuncionario FROM funcionario WHERE email = '${email}'
@@ -40,5 +53,6 @@ module.exports = {
     autenticar,
     cadastrar,
     recuperar,
-    alterarSenha
+    alterarSenha, 
+    buscarModelos
 };

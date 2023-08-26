@@ -10,9 +10,15 @@ function cadastrar(req, res){
 
     maquinaModel.cadastrarModelo(modelo, descricao, tipo)
         .then((resModelo) => {
-            res.status(200).json({msg: resModelo})
+            limites.map(i => {
+                maquinaModel.cadastrarPeca(i.nome)
+                    .then((resPeca) => {
+                        maquinaModel.cadastrarLimites(i.valores, resModelo.insertId, resPeca.insertId)
+                    })
+            })
+            res.status(200).json({msg: "Novo Modelo Cadastrado"})
         })
-        .cactch((erro) => {
+        .catch((erro) => {
             res.status(500).json({erro: erro})
         })
 }

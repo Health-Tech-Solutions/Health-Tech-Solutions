@@ -366,13 +366,13 @@
                         <div class="form-group row">
                             <div class="col-sm-10">
                                 <input type="text" id="iptModelo" class="form-control form-control-user"
-                                    id="exampleInputEmail" aria-describedby="Modelo"
+                                     aria-describedby="Modelo"
                                     placeholder="Modelo">
                             </div>
                             <div class="col-sm-2">
                                 <div class="dropdown">
                                     <input class=" form-control form-control-user"
-                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        id="iptTipo" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" placeholder="Tipo" readonly>
                                     <div class="dropdown-menu animated--fade-in"
                                         aria-labelledby="dropdownMenuButton">
@@ -385,73 +385,73 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-8">
-                                <input type="text" id="iptCpu" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptCpu" onchange="manipuladorLimite(true,1,this.value)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Cpu">
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" id="iptRam" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptCpuTemp" onchange="manipuladorLimite(false,1,this.value,1,1)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Temp máxima">
                             </div>
 
                             <div class="col-sm-2">
-                                <input type="text" id="iptRam" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptCpuLimite" onchange="manipuladorLimite(false,1,this.value,2,2)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Limite máximo">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" id="iptCpu" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptRam" onchange="manipuladorLimite(true,2,this.value)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Memória ram">
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" id="iptRam" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptRamLimite" onchange="manipuladorLimite(false,2,this.value,1,1)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Limite máximo">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <input type="text" id="iptCpu" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptDisco" onchange="manipuladorLimite(true,3,this.value)"class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Disco">
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" id="iptRam" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptDiscoLimite" onchange="manipuladorLimite(false,3,this.value,1,1)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Limite máximo">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-8">
-                                <input type="text" id="iptCpu" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptGpu" onchange="manipuladorLimite(true,4,this.value)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Gpu">
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" id="iptRam" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptGpuTemp" onchange="manipuladorLimite(false,4,this.value,1,1)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Temp máxima">
                             </div>
                             <div class="col-sm-2">
-                                <input type="text" id="iptRam" class="form-control form-control-user"
-                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                <input type="text" id="iptGpuLimite" onchange="manipuladorLimite(false,4,this.value,2,2)" class="form-control form-control-user"
+                                 aria-describedby="emailHelp"
                                 placeholder="Limite máximo">
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea type="email" id="iptEmail" class="form-control form-control-description"
-                            id="exampleInputEmail" aria-describedby="emailHelp"
+                            <textarea id="iptDescricao" class="form-control form-control-description"
+                             aria-describedby="emailHelp"
                             placeholder="Descrição"></textarea>
                         </div>
                         <div class="form-group">
-                            <a class="btn btn-primary btn-user btn-block" >
+                            <a class="btn btn-primary btn-user btn-block" onclick="cadastrar()">
                                 Cadastrar
                             </a>
                         </div>
@@ -514,6 +514,65 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <script>
+        let limites = []
+
+        function cadastrar(){
+            const modelo = iptModelo.value
+            const tipo = Number(iptTipo.value)
+            const descricao = iptDescricao.value
+
+            fetch("/maquinas/cadastrar",{
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    "modelo": modelo,
+                    "descricao": descricao,
+                    "tipo": 1,
+                    "limites": limites
+                })
+            })
+        }
+
+        function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor){
+            const index = limites.map(i => i.idLimite).indexOf(idLimite)
+            if(isPrincipal){
+                if(index != -1){
+                    limites[index].nome = valor
+                }
+                else{
+                    limites.push({
+                        "idLimite": idLimite,
+                        "nome": valor,
+                        "valores": []
+                    })
+                }
+            }
+            else{
+                if(index != -1){
+                    const indexValor = limites[index].valores
+                        .map(i => i.idValor)
+                        .indexOf(idValor)
+
+                    if(indexValor != -1){
+                        limites[index].valores[indexValor].valor = valor
+                    }
+                    else{
+                        limites[index].valores.push({
+                        "idValor": idValor,
+                        "valor": valor,
+                        "medida": medida
+                    })
+                    }
+                }
+                else{
+                    if(valor) alert("Preencha o modelo da peça!")
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

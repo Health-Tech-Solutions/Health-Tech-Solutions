@@ -23,18 +23,6 @@ function cadastrar(req, res){
         })
 }
 
-/*
-    limites = [{
-        nome,
-        valores: [
-            {
-                valor,
-                medida
-            }
-        ]
-    }]
-*/
-
 module.exports = {
     cadastrar
 }

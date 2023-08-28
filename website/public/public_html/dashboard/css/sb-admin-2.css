@@ -1627,6 +1627,11 @@ pre code {
     max-width: 25%;
   }
 
+  .col-xl-3cards {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
   .col-xl-4 {
     flex: 0 0 33.33333%;
     max-width: 33.33333%;
@@ -2930,6 +2935,7 @@ fieldset:disabled a.btn {
 
 .btn-danger:hover {
   color: #fff;
+
   background-color: #e02d1b;
   border-color: #d52a1a;
 }
@@ -10798,10 +10804,10 @@ button.bg-dark:focus {
   color: #DA4931 !important;
 }
 
-a.text-primary:hover,
+/* a.text-primary:hover,
 a.text-primary:focus {
   color: #DA4931 !important;
-}
+} */
 
 .text-secondary {
   color: #858796 !important;
@@ -11137,9 +11143,9 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #DA4931;
-  background-image: url(../img/background.png);
-  background-size: cover;
+  background-color: #030050;
+  /* background-image: url(../img/background.png);
+  background-size: cover; */
 }
 
 .bg-gradient-secondary {
@@ -12665,3 +12671,16 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+input[type=number]::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  
+}
+input[type=number] { 
+ -moz-appearance: textfield;
+ appearance: textfield;
+
+}
+
+
+

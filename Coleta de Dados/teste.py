@@ -1,56 +1,64 @@
 import psutil
+import time
 from tkinter import *
 import mysql.connector
 
 try:
     conexao = mysql.connector.connect(host='localhost',database='teste', port='3306', user ='root', password='lucas-00123969130980362')  
 
-    print("Número de núcleos")
-    nucleos = psutil.cpu_count()
-    print(nucleos)    
+    nucleosLogicos = psutil.cpu_count()
+    nucleos = psutil.cpu_count(logical=False)
+    print("Quantidad de núcleos: ")
+    print(nucleos)     
+    print("Quantidad de núcleos lógicos: ")
+    print(nucleosLogicos)
 
     def dados():
-      
+        for x in range (10): 
+            time.sleep(1)
+            texto_dados['text'] = ''
+
+            texto_dados["text"] += "\n \n----- Percentual de CPU (%) -----  \n"
+            cpuPorcent = psutil.cpu_percent()
+            texto_dados["text"] += str(cpuPorcent) 
+            
         
-        texto_dados['text'] = ''
-       
-        texto_dados["text"] += "\n \n----- Porcentagem CPU ------------  \n"
-        cpuPorcent = psutil.cpu_percent()
-        texto_dados["text"] += str(cpuPorcent) 
-
-        # print("----- Temperaturas ------------")
-        # print(psutil.sensors_temperatures()) #NÃO FUNCIONA PARA WINDOWS
+            #   Não funciona no Windows:
+            texto_dados["text"] += "\n ----- Temperatura (°C) ----- \n"
+            cpuTemp = psutil.sensors_temperatures()['acpitz'][0][1]
+            texto_dados["text"] += str(cpuTemp)
+            #
         
-        texto_dados["text"] += "\n ----- Temperaturas ------------ \n"
-        cpuTemp = psutil.sensors_temperatures()['acpitz'][0][1]
-        texto_dados["text"] += str(cpuTemp)
+            texto_dados["text"] += "\n ----- Frequência de CPU GHz----- \n" ## alterado
+            cpuFreq = (psutil.cpu_freq()[0]) / 1000 ## alterad0
+            texto_dados["text"] += str(cpuFreq)
+
+            texto_dados["text"] += "\n ----- Porcentual de memoria virtual (%) ----- \n"
+            vitualMemory = psutil.virtual_memory()[2]
+            texto_dados["text"] += str(vitualMemory)
+
+            # # print("----- Porcentagem memoria SWAP ------------")
+            # # print(psutil.swap_memory()[3])
+
+            texto_dados["text"] += "\n ----- Porcentual de uso de DISCO (%) ----- \n"
+            disco = psutil.disk_usage('/')[3]
+            texto_dados["text"] += str(disco)
+
+            texto_dados["text"] += "\n ----- Porcentual de Bateria (%) ----- \n"
+            bateria = psutil.sensors_battery()[0]
+            texto_dados["text"] += str(bateria)
+
+            janela.update() ##
         
-        texto_dados["text"] += "\n ----- Frequencia CPU ------------ \n"
-        cpuFreq = psutil.cpu_freq()[0]
-        texto_dados["text"] += str(cpuFreq)
-
-        texto_dados["text"] += "\n ----- Porcentagem memoria virtual ------------ \n"
-        vitualMemory = psutil.virtual_memory()[2]
-        texto_dados["text"] += str(vitualMemory)
-
-        # # print("----- Porcentagem memoria SWAP ------------")
-        # # print(psutil.swap_memory()[3])
-
-        texto_dados["text"] += "\n ----- Porcentagem DISCO------------ \n"
-        disco = psutil.disk_usage('/')[3]
-        texto_dados["text"] += str(disco)
-
-        texto_dados["text"] += "\n ----- Porcentagem Bateria------------ \n"
-        bateria = psutil.sensors_battery()[0]
-        texto_dados["text"] += str(bateria)
-        
-        cursor = conexao.cursor()
-        cursor.execute("Insert into testeDados (idMaquina , valorCpu, valorFrequencia, percentMemoriaVirtual, percentDisco,percentBateria, tempCPU) values "
+            cursor = conexao.cursor()
+            cursor.execute("Insert into testeDados (idMaquina , valorCpu, valorFrequencia, percentMemoriaVirtual, percentDisco,percentBateria, tempCPU) values "
                        f"('89','{cpuPorcent}','{cpuFreq}','{vitualMemory}','{disco}','{bateria}', '{cpuTemp}');")
-        conexao.commit()
+            conexao.commit()
+
+            if x == 9: 
+                texto_dados["text"] += "\n \n Ultima Captura" 
 
     def sair():
-         conexao.close()
          exit()
 
     janela = Tk() #cria uma janela 

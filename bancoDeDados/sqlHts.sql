@@ -29,41 +29,6 @@ create table funcionario(
     foreign key (fkRepresentante) references funcionario(idFuncionario)
 );
 
-create table  tipoMaquinario(
-	idTipoMaquinario int primary key auto_increment,
-    modelo varchar(45),
-    descricao varchar(255)
-);
-
-create table maquinario(
-	idMaquinario int,
-    fkIndustria int,
-    foreign key (fkIndustria) references empresa(idEmpresa),
-    fkHospital int,
-    foreign key (fkHospital) references empresa(idEmpresa),
-	fkTipoMaquina int,
-    foreign key (fkTipoMaquina) references tipoMaquinario(idTipoMaquinario),
-    primary key(idMaquinario, fkTipoMaquina)
-);
-
-create table tipoRegistro(
-	idTipoRegistro int primary key auto_increment,
-    nome varchar(45),
-    medida varchar(45)
-);
-
-create table Registro(
-	idRegistro int primary key auto_increment,
-    dataHora date,
-    valor decimal(7,2),
-    fkMaquina int,
-    foreign key (fkMaquina) references maquinario(idMaquinario),
-    fkTipoMaquina int,
-    foreign key (fkTipoMaquina) references maquinario(fkTipoMaquina),
-    fkTipoRegistro int,
-    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
-);
-
 create table plano(
 	idPlano int primary key auto_increment, 
     nome varchar(45),
@@ -80,3 +45,91 @@ create table assinatura(
     estado varchar(45),
     primary key(fkIndustria, dataContrato)
 );
+
+create table tipo(
+	idTipo int primary key auto_increment,
+    nome varchar(45)
+);
+
+insert into tipo (nome) values ("Ultrassom"), ("Raio-x"), ("Anestesia"), ("Outros");
+
+create table modelo(
+	idModelo int primary key auto_increment,
+    modelo varchar(45),
+    descricao varchar(255),
+    fkTipo int,
+	foreign key (fkTipo) references tipo(idTipo)
+);
+
+insert into modelo (modelo, descricao, fkTipo) values 
+	("Ultra-x","Maquina ultra precisa para raio x", 2),
+	("Master-1801", null, 1),
+	("Anes-tesia", null, 3);
+
+	
+create table maquinario(
+	idMaquinario int,
+    fkIndustria int,
+    foreign key (fkIndustria) references empresa(idEmpresa),
+    fkHospital int,
+    foreign key (fkHospital) references empresa(idEmpresa),
+	fkModelo int,
+    foreign key (fkModelo) references modelo(idModelo),
+    primary key(idMaquinario, fkModelo)
+);
+
+create table tipoRegistro(
+	idTipoRegistro int primary key auto_increment,
+    nome varchar(45),
+    medida varchar(45)
+);
+
+insert into tipoRegistro (nome, medida) values ("Porcentagem", "%"), ("Celsius","c");
+
+create table registro(
+	idRegistro int primary key auto_increment,
+    dataHora date,
+    valor decimal(7,2),
+    fkMaquina int,
+    foreign key (fkMaquina) references maquinario(idMaquinario),
+    fkModelo int,
+    foreign key (fkModelo) references maquinario(fkModelo),
+    fkTipoRegistro int,
+    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
+);
+
+create table chamado(
+	idChamado int primary key auto_increment,
+    nivel varchar(45),
+    estado varchar(45),
+    sla varchar(45),
+    descricao varchar(45),
+	fkRegistro int,
+    foreign key(fkRegistro) references registro(idRegistro)
+);
+
+
+
+create table peca(
+	idPeca int primary key auto_increment,
+    nome varchar(45)
+);
+
+insert into peca (nome) values ("i7-10..."),("kingston 8gb ram"), ("1tb seagate");
+
+create table limite(
+	idLimite int primary key auto_increment,
+    fkPeca int,
+    foreign key (fkPeca) references peca(idPeca),
+    fkModelo int,
+    foreign key (fkModelo) references modelo(idModelo),
+    fkTipoRegistro int,
+    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro),
+    valor decimal(5,2)
+);
+
+insert into limite (fkPeca, fkModelo, fkTipoRegistro, valor) values 
+	(1, 1, 1, 90),
+    (1, 1, 2, 105.5),
+    (2, 1, 2, 80),
+    (3, 1, 1, 50);

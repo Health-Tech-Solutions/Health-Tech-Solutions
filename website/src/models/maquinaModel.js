@@ -23,8 +23,15 @@ function cadastrarLimites(valores, idModelo, idPeca){
     return database.executar(sql)
 }
 
+function listarTipos(){
+    const sql = `select * from tipo`
+
+    return database.executar(sql)
+}
+
 module.exports = {
     cadastrarModelo,
     cadastrarPeca,
-    cadastrarLimites
+    cadastrarLimites,
+    listarTipos
 }

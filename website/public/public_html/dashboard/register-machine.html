@@ -374,11 +374,9 @@
                                     <input class=" form-control form-control-user"
                                         id="iptTipo" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" placeholder="Tipo" readonly>
-                                    <div class="dropdown-menu animated--fade-in"
+                                    <div id="dropdown-items" class="dropdown-menu animated--fade-in"
                                         aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -516,24 +514,49 @@
 
     <script>
         let limites = []
+        let tipo = 0
+
+        function addDropdownItem(i){
+            const dropdown = document.getElementById("dropdown-items")
+
+            dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
+        }
+
+        function setDropdownValue(valor, nome){
+            iptTipo.value = nome
+            tipo = valor
+        }
 
         function cadastrar(){
             const modelo = iptModelo.value
-            const tipo = Number(iptTipo.value)
             const descricao = iptDescricao.value
 
-            fetch("/maquinas/cadastrar",{
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    "modelo": modelo,
-                    "descricao": descricao,
-                    "tipo": 1,
-                    "limites": limites
+            const totais = limites.map(i => i.valores.length)
+
+            if(modelo.trim() == '' || tipo == 0){
+                alert("Preencha os campos obrigatórios!")
+            }
+            else if(limites.length == 0 || totais.includes(0)){
+                alert("Os campos de métricas não foram preenchidos corretamente")
+            }
+            else{
+                fetch("/maquinas/cadastrar",{
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "modelo": modelo,
+                        "descricao": descricao,
+                        "tipo": tipo,
+                        "limites": limites
+                    })
+                }).then(res => {
+                    if(res.status == 200){
+                        alert("Modelo Cadastrado")
+                    }
                 })
-            })
+            }
         }
 
         function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor){
@@ -572,6 +595,12 @@
                 }
             }
         }
+
+        fetch("/maquinas/tipo")
+            .then((res) => res.json())
+            .then((res) => {
+                res.tipos.map(addDropdownItem)
+            })
     </script>
 </body>
 

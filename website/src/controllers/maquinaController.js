@@ -23,6 +23,17 @@ function cadastrar(req, res){
         })
 }
 
+function tipos(req, res){
+    maquinaModel.listarTipos()
+        .then((resultado) => {
+            res.status(200).json({tipos: resultado})
+        })
+        .catch((error) => {
+            res.status(500).json({error: error})
+        })
+}
+
 module.exports = {
-    cadastrar
+    cadastrar,
+    tipos
 }

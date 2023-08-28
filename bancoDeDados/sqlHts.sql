@@ -51,8 +51,6 @@ create table tipo(
     nome varchar(45)
 );
 
-insert into tipo (nome) values ("Ultrassom"), ("Raio-x"), ("Anestesia"), ("Outros");
-
 create table modelo(
 	idModelo int primary key auto_increment,
     modelo varchar(45),
@@ -60,12 +58,6 @@ create table modelo(
     fkTipo int,
 	foreign key (fkTipo) references tipo(idTipo)
 );
-
-insert into modelo (modelo, descricao, fkTipo) values 
-	("Ultra-x","Maquina ultra precisa para raio x", 2),
-	("Master-1801", null, 1),
-	("Anes-tesia", null, 3);
-
 	
 create table maquinario(
 	idMaquinario int,
@@ -83,8 +75,6 @@ create table tipoRegistro(
     nome varchar(45),
     medida varchar(45)
 );
-
-insert into tipoRegistro (nome, medida) values ("Porcentagem", "%"), ("Celsius","c");
 
 create table registro(
 	idRegistro int primary key auto_increment,
@@ -108,14 +98,10 @@ create table chamado(
     foreign key(fkRegistro) references registro(idRegistro)
 );
 
-
-
 create table peca(
 	idPeca int primary key auto_increment,
     nome varchar(45)
 );
-
-insert into peca (nome) values ("i7-10..."),("kingston 8gb ram"), ("1tb seagate");
 
 create table limite(
 	idLimite int primary key auto_increment,
@@ -127,9 +113,3 @@ create table limite(
     foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro),
     valor decimal(5,2)
 );
-
-insert into limite (fkPeca, fkModelo, fkTipoRegistro, valor) values 
-	(1, 1, 1, 90),
-    (1, 1, 2, 105.5),
-    (2, 1, 2, 80),
-    (3, 1, 1, 50);

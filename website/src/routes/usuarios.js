@@ -56,4 +56,8 @@ router.post("/alterarSenha", function(req, res) {
     usuarioController.alterarSenha(req, res)
 })
 
+router.post("/buscarModelos", function(req, res) {
+    usuarioController.buscarModelos(req, res)
+})
+
 module.exports = router;

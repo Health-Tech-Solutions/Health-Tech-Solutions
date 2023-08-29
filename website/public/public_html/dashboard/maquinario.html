@@ -321,7 +321,7 @@
                   
                     <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
 
-                        <a href="#" class="btn btn-success btn-icon-split">
+                        <a href="#" class="btn btn-success btn-icon-split" onclick="mostrarModelo(1)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -377,6 +377,8 @@
                         </a>
                     </div>
                    
+
+                    
                     
 
                      
@@ -387,14 +389,15 @@
                     <h1 class="h3 mb-4 text-gray-800">Modelos</h1>
 
                      <!-- Basic Card Example -->
+
+                     
+
                      <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">LOGIQ E10 Series</h6>
+                            <h6 class="m-0 font-weight-bold text-primary" id="cardModelo"></h6>
                         </div>
-                        <div class="card-body">
-                            The styling for this basic card example is created by using default Bootstrap
-                            utility classes. By using utility classes, the style of the card component can be
-                            easily modified with no need for any custom CSS!
+                        <div class="card-body" id="cardModeloDescricao">
+                           
                         </div>
                     </div>
                      <!-- Basic Card Example -->
@@ -471,8 +474,56 @@
 </html>
 
 <script>
+    
+    // sessionStorage.ID_USUARIO = 
 
-    function mostrarModelo() {
-        
-    }
+    function cadastrar(fkTipoVar) {
+    aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var idEmpresaVar = sessionStorage.ID_EMPRESA;
+    
+    
+    if (
+        idEmpresaVar == "" || idEmpresaVar == undefined
+      
+    ) {
+      window.location("login.html");
+      
+      return false;
+
+    } 
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/buscarModelos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idEmpresaServer: idEmpresaVar,
+        fkTipoServer: fkTipoVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          console.log("Busca de modelos realizada")
+        } else {
+          throw "Houve um erro ao tentar realizar a busca!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+
 </script>

@@ -48,6 +48,9 @@
   text-align: start;
 }
 
+.tituloDiagrama{
+  margin-top: 3%;
+}
 
 
 
@@ -12424,13 +12427,35 @@ p {
   align-items: center;
   padding: 30px 0;
   width: 95%;
-  max-width: 1050px;
+  max-width: 1100px;
   margin: auto;
   box-shadow: 2px 0 10px rgba(52, 58, 64, 0.2);
   margin-top: -140px;
   z-index: 99;
   position: relative;
   max-height: 300px;
+}
+
+.boxNovo {
+  
+  border-radius: 0.15rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  /* -webkit-align-items: center; */
+  -ms-flex-align: center;
+  /* align-items: center; */
+  justify-content: center;
+  padding: 30px 0;
+  width: 100%;
+  max-width: 1050px;
+  margin: auto;
+  box-shadow: 2px 0 10px rgba(52, 58, 64, 0.2);
+  z-index: 99;
+  position: relative;
+  max-height: 400px;
 }
 
 .box .box-item {
@@ -12445,6 +12470,18 @@ p {
   padding: 10px 15px;
 }
 
+.boxNovo .boxNovo-item {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-basis: 0;
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+ 
+  padding: 10px 30px;
+}
+
 .box .box-item i {
   font-size: 50px;
   color: #9a0801;
@@ -12456,6 +12493,10 @@ p {
 .box .box-item .box-title {
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+.boxNovo .boxNovo-item p{
+ text-align: justify;
 }
 
 .box .box-item:last-child {

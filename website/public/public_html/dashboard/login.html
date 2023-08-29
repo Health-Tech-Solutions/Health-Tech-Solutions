@@ -49,15 +49,15 @@
                                     <form class="user">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="ipt_email" aria-describedby="emailHelp"
                                                 placeholder="Email">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Senha">
+                                                id="ipt_senha" placeholder="Senha">
                                         </div>
                                        
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a class="btn btn-primary btn-user btn-block" onclick="autenticar()">
                                             Login
                                         </a>
                                         
@@ -95,3 +95,49 @@
 </body>
 
 </html>
+
+<script>
+  function autenticar(){
+    var email = ipt_email.value;
+    var senha = ipt_senha.value;
+
+    if(email == undefined || senha == undefined){
+        alert("Por favor insira dados nos campos solicitados")
+    }else{
+        fetch("/usuarios/autenticar",{
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta){
+            console.log("Deu certo, entrou no then do autenticar() do login")
+            if(resposta.ok){
+                console.log('Enviando para a dashboard')
+                console.log(resposta)
+
+                resposta.json().then(json=> {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    setTimeout(function() {
+                       window.location = "cards.html";
+                    });
+                })
+            }
+            else{
+                console.log("caiu no else do if dentro do then")
+                alert("Desculpe passamos por problemas para adentrar a dashboard")
+            }
+
+        }).catch(function(erro){
+            console.log(erro)
+        })
+    }
+  }
+    
+    
+</script>

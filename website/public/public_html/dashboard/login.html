@@ -122,9 +122,10 @@
                 resposta.json().then(json=> {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_INDUSTRIA = json[0].fkIndustria;
+                    sessionStorage.NOME_USUARIO = json[0].nome;
                     setTimeout(function() {
-                       window.location = "cards.html";
+                       window.location = "index.html";
                     });
                 })
             }

@@ -63,7 +63,7 @@
                                                 id="InputConfirmacaoSenha" placeholder="Confirme a senha">
                                         </div>
                                     </div>
-                                    <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()">
+                                    <a class="btn btn-primary btn-user btn-block" onclick="verifEmail()">
                                         Continuar
                                     </a>
                                 </form>
@@ -76,15 +76,15 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="InputTelefone" placeholder="Telefone">
+                                            <input type="number" class="form-control form-control-user" id="InputTelefone"
+                                                placeholder="Telefone" maxlength="14">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="InputCNPJ" placeholder="CNPJ">
+                                            <input type="number" class="form-control form-control-user" id="InputCNPJ"
+                                                placeholder="CNPJ" maxlength="14">
                                         </div>
                                     </div>
-                                    <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()">
+                                    <a class="btn btn-primary btn-user btn-block" onclick="verifCNPJ()">
                                         Continuar
                                     </a>
                                 </form>
@@ -93,12 +93,12 @@
                                 <form class="user">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                            id="InputCEP" placeholder="CEP">
+                                            <input type="number" class="form-control form-control-user" id="InputCEP"
+                                                placeholder="CEP" maxlength="8">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user"
-                                            id="InputNumero" placeholder="Número">
+                                            <input type="number" class="form-control form-control-user" id="InputNumero"
+                                                placeholder="Número">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -107,17 +107,19 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="dropdown d-inline-block">
-                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Selecione o plano de interesse
+                                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                Selecione o plano de interesse
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" onclick="planoPrata()">Prata</a>
-                                            <a class="dropdown-item" onclick="planoGold()">Gold</a>
-                                            <a class="dropdown-item" onclick="planoRubi()">Rubi</a>
+                                                <a class="dropdown-item" onclick="planoPrata()">Prata</a>
+                                                <a class="dropdown-item" onclick="planoGold()">Gold</a>
+                                                <a class="dropdown-item" onclick="planoRubi()">Rubi</a>
                                             </div>
-                                         </div>
+                                        </div>
                                     </div>
-                                    <a class="btn btn-primary btn-user btn-block">
+                                    <a class="btn btn-primary btn-user btn-block" onclick="cadastarEndereco()">
                                         Cadastrar
                                     </a>
                                 </form>
@@ -143,34 +145,11 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    
+
     <script src="../PossivelSite/public_html/assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="../PossivelSite/public_html/assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+    <script src="js/register.js"></script>
 
-    <script>
-    document.getElementById("primeiroCadastro").style.display = "block"; 
-
-        function planoPrata() {
-            dropdownMenuButton.innerHTML= 'Prata';
-        }
-        function planoGold() {
-            dropdownMenuButton.innerHTML= 'Gold';
-        }
-        function planoRubi() {
-            dropdownMenuButton.innerHTML= 'Rubi';
-        }
-        function trocarTela() {
-            if(primeiroCadastro.style.display == 'block') {
-                document.getElementById("primeiroCadastro").style.display = "none"; 
-                document.getElementById("segundoCadastro").style.display = "block"; 
-                tituloCadastro.innerHTML = 'Cadastre sua corporação';
-            } else if (segundoCadastro.style.display == 'block') {
-                document.getElementById("segundoCadastro").style.display = "none"; 
-                document.getElementById("terceiroCadastro").style.display = "block"; 
-                tituloCadastro.innerHTML = 'Cadastre seu endereço';
-            }
-        }
-    </script>
 
 </body>
 

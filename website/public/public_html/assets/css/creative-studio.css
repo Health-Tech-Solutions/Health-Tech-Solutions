@@ -12497,6 +12497,7 @@ p {
 
 .boxNovo .boxNovo-item p{
  text-align: justify;
+ font-size: 15px;
 }
 
 .box .box-item:last-child {

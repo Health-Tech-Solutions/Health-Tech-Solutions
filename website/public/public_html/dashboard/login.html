@@ -119,13 +119,13 @@
                 console.log('Enviando para a dashboard')
                 console.log(resposta)
 
-                resposta.json().then(json=> {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.NOME_USUARIO = json.nome;
+                resposta.json().then(json => {
+                    console.log(json[0])
+                    sessionStorage.NOME_USUARIO = json[0].nome;
+                    sessionStorage.FK_EMPRESA = json[0].fkIndustria
                     setTimeout(function() {
-                       window.location = "cards.html";
-                    });
+                       window.location = "index.html";
+                    },1000);
                 })
             }
             else{

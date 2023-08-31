@@ -29,6 +29,7 @@ create table funcionario(
     foreign key (fkRepresentante) references funcionario(idFuncionario)
 );
 
+
 create table plano(
 	idPlano int primary key auto_increment, 
     nome varchar(45),

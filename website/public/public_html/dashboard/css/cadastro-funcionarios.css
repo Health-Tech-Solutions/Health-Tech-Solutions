@@ -1,0 +1,20 @@
+.container-fluid{
+  text-align: center !important;
+
+}
+
+.container-fluid .card {
+  margin-top: 6% !important;
+  
+}
+
+.container-fluid .card h6{
+  color: #030050 !important;
+
+}
+
+.container-fluid{
+  align-items: center;
+
+}
+

@@ -12289,14 +12289,14 @@ p {
   overflow: hidden;
   margin-bottom: 30px;
   display: block;
-  display: block;
 }
 
 .img-wrapper img {
   position: relative;
   width: 100%;
   z-index: 8;
-  height: 50vh;
+  object-position: center center;
+  object-fit: cover;
 }
 
 .img-wrapper .overlay {
@@ -12444,18 +12444,13 @@ p {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  /* -webkit-align-items: center; */
   -ms-flex-align: center;
-  /* align-items: center; */
   justify-content: center;
   padding: 30px 0;
-  width: 100%;
-  max-width: 1050px;
-  margin: auto;
   box-shadow: 2px 0 10px rgba(52, 58, 64, 0.2);
   z-index: 99;
   position: relative;
-  max-height: 400px;
+  flex-wrap: wrap;
 }
 
 .box .box-item {
@@ -12472,13 +12467,10 @@ p {
 
 .boxNovo .boxNovo-item {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
   -ms-flex-positive: 1;
-  flex-grow: 1;
   -webkit-flex-basis: 0;
   -ms-flex-preferred-size: 0;
   flex-basis: 0;
- 
   padding: 10px 30px;
 }
 

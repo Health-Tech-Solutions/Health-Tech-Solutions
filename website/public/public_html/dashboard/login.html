@@ -121,6 +121,7 @@
 
                 resposta.json().then(json => {
                     console.log(json[0])
+                    sessionStorage.ID_USUARIO = json[0].idFuncionario
                     sessionStorage.NOME_USUARIO = json[0].nome;
                     sessionStorage.FK_EMPRESA = json[0].fkIndustria
                     setTimeout(function() {

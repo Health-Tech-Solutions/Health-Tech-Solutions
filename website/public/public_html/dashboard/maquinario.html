@@ -392,15 +392,18 @@
             <!-- Essa div acima se refere ao content, está com seu inicio na linha 118 -->
             <!-- Engloba o conteudo principal e fornece a estilização -->                     
                     <!--Fim dos tipos-->
+                   
             <div class="container-modelos" id="maquina_modelos">
                 <div class="card shadow mb-4">
                    <div class="card-header py-3">
-                       <h6 class="m-0 font-weight-bold text-primary">LOGIQ Fortis</h6>
+                       <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
+
+                       </h6>
                    </div>
-                   <div class="card-body">
-                       The styling for this basic card example is created by using default Bootstrap
-                       utility classes. By using utility classes, the style of the card component can be
-                       easily modified with no need for any custom CSS!
+                   <div class="card-body" id="descricaoMaquina">
+                     <p id="textoDescricao">
+
+                     </p>  
                    </div>
                </div>
            </div>
@@ -522,6 +525,50 @@
   }
 
   function mostrarModelo(){
-        maquina_modelos.style.display = "block";
-  }
+      maquina_modelos.style.display = "block";
+      obterDadosGrafico();
+      }
+
+//Essa função é a responsavel de pegar os dados da tabela mySQL
+  function obterDadosGrafico() {
+
+fetch(`/medidas/ultimas/`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            
+            var visualizarDados = resposta[0];
+            console.log(visualizarDados)
+            nomeMaquina.innerHTML = `${resposta.modelo}`
+            textoDescricao.innerHTML = `${resposta.descricao}`
+            if(resposta.length>1){
+               var container =  `<div class="container-modelos" id="maquina_modelos">
+                <div class="card shadow mb-4">
+                   <div class="card-header py-3">
+                       <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
+
+                       </h6>
+                   </div>
+                   <div class="card-body" id="descricaoMaquina">
+                     <p id="textoDescricao">
+
+                     </p>  
+                   </div>
+               </div>
+           </div> `
+           nomeMaquina.innerHTML = `${resposta.modelo}`
+            textoDescricao.innerHTML = `${resposta.descricao}`
+            }
+            //resposta.reverse();
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+
 </script>

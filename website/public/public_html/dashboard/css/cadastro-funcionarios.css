@@ -1,5 +1,6 @@
 .container-fluid{
   text-align: center !important;
+  align-items: center;
 
 }
 
@@ -13,7 +14,6 @@
 
 }
 
-.container-fluid{
-  align-items: center;
-
+.container-fluid .user .btn{
+  font-size: 17px;
 }

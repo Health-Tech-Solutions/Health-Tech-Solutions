@@ -21,7 +21,6 @@
     <link href="css/cadastro-funcionarios.css" rel="stylesheet">
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
-
 </head>
 
 <body id="page-top">
@@ -378,39 +377,19 @@
                                     placeholder="Confirme a senha">
                             </div>
                         </div>
-                        <a class="btn btn-primary btn-user btn-block" onclick="trocarTela()" >
+                        <a class="btn btn-primary btn-user btn-block" onclick="cadastrar()">
                             Cadastrar
                         </a>
                     </form>
 
-
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4" >
                         <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                        <a  href="#funcionarios" class="d-block card-header py-3" data-toggle="collapse"
                             role="button" aria-expanded="true" aria-controls="collapseCardExample">
                             <h6 class="m-0 font-weight-bold text-primary">Funcionários cadastrados</h6>
                         </a>
                         <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="collapseCardExample">
-                            <div class="card-body">
-                                <nav class="navbar navbar-expand navbar-light bg-light mb-4">
-                                    <a class="navbar-brand" href="#">Maria Antonieta</a>
-                                    <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                                                role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                                Alterar 
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right animated--grow-in"
-                                                aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Deletar</a>
-                                                <a class="dropdown-item" href="#">Editar(talvez)</a>
-
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
+                        <div class="collapse show" id="funcionarios">   
                         </div>
                     </div>
 
@@ -475,4 +454,74 @@
 
 </body>
 
+<script>
+    function cadastrar(){
+        const nome = InputNome.value
+        const email = InputEmail.value
+        const senha = InputSenha.value
+        const confirmacaoSenha = InputConfirmacaoSenha.value
+
+        if(!nome || !email || !senha || !confirmacaoSenha){
+            alert("Preencha todos os campos para efetuar o cadastro")
+        }
+        else if(senha != confirmacaoSenha){
+            alert("As senhas não correspondem")
+        }
+        else{
+            fetch("/funcionario/cadastrar",{
+                method: "POST",
+                headers: {
+                    "Content-type": 'application/json'
+                },
+                body: JSON.stringify({
+                    nome,
+                    email,
+                    senha,
+                    fkEmpresa: sessionStorage.FK_EMPRESA,
+                    fkRepresentante: sessionStorage.ID_USUARIO
+                })
+            })
+            .then(res => {
+                if(res.status == 200){
+                    res.json().then(res => {
+                        InputNome.value = ""
+                        InputEmail.value = ""
+                        InputSenha.value = ""
+                        listarFuncionarios()
+                    })
+                        InputConfirmacaoSenha.value = ""
+                } else if(res.status == 400){
+                    alert("Email já cadastrado")
+                }
+            })
+        }
+    }
+
+    function listarFuncionarios(){
+        fetch(`/funcionario/listar/${sessionStorage.FK_EMPRESA}`)
+            .then(res => res.json())
+            .then(res => {
+                funcionarios.innerHTML = ""
+                if(res.funcionarios.length > 0){
+                    res.funcionarios.map(i => {
+                        funcionarios.innerHTML += `
+                            <div class="card-body row row-cols-3 justify-content-between">
+                                <p>${i.nome}</p>
+                                <p>${i.email}</p>
+                                <p>${i.funcao}</p>
+                            </div>
+                        `
+                     })
+                }
+                else{
+                    funcionario.innerHMTL += `
+                        <div class="card-body">
+                            Não há nenhum funcionário cadastrado no momento
+                        </div>
+                    `   
+                }
+            })
+    }   
+    listarFuncionarios()
+</script>
 </html>

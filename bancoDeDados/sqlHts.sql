@@ -23,6 +23,7 @@ create table funcionario(
     nome varchar(45),
     email varchar(60),
     senha varchar(45),
+    funcao varchar(45),
     fkIndustria int,
     foreign key (fkIndustria) references empresa(idEmpresa),
     fkRepresentante int,

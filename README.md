@@ -14,10 +14,10 @@
 
 ## 📚 Sobre o projeto
 
-<p>A empresa Health Tech Solutions é um projeto para o curso de Ciência da Computação na faculdade SpTech, em que o objetivo é criar um site institucional e um sistema de monitoramento de sistemas operacionais. O software monitora os recursos do hardware dos equipamentos, coletando e analisando os dados transmitidos pelas máquinas, devolvendo informações precisas e didáticas para fácil entendimento do cliente./p>
+<p>A empresa Health Tech Solutions é um projeto para o curso de Ciência da Computação na faculdade SpTech, em que o objetivo é criar um site institucional e um sistema de monitoramento de sistemas operacionais. O software monitora os recursos do hardware dos equipamentos, coletando e analisando os dados transmitidos pelas máquinas, devolvendo informações precisas e didáticas para fácil entendimento do cliente.</p>
 
 ## Ferramentas utilizadas
-<h3>Databases</h3>
+
 <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"/>
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
@@ -34,15 +34,11 @@
 
 ## 🦸 Autores
 
- <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/92685862?s=400&u=3afc6b9dfe5b8c08e2d17495c6d904ee8bd6d458&v=4" width="100px;" alt=""/>
- <sub><b>Bruna Sanguini</b></sub>
-
-[![Linkedin Badge](https://img.shields.io/badge/-Bruna-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/brunasanguini/)](https://www.linkedin.com/in/brunasanguini/) 
-
- <img style="border-radius: 50%;" src="https://media.licdn.com/dms/image/D4D03AQEZwRzE53hwPw/profile-displayphoto-shrink_400_400/0/1687270527990?e=1697068800&v=beta&t=PZ7JSCBqR3JmJnt4JBx_JxhzSZYpUO4udR9MTqt4sOo" width="100px;" alt=""/>
- <sub><b>Lucas Garcia</b></sub>
-
+[![Linkedin Badge](https://img.shields.io/badge/-Bruna-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/brunasanguini/)](https://www.linkedin.com/in/brunasanguini/)
 [![Linkedin Badge](https://img.shields.io/badge/-Lucas-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-au-garcia/)](https://www.linkedin.com/in/lucas-au-garcia/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Luanna-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-au-garcia/)](https://www.linkedin.com/in/lucas-au-garcia/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Andrey-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-au-garcia/)](https://www.linkedin.com/in/lucas-au-garcia/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Caetano-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/lucas-au-garcia/)](https://www.linkedin.com/in/lucas-au-garcia/) 
 
 ---
 

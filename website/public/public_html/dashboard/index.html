@@ -317,16 +317,16 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Alertas disparados</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">45</div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Máquinas cadastradas</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">45.000</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                            <i class="fas fa-digital-tachograph fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -335,16 +335,16 @@
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Máquinas Saudáveis</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">215,000</div>
+                                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                Modelo em alerta</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">LOGIQ Fortis</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-check-double fa-2x text-gray-300"></i>
+                                            <i class="fas fa-laptop-medical fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -425,9 +425,10 @@
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Ultrassom</h6>
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <i class="fas fa-fw fa-arrow-left"></i>
+                                    <h6 class="m-0 font-weight-bold text-primary">Ultrassom - LOGIQ Fortis</h6>
+                                    <i class="fas fa-fw fa-arrow-right"></i>
                                     
                                 </div>
                                 <!-- Card Body -->
@@ -715,10 +716,15 @@
     new Chart(configPie, {
         type: 'pie',
         data: {
-            labels: ['Ultrassom', 'Anestesia', 'Cardioversores', 'Desfibriladores', 'Monitor Cardíaco', 'ECG', 'Monitor Fetal', 'Monitor de sinais vitais'],
+            labels: ['Perigo', 'Em risco', 'Saudável'],
         datasets: [{
           label: '',
-          data: [12, 19, 3, 5, 7, 3, 9, 2],
+          data: [2, 9, 30],
+          backgroundColor: [
+      '#e74a3b',
+      '#f6c23e',
+      '#1cc88a'
+    ],
           borderWidth: 1
         }]
       },

@@ -9,15 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Cadastro Funcionairos</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <link href="css/cadastro-funcionarios.css" rel="stylesheet">
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
 </head>
@@ -231,8 +232,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -243,8 +243,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
@@ -255,8 +254,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
@@ -323,100 +321,43 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Cadastro Maquinário</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Cadastro de funcionários</h1>
 
                     <form class="user">
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <input type="text" id="iptModelo" class="form-control form-control-user"
-                                     aria-describedby="Modelo"
-                                    placeholder="Modelo">
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="dropdown">
-                                    <input class=" form-control form-control-user"
-                                        id="iptTipo" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false" placeholder="Tipo" readonly>
-                                    <div id="dropdown-items" class="dropdown-menu animated--fade-in"
-                                        aria-labelledby="dropdownMenuButton">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-8">
-                                <input type="text" id="iptCpu" onchange="manipuladorLimite(true,1,this.value)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Cpu">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" id="iptCpuTemp" onchange="manipuladorLimite(false,1,this.value,1,1)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Temp máxima">
-                            </div>
-
-                            <div class="col-sm-2">
-                                <input type="text" id="iptCpuLimite" onchange="manipuladorLimite(false,1,this.value,2,2)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Limite máximo">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <input type="text" id="iptRam" onchange="manipuladorLimite(true,2,this.value)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Memória ram">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" id="iptRamLimite" onchange="manipuladorLimite(false,2,this.value,1,1)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Limite máximo">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                <input type="text" id="iptDisco" onchange="manipuladorLimite(true,3,this.value)"class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Disco">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" id="iptDiscoLimite" onchange="manipuladorLimite(false,3,this.value,1,1)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Limite máximo">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-8">
-                                <input type="text" id="iptGpu" onchange="manipuladorLimite(true,4,this.value)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Gpu">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" id="iptGpuTemp" onchange="manipuladorLimite(false,4,this.value,1,1)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Temp máxima">
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" id="iptGpuLimite" onchange="manipuladorLimite(false,4,this.value,2,2)" class="form-control form-control-user"
-                                 aria-describedby="emailHelp"
-                                placeholder="Limite máximo">
-                            </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="InputNome" placeholder="Nome">
                         </div>
                         <div class="form-group">
-                            <textarea id="iptDescricao" class="form-control form-control-description"
-                             aria-describedby="emailHelp"
-                            placeholder="Descrição"></textarea>
+                            <input type="email" class="form-control form-control-user" id="InputEmail"
+                                placeholder="Email">
                         </div>
-                        <div class="form-group">
-                            <a class="btn btn-primary btn-user btn-block" onclick="cadastrar()">
-                                Cadastrar
-                            </a>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="password" class="form-control form-control-user" id="InputSenha"
+                                    placeholder="Senha">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control form-control-user" id="InputConfirmacaoSenha"
+                                    placeholder="Confirme a senha">
+                            </div>
                         </div>
+                        <a class="btn btn-primary btn-user btn-block" onclick="cadastrar()">
+                            Cadastrar
+                        </a>
                     </form>
+
+                    <div class="card shadow mb-4" >
+                        <!-- Card Header - Accordion -->
+                        <a  href="#funcionarios" class="d-block card-header py-3" data-toggle="collapse"
+                            role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                            <h6 class="m-0 font-weight-bold text-primary">Funcionários cadastrados</h6>
+                        </a>
+                        <!-- Card Content - Collapse -->
+                        <div class="collapse show" id="funcionarios">   
+                        </div>
+                    </div>
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -428,7 +369,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Health Tech Solutions 2023</span>
                     </div>
                 </div>
             </footer>
@@ -475,96 +416,76 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <script>
-        let limites = []
-        let tipo = 0
-
-        function addDropdownItem(i){
-            const dropdown = document.getElementById("dropdown-items")
-
-            dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
-        }
-
-        function setDropdownValue(valor, nome){
-            iptTipo.value = nome
-            tipo = valor
-        }
-
-        function cadastrar(){
-            const modelo = iptModelo.value
-            const descricao = iptDescricao.value
-
-            const totais = limites.map(i => i.valores.length)
-
-            if(modelo.trim() == '' || tipo == 0){
-                alert("Preencha os campos obrigatórios!")
-            }
-            else if(limites.length == 0 || totais.includes(0)){
-                alert("Os campos de métricas não foram preenchidos corretamente")
-            }
-            else{
-                fetch("/maquinas/cadastrar",{
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "modelo": modelo,
-                        "descricao": descricao,
-                        "tipo": tipo,
-                        "limites": limites
-                    })
-                }).then(res => {
-                    if(res.status == 200){
-                        alert("Modelo Cadastrado")
-                    }
-                })
-            }
-        }
-
-        function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor){
-            const index = limites.map(i => i.idLimite).indexOf(idLimite)
-            if(isPrincipal){
-                if(index != -1){
-                    limites[index].nome = valor
-                }
-                else{
-                    limites.push({
-                        "idLimite": idLimite,
-                        "nome": valor,
-                        "valores": []
-                    })
-                }
-            }
-            else{
-                if(index != -1){
-                    const indexValor = limites[index].valores
-                        .map(i => i.idValor)
-                        .indexOf(idValor)
-
-                    if(indexValor != -1){
-                        limites[index].valores[indexValor].valor = valor
-                    }
-                    else{
-                        limites[index].valores.push({
-                        "idValor": idValor,
-                        "valor": valor,
-                        "medida": medida
-                    })
-                    }
-                }
-                else{
-                    if(valor) alert("Preencha o modelo da peça!")
-                }
-            }
-        }
-
-        fetch("/maquinas/tipo")
-            .then((res) => res.json())
-            .then((res) => {
-                res.tipos.map(addDropdownItem)
-            })
-    </script>
 </body>
 
+<script>
+    function cadastrar(){
+        const nome = InputNome.value
+        const email = InputEmail.value
+        const senha = InputSenha.value
+        const confirmacaoSenha = InputConfirmacaoSenha.value
+
+        if(!nome || !email || !senha || !confirmacaoSenha){
+            alert("Preencha todos os campos para efetuar o cadastro")
+        }
+        else if(senha != confirmacaoSenha){
+            alert("As senhas não correspondem")
+        }
+        else{
+            fetch("/funcionario/cadastrar",{
+                method: "POST",
+                headers: {
+                    "Content-type": 'application/json'
+                },
+                body: JSON.stringify({
+                    nome,
+                    email,
+                    senha,
+                    fkEmpresa: sessionStorage.FK_EMPRESA,
+                    fkRepresentante: sessionStorage.ID_USUARIO
+                })
+            })
+            .then(res => {
+                if(res.status == 200){
+                    res.json().then(res => {
+                        InputNome.value = ""
+                        InputEmail.value = ""
+                        InputSenha.value = ""
+                        listarFuncionarios()
+                    })
+                        InputConfirmacaoSenha.value = ""
+                } else if(res.status == 400){
+                    alert("Email já cadastrado")
+                }
+            })
+        }
+    }
+
+    function listarFuncionarios(){
+        fetch(`/funcionario/listar/${sessionStorage.FK_EMPRESA}`)
+            .then(res => res.json())
+            .then(res => {
+                funcionarios.innerHTML = ""
+                if(res.funcionarios.length > 0){
+                    res.funcionarios.map(i => {
+                        funcionarios.innerHTML += `
+                            <div class="card-body row row-cols-3 justify-content-between">
+                                <p>${i.nome}</p>
+                                <p>${i.email}</p>
+                                <p>${i.funcao}</p>
+                            </div>
+                        `
+                     })
+                }
+                else{
+                    funcionario.innerHMTL += `
+                        <div class="card-body">
+                            Não há nenhum funcionário cadastrado no momento
+                        </div>
+                    `   
+                }
+            })
+    }   
+    listarFuncionarios()
+</script>
 </html>

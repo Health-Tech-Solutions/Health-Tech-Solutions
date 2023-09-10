@@ -146,11 +146,7 @@ try:
         janela_tempo = Toplevel()
         janela_tempo.title("Definir tempo de coleta")
 
-        backgroundTempo = PhotoImage(file="background.png")
-        backgroundTkTempo = Label(janela_tempo, image = backgroundTempo)
-        backgroundTkTempo.place(x=-1, y=-1)
-
-        texto_orientacao = Label(janela_tempo, text = "Digite o tempo desejado para coleta de dados",font=("Arial",13), background="#9A0801")
+        texto_orientacao = Label(janela_tempo, text = "Digite o tempo desejado para coleta de dados",font=("Arial",13))
         texto_orientacao.grid(column = 0, row = 0,padx = 10,pady=10)
 
         input_tempo = Entry(janela_tempo, width=10)
@@ -169,32 +165,27 @@ try:
 
     janela.title("Health Tech Solutions")
 
-
-    background = PhotoImage(file="background.png")
-    backgroundTk = Label(janela, image = background)
-    backgroundTk.place(x=-1, y=-1)
-
-    apresentacaoHardware = Label(janela, text = "Especificações da máquina",font=("Arial",14), background="#9A0801")
+    apresentacaoHardware = Label(janela, text = "Especificações da máquina",font=("Arial",14))
     apresentacaoHardware.grid(column = 0, row = 0,padx = 10,pady=10)
     
-    infoNucleosFisicos = Label(janela, text = "Núcleos físicos: ",font=("Arial",12), background="#9A0801")
+    infoNucleosFisicos = Label(janela, text = "Núcleos físicos: ",font=("Arial",12))
     infoNucleosFisicos.grid(column = 0, row = 1,padx = 10,pady=5)
     infoNucleosFisicos["text"] += str(nucleos)
 
-    infoNucleosLogicos = Label(janela, text = "Núcleos lógicos: ",font=("Arial",12), background="#9A0801")
+    infoNucleosLogicos = Label(janela, text = "Núcleos lógicos: ",font=("Arial",12))
     infoNucleosLogicos.grid(column = 0, row = 2,padx = 10,pady=5)
     infoNucleosLogicos["text"] += str(nucleosLogicos)
 
-    infoRam = Label(janela, text = "Memória RAM total (GB): ",font=("Arial",12), background="#9A0801")
+    infoRam = Label(janela, text = "Memória RAM total (GB): ",font=("Arial",12))
     infoRam.grid(column = 0, row = 3,padx = 10,pady=5)
     infoRam["text"] += str(format(totalRam, ".2f"))
 
-    infoDiscoTotal = Label(janela, text = "Disco total (GB): ",font=("Arial",12), background="#9A0801")
+    infoDiscoTotal = Label(janela, text = "Disco total (GB): ",font=("Arial",12))
     infoDiscoTotal.grid(column = 0, row = 4,padx = 10,pady=5)
     infoDiscoTotal["text"] += str(format(discoTotal, ".2f"))
 
 
-    texto_orientacao = Label(janela, text = "Que tipo de captura deseja realizar?",font=("Arial",14), background="#9A0801")
+    texto_orientacao = Label(janela, text = "Que tipo de captura deseja realizar?",font=("Arial",14))
     texto_orientacao.grid(column = 0, row = 5,padx = 10,pady=30)
 
     botao = Button(janela, text = "Padrão (10 segundos)", command = indefinido, height= 2, width = 18,font=("Arial",12))
@@ -203,13 +194,13 @@ try:
     botao = Button(janela, text = "Definir Intervalo", command = definir_tempo, height= 2, width = 18,font=("Arial",12))
     botao.grid(column=0,row=7)
 
-    espaco = Label(janela,text="",height= 1, background="#9A0801")
+    espaco = Label(janela,text="",height= 1)
     espaco.grid(column=0,row=8)
 
     botao_sair = Button(janela,text="Sair", command=sair, height= 2, width = 18, font=("Arial",12), background="#030050",foreground="white")
     botao_sair.grid(column=0,row=9)
 
-    texto_dados = Label(janela,text="",padx = 10,pady=10,font=("Arial",12), background="#9A0801")
+    texto_dados = Label(janela,text="",padx = 10,pady=10,font=("Arial",12))
     texto_dados.grid(column=0,row=10)
 
 

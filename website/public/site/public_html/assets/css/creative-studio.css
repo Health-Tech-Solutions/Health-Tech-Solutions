@@ -5567,6 +5567,65 @@ input[type="button"].btn-block {
   padding: 1.25rem;
 }
 
+.plano{
+  border-radius: 10px;
+  padding: 0.3rem;
+
+}
+
+.plano .h5{
+  color: #000;
+  
+}
+
+.silver{
+  border: solid rgba(0, 0, 0, 0.795) 1px !important;
+  box-shadow: 6px 7px;
+  
+
+}
+
+.gold{
+  border: solid black 1px !important;
+  box-shadow: 0px 7px;  
+
+}
+
+
+.platinum{
+  border: solid rgba(0, 0, 0, 0.795) 1px !important;
+  box-shadow: 6px 7px 0px 0px;
+  padding: 0.298rem;
+}
+
+
+.card__one {
+  transition: transform .10s;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 2s cubic-bezier(.165, .84, .44, 1);
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .15);
+    content: '';
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale3d(1.070, 1.070, 1);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+
 .card-title {
   margin-bottom: 0.75rem;
 }

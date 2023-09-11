@@ -12605,6 +12605,9 @@
       width: 65vw;
       height: 40vh;
     }
+    .box-tittle-plano>h2{
+      font-size: 5rem;
+    }
     /* .box-tittle-plano > h2{
       font-size: 3rem;
     } */
@@ -12612,9 +12615,15 @@
       width: 65vw;
       height:40vh ;
     }
+    .box-body>ul>p{
+      font-size: 3rem;
+    }
     /* .box-prize > h2{
       font-size: 3rem;
     } */
+    .box-prize>p{
+      font-size: 3rem;
+    }
   }
     .box .box-item {
       border-radius: 0.2rem;

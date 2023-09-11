@@ -534,7 +534,7 @@
   }
 //Essa função é a responsavel de pegar os dados da tabela mySQL
 function obterDadosGrafico(fkTipo) {
-
+divInferior.innerHTML = "";
 fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
@@ -546,20 +546,19 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
                 console.log(visualizarDados.modelo)
                divInferior.innerHTML += `<div class="container-modelos" id="maquina_modelos">
                 <div class="card shadow mb-4">
-                   <div class="card-header py-3">
-                       <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
-                            
-                       </h6>
-                   </div>
-                   <div class="card-body" id="descricaoMaquina">
-                     <p id="textoDescricao">
-
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
+                            <h3 style="color: #e02d1b;"> ${visualizarDados.modelo} </h3>
+                        </h6>
+                        </div>
+                        <div class="card-body" id="descricaoMaquina">
+                            <p id="textoDescricao">
+                                <p> ${visualizarDados.descricao}</p>  
                      </p>  
                    </div>
                </div>
            </div> `
-           nomeMaquina.innerHTML += `${visualizarDados.modelo}`
-           textoDescricao.innerHTML += `${visualizarDados.descricao}`
+           
            divSelect.style.display = "block";
            mudarGrafico()
             }
@@ -577,11 +576,11 @@ function mudarGrafico(){
     ctx.style.height = "60vh";
     const graficoDados = document.getElementById("selectGrafico");
     var graficoEscolhido = graficoDados.value
-    if(graficoEscolhido = 2){
-          new Chart(ctx, {
+    if(graficoEscolhido == 2){
+     myNewChart = new Chart(ctx, {
             type: 'line',
             data: {
-              labels: ['GHz', 'GHz', 'GHz', 'GHz', 'GHz', 'GHz'],
+              labels: ['1.19 GHz', '1.23 GHz', '1.22 GHz', '1.25 GHz', '1.25 GHz', '1.23GHz'],
               datasets: [{
                 label: 'Desempenho CPU',
                 data: [12, 19, 3, 5, 2, 3],
@@ -596,9 +595,8 @@ function mudarGrafico(){
               }
             }
           });
-    }else if(graficoEscolhido = 3){
-        ctx.innerHTML = "";
-          new Chart(ctx, {
+    }else if(graficoEscolhido == 3){
+         myNewChart= new Chart(ctx, {
             type: 'line',
             data: {
               labels: ['', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -616,9 +614,8 @@ function mudarGrafico(){
               }
             }
           });
-    }else if(graficoEscolhido = 4){
-        ctx.innerHTML = "";
-          new Chart(ctx, {
+    }else if(graficoEscolhido == 4){
+         myNewChart = new Chart(ctx, {
             type: 'line',
             data: {
               labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -636,8 +633,7 @@ function mudarGrafico(){
               }
             }
           });
-    }else if(graficoEscolhido = 1){
-         ctx.innerHTML = "";
+    }else if(graficoEscolhido == 1){
     }
 }
 </script>

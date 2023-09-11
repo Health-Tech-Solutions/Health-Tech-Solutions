@@ -39,6 +39,9 @@ select{
   width: 10vw;
   border-radius: 10px;
   }
+  canvas{
+    display: none;
+  }
 #graficoMaquina{
   display: none;
   display: flex;
@@ -47,8 +50,9 @@ select{
   justify-content: center;
   align-items: center;
   width: 100%;
+  flex-direction: column;
 }
-#myChart{
+/* #myChart{
   width: 100%;
   height: 30vh;
   display: block;
@@ -56,7 +60,7 @@ select{
   justify-content: center;
   align-items: center;
   /* background-color: #030050; */
-}
+/* } */ 
 
 
 /*Parte do css que já estava no arquivo

@@ -395,24 +395,6 @@
                 
             </div>  
             <div id="divSelect">
-                <div class="container-select">
-                     <div class="main-select">
-                         <select id="selectGrafico" onchange="mudarGrafico()">
-                             <option value=1></option>
-                             <option value=2>CPU</option>
-                             <option value=3>RAM</option>
-                             <option value=4>DISCO</option>
-                         </select>
-                            
-                     </div>
-                </div>
-                <div class="container-modelos" id="maquina_modelos">
-                 <div class="card shadow mb-4">
-                    <div class="card-body" id="graficoMaquina">
-                         <canvas id="myChart"></canvas> 
-                    </div>
-                </div>   
-            </div>
                  </div>
                 
             </div>     
@@ -532,6 +514,7 @@
 
     return false;
   }
+  var visualizarDados = '';
 //Essa função é a responsavel de pegar os dados da tabela mySQL
 function obterDadosGrafico(fkTipo) {
 divInferior.innerHTML = "";
@@ -542,7 +525,7 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
             console.log(visualizarDados)
             //Está sempre retornando object/undefined ao colocar no html os dados da resposta
             for (let i = 0; i < resposta.length; i++) {
-                var visualizarDados = resposta[i];
+                 visualizarDados = resposta[i];
                 console.log(visualizarDados.modelo)
                divInferior.innerHTML += `<div class="container-modelos" id="maquina_modelos">
                 <div class="card shadow mb-4">
@@ -558,9 +541,29 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
                    </div>
                </div>
            </div> `
-           
            divSelect.style.display = "block";
-           mudarGrafico()
+           divSelect.innerHTML += `
+           <div class="container-select">
+                     <div class="main-select">
+                         <select id="selectGrafico${i}" onchange="mudarGrafico(${i})">
+                             <option value=1></option>
+                             <option value=2>CPU</option>
+                             <option value=3>RAM</option>
+                             <option value=4>DISCO</option>
+                         </select>
+                            
+                     </div>
+                </div>
+                <div class="container-modelos" id="maquina_modelos">
+                 <div class="card shadow mb-4">
+                    <div class="card-body" id="graficoMaquina">
+                        <h3>${visualizarDados.modelo}</h3>
+                         <canvas id="graficoCPU${i}"></canvas> 
+                         <canvas id="graficoRAM${i}"></canvas> 
+                         <canvas id="graficoDisco${i}"></canvas> 
+                    </div>
+                </div>   
+            </div>`
             }
                     });
     } else {
@@ -571,20 +574,34 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
-function mudarGrafico(){
-    const ctx = document.getElementById('myChart');
-    ctx.style.height = "60vh";
-    const graficoDados = document.getElementById("selectGrafico");
+function mudarGrafico(visualizarDados){
+    const x = document.getElementById('graficoCPU'+visualizarDados);
+    const y = document.getElementById('graficoRAM'+visualizarDados);
+    const z = document.getElementById('graficoDisco'+visualizarDados);
+
+    x.style.height = "60vh";
+    y.style.height = "60vh";
+    z.style.height = "60vh";
+    x.style.width = "100%";
+    y.style.width = "100%";
+    z.style.width = "100%";
+
+    const graficoDados = document.getElementById("selectGrafico"+visualizarDados);
     var graficoEscolhido = graficoDados.value
     if(graficoEscolhido == 2){
-     myNewChart = new Chart(ctx, {
+    x.style.display = "block";
+    y.style.display = "none";
+    z.style.display = "none";
+     myNewChart = new Chart(x, {
             type: 'line',
             data: {
-              labels: ['1.19 GHz', '1.23 GHz', '1.22 GHz', '1.25 GHz', '1.25 GHz', '1.23GHz'],
+              labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
               datasets: [{
-                label: 'Desempenho CPU',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
+                label: 'Uso médio da CPU',
+                data: [94,95,96,96,97,98,98,96,92,98,91,99],
+                borderWidth: 1,
+                backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+                borderColor: 'rgba(3, 0, 80, 1)'
               }]
             },
             options: {
@@ -596,14 +613,19 @@ function mudarGrafico(){
             }
           });
     }else if(graficoEscolhido == 3){
-         myNewChart= new Chart(ctx, {
+    x.style.display = "none";
+    y.style.display = "block";
+    z.style.display = "none";
+         myNewChart= new Chart(y, {
             type: 'line',
             data: {
-              labels: ['', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
               datasets: [{
-                label: 'Desempenho RAM',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
+                label: 'Uso médio da RAM',
+                data: [98,95,96,98,97,98,98,96,94,95,97,97],
+                borderWidth: 1,
+                backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+                borderColor: 'rgba(3, 0, 80, 1)'
               }]
             },
             options: {
@@ -615,14 +637,19 @@ function mudarGrafico(){
             }
           });
     }else if(graficoEscolhido == 4){
-         myNewChart = new Chart(ctx, {
+    x.style.display = "none";
+    y.style.display = "none";
+    z.style.display = "block";
+         myNewChart = new Chart(z, {
             type: 'line',
             data: {
-              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
               datasets: [{
-                label: 'Desempenho Disco',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
+                label: 'Uso médio do Disco',
+                data: [4,3,3,4,4,2,3,4,4,2,3,4],
+                borderWidth: 1,
+                 backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+                borderColor: 'rgba(3, 0, 80, 1)'
               }]
             },
             options: {
@@ -634,6 +661,10 @@ function mudarGrafico(){
             }
           });
     }else if(graficoEscolhido == 1){
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";
+
     }
 }
 </script>

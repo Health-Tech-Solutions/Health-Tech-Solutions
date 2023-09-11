@@ -320,13 +320,13 @@
                     <!-- Começo dos tipos -->
             <div class="container-box-all">
                 <div class="column">
-                    <a href="#" class="btn btn-success btn-icon-split" onclick="mostrarModelo(1)">
+                    <a href="#" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(1)">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
                         <span class="text">Ultrassom</span>
                     </a>
-                    <a href="#" class="btn btn-info btn-icon-split"onclick= "mostrarModelo()">
+                    <a href="#" class="btn btn-info btn-icon-split"onclick= "obterDadosGrafico(2)">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
@@ -334,7 +334,7 @@
                     </a>
                 </div>
                 <div class="column">
-                    <a href="#" class="btn btn-warning btn-icon-split" onclick= "mostrarModelo()">
+                    <a href="#" class="btn btn-warning btn-icon-split" onclick= "obterDadosGrafico(3)">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
@@ -342,7 +342,7 @@
                     </a>
                     <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
     
-                        <a href="#" class="btn btn-danger btn-icon-split" onclick= "mostrarModelo()">
+                        <a href="#" class="btn btn-danger btn-icon-split" onclick= "obterDadosGrafico(4)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -353,13 +353,13 @@
     
                         <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
                         
-                            <a href="#" onclick="mostrarModelo(5)" class="btn btn-info btn-icon-split">
+                            <a href="#" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-arrow-right"></i>
                                 </span>
                                     <span class="text">Desfibriladores</span>
                             </a>
-                            <a href="#" class="btn btn-danger btn-icon-split" onclick= "mostrarModelo()">
+                            <a href="#" class="btn btn-danger btn-icon-split" onclick= "obterDadosGrafico(6)">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-arrow-right"></i>
                                     </span>
@@ -369,13 +369,13 @@
 
                     <div class="column">
                         
-                        <a href="#" class="btn btn-success btn-icon-split" onclick= "mostrarModelo()">
+                        <a href="#" class="btn btn-success btn-icon-split" onclick= "obterDadosGrafico(7)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                                 <span class="text">Monitor Cardíaco</span>
                         </a>
-                        <a href="#" class="btn btn-warning btn-icon-split" onclick= "mostrarModelo()">
+                        <a href="#" class="btn btn-warning btn-icon-split" onclick= "obterDadosGrafico(8)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -391,22 +391,31 @@
             <!-- Essa div acima se refere ao content, está com seu inicio na linha 118 -->
             <!-- Engloba o conteudo principal e fornece a estilização -->                     
                     <!--Fim dos tipos-->
-                   
-            <div class="container-modelos" id="maquina_modelos">
-                <div class="card shadow mb-4">
-                   <div class="card-header py-3">
-                       <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
-
-                       </h6>
-                   </div>
-                   <div class="card-body" id="descricaoMaquina">
-                     <p id="textoDescricao">
-
-                     </p>  
-                   </div>
-               </div>
-           </div>
+            <div id="divInferior">
+                
+            </div>  
+            <div id="divSelect">
+                <div class="container-select">
+                     <div class="main-select">
+                         <select id="selectGrafico" onchange="mudarGrafico()">
+                             <option value=1></option>
+                             <option value=2>CPU</option>
+                             <option value=3>RAM</option>
+                             <option value=4>DISCO</option>
+                         </select>
+                            
+                     </div>
+                </div>
+                <div class="container-modelos" id="maquina_modelos">
+                 <div class="card shadow mb-4">
+                    <div class="card-body" id="graficoMaquina">
+                         <canvas id="myChart"></canvas> 
+                    </div>
+                </div>   
             </div>
+                 </div>
+                
+            </div>     
                     <!--Começo dos modelos-->
 
                      <!-- Basic Card Example -->
@@ -466,6 +475,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 
@@ -522,33 +532,19 @@
 
     return false;
   }
-
-  function mostrarModelo(numero){
-    //A função deve receber um parametro em relação a qual botao foi apertado
-    //Chamando a funçaõ obterDadosGrafico() após cair no if correspondente
-    //if(numero == 1){
-    //}
-    maquina_modelos.style.display = "block";
-    obterDadosGrafico();
-    //else if(numero == 2){
-
-    //}
-      }
-
 //Essa função é a responsavel de pegar os dados da tabela mySQL
-  function obterDadosGrafico() {
+function obterDadosGrafico(fkTipo) {
 
-fetch(`/medidas/ultimas/`, { cache: 'no-store' }).then(function (response) {
+fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            
-            
             console.log(visualizarDados)
             //Está sempre retornando object/undefined ao colocar no html os dados da resposta
             for (let i = 0; i < resposta.length; i++) {
                 var visualizarDados = resposta[i];
-                `<div class="container-modelos" id="maquina_modelos">
+                console.log(visualizarDados.modelo)
+               divInferior.innerHTML += `<div class="container-modelos" id="maquina_modelos">
                 <div class="card shadow mb-4">
                    <div class="card-header py-3">
                        <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
@@ -562,8 +558,10 @@ fetch(`/medidas/ultimas/`, { cache: 'no-store' }).then(function (response) {
                    </div>
                </div>
            </div> `
-           nomeMaquina.innerHTML = `${visualizarDados.modelo}`
-            textoDescricao.innerHTML = `${visualizarDados.descricao}`
+           nomeMaquina.innerHTML += `${visualizarDados.modelo}`
+           textoDescricao.innerHTML += `${visualizarDados.descricao}`
+           divSelect.style.display = "block";
+           mudarGrafico()
             }
                     });
     } else {
@@ -574,6 +572,72 @@ fetch(`/medidas/ultimas/`, { cache: 'no-store' }).then(function (response) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
-
-
+function mudarGrafico(){
+    const ctx = document.getElementById('myChart');
+    ctx.style.height = "60vh";
+    const graficoDados = document.getElementById("selectGrafico");
+    var graficoEscolhido = graficoDados.value
+    if(graficoEscolhido = 2){
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['GHz', 'GHz', 'GHz', 'GHz', 'GHz', 'GHz'],
+              datasets: [{
+                label: 'Desempenho CPU',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                }
+              }
+            }
+          });
+    }else if(graficoEscolhido = 3){
+        ctx.innerHTML = "";
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                label: 'Desempenho RAM',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+    }else if(graficoEscolhido = 4){
+        ctx.innerHTML = "";
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                label: 'Desempenho Disco',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+    }else if(graficoEscolhido = 1){
+         ctx.innerHTML = "";
+    }
+}
 </script>

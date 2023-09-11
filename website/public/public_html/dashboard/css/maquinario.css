@@ -13,10 +13,52 @@
     margin: 10px;
 }
 .container-modelos{
-    display: none;
+    display: block;
     /* height: 60vh;
     width: 100%; */
 }
+.main-select{
+  width: 40vw;
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container-select{
+  display: none;
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  padding: 25px;
+  align-items: center;
+}
+#divSelect{
+  display: none;
+}
+select{
+  width: 10vw;
+  border-radius: 10px;
+  }
+#graficoMaquina{
+  display: none;
+  display: flex;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#myChart{
+  width: 100%;
+  height: 30vh;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #030050; */
+}
+
+
 /*Parte do css que já estava no arquivo
 /*!
  * Start Bootstrap - SB Admin 2 v4.1.3 (https://startbootstrap.com/theme/sb-admin-2)

@@ -201,8 +201,9 @@ function buscaFkEndereco() {
 function verifCNPJ() {
     var erro = false;
     var cnpjVar = InputCNPJ.value;
-    if (cnpjVar == undefined) {
-        alert('O complemento esta undefined');
+    console.log(InputCNPJ)
+    if (cnpjVar == undefined || cnpjVar == '') {
+        alert('O CNPJ esta undefined');
         erro = true;
     }
     if (erro == false) {

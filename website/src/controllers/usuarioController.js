@@ -163,6 +163,7 @@ function verifEmail(req, res) {
 function verifCNPJ(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var CNPJ = req.body.cnpjServer;
+    console.log(CNPJ)
 
     // Faça as validações dos valores
     if (CNPJ == undefined) {

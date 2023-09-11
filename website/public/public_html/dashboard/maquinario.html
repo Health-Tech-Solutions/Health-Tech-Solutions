@@ -18,7 +18,6 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/maquinario.css">
 
 </head>
@@ -312,110 +311,97 @@
 
 
                 <!-- Begin Page Content -->
+                <!-- Inicio do container dos maquinarios -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Maquinário</h1>
 
                     <!-- Começo dos tipos -->
-                  
-                    <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
-
-                        <a href="#" class="btn btn-success btn-icon-split" onclick="mostrarModelo(1)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Ultrassom</span>
-                        </a>
-                        <a href="#" class="btn btn-info btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Máquina de Anestesia</span>
-                        </a>
-                        <a href="#" class="btn btn-warning btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Cardioversores</span>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-icon-split">
+            <div class="container-box-all">
+                <div class="column">
+                    <a href="#" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(1)">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="text">Ultrassom</span>
+                    </a>
+                    <a href="#" class="btn btn-info btn-icon-split"onclick= "obterDadosGrafico(2)">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="text">Máquina de Anestesia</span>
+                    </a>
+                </div>
+                <div class="column">
+                    <a href="#" class="btn btn-warning btn-icon-split" onclick= "obterDadosGrafico(3)">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="text">Cardioversores</span>
+                    </a>
+                    <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
+    
+                        <a href="#" class="btn btn-danger btn-icon-split" onclick= "obterDadosGrafico(4)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span class="text">Máquinas de ECG</span>
                         </a>
-
-
                     </div>
-                    
-                    <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+                    <div class="column">
+    
+                        <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
                         
-                        <a href="#" onclick="mostrarModelo(5)" class="btn btn-info btn-icon-split">
+                            <a href="#" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                    <span class="text">Desfibriladores</span>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-icon-split" onclick= "obterDadosGrafico(6)">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                        <span class="text">Monitor Fetal</span>
+                                </a>
+                    </div>
+
+                    <div class="column">
+                        
+                        <a href="#" class="btn btn-success btn-icon-split" onclick= "obterDadosGrafico(7)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text">Desfibriladores</span>
+                                <span class="text">Monitor Cardíaco</span>
                         </a>
-                        <a href="#" class="btn btn-danger btn-icon-split">
+                        <a href="#" class="btn btn-warning btn-icon-split" onclick= "obterDadosGrafico(8)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text">Monitor Fetal</span>
-                        </a>
-                        <a href="#" class="btn btn-success btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Monitor Cardíaco</span>
-                        </a>
-                        <a href="#" class="btn btn-warning btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Monitor de sinais vitais</span>
+                        <span class="text">Monitor de sinais vitais</span>
                         </a>
                     </div>
-                   
-
-                    
-                    
-
-                     
+                </div>
+                
+                <h1 class="h3 mb-4 text-gray-800">Modelos</h1>
+            </div>
+            <!-- Termino do container dos maquinarios -->
+            </div>  
+            <!-- Essa div acima se refere ao content, está com seu inicio na linha 118 -->
+            <!-- Engloba o conteudo principal e fornece a estilização -->                     
                     <!--Fim dos tipos-->
-
+            <div id="divInferior">
+                
+            </div>  
+            <div id="divSelect">
+                 </div>
+                
+            </div>     
                     <!--Começo dos modelos-->
 
-                    <h1 class="h3 mb-4 text-gray-800">Modelos</h1>
-
                      <!-- Basic Card Example -->
-
                      
-
-                   
-                     <!-- Basic Card Example -->
-                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">LOGIQ Fortis</h6>
-                        </div>
-                        <div class="card-body">
-                            The styling for this basic card example is created by using default Bootstrap
-                            utility classes. By using utility classes, the style of the card component can be
-                            easily modified with no need for any custom CSS!
-                        </div>
-                    </div>
-                       <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">LOGIQ Fortis</h6>
-                        </div>
-                        <div class="card-body">
-                            The styling for this basic card example is created by using default Bootstrap
-                            utility classes. By using utility classes, the style of the card component can be
-                            easily modified with no need for any custom CSS!
-                        </div>
-                    </div>
-
-                </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -471,6 +457,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>
 
@@ -527,6 +514,157 @@
 
     return false;
   }
+  var visualizarDados = '';
+//Essa função é a responsavel de pegar os dados da tabela mySQL
+function obterDadosGrafico(fkTipo) {
+divInferior.innerHTML = "";
+fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            console.log(visualizarDados)
+            //Está sempre retornando object/undefined ao colocar no html os dados da resposta
+            for (let i = 0; i < resposta.length; i++) {
+                 visualizarDados = resposta[i];
+                console.log(visualizarDados.modelo)
+               divInferior.innerHTML += `<div class="container-modelos" id="maquina_modelos">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
+                            <h3 style="color: #e02d1b;"> ${visualizarDados.modelo} </h3>
+                        </h6>
+                        </div>
+                        <div class="card-body" id="descricaoMaquina">
+                            <p id="textoDescricao">
+                                <p> ${visualizarDados.descricao}</p>  
+                     </p>  
+                   </div>
+               </div>
+           </div> `
+           divSelect.style.display = "block";
+           divSelect.innerHTML += `
+           <div class="container-select">
+                     <div class="main-select">
+                         <select id="selectGrafico${i}" onchange="mudarGrafico(${i})">
+                             <option value=1></option>
+                             <option value=2>CPU</option>
+                             <option value=3>RAM</option>
+                             <option value=4>DISCO</option>
+                         </select>
+                            
+                     </div>
+                </div>
+                <div class="container-modelos" id="maquina_modelos">
+                 <div class="card shadow mb-4">
+                    <div class="card-body" id="graficoMaquina">
+                        <h3>${visualizarDados.modelo}</h3>
+                         <canvas id="graficoCPU${i}"></canvas> 
+                         <canvas id="graficoRAM${i}"></canvas> 
+                         <canvas id="graficoDisco${i}"></canvas> 
+                    </div>
+                </div>   
+            </div>`
+            }
+                    });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+function mudarGrafico(visualizarDados){
+    const x = document.getElementById('graficoCPU'+visualizarDados);
+    const y = document.getElementById('graficoRAM'+visualizarDados);
+    const z = document.getElementById('graficoDisco'+visualizarDados);
 
+    x.style.height = "60vh";
+    y.style.height = "60vh";
+    z.style.height = "60vh";
+    x.style.width = "100%";
+    y.style.width = "100%";
+    z.style.width = "100%";
 
+    const graficoDados = document.getElementById("selectGrafico"+visualizarDados);
+    var graficoEscolhido = graficoDados.value
+    if(graficoEscolhido == 2){
+    x.style.display = "block";
+    y.style.display = "none";
+    z.style.display = "none";
+     myNewChart = new Chart(x, {
+            type: 'line',
+            data: {
+              labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
+              datasets: [{
+                label: 'Uso médio da CPU',
+                data: [94,95,96,96,97,98,98,96,92,98,91,99],
+                borderWidth: 1,
+                backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+                borderColor: 'rgba(3, 0, 80, 1)'
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                }
+              }
+            }
+          });
+    }else if(graficoEscolhido == 3){
+    x.style.display = "none";
+    y.style.display = "block";
+    z.style.display = "none";
+         myNewChart= new Chart(y, {
+            type: 'line',
+            data: {
+                labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
+              datasets: [{
+                label: 'Uso médio da RAM',
+                data: [98,95,96,98,97,98,98,96,94,95,97,97],
+                borderWidth: 1,
+                backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+                borderColor: 'rgba(3, 0, 80, 1)'
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+    }else if(graficoEscolhido == 4){
+    x.style.display = "none";
+    y.style.display = "none";
+    z.style.display = "block";
+         myNewChart = new Chart(z, {
+            type: 'line',
+            data: {
+                labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
+              datasets: [{
+                label: 'Uso médio do Disco',
+                data: [4,3,3,4,4,2,3,4,4,2,3,4],
+                borderWidth: 1,
+                 backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+                borderColor: 'rgba(3, 0, 80, 1)'
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+    }else if(graficoEscolhido == 1){
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";
+
+    }
+}
 </script>

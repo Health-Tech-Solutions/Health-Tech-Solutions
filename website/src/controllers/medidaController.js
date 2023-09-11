@@ -2,13 +2,13 @@ var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidas(req, res) {
 
-    const limite_linhas = 7;
+    //const limite_linhas = 7;
 
-    var idAquario = req.params.idAquario;
+    var fkTipo = req.params.fkTipo;
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+    //console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidas(idAquario, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas(fkTipo).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -21,14 +21,15 @@ function buscarUltimasMedidas(req, res) {
     });
 }
 
+function buscarDadosMaquina(req, res) {
 
-function buscarMedidasEmTempoReal(req, res) {
+    //const limite_linhas = 7;
 
-    var idAquario = req.params.idAquario;
+    var fkMaquina = req.params.fkMaquina;
 
-    console.log(`Recuperando medidas em tempo real`);
+    //console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarMedidasEmTempoReal(idAquario).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas(fkMaquina).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -43,6 +44,5 @@ function buscarMedidasEmTempoReal(req, res) {
 
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
-
+    buscarDadosMaquina
 }

@@ -1,0 +1,19 @@
+.container-fluid{
+  text-align: center !important;
+  align-items: center;
+
+}
+
+.container-fluid .card {
+  margin-top: 6% !important;
+  
+}
+
+.container-fluid .card h6{
+  color: #030050 !important;
+
+}
+
+.container-fluid .user .btn{
+  font-size: 17px;
+}

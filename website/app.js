@@ -19,7 +19,7 @@ const funcionarioRouter = require("./src/routes/funcionario")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public/public_html")));
+app.use(express.static(path.join(__dirname, "public/site/public_html")));
 
 app.use(cors());
 

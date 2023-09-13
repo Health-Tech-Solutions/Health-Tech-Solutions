@@ -91,6 +91,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    
+    <script src="../../public_html/dashboard/index.html"></script>
 
 </body>
 
@@ -125,7 +127,7 @@
                     sessionStorage.NOME_USUARIO = json[0].nome;
                     sessionStorage.FK_EMPRESA = json[0].fkIndustria
                     setTimeout(function() {
-                       window.location = "../../public_html/dashboard/index.html";
+                       window.location = "./dashboard/index.html";
                     },1000);
                 })
             }

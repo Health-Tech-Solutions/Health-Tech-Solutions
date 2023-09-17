@@ -1,3 +1,4 @@
+drop database if exists hts;
 create database hts;
 
 use hts;
@@ -247,12 +248,16 @@ create table tipoRegistro(
 insert into 
 	tipoRegistro(nome, medida)
 values
-	("Celsius","c"),
-	("Porcentagem", "%");
+	('Uso de CPU', '%'),
+	('Temperatura de CPU', 'ºC'),
+	('Frequência de CPU', 'GHz'),
+	('Uso de memória virtual', '%'),
+	('Uso de RAM', '%'),
+	('Uso de disco', '%');
 
 create table registro(
 	idRegistro int primary key auto_increment,
-    dataHora date,
+    dataHora datetime,
     valor decimal(7,2),
     fkMaquina int,
     foreign key (fkMaquina) references maquinario(idMaquinario),
@@ -267,21 +272,21 @@ select * from maquinario;
 insert into 
 	registro(dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro)
 values
-	(date(now()),89, 2 , 13,2),
-	(date(now()),82, 2 , 13,1),
-	(date(now()),45, 2 , 13,2),
-	(date(now()),91, 2 , 13,1),
-	(date(now()),33, 2 , 13,2),
-	(date(now()),2, 3 , 15,2),
-	(date(now()),94, 3 , 15,1),
-	(date(now()),27, 3 , 15,2),
-	(date(now()),3, 3 , 15,1),
-	(date(now()),93, 3 , 15,2),
-	(date(now()),44, 6 , 3,2),
-	(date(now()),69, 6 , 3,1),
-	(date(now()),47, 6 , 3,2),
-	(date(now()),23, 6 , 3,1),
-	(date(now()),44, 6 , 3,2);
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+	(now(),44, 6 , 3,2);
 
 create table chamado(
 	idChamado int primary key auto_increment,
@@ -375,3 +380,6 @@ values
 	("Andreylrodrigues@hotmail.com", "(11)94100-0405","Qual o melhor plano para uma empresa grande"),
     ("Julia-fernandes@gmail.com","(15)95116-0122","Bom dia, quais os beneficios do plano rubi?"),
     ("Henrique.trenolitos@bol.com.br","(11)91133-6122","Como funciona a dashboard do hospital?");
+    
+    
+select * from registro join tipoRegistro on fkTipoRegistro = idTipoRegistro order by dataHora desc;    

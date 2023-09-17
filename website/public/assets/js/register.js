@@ -3,18 +3,18 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
-// function planoPrata() {
-//     // dropdownMenuButton.innerHTML = 'Prata';
-//     planoEscolhido = 1;
-// }
-// function planoGold() {
-//     // dropdownMenuButton.innerHTML = 'Gold';
-//     planoEscolhido = 2;
-// }
-// function planoRubi() {
-//     // dropdownMenuButton.innerHTML = 'Rubi';
-//     planoEscolhido = 3;
-// }
+function planoPrata() {
+     dropdownMenuButton.innerHTML = 'Prata';
+     planoEscolhido = 1;
+ }
+ function planoGold() {
+     dropdownMenuButton.innerHTML = 'Gold';
+     planoEscolhido = 2;
+ }
+ function planoRubi() {
+     dropdownMenuButton.innerHTML = 'Rubi';
+     planoEscolhido = 3;
+ }
 
 function plano(i){
     planoEscolhido = Number(i)

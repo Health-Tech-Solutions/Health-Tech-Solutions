@@ -1,90 +1,99 @@
 import psutil
 import time
 import mysql.connector
-import json
 
+def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro):
+    cursor.execute(
+        "INSERT INTO registro (dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro) VALUES "
+        "(NOW(), %s, %s, %s, %s)",
+        (valor, fkMaquina, fkTipoMaquina, fkTipoRegistro)
+    )
 
 try:
-    inicioWhile = True
-    contador = 0
-    conexao = mysql.connector.connect(host='localhost',database='teste', port='3306', user ='root', password='lucas-00123969130980362')  
+    conexao = mysql.connector.connect(
+        host='localhost',
+        database='hts',
+        port='3306',
+        user='root',
+        password='lucas-00123969130980362'
+    )
+
+    if conexao.is_connected():
+        print("Conexão com o banco de dados estabelecida.")
 
     nucleosLogicos = psutil.cpu_count()
     nucleos = psutil.cpu_count(logical=False)
-    totalMemory = psutil.virtual_memory()[0] / (1024 ** 3)
-    totalRam = (psutil.virtual_memory().total / 1024**3)
-    discoTotal = (psutil.disk_usage('/')[0]) / (1024**3)
-    print("Quantidad de núcleos: ")
-    print(nucleos)     
-    print("Quantidad de núcleos lógicos: ")
-    print(nucleosLogicos)
+    totalMemory = psutil.virtual_memory().total / (1024 ** 3)
+    totalRam = totalMemory
+    discoTotal = psutil.disk_usage('/').total / (1024 ** 3)
 
+    print("Quantidade de núcleos lógicos:", nucleosLogicos)
+    print("Quantidade de núcleos físicos:", nucleos)
     print()
-    tempo = int(input("De quanto em quanto tempo a máquina deve capturar os dados?"))
-    limiteMed = int(input("Quanstas captura são necessárias para calculas as médias?"))
+
+    tempo = int(input("De quanto em quanto tempo a máquina deve capturar os dados? "))
+    limiteMed = int(input("Quantas capturas são necessárias para calcular as médias? "))
     token = input("Insira o token da máquina: ")
 
-    fkMaquina, fkTipoMaquina = token.split("#")
-    fkMaquina = int(fkMaquina)
-    fkTipoMaquina = int(fkTipoMaquina)
-    
+    fkMaquina, fkTipoMaquina = map(int, token.split("#"))
 
     somaCpuPorcent = 0
     somaCpuTemp = 0
     somaCpuFreq = 0
-    somavirtualMemory =0
+    somaVirtualMemory = 0
     somaRamPorcent = 0
 
+    contador = 0
 
-    while inicioWhile == True :
+    while True:
+        contador = contador + 1
         time.sleep(tempo)
-        contador+=1
 
         cpuPorcent = psutil.cpu_percent()
-        cpuTemp = psutil.sensors_temperatures()['acpitz'][0][1]
-        cpuFreq = (psutil.cpu_freq()[0]) / 1000
-        discoDisponivel = (psutil.disk_usage('/')[2]) / (1024**3)
-        ramPorcent = ((psutil.virtual_memory().used / 1024**3) / totalRam) * 100
-        virtualMemory = psutil.virtual_memory()[1] / (1024 ** 3)
+        cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
+        cpuFreq = psutil.cpu_freq().current / 1000
+        discoDisponivel = psutil.disk_usage('/').free / (1024 ** 3)
+        ramPorcent = (psutil.virtual_memory().used / 1024 ** 3) / totalRam * 100
+        virtualMemory = psutil.virtual_memory().available / (1024 ** 3)
         virtualMemoryPercent = (virtualMemory / totalMemory) * 100
 
-        # print("Capturei os dados")
-        # print(contador)
-        # print(limiteMed)
-        
         somaCpuPorcent += cpuPorcent
         somaCpuTemp += cpuTemp
         somaCpuFreq += cpuFreq
         somaRamPorcent += ramPorcent
-        somavirtualMemory += virtualMemoryPercent
+        somaVirtualMemory += virtualMemoryPercent
 
-        if contador == limiteMed :
+        if contador == limiteMed:
+            mediaCpuPorcent = somaCpuPorcent / limiteMed
+            mediaCpuTemp = somaCpuTemp / limiteMed
+            mediaCpuFreq = somaCpuFreq / limiteMed
+            mediaVirtualMemory = somaVirtualMemory / limiteMed
+            mediaRamPorcent = somaRamPorcent / limiteMed
+
+            discoUtilizado = discoTotal - discoDisponivel
+            discoPorcent = (discoUtilizado / discoTotal) * 100
+            
+            cursor = conexao.cursor()
+
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuPorcent, 1)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 5)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 6)
+
+            conexao.commit()
+
+            print("Dados inseridos no banco de dados com sucesso.")
+
+            somaCpuPorcent = 0
+            somaCpuTemp = 0
+            somaCpuFreq = 0
+            somaVirtualMemory = 0
+            somaRamPorcent = 0
             contador = 0
 
-            mediaCpuPorcent = somaCpuPorcent / tempo
-            mediaCpuTemp = somaCpuTemp / tempo
-            mediaCpuFreq = somaCpuFreq / tempo
-            mediaVirtualMemory = somavirtualMemory / tempo
-            mediaRamPorcent = somaRamPorcent / tempo
-            
-            discoUtilizado = discoTotal - discoDisponivel
-            discoPorcent = discoUtilizado/discoTotal * 100
-
-            def inserir(dadoDaVez, fkTipoRegistro) : 
-                cursor = conexao.cursor()
-                cursor.execute("INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoMaquina, fkTipoRegistro) VALUES"
-               f"(NOW(), {format(dadoDaVez, '.2f')}, {fkMaquina}, {fkTipoMaquina}, {fkTipoRegistro});")
-                conexao.commit()
-
-            inserir(mediaCpuPorcent, 1)
-            inserir(mediaCpuTemp, 2)
-            inserir(mediaCpuFreq, 3)
-            inserir(mediaVirtualMemory, 4)
-            inserir(mediaRamPorcent, 5)
-            inserir(discoPorcent, 6)
-
-
-         
-except:
-    print("Falha na conexão")   
-
+except mysql.connector.Error as e:
+    print(f"Erro do banco de dados: {e}")
+except KeyboardInterrupt:
+    print("Encerrando o programa.")

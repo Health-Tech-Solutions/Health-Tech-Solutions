@@ -5,14 +5,25 @@ from tkinter import *
 import mysql.connector
 import json
 
+
 try:
     conexao = mysql.connector.connect(
-        host='localhost',database='teste',
+        host='localhost',database='hts',
         port='3306',
         user ='root',
         password='lucas-00123969130980362'
     )  
+    def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro):
+        cursor.execute(
+            "INSERT INTO registro (dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro) VALUES "
+            "(NOW(), %s, %s, %s, %s)",
+            (valor, fkMaquina, fkTipoMaquina, fkTipoRegistro)
+    )
+        
+    token = input("Insira o token da máquina: ")
 
+    fkMaquina, fkTipoMaquina = map(int, token.split("#"))
+    
     nucleosLogicos = psutil.cpu_count()
     nucleos = psutil.cpu_count(logical=False)
     totalMemory = psutil.virtual_memory()[0] / (1024 ** 3)
@@ -117,18 +128,16 @@ try:
 
 
                 janela.update() 
-                def inserir(dadoDaVez, fkTipoRegistro) : 
-                    cursor = conexao.cursor()
-                    cursor.execute("INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoMaquina, fkTipoRegistro) VALUES"
-                    f"(NOW(), {format(dadoDaVez, '.2f')}, 1, 1, {fkTipoRegistro});")
-                    conexao.commit()
+                cursor = conexao.cursor()
 
-                inserir(mediaCpuPorcent, 1)
-                inserir(mediaCpuTemp, 2)
-                inserir(mediaCpuFreq, 3)
-                inserir(mediaVirtualMemory, 4)
-                inserir(mediaRamPorcent, 5)
-                inserir(discoPorcent, 6)
+                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuPorcent, 1)
+                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
+                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
+                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
+                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 5)
+                inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 6)
+
+                conexao.commit()
                     
 
     def indefinido() : 
@@ -211,4 +220,3 @@ try:
 
 except:
     print("Falha na conexão")   
-

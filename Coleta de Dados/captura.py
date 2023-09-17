@@ -15,7 +15,7 @@ try:
         database='hts',
         port='3306',
         user='root',
-        password='lucas-00123969130980362'
+        password=''
     )
 
     if conexao.is_connected():

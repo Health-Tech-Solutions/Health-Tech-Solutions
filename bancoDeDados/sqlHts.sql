@@ -19,6 +19,8 @@ create table empresa(
     foreign key (fkEndereco) references endereco(idEndereco)
 );
 
+
+insert into empresa values (null, "teste", null, null, null);
 create table funcionario(
 	idFuncionario int primary key auto_increment,
     nome varchar(45),
@@ -63,14 +65,28 @@ create table modelo(
     foreign key (fkEmpresa) references empresa(idEmpresa)
 );
 
+insert into modelo
+	values 
+		(null, null, null, null, null),
+		(null, null, null, null, null),
+		(null, null, null, null, null),
+		(null, null, null, null, null),
+		(null, null, null, null, null);
+
 create table maquinario(
 	idMaquinario int,
 	fkModelo int,
     foreign key (fkModelo) references modelo(idModelo),
     fkEmpresa int,
     foreign key (fkEmpresa) references empresa(idEmpresa),
-    primary key(idMaquinario, fkModelo)
+    primary key(idMaquinario, fkModelo) 
 );
+
+insert into maquinario
+	values
+		(123,1,1),
+		(124,2,1),
+		(125,3,1);
 
 create table tipoRegistro(
 	idTipoRegistro int primary key auto_increment,
@@ -90,10 +106,21 @@ create table limite(
     fkModelo int,
     foreign key (fkModelo) references modelo(idModelo),
     fkTipoRegistro int,
+	tipo varchar(45),
     foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro),
     valor decimal(5,2)
 );
-
+insert into limite values 
+		(null, null, null, null,"cpu", 15),
+		(null, null, null, null,"disco", 15),
+		(null, null, null, null,"ram", 15),
+		(null, null, null, null,"cpu", 15),
+		(null, null, null, null,"ram", 15),
+		(null, null, null, null,"disco", 15),
+		(null, null, null, null,"disco", 15),
+		(null, null, null, null,"cpu", 15),
+		(null, null, null, null,"ram", 15);
+        
 create table registro(
 	idRegistro int primary key auto_increment,
     dataHora datetime,
@@ -104,8 +131,18 @@ create table registro(
     foreign key (fkModelo) references maquinario(fkModelo),
     fkLimite int,
     foreign key (fkLimite) references limite(idLimite)
-);
-
+); 
+insert into registro
+	values 
+		(null, now(), 15, 123, 1, 1),
+        (null, now(), 15, 123, 1, 2),
+        (null, now(), 35, 123, 1, 3),
+        (null, now(), 20, 124, 2, 4),
+		(null, now(), 15, 124, 2, 5),
+        (null, now(), null, 124, 2, 6),
+        (null, now(), 35, 125, 3, 7),
+        (null, now(), null, 125, 3, 8),
+        (null, now(), 20, 125, 3, 9);
 create table chamado(
 	idChamado int primary key auto_increment,
     nivel varchar(45),
@@ -123,8 +160,24 @@ create table faleConosco(
     mensagem varchar(255)
 );
 
+drop view if exists vw_registro;
+create view vw_registro as
+	select 
+		distinct(r.datahora),
+		(select rv.valor from registro rv 
+			join limite lv on lv.idLimite = rv.fkLimite
+			where lv.tipo = "cpu" and rv.datahora = r.datahora and rv.fkMaquinario = r.fkMaquinario) cpu,
+  		(select rv.valor from registro rv  
+			join limite lv on lv.idLimite = rv.fkLimite
+			where lv.tipo = "disco" and rv.datahora = r.datahora and rv.fkMaquinario = r.fkMaquinario) disco,
+		(select rv.valor from registro rv 
+			join limite lv on lv.idLimite = rv.fkLimite
+			where lv.tipo = "ram" and rv.datahora = r.datahora and rv.fkMaquinario = r.fkMaquinario) ram
+	from registro r
+	join limite l on l.idLimite = r.fkLimite;
 
---------------- INSERT -------------------------------
+select * from vw_registro;
+-- --------------------- INSERT ----------------------------- --
 
 /*
 insert into 

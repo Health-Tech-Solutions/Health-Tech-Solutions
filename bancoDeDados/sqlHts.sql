@@ -10,18 +10,6 @@ create table endereco(
     complemento varchar(10)
 );
 
-insert into 
-	endereco(cep, numero, complemento) 
-values 
-	('41200-104','12u','A'),
-	('41200-104','12u','C'),
-	('60144-132','15', null),
-	('12345-678','358', null),
-	('01321-001','741', null),
-    ('01323-903','331', null),
-    ('04263-200','150', null),
-    ('05652-900','701', null);
-
 create table empresa(
 	idEmpresa int primary key auto_increment,
     nomeFantasia varchar(45),
@@ -30,18 +18,6 @@ create table empresa(
     fkEndereco int,
     foreign key (fkEndereco) references endereco(idEndereco)
 );
-
-insert into
-	empresa(nomeFantasia, cnpj, telefone, fkEndereco)
-values
-	("Da Vinci","56.158.491/5012-61","(11)95102-1401",1),
-	("Lean machine","95.144.803/2012-62","(11)90422-2101",2),
-	("Croquer","77.921.121/0102-19","(15)99291-4021",3),
-	("alrHosp","45.123.952/4122-14","(11)94100-0405",4),
-    ("Paulistano","11.910.753/1105-85","(11)91361-5055",5),
-    ("Oswaldo Cruz","09.521.857/0411-21","(11)99020-1100",6),
-    ("São Camilo - ipiranga","70.111.556/1244-78","(11)9071-1322",7),
-    ("Albert Eistean","31.403.125/0012-01","(11)92445-8622",8);
 
 create table funcionario(
 	idFuncionario int primary key auto_increment,
@@ -54,6 +30,126 @@ create table funcionario(
     fkRepresentante int,
     foreign key (fkRepresentante) references funcionario(idFuncionario)
 );
+
+create table plano(
+	idPlano int primary key auto_increment, 
+    nome varchar(45),
+    valor decimal(8,2),
+    descricao varchar(255)
+);
+
+create table assinatura(
+	fkIndustria int,
+    foreign key (fkIndustria) references empresa(idEmpresa),
+    fkPlano int,
+    foreign key (fkPlano) references plano(idPlano),
+    dataContrato date,
+    estado varchar(45),
+    primary key(fkIndustria, dataContrato)
+);
+
+create table tipo(
+	idTipo int primary key auto_increment,
+    nome varchar(45)
+);
+
+create table modelo(
+	idModelo int primary key auto_increment,
+    modelo varchar(45),
+    descricao varchar(255),
+    fkTipo int,
+	foreign key (fkTipo) references tipo(idTipo),
+    fkEmpresa int,
+    foreign key (fkEmpresa) references empresa(idEmpresa)
+);
+
+create table maquinario(
+	idMaquinario int,
+	fkModelo int,
+    foreign key (fkModelo) references modelo(idModelo),
+    fkEmpresa int,
+    foreign key (fkEmpresa) references empresa(idEmpresa),
+    primary key(idMaquinario, fkModelo)
+);
+
+create table tipoRegistro(
+	idTipoRegistro int primary key auto_increment,
+    nome varchar(45),
+    medida varchar(45)
+);
+
+create table peca(
+	idPeca int primary key auto_increment,
+    nome varchar(45)
+);
+
+create table limite(
+	idLimite int primary key auto_increment,
+    fkPeca int,
+    foreign key (fkPeca) references peca(idPeca),
+    fkModelo int,
+    foreign key (fkModelo) references modelo(idModelo),
+    fkTipoRegistro int,
+    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro),
+    valor decimal(5,2)
+);
+
+create table registro(
+	idRegistro int primary key auto_increment,
+    dataHora datetime,
+    valor decimal(7,2),
+    fkMaquinario int,
+    foreign key (fkMaquinario) references maquinario(idMaquinario),
+    fkModelo int,
+    foreign key (fkModelo) references maquinario(fkModelo),
+    fkLimite int,
+    foreign key (fkLimite) references limite(idLimite)
+);
+
+create table chamado(
+	idChamado int primary key auto_increment,
+    nivel varchar(45),
+    estado varchar(45),
+    sla varchar(45),
+    descricao varchar(45),
+	fkRegistro int,
+    foreign key(fkRegistro) references registro(idRegistro)
+);
+
+create table faleConosco(
+    idFaleConosco int primary key auto_increment,
+    email varchar(45),
+    telefone char(14),
+    mensagem varchar(255)
+);
+
+
+--------------- INSERT -------------------------------
+
+/*
+insert into 
+	endereco(cep, numero, complemento) 
+values 
+	('41200-104','12u','A'),
+	('41200-104','12u','C'),
+	('60144-132','15', null),
+	('12345-678','358', null),
+	('01321-001','741', null),
+    ('01323-903','331', null),
+    ('04263-200','150', null),
+    ('05652-900','701', null);
+
+insert into
+	empresa(nomeFantasia, cnpj, telefone, fkEndereco)
+values
+	("Da Vinci","56.158.491/5012-61","(11)95102-1401",1),
+	("Lean machine","95.144.803/2012-62","(11)90422-2101",2),
+	("Croquer","77.921.121/0102-19","(15)99291-4021",3),
+	("alrHosp","45.123.952/4122-14","(11)94100-0405",4),
+    ("Paulistano","11.910.753/1105-85","(11)91361-5055",5),
+    ("Oswaldo Cruz","09.521.857/0411-21","(11)99020-1100",6),
+    ("São Camilo - ipiranga","70.111.556/1244-78","(11)9071-1322",7),
+    ("Albert Eistean","31.403.125/0012-01","(11)92445-8622",8);
 
 insert into
 	funcionario(nome, email, senha,funcao, fkIndustria)
@@ -74,29 +170,12 @@ values
 	("Rosa Emilly Valentina Viana","rosa_viana@pierproj.com.br","xYFG7H7ikq","funcionario", 5),   
 	("Clarice Louise Laura Araújo","clarice_araujo@yahoo.com.ar","RNoeEDd7yb","funcionario", 5);
 
-create table plano(
-	idPlano int primary key auto_increment, 
-    nome varchar(45),
-    valor decimal(8,2),
-    descricao varchar(45)
-);
-
 insert into 
 	plano(nome, valor, descricao)
 values
-	("Silve", 10, "Plano prata"),
+	("Silver", 10, "Plano prata"),
 	("Gold", 20, "Plano gold"),
 	("Rubi", 30,"Plano rubi");
-
-create table assinatura(
-	fkIndustria int,
-    foreign key (fkIndustria) references empresa(idEmpresa),
-    fkPlano int,
-    foreign key (fkPlano) references plano(idPlano),
-    dataContrato date,
-    estado varchar(45),
-    primary key(fkIndustria, dataContrato)
-);
 
 insert into
 	assinatura(fkIndustria, fkPlano, dataContrato, estado)
@@ -110,11 +189,6 @@ values
 	(3, 1, "2023-08-12", "Pago"),
 	(3, 2, "2023-09-12", "Pago");
 
-create table tipo(
-	idTipo int primary key auto_increment,
-    nome varchar(45)
-);
-
 insert into
 	tipo(nome)
 values
@@ -127,14 +201,7 @@ values
     ("Monitor Fetal"),
     ("Monitor de sinais vitais");
 
-create table modelo(
-	idModelo int primary key auto_increment,
-    modelo varchar(45),
-    descricao varchar(255),
-    fkTipo int,
-	foreign key (fkTipo) references tipo(idTipo)
-);
-	
+
 insert into
 	modelo(modelo, descricao, fkTipo)
 values
@@ -162,18 +229,7 @@ values
 	("Vital1", "", 8),
 	("Vital2", "", 8),
 	("Vital3", "", 8);
-    
-    
-create table maquinario(
-	idMaquinario int,
-    fkIndustria int,
-    foreign key (fkIndustria) references empresa(idEmpresa),
-    fkHospital int,
-    foreign key (fkHospital) references empresa(idEmpresa),
-	fkModelo int,
-    foreign key (fkModelo) references modelo(idModelo),
-    primary key(idMaquinario, fkModelo)
-);
+
 
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
@@ -239,12 +295,6 @@ values
 	(18,2,6,24),
 	(57,1,8,24);
 
-create table tipoRegistro(
-	idTipoRegistro int primary key auto_increment,
-    nome varchar(45),
-    medida varchar(45)
-);
-
 insert into 
 	tipoRegistro(nome, medida)
 values
@@ -254,20 +304,6 @@ values
 	('Uso de memória virtual', '%'),
 	('Uso de RAM', '%'),
 	('Uso de disco', '%');
-
-create table registro(
-	idRegistro int primary key auto_increment,
-    dataHora datetime,
-    valor decimal(7,2),
-    fkMaquina int,
-    foreign key (fkMaquina) references maquinario(idMaquinario),
-    fkModelo int,
-    foreign key (fkModelo) references maquinario(fkModelo),
-    fkTipoRegistro int,
-    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
-);
-
-select * from maquinario;
 
 insert into 
 	registro(dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro)
@@ -288,15 +324,6 @@ values
 	(now(),23, 6 , 3,1),
 	(now(),44, 6 , 3,2);
 
-create table chamado(
-	idChamado int primary key auto_increment,
-    nivel varchar(45),
-    estado varchar(45),
-    sla varchar(45),
-    descricao varchar(45),
-	fkRegistro int,
-    foreign key(fkRegistro) references registro(idRegistro)
-);
 
 insert into
 	chamado (nivel, estado, sla, descricao, fkRegistro)
@@ -319,11 +346,7 @@ select
 	"" descriacao,
 	r.idRegistro
 from registro r where r.valor > 85;
-    
-create table peca(
-	idPeca int primary key auto_increment,
-    nome varchar(45)
-);
+
 
 insert into 
 	peca(nome)
@@ -342,17 +365,6 @@ values
     ("500gb ssd samsung"),
     ("450gb hd Adata");
 
-create table limite(
-	idLimite int primary key auto_increment,
-    fkPeca int,
-    foreign key (fkPeca) references peca(idPeca),
-    fkModelo int,
-    foreign key (fkModelo) references modelo(idModelo),
-    fkTipoRegistro int,
-    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro),
-    valor decimal(5,2)
-);
-
 insert into 
 	limite(fkPeca, fkModelo, fkTipoRegistro, valor)
 values
@@ -367,19 +379,11 @@ values
 	(9,15,1, 85),
 	(12,15,1, 85);
 
-create table faleConosco(
-    idFaleConosco int primary key auto_increment,
-    email varchar(45),
-    telefone char(14),
-    mensagem varchar(255)
-);
-
 insert into 
 	faleConosco(email, telefone, mensagem)
 values
 	("Andreylrodrigues@hotmail.com", "(11)94100-0405","Qual o melhor plano para uma empresa grande"),
     ("Julia-fernandes@gmail.com","(15)95116-0122","Bom dia, quais os beneficios do plano rubi?"),
     ("Henrique.trenolitos@bol.com.br","(11)91133-6122","Como funciona a dashboard do hospital?");
-    
-    
-select * from registro join tipoRegistro on fkTipoRegistro = idTipoRegistro order by dataHora desc;    
+
+*/

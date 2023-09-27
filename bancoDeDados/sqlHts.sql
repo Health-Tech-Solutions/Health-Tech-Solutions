@@ -385,11 +385,11 @@ values
 CREATE OR REPLACE VIEW vw_maquina
 AS 
 	select 
-		r.idRegistro,
+
 		r.dataHora,
         MAX(CASE WHEN fkTipoRegistro = 1 THEN r.valor END) AS CPU,
         MAX(CASE WHEN fkTipoRegistro = 5 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 6 THEN r.valor END) AS DISCO
-    from registro AS r GROUP BY r.dataHora, r.idRegistro;
+    from registro AS r GROUP BY r.dataHora;
 select * from vw_maquina;
 select * from registro order by idRegistro desc; 

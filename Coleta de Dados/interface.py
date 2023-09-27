@@ -10,8 +10,8 @@ try:
     conexao = mysql.connector.connect(
         host='localhost',database='hts',
         port='3306',
-        user ='root',
-        password=''
+        user ='stockSafe',
+        password='urubu100'
     )  
     def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro):
         cursor.execute(
@@ -51,7 +51,7 @@ try:
 
             texto_dados['text'] = ''
             cpuPorcent = psutil.cpu_percent()
-            cpuTemp = psutil.sensors_temperatures()['acpitz'][0][1]
+            # cpuTemp = psutil.sensors_temperatures()['acpitz'][0][1]
             cpuFreq = (psutil.cpu_freq()[0]) / 1000
             discoDisponivel = (psutil.disk_usage('/')[2]) / (1024**3)
             ramPorcent = ((psutil.virtual_memory().used / 1024**3) / totalRam) * 100
@@ -59,7 +59,7 @@ try:
             virtualMemoryPercent = (virtualMemory / totalMemory) * 100
 
             somaCpuPorcent += cpuPorcent
-            somaCpuTemp += cpuTemp
+            # somaCpuTemp += cpuTemp
             somaCpuFreq += cpuFreq
             somaRamPorcent += ramPorcent
             somavirtualMemory += virtualMemoryPercent
@@ -73,7 +73,7 @@ try:
         
             #   Não funciona no Windows:
             texto_dados["text"] += "\n ----- Temperatura (°C) ----- \n"
-            texto_dados["text"] += format(cpuTemp, ".2f")
+            # texto_dados["text"] += format(cpuTemp, ".2f")
             #
         
             texto_dados["text"] += "\n ----- Frequência de CPU GHz----- \n" ## alterado
@@ -91,53 +91,53 @@ try:
 
             janela.update() 
 
-            if x == tempo - 1 : 
-                texto_dados['text'] = ''
-                mediaCpuPorcent = somaCpuPorcent / tempo
-                mediaCpuTemp = somaCpuTemp / tempo
-                mediaCpuFreq = somaCpuFreq / tempo
-                mediaVirtualMemory = somavirtualMemory / tempo
-                mediaRamPorcent = somaRamPorcent / tempo
+           
+            texto_dados['text'] = ''
+            mediaCpuPorcent = somaCpuPorcent / tempo
+            mediaCpuTemp = somaCpuTemp / tempo
+            mediaCpuFreq = somaCpuFreq / tempo
+            mediaVirtualMemory = somavirtualMemory / tempo
+            mediaRamPorcent = somaRamPorcent / tempo
 
-                discoUtilizado = discoTotal - discoDisponivel
-                discoPorcent = discoUtilizado/discoTotal * 100
+            discoUtilizado = discoTotal - discoDisponivel
+            discoPorcent = discoUtilizado/discoTotal * 100
 
-                texto_dados["text"] += "Médias: \n"
+            texto_dados["text"] += "Médias: \n"
 
-                texto_dados["text"] += "\n \n----- Percentual de CPU (%) -----  \n"
-                texto_dados["text"] += format(mediaCpuPorcent, ".2f")
-            
-                #   Não funciona no Windows:
-                texto_dados["text"] += "\n ----- Temperatura (°C) ----- \n"
-                texto_dados["text"] += format(mediaCpuTemp, ".2f")
-                #
+            texto_dados["text"] += "\n \n----- Percentual de CPU (%) -----  \n"
+            texto_dados["text"] += format(mediaCpuPorcent, ".2f")
         
-                texto_dados["text"] += "\n ----- Frequência de CPU GHz----- \n"
-                texto_dados["text"] += format(mediaCpuFreq, ".2f")
+            #   Não funciona no Windows:
+            texto_dados["text"] += "\n ----- Temperatura (°C) ----- \n"
+            texto_dados["text"] += format(mediaCpuTemp, ".2f")
+            #
+    
+            texto_dados["text"] += "\n ----- Frequência de CPU GHz----- \n"
+            texto_dados["text"] += format(mediaCpuFreq, ".2f")
 
-                texto_dados["text"] += "\n ----- Percentual de memoria virtual (%) ----- \n"
-                texto_dados["text"] += format(mediaVirtualMemory, ".2f")
-                texto_dados["text"] += "\n ----- Percentual de uso de ram (%)----- \n"
-                texto_dados["text"] += format(mediaRamPorcent, ".2f")
+            texto_dados["text"] += "\n ----- Percentual de memoria virtual (%) ----- \n"
+            texto_dados["text"] += format(mediaVirtualMemory, ".2f")
+            texto_dados["text"] += "\n ----- Percentual de uso de ram (%)----- \n"
+            texto_dados["text"] += format(mediaRamPorcent, ".2f")
 
-                texto_dados["text"] += "\n ----- Percentual de uso de disco (%)----- \n"
-                texto_dados["text"] += format(discoPorcent, ".2f")
-
-
-                
+            texto_dados["text"] += "\n ----- Percentual de uso de disco (%)----- \n"
+            texto_dados["text"] += format(discoPorcent, ".2f")
 
 
-                janela.update() 
-                cursor = conexao.cursor()
+            
 
-                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuPorcent, 1)
-                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
-                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
-                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
-                inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 5)
-                inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 6)
 
-                conexao.commit()
+            janela.update() 
+            cursor = conexao.cursor()
+
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuPorcent, 1)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 5)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 6)
+
+            conexao.commit()
                     
 
     def indefinido() : 

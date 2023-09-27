@@ -266,8 +266,8 @@ create table registro(
     fkTipoRegistro int,
     foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
 );
-
-select * from maquinario;
+use hts;
+select * from registro;
 
 insert into 
 	registro(dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro)
@@ -380,6 +380,16 @@ values
 	("Andreylrodrigues@hotmail.com", "(11)94100-0405","Qual o melhor plano para uma empresa grande"),
     ("Julia-fernandes@gmail.com","(15)95116-0122","Bom dia, quais os beneficios do plano rubi?"),
     ("Henrique.trenolitos@bol.com.br","(11)91133-6122","Como funciona a dashboard do hospital?");
+
     
-    
-select * from registro join tipoRegistro on fkTipoRegistro = idTipoRegistro order by dataHora desc;    
+CREATE OR REPLACE VIEW vw_maquina
+AS 
+	select 
+		r.idRegistro,
+		r.dataHora,
+        MAX(CASE WHEN fkTipoRegistro = 1 THEN r.valor END) AS CPU,
+        MAX(CASE WHEN fkTipoRegistro = 5 THEN r.valor END) AS RAM,
+        MAX(CASE WHEN fkTipoRegistro = 6 THEN r.valor END) AS DISCO
+    from registro AS r GROUP BY r.dataHora, r.idRegistro;
+select * from vw_maquina;
+select * from registro order by idRegistro desc; 

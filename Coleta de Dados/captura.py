@@ -14,8 +14,8 @@ try:
         host='localhost',
         database='hts',
         port='3306',
-        user='root',
-        password=''
+        user='stockSafe',
+        password='urubu100'
     )
 
     if conexao.is_connected():

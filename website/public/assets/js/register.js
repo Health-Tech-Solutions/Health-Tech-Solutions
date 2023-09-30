@@ -3,22 +3,22 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
-function planoPrata() {
-     dropdownMenuButton.innerHTML = 'Prata';
-     planoEscolhido = 1;
- }
- function planoGold() {
-     dropdownMenuButton.innerHTML = 'Gold';
-     planoEscolhido = 2;
- }
- function planoRubi() {
-     dropdownMenuButton.innerHTML = 'Rubi';
-     planoEscolhido = 3;
- }
+// function planoPrata() {
+//      dropdownMenuButton.innerHTML = 'Prata';
+//      planoEscolhido = 1;
+//  }
+//  function planoGold() {
+//      dropdownMenuButton.innerHTML = 'Gold';
+//      planoEscolhido = 2;
+//  }
+//  function planoRubi() {
+//      dropdownMenuButton.innerHTML = 'Rubi';
+//      planoEscolhido = 3;
+//  }
 
-function plano(i){
-    planoEscolhido = Number(i)
-}
+// function plano(i){
+//     planoEscolhido = Number(i)
+// }
 function trocarTela() {
     if (primeiroCadastro.style.display == 'block') {
         document.getElementById("primeiroCadastro").style.display = "none";
@@ -405,12 +405,12 @@ function cadastrarFuncionario() {
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-                    console.log("Cadastro de Funcionario realizado, iniciando cadastro de plano")
+                    console.log("Cadastro de Funcionario realizado")
                     InputComplemento.value = '';
                     InputNumero.value = '';
                     InputCEP.value = '';
-                    cadastrarPlano();
-
+                    // cadastrarPlano();
+                    window.location.href = "login.html";
                 } else {
                     throw "Houve um erro ao tentar cadastrar funcionario";
                 }
@@ -424,41 +424,41 @@ function cadastrarFuncionario() {
     }
 }
 
-function cadastrarPlano() {
-    var erro = false;
-    var planoEscolhidoVar = planoEscolhido;
-    var fkEmpresaVar = fkEmpresa;
+// function cadastrarPlano() {
+//     var erro = false;
+//     var planoEscolhidoVar = planoEscolhido;
+//     var fkEmpresaVar = fkEmpresa;
 
-    if (planoEscolhido == undefined) {
-        alert("O plano escolhido está undefined");
-        erro = true;
-    }
-    if (erro == false) {
-        fetch("/usuarios/cadastrarPlano", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                planoEscolhidoServer: planoEscolhidoVar,
-                fkEmpresaServer: fkEmpresaVar
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
+//     if (planoEscolhido == undefined) {
+//         alert("O plano escolhido está undefined");
+//         erro = true;
+//     }
+//     if (erro == false) {
+//         fetch("/usuarios/cadastrarPlano", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//             body: JSON.stringify({
+//                 planoEscolhidoServer: planoEscolhidoVar,
+//                 fkEmpresaServer: fkEmpresaVar
+//             }),
+//         })
+//             .then(function (resposta) {
+//                 console.log("resposta: ", resposta);
 
-                if (resposta.ok) {
-                    console.log("Cadastro de plano realizado")
-                    window.location.href = "login.html";
-                } else {
-                    throw "Houve um erro ao tentar cadastrar plano";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
+//                 if (resposta.ok) {
+//                     console.log("Cadastro de plano realizado")
+//                     window.location.href = "login.html";
+//                 } else {
+//                     throw "Houve um erro ao tentar cadastrar plano";
+//                 }
+//             })
+//             .catch(function (resposta) {
+//                 console.log(`#ERRO: ${resposta}`);
 
-            });
+//             });
 
-        return false;
-    }
-}
+//         return false;
+//     }
+// }

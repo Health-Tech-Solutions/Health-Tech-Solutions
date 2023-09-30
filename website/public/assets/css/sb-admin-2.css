@@ -2724,8 +2724,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #030050;
-  border-color: #030050;
+  background-color: #9a0801;
+  border-color: #9a0801;
 }
 
 .btn-primary:hover {
@@ -11143,7 +11143,8 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #030050;
+  background-image: url(../imgs/contactBackground.png);
+
   /* background-image: url(../img/background.png);
   background-size: cover; */
 }
@@ -12152,11 +12153,11 @@ a:focus {
 }
 
 .bg-register-image {
-  background: url(../imgs/imagemDestaqueCadastro.png);
+  /* background: url(../imgs/imagemDestaqueCadastro.png); */
   background-position: center;
   background-size: cover;
   background-position-y: -3rem;
-  background-color: #000000f7;
+  background-color: #000;
 }
 
 .bg-password-image {

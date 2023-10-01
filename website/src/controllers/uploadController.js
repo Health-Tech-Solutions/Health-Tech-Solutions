@@ -1,4 +1,4 @@
-const usuarioModel = require('../models/usuarioModel');
+const usuarioModel = require('../models/uploadModel');
 
 
 function salvar(req, res) {

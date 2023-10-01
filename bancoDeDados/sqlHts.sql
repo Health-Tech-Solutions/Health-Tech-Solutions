@@ -1,8 +1,31 @@
 drop database if exists hts;
 create database hts;
+USE hts;
 
-use hts;
+-- Criação do usuario padrão se ele ainda não existe
+CREATE USER IF NOT EXISTS 'hts'@'localHost' IDENTIFIED BY 'urubu100';
+DROP PROCEDURE IF EXISTS dar_privilegios;
+DELIMITER //
 
+CREATE PROCEDURE dar_privilegios ()
+BEGIN
+IF NOT EXISTS (
+	SELECT 1
+    FROM information_schema.user_privileges WHERE GRANTEE = 'hth''@''localHost'
+	 AND privilege_type = '	ALL PRIVILEGES'
+) THEN
+	GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
+    FLUSH PRIVILEGES;
+END IF ;
+END //
+
+DELIMITER ;
+CALL dar_privilegios();
+
+
+
+
+-- Criação das tabelas
 create table endereco(
 	idEndereco int primary key auto_increment,
     cep char(9),

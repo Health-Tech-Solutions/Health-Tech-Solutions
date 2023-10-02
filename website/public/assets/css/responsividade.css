@@ -1,0 +1,16 @@
+@media screen and (max-width: 991px) {
+
+#linkHome a {
+    color: #49505a !important;
+}
+
+#botaoCadastro a {
+    color: white;
+    
+}
+
+#navbarResponsiva {
+    padding-bottom: 15px;
+}
+
+}

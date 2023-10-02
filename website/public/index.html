@@ -13,40 +13,43 @@
     <!-- Bootstrap + Creative Studio main styles -->
 	<link rel="stylesheet" href="./assets/css/creative-studio.css">
 
+    <!-- link CSS para correção de erros do bootstrap -->
+    <link rel="stylesheet" href="./assets/css/responsividade.css">
+
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
     <!-- Page Navigation -->
-    <nav class="navbar custom-navbar navbar-expand-lg navbar-dark" data-spy="affix" data-offset-top="20">
+    <nav id="navbarResponsiva" class="navbar custom-navbar navbar-expand-lg navbar-dark" data-spy="affix" data-offset-top="20">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="./assets/imgs/logo.png" alt="Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button id="botao" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li id="linkHome" class="nav-item">
                         <a class="nav-link" href="#home">Início</a>
                     </li>
-                    <li class="nav-item">
+                    <li id="linkHome" class="nav-item">
                         <a class="nav-link" href="#about">Sobre</a>
                     </li>
-                    <li class="nav-item">
+                    <li id="linkHome" class="nav-item">
                         <a class="nav-link" href="#values">Nossos valores</a>
                     </li>
-                    <li class="nav-item">
+                    <li id="linkHome" class="nav-item">
                         <a class="nav-link" href="#funcoes">Funções</a>
                     </li>
-                    <li class="nav-item">
+                    <li id="linkHome" class="nav-item">
                         <a class="nav-link" href="#contact">Contato</a>
                     </li>   
-                    <li class="nav-item">
+                    <li id="linkHome" class="nav-item">
                         <a class="nav-link btn btn-primary btn-sm ml-lg-3" id="btn-login" href="./login.html">Login</a>
                     </li>
-                    <li class="nav-item">
+                    <li id="botaoCadastro" class="nav-item">
                         <a class="nav-link btn btn-primary btn-sm ml-lg-3" id="btn-cad" href="./register.html">Cadastro</a>
                     </li>
                 </ul>
@@ -420,3 +423,26 @@
 
 </body>
 </html>
+
+<script>
+
+// Obtém uma referência para o botão e a div alvo
+const button = document.getElementById("botao");
+const targetDiv = document.getElementById("navbarResponsiva");
+
+let isDefaultColor = true;
+
+// Adiciona um ouvinte de evento de clique ao botão
+button.addEventListener("click", function () {
+    // Define a nova cor de fundo
+    if (isDefaultColor) {
+    targetDiv.style.backgroundColor = "white";
+    isDefaultColor = false;
+    } else {
+        targetDiv.style.backgroundColor = "";
+        isDefaultColor = true;
+    }
+});
+
+
+</script>

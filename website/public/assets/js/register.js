@@ -3,6 +3,18 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
+InputCNPJ.addEventListener('keypress', () =>{
+    let inputLength = InputCNPJ.value.length
+    console.log(inputLength)
+    if(inputLength === 2 || inputLength === 6){
+        InputCNPJ.value += '.'
+    } else if(inputLength === 10){
+        InputCNPJ.value += '/'
+    } else if(inputLength === 15){
+        InputCNPJ.value += '-'
+    }
+})
+
 // function planoPrata() {
 //      dropdownMenuButton.innerHTML = 'Prata';
 //      planoEscolhido = 1;
@@ -35,7 +47,7 @@ function trocarTela() {
 function verifEmail() {
     var erro = false;
     var emailVar = InputEmail.value;
-    
+   
     if (InputNome.value == '') {
         alert("Favor inserir o nome do usuário");
         erro = true;

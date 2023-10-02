@@ -20,7 +20,9 @@ END IF ;
 END //
 
 DELIMITER ;
--- CALL dar_privilegios();
+CALL dar_privilegios();
+
+
 
 
 -- Criação das tabelas
@@ -28,9 +30,6 @@ create table endereco(
 	idEndereco int primary key auto_increment,
     cep char(9),
     numero varchar(10),
-    rua VARCHAR(45),
-    bairro VARCHAR(45),
-    cidade VARCHAR(45),
     complemento varchar(10)
 );
 
@@ -49,16 +48,23 @@ values
 create table empresa(
 	idEmpresa int primary key auto_increment,
     nomeFantasia varchar(45),
-    cnpj char(14),
-    telefone char(13),
+    cnpj char(18),
+    telefone char(14),
     fkEndereco int,
     foreign key (fkEndereco) references endereco(idEndereco)
 );
-select * from empresa;
+
 insert into
-	empresa
+	empresa(nomeFantasia, cnpj, telefone, fkEndereco)
 values
-	(NULL, 'MinDray', '09058456000187','5511984563218', 1);
+	("Da Vinci","56.158.491/5012-61","(11)95102-1401",1),
+	("Lean machine","95.144.803/2012-62","(11)90422-2101",2),
+	("Croquer","77.921.121/0102-19","(15)99291-4021",3),
+	("alrHosp","45.123.952/4122-14","(11)94100-0405",4),
+    ("Paulistano","11.910.753/1105-85","(11)91361-5055",5),
+    ("Oswaldo Cruz","09.521.857/0411-21","(11)99020-1100",6),
+    ("São Camilo - ipiranga","70.111.556/1244-78","(11)9071-1322",7),
+    ("Albert Eistean","31.403.125/0012-01","(11)92445-8622",8);
 
 create table funcionario(
 	idFuncionario int primary key auto_increment,
@@ -67,30 +73,65 @@ create table funcionario(
     senha varchar(45),
     funcao varchar(45),
     fkIndustria int,
-    foto VARCHAR(300),
     foreign key (fkIndustria) references empresa(idEmpresa),
     fkRepresentante int,
     foreign key (fkRepresentante) references funcionario(idFuncionario)
 );
-select * from funcionario;
+
 insert into
 	funcionario(nome, email, senha,funcao, fkIndustria)
 values
 	("Isabela Mariana Olivia da Rosa","isabelamarianadarosa@imeio.com","8sPiKN8z48","admin", 1),
 	("Antonio Breno Augusto Moura","antonio_breno_moura@br.festo.com","LMgH7kFB6I","funcionario", 1),
 	("Miguel Cauê Pereira","miguel-pereira93@superigi.com.br","P2JIrkFdnF","funcionario", 1),     
-	("Helena Sarah Porto","helena_porto@kimmay.com.br","le7y7mi7oh","admin", 1),
-	("Bryan Luan Gomes","bryan-gomes83@uolinc.com","gLD7XFQj5y","funcionario", 1),
-	("Anderson Manuel Galvão","anderson.manuel.galvao@systemsadvisers.com","Y48nEZ5qey","funcionario", 1),
-	("Stefany Bárbara Alessandra Melo","stefany_melo@icloub.com","MSRwLa8e9K","admin", 1),  
-	("Diogo Enrico Nelson Gonçalves","diogo_goncalves@edbrasil.net","M1SM0aBq3r","funcionario", 1),
-	("Lívia Letícia Carolina Dias","livia.leticia.dias@ritmolog.com.br","diH6Brmkli","funcionario", 1),
-	("Aline Esther Bruna Cardoso","aline_cardoso@graffiti.net","ejYPZK6680","admin", 1),    
-	("Elza Allana Rita Moraes","elzaallanamoraes@verdana.com.br","DUrP3YwNX3","funcionario", 1),  
-	("Gael Murilo dos Santos","gael_murilo_dossantos@rebecacometerra.com.br","fSik4S6Hnk","funcionario", 1),
-	("Isabelly Sara Luciana da Rocha","isabelly_darocha@directnet.com","yjkapiMCxz","admin", 1),
-	("Rosa Emilly Valentina Viana","rosa_viana@pierproj.com.br","xYFG7H7ikq","funcionario", 1),   
-	("Clarice Louise Laura Araújo","clarice_araujo@yahoo.com.ar","RNoeEDd7yb","funcionario", 1);
+	("Helena Sarah Porto","helena_porto@kimmay.com.br","le7y7mi7oh","admin", 2),
+	("Bryan Luan Gomes","bryan-gomes83@uolinc.com","gLD7XFQj5y","funcionario", 2),
+	("Anderson Manuel Galvão","anderson.manuel.galvao@systemsadvisers.com","Y48nEZ5qey","funcionario", 2),
+	("Stefany Bárbara Alessandra Melo","stefany_melo@icloub.com","MSRwLa8e9K","admin", 3),  
+	("Diogo Enrico Nelson Gonçalves","diogo_goncalves@edbrasil.net","M1SM0aBq3r","funcionario", 3),
+	("Lívia Letícia Carolina Dias","livia.leticia.dias@ritmolog.com.br","diH6Brmkli","funcionario", 3),
+	("Aline Esther Bruna Cardoso","aline_cardoso@graffiti.net","ejYPZK6680","admin", 4),    
+	("Elza Allana Rita Moraes","elzaallanamoraes@verdana.com.br","DUrP3YwNX3","funcionario", 4),  
+	("Gael Murilo dos Santos","gael_murilo_dossantos@rebecacometerra.com.br","fSik4S6Hnk","funcionario", 4),
+	("Isabelly Sara Luciana da Rocha","isabelly_darocha@directnet.com","yjkapiMCxz","admin", 5),
+	("Rosa Emilly Valentina Viana","rosa_viana@pierproj.com.br","xYFG7H7ikq","funcionario", 5),   
+	("Clarice Louise Laura Araújo","clarice_araujo@yahoo.com.ar","RNoeEDd7yb","funcionario", 5);
+
+create table plano(
+	idPlano int primary key auto_increment, 
+    nome varchar(45),
+    valor decimal(8,2),
+    descricao varchar(45)
+);
+
+insert into 
+	plano(nome, valor, descricao)
+values
+	("Silve", 10, "Plano prata"),
+	("Gold", 20, "Plano gold"),
+	("Rubi", 30,"Plano rubi");
+
+create table assinatura(
+	fkIndustria int,
+    foreign key (fkIndustria) references empresa(idEmpresa),
+    fkPlano int,
+    foreign key (fkPlano) references plano(idPlano),
+    dataContrato date,
+    estado varchar(45),
+    primary key(fkIndustria, dataContrato)
+);
+
+insert into
+	assinatura(fkIndustria, fkPlano, dataContrato, estado)
+values
+	(1, 3, "2023-06-11", "Pago"),
+	(1, 3, "2023-07-13", "Pago"),
+	(1, 3, "2023-08-12", "Pago"),
+	(1, 3, "2023-09-11", "Pendente"),
+	(2, 2, "2023-08-03", "Pago"),
+	(2, 2, "2023-09-04", "Pago"),
+	(3, 1, "2023-08-12", "Pago"),
+	(3, 2, "2023-09-12", "Pago");
 
 create table tipo(
 	idTipo int primary key auto_increment,
@@ -160,66 +201,66 @@ create table maquinario(
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
 values
-	(68,1,1,1),
-	(64,1,1,1),
-	(37,1,1,1),
-	(89,1,1,1),
-	(33,1,1,1),
-	(82,1,1,2),
-	(68,1,1,2),
-	(71,1,1,2),
-	(38,1,1,2),
-	(13,1,1,2),
-	(93,1,1,3),
-	(6,1,1,3),
-	(98,1,1,3),
-	(22,1,1,3),
-	(7,1,1,4),
-	(93,1,1,4),
-	(63,1,1,4),
-	(19,1,1,4),
-	(9,1,1,5),
-	(12,1,1,6),
-	(21,1,1,7),
-	(61,1,1,7),
-	(25,1,1,8),
-	(88,1,1,8),
-	(63,1,1,8),
-	(93,1,1,9),
-	(77,1,1,10),
-	(12,1,1,11),
-	(71,1,1,12),
-	(39,1,1,12),
-	(38,1,1,13),
-	(71,1,1,13),
-	(2,1,1,13),
-	(50,1,1,14),
-	(41,1,1,14),
-	(88,1,1,14),
-	(41,1,1,15),
-	(22,1,1,15),
-	(64,1,1,15),
-	(61,1,1,15),
-	(3,1,1,15),
-	(17,1,1,16),
-	(35,1,1,16),
-	(21,1,1,16),
-	(85,1,1,17),
-	(38,1,1,18),
-	(39,1,1,18),
-	(98,1,1,18),
-	(60,1,1,19),
-	(43,1,1,19),
-	(74,1,1,19),
-	(13,1,1,20),
-	(37,1,1,20),
-	(7,1,1,20),
-	(30,1,1,21),
-	(93,1,1,22),
-	(89,1,1,23),
-	(18,1,1,23),
-	(18,1,1,24),
-	(57,1,1,24);
+	(68,3,6,1),
+	(64,3,6,1),
+	(37,1,4,1),
+	(89,1,6,1),
+	(33,1,6,1),
+	(82,1,6,2),
+	(68,2,5,2),
+	(71,2,8,2),
+	(38,2,4,2),
+	(13,1,4,2),
+	(93,2,6,3),
+	(6,1,4,3),
+	(98,3,5,3),
+	(22,1,7,3),
+	(7,2,7,4),
+	(93,1,5,4),
+	(63,3,4,4),
+	(19,3,5,4),
+	(9,2,6,5),
+	(12,3,8,6),
+	(21,3,8,7),
+	(61,2,4,7),
+	(25,2,7,8),
+	(88,3,7,8),
+	(63,1,4,8),
+	(93,2,8,9),
+	(77,2,6,10),
+	(12,1,4,11),
+	(71,1,7,12),
+	(39,1,7,12),
+	(38,3,7,13),
+	(71,2,8,13),
+	(2,3,7,13),
+	(50,3,7,14),
+	(41,1,4,14),
+	(88,3,4,14),
+	(41,2,5,15),
+	(22,3,4,15),
+	(64,1,7,15),
+	(61,3,4,15),
+	(3,1,5,15),
+	(17,2,8,16),
+	(35,1,4,16),
+	(21,2,6,16),
+	(85,1,5,17),
+	(38,2,8,18),
+	(39,2,7,18),
+	(98,3,5,18),
+	(60,3,7,19),
+	(43,3,7,19),
+	(74,2,4,19),
+	(13,3,8,20),
+	(37,3,5,20),
+	(7,1,6,20),
+	(30,3,8,21),
+	(93,3,4,22),
+	(89,3,8,23),
+	(18,3,8,23),
+	(18,2,6,24),
+	(57,1,8,24);
 
 create table tipoRegistro(
 	idTipoRegistro int primary key auto_increment,
@@ -248,6 +289,8 @@ create table registro(
     fkTipoRegistro int,
     foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
 );
+use hts;
+select * from registro;
 
 insert into 
 	registro(dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro)
@@ -347,13 +390,29 @@ values
 	(9,15,1, 85),
 	(12,15,1, 85);
 
+create table faleConosco(
+    idFaleConosco int primary key auto_increment,
+    email varchar(45),
+    telefone char(14),
+    mensagem varchar(255)
+);
+
+insert into 
+	faleConosco(email, telefone, mensagem)
+values
+	("Andreylrodrigues@hotmail.com", "(11)94100-0405","Qual o melhor plano para uma empresa grande"),
+    ("Julia-fernandes@gmail.com","(15)95116-0122","Bom dia, quais os beneficios do plano rubi?"),
+    ("Henrique.trenolitos@bol.com.br","(11)91133-6122","Como funciona a dashboard do hospital?");
 
     
 CREATE OR REPLACE VIEW vw_maquina
 AS 
 	select 
+
 		r.dataHora,
         MAX(CASE WHEN fkTipoRegistro = 1 THEN r.valor END) AS CPU,
         MAX(CASE WHEN fkTipoRegistro = 5 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 6 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
+select * from vw_maquina;
+select * from registro order by idRegistro desc; 

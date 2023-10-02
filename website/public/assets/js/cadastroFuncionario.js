@@ -11,8 +11,7 @@ InputCPF.addEventListener('keypress', () =>{
 function cadastrar(){
     var cpfEspecial = InputCPF.value
     var cpf = cpfEspecial.replace(/[^0-9]/g, "")
-    console.log(cpfEspecial)
-    console.log(cpf)
+    
 
     var nome = InputNome.value
     var email = InputEmail.value

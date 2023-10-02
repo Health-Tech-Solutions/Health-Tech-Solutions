@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maquinario {
-
     private String tipoMaquina;
 
     private String modeloMaquina;
@@ -13,6 +12,7 @@ public class Maquinario {
     private String numSerie;
 
     private static List<Maquinario> maquinarioCadastrados = new ArrayList<>();
+
 
     public Maquinario(String tipoMaquina, String modeloMaquina, String numSerie) {
         this.tipoMaquina = tipoMaquina;
@@ -45,7 +45,14 @@ public class Maquinario {
         return numSerie;
     }
 
-
+    @Override
+    public String toString() {
+        return "Maquinário{" +
+                "tipoMaquina='" + tipoMaquina + '\'' +
+                ", modeloMaquina='" + modeloMaquina + '\'' +
+                ", numSerie='" + numSerie + '\'' +
+                '}';
+    }
 }
 
 

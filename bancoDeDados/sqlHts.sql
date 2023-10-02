@@ -50,6 +50,7 @@ create table funcionario(
     email varchar(60),
     senha varchar(45),
     funcao varchar(45),
+    CPF CHAR(11),
     fkIndustria int,
     foto VARCHAR(300),
     foreign key (fkIndustria) references empresa(idEmpresa),

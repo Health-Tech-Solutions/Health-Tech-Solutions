@@ -34,6 +34,7 @@ function cadastrar(){
                 nome,
                 email,
                 senha,
+                cpf,
                 fkEmpresa: sessionStorage.FK_EMPRESA,
                 fkRepresentante: sessionStorage.ID_USUARIO
             })

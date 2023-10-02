@@ -1,11 +1,11 @@
 const database = require("../database/config")
 
-function cadastrar(nome, email, senha, fkEmpresa, fkRepresentante){
+function cadastrar(nome, email, senha, fkEmpresa, fkRepresentante, cpf){
     const sql = `
         INSERT INTO 
-            funcionario(nome, email, senha, fkIndustria, fkRepresentante, funcao) 
+            funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao) 
         VALUES 
-            ('${nome}', '${email}', '${senha}', ${fkEmpresa}, ${fkRepresentante}, 'Funcionario')
+            ('${nome}', '${email}', '${senha}',${cpf}, ${fkEmpresa}, ${fkRepresentante}, 'Funcionario')
     `
 
     return database.executar(sql)

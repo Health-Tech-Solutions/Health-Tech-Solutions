@@ -20,6 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="css/cadastro-funcionarios.css" rel="stylesheet">
     <link href="css/sb-admin-2.css" rel="stylesheet">
+   
 
 </head>
 
@@ -318,10 +319,17 @@
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user" id="InputNome" placeholder="Nome">
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control form-control-user" id="InputEmail"
-                                placeholder="Email">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="email" class="form-control form-control-user" id="InputEmail"
+                                    placeholder="Email">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="CPF" class="form-control form-control-user" id="InputCPF"
+                                    placeholder="CPF ">
+                            </div>
                         </div>
+                        
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="password" class="form-control form-control-user" id="InputSenha"
@@ -408,75 +416,5 @@
     <script src="js/sb-admin-2.min.js"></script>
 
 </body>
-
-<script>
-    function cadastrar(){
-        const nome = InputNome.value
-        const email = InputEmail.value
-        const senha = InputSenha.value
-        const confirmacaoSenha = InputConfirmacaoSenha.value
-
-        if(!nome || !email || !senha || !confirmacaoSenha){
-            alert("Preencha todos os campos para efetuar o cadastro")
-        }
-        else if(senha != confirmacaoSenha){
-            alert("As senhas não correspondem")
-        }
-        else{
-            fetch("/funcionario/cadastrar",{
-                method: "POST",
-                headers: {
-                    "Content-type": 'application/json'
-                },
-                body: JSON.stringify({
-                    nome,
-                    email,
-                    senha,
-                    fkEmpresa: sessionStorage.FK_EMPRESA,
-                    fkRepresentante: sessionStorage.ID_USUARIO
-                })
-            })
-            .then(res => {
-                if(res.status == 200){
-                    res.json().then(res => {
-                        InputNome.value = ""
-                        InputEmail.value = ""
-                        InputSenha.value = ""
-                        listarFuncionarios()
-                    })
-                        InputConfirmacaoSenha.value = ""
-                } else if(res.status == 400){
-                    alert("Email já cadastrado")
-                }
-            })
-        }
-    }
-
-    function listarFuncionarios(){
-        fetch(`/funcionario/listar/${sessionStorage.FK_EMPRESA}`)
-            .then(res => res.json())
-            .then(res => {
-                funcionarios.innerHTML = ""
-                if(res.funcionarios.length > 0){
-                    res.funcionarios.map(i => {
-                        funcionarios.innerHTML += `
-                            <div class="card-body row row-cols-3 justify-content-between">
-                                <p>${i.nome}</p>
-                                <p>${i.email}</p>
-                                <p>${i.funcao}</p>
-                            </div>
-                        `
-                     })
-                }
-                else{
-                    funcionario.innerHMTL += `
-                        <div class="card-body">
-                            Não há nenhum funcionário cadastrado no momento
-                        </div>
-                    `   
-                }
-            })
-    }   
-    listarFuncionarios()
-</script>
 </html>
+<script src="../assets/js/cadastroFuncionario.js"></script>

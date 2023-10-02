@@ -106,7 +106,7 @@ function verifEmail() {
     }
 }
 
-function cadastarEndereco() {
+function cadastrarEndereco() {
     var erro = false;
     var cepVar = InputCEP.value;
     var numeroVar = InputNumero.value;
@@ -195,7 +195,7 @@ function buscaFkEndereco() {
                         console.log(JSON.stringify(json));
                         if (json[0] != undefined) {
                             fkEndereco= json[0].idEndereco;
-                            cadastarEmpresa();
+                            cadastrarEmpresa();
                         }
                         else {
                             console.log("Não foi possível encontrar a fk de endereço")
@@ -260,11 +260,14 @@ function verifCNPJ() {
     }
 }
 
-function cadastarEmpresa() {
+function cadastrarEmpresa() {
+    //tratamento da variável - Eliminando caracteres especiais
+    var cnpjEspecial = InputCNPJ.value
+    var cnpjVar = cnpjEspecial.replace(/[^0-9]/g, "");
+
     var erro = false;
     var nomeFantasiaVar = InputNomeFantasia.value;
     var telefoneVar = InputTelefone.value;
-    var cnpjVar = InputCNPJ.value;
     var fkEnderecoVar = fkEndereco;
 
     if (nomeFantasiaVar == undefined) {

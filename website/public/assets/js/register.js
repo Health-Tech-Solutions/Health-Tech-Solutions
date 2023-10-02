@@ -3,9 +3,21 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
+InputTelefone.addEventListener('keypress', () =>{
+    let inputLength = InputTelefone.value.length
+
+    if(inputLength === 0){
+        InputTelefone.value += '(';
+    } else if(inputLength === 3){
+        InputTelefone.value += ')'
+    } else if(inputLength === 9){
+        InputTelefone.value += '-'
+    }
+})
+// Adicionando mascara nos inputs
 InputCNPJ.addEventListener('keypress', () =>{
     let inputLength = InputCNPJ.value.length
-    console.log(inputLength)
+  
     if(inputLength === 2 || inputLength === 6){
         InputCNPJ.value += '.'
     } else if(inputLength === 10){
@@ -15,22 +27,6 @@ InputCNPJ.addEventListener('keypress', () =>{
     }
 })
 
-// function planoPrata() {
-//      dropdownMenuButton.innerHTML = 'Prata';
-//      planoEscolhido = 1;
-//  }
-//  function planoGold() {
-//      dropdownMenuButton.innerHTML = 'Gold';
-//      planoEscolhido = 2;
-//  }
-//  function planoRubi() {
-//      dropdownMenuButton.innerHTML = 'Rubi';
-//      planoEscolhido = 3;
-//  }
-
-// function plano(i){
-//     planoEscolhido = Number(i)
-// }
 function trocarTela() {
     if (primeiroCadastro.style.display == 'block') {
         document.getElementById("primeiroCadastro").style.display = "none";
@@ -262,12 +258,14 @@ function verifCNPJ() {
 
 function cadastrarEmpresa() {
     //tratamento da variável - Eliminando caracteres especiais
-    var cnpjEspecial = InputCNPJ.value
+    var cnpjEspecial = InputCNPJ.value;
     var cnpjVar = cnpjEspecial.replace(/[^0-9]/g, "");
 
+    var telefoneEspecial = InputTelefone.value;
+    var telefoneVar = telefoneEspecial.replace(/[^0-9]/g, "")
+    console.log(telefoneVar)
     var erro = false;
     var nomeFantasiaVar = InputNomeFantasia.value;
-    var telefoneVar = InputTelefone.value;
     var fkEnderecoVar = fkEndereco;
 
     if (nomeFantasiaVar == undefined) {

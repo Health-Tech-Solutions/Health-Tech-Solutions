@@ -1,0 +1,21 @@
+CREATE DATABASE htsJava;
+USE htsJava;
+
+CREATE TABLE usuario (
+idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+senha VARCHAR(30),
+empresa VARCHAR(45),
+cargo VARCHAR(45)
+);
+
+SELECT * FROM usuario;
+
+CREATE TABLE maquina (
+idMaquina INT PRIMARY KEY AUTO_INCREMENT,
+tipo VARCHAR(45),
+modelo VARCHAR(45),
+numeroSerie INT
+) AUTO_INCREMENT = 2000;
+
+SELECT * FROM maquina;

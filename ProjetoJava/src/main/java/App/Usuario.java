@@ -1,6 +1,8 @@
 package App;
 
 import java.util.*;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Usuario {
     private String nome;
@@ -10,6 +12,11 @@ public class Usuario {
 
     private static List<Usuario> usuariosCadastrados = new ArrayList<>();
 
+    private Conexao conexaoLogin = new Conexao();
+    private JdbcTemplate con = conexaoLogin.getConexaoDoBanco();
+
+
+
     public Usuario(String nome, String senha, String empresa, String cargo) {
         this.nome = nome;
         this.senha = senha;
@@ -17,13 +24,7 @@ public class Usuario {
         this.cargo = cargo;
     }
 
-    public String getNome() {
-        return nome;
-    }
 
-    public String getSenha() {
-        return senha;
-    }
 
     public boolean validarLogin(String nome, String senha) {
         for (Usuario usuario : usuariosCadastrados) {
@@ -36,7 +37,6 @@ public class Usuario {
 
 
     public void menuMaquina() {
-        System.out.println("\nBem-vindo, " + nome + "!");
         System.out.println("\nOpções:");
         System.out.println("1. Cadastrar Máquina");
         System.out.println("2. Listar Máquinas");
@@ -50,6 +50,13 @@ public class Usuario {
 
     public void addUsuarioCadastrado(Usuario usuario){
         usuariosCadastrados.add(usuario);
+    }
+    public String getNome() {
+        return nome;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 
     public String getEmpresa() {

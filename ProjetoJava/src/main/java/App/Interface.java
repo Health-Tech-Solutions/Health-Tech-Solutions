@@ -1,19 +1,22 @@
 package App;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import Relatorios.RelatorioUsuario;
 import Relatorios.RelatorioMaquinario;
 import Relatorios.Relatorio;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 
 public class Interface {
-
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Conexao conexao = new Conexao();
+        JdbcTemplate con = conexao.getConexaoDoBanco();
 
+        Scanner scanner = new Scanner(System.in);
 
         Usuario usuario = null;
         Maquinario maquina = null;
@@ -74,6 +77,9 @@ public class Interface {
                         String cargoCadastro = scanner.next();
 
 
+                        con.update(
+                                "INSERT INTO usuario (nome, senha, empresa, cargo) VALUES (?, ?, ?, ?);",
+                                nomeCadastro, senhaCadastro, empresaCadastro, cargoCadastro);
                         usuario = new Usuario(nomeCadastro, senhaCadastro, empresaCadastro, cargoCadastro);
                         usuario.addUsuarioCadastrado(usuario);
 
@@ -139,6 +145,8 @@ public class Interface {
                             System.out.println("Número de série já existe.");
                         } else {
 
+                            con.update("INSERT INTO maquina (tipo, modelo, numeroSerie) VALUES (?, ?, ?);",
+                                    tipoMaquina, nomeMaquina, numSerie);
                             maquina = new Maquinario(tipoMaquina, nomeMaquina, numSerie);
                             maquina.addMaquinarioCadastrado(maquina);
 
@@ -157,6 +165,9 @@ public class Interface {
                                         + "\nNúmero de série: " + maquinarioDaLista.getNumSerie());
 
                             }
+                            /*List<Maquinario> maquinasBanco = con.query(
+                                "SELECT * FROM maquina", new BeanPropertyRowMapper<>(Maquinario.class));
+                            System.out.println(maquinasBanco);*/
 
                             System.out.println("""
                                     Escolha uma opção:
@@ -186,7 +197,8 @@ public class Interface {
                         for (int i = 0; i < Usuario.getUsuariosCadastrados().size(); i++) {
                             Usuario usuarioDaLista = Usuario.getUsuariosCadastrados().get(i);
                             System.out.println("=".repeat(60));
-                            System.out.println((i + 1) + ". Nome: " + usuarioDaLista.getNome() + ", Cargo: " + usuarioDaLista.getCargo()
+                            System.out.println((i + 1) + ". Nome: " + usuarioDaLista.getNome() + ", Cargo: " +
+                                    usuarioDaLista.getCargo()
                                     + ", Empresa: " + usuarioDaLista.getEmpresa());
                         }
                         System.out.println("""
@@ -225,8 +237,6 @@ public class Interface {
                         break;
 
                 }
-
-
             }
         }
     }

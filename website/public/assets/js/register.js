@@ -3,6 +3,7 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
+// Adicionando mascara nos inputs
 InputTelefone.addEventListener('keypress', () =>{
     let inputLength = InputTelefone.value.length
 
@@ -14,7 +15,7 @@ InputTelefone.addEventListener('keypress', () =>{
         InputTelefone.value += '-'
     }
 })
-// Adicionando mascara nos inputs
+
 InputCNPJ.addEventListener('keypress', () =>{
     let inputLength = InputCNPJ.value.length
   
@@ -24,6 +25,14 @@ InputCNPJ.addEventListener('keypress', () =>{
         InputCNPJ.value += '/'
     } else if(inputLength === 15){
         InputCNPJ.value += '-'
+    }
+})
+
+InputCEP.addEventListener('keypress', ()=> {
+    let inputLength = InputCEP.value.length
+    
+    if(inputLength === 5){
+        InputCEP.value += '-'
     }
 })
 
@@ -43,7 +52,8 @@ function trocarTela() {
 function verifEmail() {
     var erro = false;
     var emailVar = InputEmail.value;
-   
+
+    
     if (InputNome.value == '') {
         alert("Favor inserir o nome do usuário");
         erro = true;
@@ -103,8 +113,10 @@ function verifEmail() {
 }
 
 function cadastrarEndereco() {
+    // tratamento do input - Eliminando caracteres especiais
+    var cepEspecial = InputCEP.value;
+    var cepVar = cepEspecial.replace(/[^0-9]/g,"");
     var erro = false;
-    var cepVar = InputCEP.value;
     var numeroVar = InputNumero.value;
     var complementoVar = InputComplemento.value;
 
@@ -155,7 +167,8 @@ function cadastrarEndereco() {
 
 function buscaFkEndereco() {
     var erro = false;
-    var cepVar = InputCEP.value;
+    var cepEspecial = InputCEP.value;
+    var cepVar = cepEspecial.replace(/[^0-9]/g,"");
     var numeroVar = InputNumero.value;
     var complementoVar = InputComplemento.value;
 
@@ -260,10 +273,8 @@ function cadastrarEmpresa() {
     //tratamento da variável - Eliminando caracteres especiais
     var cnpjEspecial = InputCNPJ.value;
     var cnpjVar = cnpjEspecial.replace(/[^0-9]/g, "");
-
     var telefoneEspecial = InputTelefone.value;
     var telefoneVar = telefoneEspecial.replace(/[^0-9]/g, "")
-    console.log(telefoneVar)
     var erro = false;
     var nomeFantasiaVar = InputNomeFantasia.value;
     var fkEnderecoVar = fkEndereco;
@@ -319,8 +330,10 @@ function cadastrarEmpresa() {
 function buscarFkEmpresa() {
     var erro = false;
     var nomeFantasiaVar = InputNomeFantasia.value;
-    var telefoneVar = InputTelefone.value;
-    var cnpjVar = InputCNPJ.value;
+    var cnpjEspecial = InputCNPJ.value;
+    var cnpjVar = cnpjEspecial.replace(/[^0-9]/g, "");
+    var telefoneEspecial = InputTelefone.value;
+    var telefoneVar = telefoneEspecial.replace(/[^0-9]/g, "")
     var fkEnderecoVar = fkEndereco;
 
     if (nomeFantasiaVar == undefined) {

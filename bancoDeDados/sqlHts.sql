@@ -4,24 +4,8 @@ USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
 CREATE USER IF NOT EXISTS 'hts'@'localHost' IDENTIFIED BY 'urubu100';
-DROP PROCEDURE IF EXISTS dar_privilegios;
-DELIMITER //
-
-CREATE PROCEDURE dar_privilegios ()
-BEGIN
-IF NOT EXISTS (
-	SELECT 1
-    FROM information_schema.user_privileges WHERE GRANTEE = 'hth''@''localHost'
-	 AND privilege_type = '	ALL PRIVILEGES'
-) THEN
-	GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
-    FLUSH PRIVILEGES;
-END IF ;
-END //
-
-DELIMITER ;
--- CALL dar_privilegios();
-
+-- GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
+-- FLUSH PRIVILEGES;
 
 -- Criação das tabelas
 create table endereco(
@@ -347,7 +331,7 @@ values
 	(9,15,1, 85),
 	(12,15,1, 85);
 
-
+select * from empresa;
     
 CREATE OR REPLACE VIEW vw_maquina
 AS 

@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="./assets/css/sb-admin-2.css" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gradient-primary">
@@ -102,8 +103,12 @@
         var email = ipt_email.value;
         var senha = ipt_senha.value;
 
-        if (email == undefined || senha == undefined) {
-            alert("Por favor insira dados nos campos solicitados")
+        if (email == '' || senha == '') {
+            Swal.fire({
+            position: 'top',
+            title: 'Por favor, insira dados nos campos!',
+            confirmButtonColor: '#9a0801'
+        });
         } else {
             fetch("/usuarios/autenticar", {
                 method: "POST",

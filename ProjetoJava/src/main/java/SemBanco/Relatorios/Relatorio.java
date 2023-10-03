@@ -1,4 +1,4 @@
-package Relatorios;
+package SemBanco.Relatorios;
 
 public interface Relatorio {
 

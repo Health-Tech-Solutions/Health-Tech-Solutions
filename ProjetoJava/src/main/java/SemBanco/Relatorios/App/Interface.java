@@ -1,13 +1,10 @@
-package App;
+package SemBanco.Relatorios.App;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
-import Relatorios.RelatorioUsuario;
-import Relatorios.RelatorioMaquinario;
-import Relatorios.Relatorio;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import SemBanco.Relatorios.RelatorioUsuario;
+import SemBanco.Relatorios.RelatorioMaquinario;
+import SemBanco.Relatorios.Relatorio;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
@@ -165,9 +162,6 @@ public class Interface {
                                         + "\nNúmero de série: " + maquinarioDaLista.getNumSerie());
 
                             }
-                            /*List<Maquinario> maquinasBanco = con.query(
-                                "SELECT * FROM maquina", new BeanPropertyRowMapper<>(Maquinario.class));
-                            System.out.println(maquinasBanco);*/
 
                             System.out.println("""
                                     Escolha uma opção:

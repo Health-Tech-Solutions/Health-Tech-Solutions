@@ -1,4 +1,4 @@
-package App;
+package SemBanco.Relatorios.App;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;

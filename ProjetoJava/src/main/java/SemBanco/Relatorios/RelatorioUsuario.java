@@ -1,6 +1,6 @@
-package Relatorios;
+package SemBanco.Relatorios;
 
-import App.Usuario;
+import SemBanco.Relatorios.App.Usuario;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
 

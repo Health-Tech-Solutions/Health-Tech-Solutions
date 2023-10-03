@@ -1,7 +1,7 @@
-package App;
+package SemBanco.Relatorios.App;
 
 import java.util.*;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Usuario {

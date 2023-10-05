@@ -50,7 +50,7 @@ try:
         time.sleep(tempo)
 
         cpuPorcent = psutil.cpu_percent()
-        cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
+        # cpuTemp = psutil.sensors_temperatures()['coretemp'][0].current
         cpuFreq = psutil.cpu_freq().current / 1000
         discoDisponivel = psutil.disk_usage('/').free / (1024 ** 3)
         ramPorcent = (psutil.virtual_memory().used / 1024 ** 3) / totalRam * 100
@@ -58,7 +58,7 @@ try:
         virtualMemoryPercent = (virtualMemory / totalMemory) * 100
 
         somaCpuPorcent += cpuPorcent
-        somaCpuTemp += cpuTemp
+        # somaCpuTemp += cpuTemp
         somaCpuFreq += cpuFreq
         somaRamPorcent += ramPorcent
         somaVirtualMemory += virtualMemoryPercent

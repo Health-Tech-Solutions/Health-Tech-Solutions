@@ -1,8 +1,8 @@
 const funcionarioModel = require("../models/funcionarioModel")
 
 function cadastrar(req, res){
-    const {nome, email, senha, fkEmpresa, fkRepresentante, cpf} = req.body
-
+    const {nome, email, senha, cpf, fkEmpresa, fkRepresentante} = req.body
+    
     console.log("fk:",fkRepresentante)
 
     funcionarioModel.verifyEmail(email)
@@ -21,7 +21,9 @@ function cadastrar(req, res){
             }
         })
         .catch(error => {
+            console.log(error)
             res.status(500).json({error: error})
+           
         })
 }
 

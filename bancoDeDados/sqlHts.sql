@@ -332,8 +332,14 @@ values
 	(9,15,1, 85),
 	(12,15,1, 85);
 
-select * from empresa;
+select * from funcionario;
+desc funcionario;
     
+    INSERT INTO
+            funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao)
+        VALUES
+            ('ef', '2@rr.com', '123456',12345678907, 4, 17, 'Funcionario');
+select * from empresa;
 CREATE OR REPLACE VIEW vw_maquina
 AS 
 	select 
@@ -342,3 +348,4 @@ AS
         MAX(CASE WHEN fkTipoRegistro = 5 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 6 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
+select * from vw_maquina;

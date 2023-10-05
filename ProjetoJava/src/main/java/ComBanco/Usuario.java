@@ -13,7 +13,6 @@ public class Usuario {
     private String senha;
     private String empresa;
     private String cargo;
-
     private Scanner scanInt = new Scanner(System.in);
     private Scanner scanString = new Scanner(System.in);
 

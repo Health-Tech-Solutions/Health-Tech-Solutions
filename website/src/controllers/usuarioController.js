@@ -1,7 +1,5 @@
 var enviarEmail = require("../utils/enviarEmail");
 var usuarioModel = require("../models/usuarioModel");
-var aquarioModel = require("../models/aquarioModel");
-
 
 function autenticar(req, res) {
     var email = req.body.emailServer;

@@ -1,7 +1,13 @@
 const funcionarioModel = require("../models/funcionarioModel")
 
 function cadastrar(req, res){
-    const {nome, email, senha, cpf, fkEmpresa, fkRepresentante} = req.body
+    
+    var nome = req.body.nome;
+    var email = req.body.email;
+    var senha = req.body.senha;
+    var cpf = req.body.cpf;
+    var fkEmpresa = req.body.fkEmpresa;
+    var fkRepresentante = req.body.fkRepresentante;
     
     console.log("fk:",fkRepresentante)
 

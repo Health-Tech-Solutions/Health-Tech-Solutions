@@ -10,18 +10,18 @@ InputCPF.addEventListener('keypress', () =>{
 
 function cadastrar(){
     var cpfEspecial = InputCPF.value
-    var cpf = cpfEspecial.replace(/[^0-9]/g, "")
-    
+    var cpfVar = cpfEspecial.replace(/[^0-9]/g, "")
+    var nomeVar = InputNome.value;
+    var emailVar = InputEmail.value;
+    var senhaVar = InputSenha.value;
+    var confirmacaoSenhaVar = InputConfirmacaoSenha.value;
+    var fkEmpresa = sessionStorage.FK_EMPRESA;
+    var fkRepresentante = sessionStorage.ID_USUARIO;
 
-    var nome = InputNome.value
-    var email = InputEmail.value
-    var senha = InputSenha.value
-    var confirmacaoSenha = InputConfirmacaoSenha.value
-
-    if(!nome || !email || !senha || !confirmacaoSenha){
+    if(!nomeVar || !emailVar || !senhaVar || !confirmacaoSenhaVar){
         alert("Preencha todos os campos para efetuar o cadastro")
     }
-    else if(senha != confirmacaoSenha){
+    else if(senhaVar != confirmacaoSenhaVar){
         alert("As senhas não correspondem")
     }
     else{
@@ -31,12 +31,12 @@ function cadastrar(){
                 "Content-type": 'application/json'
             },
             body: JSON.stringify({
-                nome,
-                email,
-                senha,
-                cpf,
-                fkEmpresa: sessionStorage.FK_EMPRESA,
-                fkRepresentante: sessionStorage.ID_USUARIO
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                cpfServer: cpfVar,
+                fkEmpresaServer: fkEmpresa,
+                fkRepresentanteServer: fkRepresentante
             })
         })
         .then(res => {
@@ -51,6 +51,9 @@ function cadastrar(){
             } else if(res.status == 400){
                 alert("Email já cadastrado")
             }
+        })
+        .catch(res => {
+            console.log("ERRO#" + res.status)
         })
     }
 }

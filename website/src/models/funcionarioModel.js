@@ -28,8 +28,28 @@ function listar(fkIndustria){
     return database.executar(sql)
 }
 
+function enviarFoto(imagem, idUsuario) {
+    var instrucao = `
+         UPDATE funcionario SET foto = '${imagem}' where idFuncionario = ${idUsuario};
+    `
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function mostrarFoto(idUsuario) {
+    var instrucao = `
+    SELECT 
+    foto
+    FROM funcionario WHERE idFuncionario = ${idUsuario};
+    `
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     cadastrar,
     verifyEmail,
-    listar
+    listar,
+    enviarFoto,
+    mostrarFoto
 }

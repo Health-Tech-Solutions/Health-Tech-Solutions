@@ -5,7 +5,7 @@ function enviarFoto() {
     formData.append('foto', ipt_foto.files[0])
     alert("Ta entrando2")
     // idUsuario = sessionStorage.ID_USUARIO
-    var idFuncionario = sessionStorage.ID_FUNCIONARIO
+    var idFuncionario = sessionStorage.ID_USUARIO
     fetch(`/funcionario/enviarFoto/${idFuncionario}`, {
       method: "POST",
       body: formData

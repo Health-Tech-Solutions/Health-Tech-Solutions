@@ -42,7 +42,40 @@ function listar(req, res){
         })
 }
 
+
+function enviarFoto(req, res) {
+    const imagem = req.file.filename;
+    const idUsuario = req.params.idUsuario
+    funcionarioModel.enviarFoto(imagem, idUsuario)
+        .then(resultado => {
+            res.status(201).send("Usuario criado com sucesso");
+        }).catch(err => {
+            res.status(500).send(err);
+        });
+}
+
+function mostrarFoto(req, res) {
+    var idUsuario = req.params.idFuncionario;
+
+    funcionarioModel.mostrarFoto(idUsuario)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+}
+
+
 module.exports = {
     cadastrar,
-    listar
+    listar,
+    enviarFoto,
+    mostrarFoto
 }

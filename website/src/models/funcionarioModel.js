@@ -28,19 +28,19 @@ function listar(fkIndustria){
     return database.executar(sql)
 }
 
-function enviarFoto(imagem, idUsuario) {
+function enviarFoto(imagem, idFuncionario) {
     var instrucao = `
-         UPDATE funcionario SET foto = '${imagem}' where idFuncionario = ${idUsuario};
+         UPDATE funcionario SET foto = '${imagem}' where idFuncionario = ${idFuncionario};
     `
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function mostrarFoto(idUsuario) {
+function mostrarFoto(idFuncionario) {
     var instrucao = `
     SELECT 
     foto
-    FROM funcionario WHERE idFuncionario = ${idUsuario};
+    FROM funcionario WHERE idFuncionario = ${idFuncionario};
     `
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)

@@ -45,19 +45,19 @@ function listar(req, res){
 
 function enviarFoto(req, res) {
     const imagem = req.file.filename;
-    const idUsuario = req.params.idUsuario
-    funcionarioModel.enviarFoto(imagem, idUsuario)
+    const idFuncionario = req.params.idFuncionario
+    funcionarioModel.enviarFoto(imagem, idFuncionario)
         .then(resultado => {
-            res.status(201).send("Usuario criado com sucesso");
+            res.status(201).send("foto enviada com sucesso para a model");
         }).catch(err => {
             res.status(500).send(err);
         });
 }
 
 function mostrarFoto(req, res) {
-    var idUsuario = req.params.idFuncionario;
+    var idFuncionario = req.params.idFuncionario;
 
-    funcionarioModel.mostrarFoto(idUsuario)
+    funcionarioModel.mostrarFoto(idFuncionario)
         .then(
             function (resultado) {
                 res.json(resultado);

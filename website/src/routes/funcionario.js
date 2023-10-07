@@ -12,7 +12,7 @@ router.get("/listar/:fkEmpresa", (res, req) => {
 })
 
 // upload.single('foto') vai buscar no json alguma propriedade chamada foto 
-router.post('/enviarFoto/:idUsuario', upload.single('foto'), (req, res) => {
+router.post('/enviarFoto/:idFuncionario', upload.single('foto'), (req, res) => {
     funcionarioController.enviarFoto(req, res);
 });
 

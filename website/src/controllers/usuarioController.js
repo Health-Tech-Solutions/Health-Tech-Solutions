@@ -378,7 +378,6 @@ function cadastrarFuncionario(req, res) {
         res.status(400).send("Seu fkEmpresa está undefined!");
     }
      else {
-
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrarFuncionario(nome, email, senha, fkEmpresa)
             .then(

@@ -80,7 +80,9 @@
                             <div class="segundoCadastro" id="segundoCadastro">
                                 <form class="user">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="InputNomeFantasia"
+                                        <input type="text" class="mb-3 form-control form-control-user" id="InputCNPJ"
+                                            placeholder="CNPJ" onchange="cnpjWsAPI()" value="60.765.823/0001-30" maxlength="18">
+                                            <input type="text" class="form-control form-control-user" id="InputNomeFantasia"
                                             placeholder="Nome Fantasia">
                                     </div>
                                     <div class="form-group row">
@@ -89,8 +91,9 @@
                                                 placeholder="Telefone" maxlength="14">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" id="InputCNPJ"
-                                                placeholder="CNPJ" maxlength="18">
+                                            <input type="text" readonly class="form-control form-control-user" id="InputRazao"
+                                            placeholder="Razão Social">
+                                   
                                         </div>
                                     </div>
                                     <a class="btn btn-primary btn-user btn-block" onclick="verifCNPJ()">

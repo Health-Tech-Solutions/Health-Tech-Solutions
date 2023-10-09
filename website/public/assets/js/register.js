@@ -4,8 +4,8 @@ var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
 //DEBUG
-// primeiroCadastro.style.display = "none"
-// terceiroCadastro.style.display = "block"
+primeiroCadastro.style.display = "none"
+segundoCadastro.style.display = "block"
 //FIM DEBUG
 
 // Adicionando mascara nos inputs
@@ -320,6 +320,17 @@ function buscaFkEndereco() {
     }
 
 }
+function cnpjWsAPI(){
+    var cnpjDestratado = document.getElementById("InputCNPJ").value;
+    var numeroCNPJ = cnpjDestratado.replace(/[^0-9]/g, "");
+    console.log(numeroCNPJ)
+    const json = fetch(`https://publica.cnpj.ws/cnpj/${numeroCNPJ.value}`)
+json.then(dados=>{
+  console.log(`${dados}`)
+})
+.catch(error =>{console.log("CEP NAO ENCONTRADO")})
+}
+ 
 
 function verifCNPJ() {
     var erro = false;

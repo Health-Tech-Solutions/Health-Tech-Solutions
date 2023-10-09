@@ -55,6 +55,7 @@ function enviarFoto(req, res) {
 }
 
 function mostrarFoto(req, res) {
+    console.log("Ta aqui")
     var idFuncionario = req.params.idFuncionario;
 
     funcionarioModel.mostrarFoto(idFuncionario)

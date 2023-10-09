@@ -1,3 +1,5 @@
+
+
 function enviarFoto() {
     alert("Ta entrando1")
     const formData = new FormData();
@@ -17,4 +19,26 @@ function enviarFoto() {
       .catch(err => {
         console.log(err);
       })
+  }
+
+  function mostrarFoto(){
+    var idFuncionario = sessionStorage.ID_USUARIO;
+    fetch(`/funcionario/mostrarFoto/${idFuncionario}`)
+    .then(function (resposta){
+      if(resposta.ok){
+        resposta.json()
+        .then(
+
+          function(resposta){
+            infos = resposta[0];
+            console.log(infos)
+            Foto = document.getElementById("usuario_foto")
+            Foto.src = `../assets/${infos.foto}`
+          }
+        )
+      }
+    })
+    .catch(err => {
+      console.log("ERRO" + err)
+    })
   }

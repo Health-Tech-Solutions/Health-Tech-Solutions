@@ -223,6 +223,9 @@ function cadastrarEndereco(req, res) {
     var cep = req.body.cepServer;
     var numero = req.body.numeroServer;
     var complemento = req.body.complementoServer;
+    var bairro = req.body.bairroServer;
+    var logradouro = req.body.logradouroServer;
+    var cidade = req.body.cidadeServer;
 
     // Faça as validações dos valores
     if (cep == undefined) {
@@ -235,7 +238,7 @@ function cadastrarEndereco(req, res) {
      else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarEndereco(cep, numero, complemento)
+        usuarioModel.cadastrarEndereco(cep, numero, complemento,bairro,logradouro,cidade)
             .then(
                 function (resultado) {
                     res.json(resultado);

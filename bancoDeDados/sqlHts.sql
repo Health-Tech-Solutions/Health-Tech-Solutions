@@ -1,21 +1,22 @@
+-- Active: 1696856128647@@localhost@3306@stage
 drop database if exists hts;
 create database hts;
 USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
 CREATE USER IF NOT EXISTS 'hts'@'localHost' IDENTIFIED BY 'urubu100';
--- GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
--- FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
+ FLUSH PRIVILEGES;
 
 -- Criação das tabelas
 create table endereco(
 	idEndereco int primary key auto_increment,
     cep char(9),
     numero varchar(10),
-    rua VARCHAR(45),
+    logradouro VARCHAR(45),
     bairro VARCHAR(45),
     cidade VARCHAR(45),
-    complemento varchar(10)
+    complemento varchar(40)
 );
 
 insert into 
@@ -335,10 +336,10 @@ values
 select * from funcionario;
 desc funcionario;
     
-    INSERT INTO
-            funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao)
-        VALUES
-            ('ef', '2@rr.com', '123456',12345678907, 4, 17, 'Funcionario');
+   -- INSERT INTO
+     --       funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao)
+       -- VALUES
+       --     ('ef', '2@rr.com', '123456',12345678907, 4, 17, 'Funcionario');
 select * from empresa;
 CREATE OR REPLACE VIEW vw_maquina
 AS 

@@ -53,13 +53,13 @@ function verifCNPJ(CNPJ) {
     return database.executar(instrucao);
 }
 
-function cadastrarEndereco(cep, numero, complemento) {
+function cadastrarEndereco(cep, numero, complemento, logradouro, bairro, cidade) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarEndereco():", cep, numero, complemento);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO endereco (cep, numero, complemento) VALUES ('${cep}', '${numero}', '${complemento}');
+        INSERT INTO endereco (cep, numero, complemento,logradouro,cidade,bairro) VALUES ('${cep}', '${numero}', '${complemento}','${logradouro}','${cidade}','${bairro}');
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

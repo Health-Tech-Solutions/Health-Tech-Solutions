@@ -80,7 +80,9 @@
                             <div class="segundoCadastro" id="segundoCadastro">
                                 <form class="user">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="InputNomeFantasia"
+                                        <input type="text" class="mb-3 form-control form-control-user" id="InputCNPJ"
+                                            placeholder="CNPJ" onchange="cnpjWsAPI()" value="60.765.823/0001-30" maxlength="18">
+                                            <input type="text" class="form-control form-control-user" id="InputNomeFantasia"
                                             placeholder="Nome Fantasia">
                                     </div>
                                     <div class="form-group row">
@@ -89,8 +91,9 @@
                                                 placeholder="Telefone" maxlength="14">
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" id="InputCNPJ"
-                                                placeholder="CNPJ" maxlength="18">
+                                            <input type="text" readonly class="form-control form-control-user" id="InputRazao"
+                                            placeholder="Razão Social">
+                                   
                                         </div>
                                     </div>
                                     <a class="btn btn-primary btn-user btn-block" onclick="verifCNPJ()">
@@ -101,18 +104,33 @@
                             <div class="terceiroCadastro" id="terceiroCadastro">
                                 <form class="user">
                                     <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" id="InputCEP"
+                                        <div class="col-sm-6">
+                                            <input type="text" onchange="viaCepAPI()" class="form-control form-control-user" id="InputCEP"
                                                 placeholder="CEP" maxlength="9">
                                         </div>
+                                        
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" id="InputNumero"
+                                            <input type="text" readonly  class="form-control form-control-user" id="InputLogradouro"
+                                                placeholder="Logradouro">
+                                        </div>
+                                        <div class="col-sm-6 mt-3">
+                                            <input type="text" readonly class="form-control form-control-user" id="InputBairro"
+                                                placeholder="Bairro">
+                                        </div>
+                                        <div class="col-sm-6 mt-3">
+                                            <input type="text"  readonly class="form-control form-control-user" id="InputCidade"
+                                                placeholder="Cidade">
+                                        </div>
+                                        <div class="col-lg mt-3">
+                                            <input type="text"   class="mb-3 col-sm-3 form-control form-control-user" id="InputNumero"
                                                 placeholder="Número">
+
+                                                <input type="text" class=" form-control form-control-user" id="InputComplemento"
+                                                placeholder="Complemento">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="InputComplemento"
-                                            placeholder="Complemento">
+                                       
                                     </div>
                                     <!-- <div class="form-group">
                                         <div class="dropdown d-inline-block">

@@ -3,6 +3,11 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
+//DEBUG
+primeiroCadastro.style.display = "none"
+segundoCadastro.style.display = "block"
+//FIM DEBUG
+
 // Adicionando mascara nos inputs
 InputTelefone.addEventListener('keypress', () => {
     let inputLength = InputTelefone.value.length
@@ -155,7 +160,18 @@ function verifEmail() {
         });
     }
 }
-
+function viaCepAPI(){
+    var numeroCep = document.getElementById("InputCEP");
+    const json = fetch(`https://viacep.com.br/ws/${numeroCep.value}/json/`)
+  .then(resposta => resposta.json())
+json.then(dados=>{
+  console.log(`---Endereço---\nCEP:${dados.cep}\nLogradouro:${dados.logradouro}\nBairro:${dados.bairro}\nCidade:${dados.localidade}`)
+InputLogradouro.value = dados.logradouro
+InputCidade.value = dados.localidade
+InputBairro.value = dados.bairro
+})
+.catch(error =>{console.log("CEP NAO ENCONTRADO")})
+}
 
 function cadastrarEndereco() {
     // tratamento do input - Eliminando caracteres especiais
@@ -164,7 +180,10 @@ function cadastrarEndereco() {
     var erro = false;
     var numeroVar = InputNumero.value;
     var complementoVar = InputComplemento.value;
-
+    var logradouroVar = InputLogradouro.value;
+    var cidadeVar = InputCidade.value;
+    var bairroVar = InputBairro.value;
+   
     var mensagensErro = [];
 
     function adicionarErro(inputElement) {
@@ -207,7 +226,10 @@ function cadastrarEndereco() {
             body: JSON.stringify({
                 cepServer: cepVar,
                 numeroServer: numeroVar,
-                complementoServer: complementoVar
+                complementoServer: complementoVar,
+                logradouroServer: logradouroVar, 
+                cidadeServer: cidadeVar, 
+                bairroServer: bairroVar
             }),
         })
             .then(function (resposta) {
@@ -298,6 +320,17 @@ function buscaFkEndereco() {
     }
 
 }
+function cnpjWsAPI(){
+    var cnpjDestratado = document.getElementById("InputCNPJ").value;
+    var numeroCNPJ = cnpjDestratado.replace(/[^0-9]/g, "");
+    console.log(numeroCNPJ)
+    const json = fetch(`https://publica.cnpj.ws/cnpj/${numeroCNPJ.value}`)
+json.then(dados=>{
+  console.log(`${dados}`)
+})
+.catch(error =>{console.log("CEP NAO ENCONTRADO")})
+}
+ 
 
 function verifCNPJ() {
     var erro = false;

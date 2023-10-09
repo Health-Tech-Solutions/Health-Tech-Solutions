@@ -33,7 +33,10 @@ function enviarFoto() {
             infos = resposta[0];
             console.log(infos)
             Foto = document.getElementById("usuario_foto")
+            Perfil = document.getElementById("foto_perfil")
             Foto.src = `../assets/${infos.foto}`
+            Perfil.src = `../assets/${infos.foto}`;
+
           }
         )
       }

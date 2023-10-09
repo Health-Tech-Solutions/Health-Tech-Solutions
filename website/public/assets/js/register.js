@@ -3,10 +3,7 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
-//DEBUG
-primeiroCadastro.style.display = "none"
-segundoCadastro.style.display = "block"
-//FIM DEBUG
+
 
 // Adicionando mascara nos inputs
 InputTelefone.addEventListener('keypress', () => {

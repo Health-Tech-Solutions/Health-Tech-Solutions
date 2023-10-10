@@ -12,9 +12,6 @@ public class Usuario {
 
     private static List<Usuario> usuariosCadastrados = new ArrayList<>();
 
-    private Conexao conexaoLogin = new Conexao();
-    private JdbcTemplate con = conexaoLogin.getConexaoDoBanco();
-
 
 
     public Usuario(String nome, String senha, String empresa, String cargo) {
@@ -67,11 +64,4 @@ public class Usuario {
         return cargo;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
 }

@@ -16,7 +16,7 @@ router.post('/enviarFoto/:idFuncionario', upload.single('foto'), (req, res) => {
     funcionarioController.enviarFoto(req, res);
 });
 
-router.get(`/mostrarFoto/:idFuncionario`, function (req, res) {
+router.get(`/mostrarFoto/:idFuncionario`, (req, res) => {
     funcionarioController.mostrarFoto(req, res);
 });
 

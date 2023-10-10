@@ -19,31 +19,34 @@ public class Maquina {
 
 
     public void menuMaquina() {
-        System.out.println("""
+        while (true) {
+            System.out.println("""
                 Opções:
                 1. Cadastrar máquina
-                2. Listar máquinas
-                3. Listar usuários
-                4. Sair""");
-        Integer opcaoMenu = scanInt.nextInt();
+                2. Monitorar máquinas
+                3. Listar máquinas
+                4. Listar usuários
+                5. Sair""");
+            Integer opcaoMenu = scanInt.nextInt();
 
-        switch (opcaoMenu) {
-            case 1:
-                cadastrarMaquinas();
-                menuMaquina();
-            case 2:
-                listarMaquinas();
-                menuMaquina();
-            case 3:
-                Usuario usuario = new Usuario();
-                usuario.listarUsuarios();
-                menuMaquina();
-            case 4:
-                System.out.println("Até logo...");
-                return;
-            default:
-                System.out.println("Opção inválida. Tente novamente.");
-                break;
+            switch (opcaoMenu) {
+                case 1:
+                    cadastrarMaquinas();
+                    break;
+                case 2:
+                    Monitoramento monitoramento = new Monitoramento();
+                    monitoramento.monitorarMaquinas();
+                    break;
+                case 3:
+                    listarMaquinas();
+                    break;
+                case 4:
+                    Usuario usuario = new Usuario();
+                    usuario.listarUsuarios();
+                    break;
+                case 5:
+                    return;
+            }
         }
     }
 
@@ -63,10 +66,10 @@ public class Maquina {
     }
 
     public void listarMaquinas() {
-        System.out.println("Lista de máquinas:");
-
         List<Maquina> maquinas = con.query("SELECT * FROM maquina;",
                 new BeanPropertyRowMapper<>(Maquina.class));
+
+        System.out.println("Lista de máquinas:");
         for (int i = 0; i < maquinas.size(); i++) {
             System.out.println("=".repeat(30));
             Maquina maquinaDaLista = maquinas.get(i);
@@ -79,7 +82,7 @@ public class Maquina {
                             """, maquinaDaLista.getIdMaquina(), maquinaDaLista.getTipo(),
                     maquinaDaLista.getModelo(), maquinaDaLista.getNumeroSerie());
             if (maquinas.size() == (i+1)) {
-                break;
+                return;
             }
         }
     }

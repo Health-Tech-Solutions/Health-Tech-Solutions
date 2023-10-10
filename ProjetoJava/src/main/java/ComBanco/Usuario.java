@@ -113,8 +113,7 @@ public class Usuario {
                 Integer escolha = scanInt.nextInt();
 
                 if (escolha == 1) {
-                    // continua no login
-                    break;
+                    logar();
                 } else if (escolha == 2) {
                     cadastrar();
                     return;
@@ -150,9 +149,6 @@ public class Usuario {
             }
         }
     }
-
-
-
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -209,6 +205,4 @@ public class Usuario {
     public void setScanString(Scanner scanString) {
         this.scanString = scanString;
     }
-
-
 }

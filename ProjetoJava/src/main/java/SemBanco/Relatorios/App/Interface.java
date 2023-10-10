@@ -10,9 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class Interface {
     public static void main(String[] args) {
-        Conexao conexao = new Conexao();
-        JdbcTemplate con = conexao.getConexaoDoBanco();
-
         Scanner scanner = new Scanner(System.in);
 
         Usuario usuario = null;
@@ -73,10 +70,6 @@ public class Interface {
                         System.out.println("Digite o cargo:");
                         String cargoCadastro = scanner.next();
 
-
-                        con.update(
-                                "INSERT INTO usuario (nome, senha, empresa, cargo) VALUES (?, ?, ?, ?);",
-                                nomeCadastro, senhaCadastro, empresaCadastro, cargoCadastro);
                         usuario = new Usuario(nomeCadastro, senhaCadastro, empresaCadastro, cargoCadastro);
                         usuario.addUsuarioCadastrado(usuario);
 
@@ -142,8 +135,6 @@ public class Interface {
                             System.out.println("Número de série já existe.");
                         } else {
 
-                            con.update("INSERT INTO maquina (tipo, modelo, numeroSerie) VALUES (?, ?, ?);",
-                                    tipoMaquina, nomeMaquina, numSerie);
                             maquina = new Maquinario(tipoMaquina, nomeMaquina, numSerie);
                             maquina.addMaquinarioCadastrado(maquina);
 

@@ -35,7 +35,12 @@
             <artifactId>commons-dbcp2</artifactId>
             <version>2.5.0</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.github.britooo/looca-api -->
+        <dependency>
+            <groupId>com.github.britooo</groupId>
+            <artifactId>looca-api</artifactId>
+            <version>2.2.0</version>
+        </dependency>
     </dependencies>
 
 </project>

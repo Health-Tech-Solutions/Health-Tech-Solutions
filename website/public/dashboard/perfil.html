@@ -22,13 +22,13 @@
     <!-- <link rel="stylesheet" href="../dashboard/css/telaPerfil/customDash.css"> -->
     <link rel="stylesheet" href="../dashboard/css/telaPerfil/perfilFuncionario.css">
     <link rel="stylesheet" href="../dashboard/css/telaPerfil/cadastroFuncionarios.css">
-    <script src="../assets/js/perfilFuncionario.js"></script>
+    
 
     <link rel="icon" href="../assets/icon/LOGO-removebg.png"/>
-    <script src="js/dados.js"></script>
+    
 </head>
 
-<body id="page-top" onload="atualizarDados()">
+<body id="page-top" onload="mostrarFoto()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -204,7 +204,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="nomeSpan" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <img class="img-profile rounded-circle" src="../assets/img copy/undraw_profile.svg" id="usuario_foto">
+                                <img class="img-profile rounded-circle"  id="usuario_foto">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -243,7 +243,7 @@
                     <form id="infos" class="user" onsubmit="return false">
                         <div class="mx-auto text-center">
                             <h1 id="tituloCad" class="h4 border-bottom-1 text-light  mt-3">Olá,</h1>
-                            <img id="usuario_foto" src="../assets/img copy/undraw_profile.svg" class="img-profile rounded-circle"width="210px" height="210px"
+                            <img id="foto_perfil"  class="img-profile rounded-circle"width="210px" height="210px"
                                 alt="">
                         </div>
                         <div class="form-group flex-wrap col-sm-8 mx-auto col">
@@ -356,6 +356,8 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
 
+    <script src="js/dados.js"></script>
+    <script src="../assets/js/perfilFuncionario.js"></script>
 </body>
 
 </html>

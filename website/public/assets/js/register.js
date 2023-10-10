@@ -3,8 +3,6 @@ var fkEmpresa;
 var planoEscolhido;
 document.getElementById("primeiroCadastro").style.display = "block";
 
-
-
 // Adicionando mascara nos inputs
 InputTelefone.addEventListener('keypress', () => {
     let inputLength = InputTelefone.value.length
@@ -320,18 +318,23 @@ function buscaFkEndereco() {
 function cnpjWsAPI(){
     var cnpjDestratado = document.getElementById("InputCNPJ").value;
     var numeroCNPJ = cnpjDestratado.replace(/[^0-9]/g, "");
+    alert(numeroCNPJ)
     console.log(numeroCNPJ)
-    const json = fetch(`https://publica.cnpj.ws/cnpj/${numeroCNPJ.value}`)
-json.then(dados=>{
-  console.log(`${dados}`)
-})
-.catch(error =>{console.log("CEP NAO ENCONTRADO")})
-}
+    const json = fetch(`https://publica.cnpj.ws/cnpj/${numeroCNPJ}`)
+    .then(resposta => resposta.json())
+    json.then(dados=>{
+      console.log(dados)
+    dados.razao_social!=undefined?InputRazao.value = dados.razao_social:InputRazao.value = "CNPJ NÃO ENCONTRADO"
+    })
+    .catch(error =>{console.log("Cnpj NAO ENCONTRADO", error)})
+    }
  
 
 function verifCNPJ() {
     var erro = false;
     var cnpjVar = InputCNPJ.value;
+    var razaoVar = InputRazao.value
+    
     console.log(InputCNPJ)
 
     var mensagensErro = [];
@@ -346,7 +349,7 @@ function verifCNPJ() {
         inputElement.classList.remove('erro-input'); 
     }
 
-    if (cnpjVar == undefined || cnpjVar == '') {
+    if (cnpjVar == undefined || cnpjVar == ''||razaoVar == "CNPJ NÃO ENCONTRADO") {
         mensagensErro.push('CNPJ inválido');
         adicionarErro(InputCNPJ);
         erro = true;

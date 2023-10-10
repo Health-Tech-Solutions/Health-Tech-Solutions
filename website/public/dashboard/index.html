@@ -20,10 +20,11 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/js/perfilFuncionario.js"></script>
 
 </head>
 
-<body id="page-top">
+<body id="page-top"  onload="mostrarFoto()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -278,7 +279,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="nomeUsuario">Bruna
                                     Sanguini</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" id="usuario_foto">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

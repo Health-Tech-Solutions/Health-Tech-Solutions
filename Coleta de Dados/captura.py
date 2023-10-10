@@ -14,7 +14,7 @@ try:
         host='localhost',
         database='hts',
         port='3306',
-        user='stockSafe',
+        user='hts',
         password='urubu100'
     )
 

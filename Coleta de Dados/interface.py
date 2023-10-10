@@ -8,9 +8,10 @@ import json
 
 try:
     conexao = mysql.connector.connect(
-        host='localhost',database='hts',
+        host='localhost',
+        database='hts',
         port='3306',
-        user ='stockSafe',
+        user ='hts',
         password='urubu100'
     )  
     def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro):
@@ -18,7 +19,33 @@ try:
             "INSERT INTO registro (dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro) VALUES "
             "(NOW(), %s, %s, %s, %s)",
             (valor, fkMaquina, fkTipoMaquina, fkTipoRegistro)
-    )
+        )
+        if valor > 85 and fkTipoRegistro == 1:
+            cursor.execute(
+                """
+                    insert into
+                                chamado (nivel, estado, sla, descricao, fkRegistro)
+                            select 
+                                case when r.valor > 95
+                                    then "Alto"
+                                    else case when r.valor > 90
+                                        then "Médio"
+                                        else "Baixo"
+                                    end
+                                end nivel,
+                                "Aberto" estado,
+                                case when r.valor > 95
+                                    then "2 horas"
+                                    else case when r.valor > 90
+                                        then "6 horas"
+                                        else "10 horas"
+                                    end
+                                end sla,
+                                "TA indo" descriscao,
+                                r.idRegistro
+                            from registro r where r.valor > 85;
+                """
+            )
         
     token = input("Insira o token da máquina: ")
 
@@ -72,7 +99,7 @@ try:
             texto_dados["text"] += format(cpuPorcent, ".2f")
         
             #   Não funciona no Windows:
-            texto_dados["text"] += "\n ----- Temperatura (°C) ----- \n"
+            # texto_dados["text"] += "\n ----- Temperatura (°C) ----- \n"
             # texto_dados["text"] += format(cpuTemp, ".2f")
             #
         
@@ -123,19 +150,15 @@ try:
             texto_dados["text"] += "\n ----- Percentual de uso de disco (%)----- \n"
             texto_dados["text"] += format(discoPorcent, ".2f")
 
-
-            
-
-
             janela.update() 
             cursor = conexao.cursor()
 
             inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuPorcent, 1)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 5)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 6)
+            #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
+            #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
+            #nserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 2)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 3)
 
             conexao.commit()
                     
@@ -216,7 +239,6 @@ try:
     janela.mainloop()
 
 
-        
-
+    
 except:
     print("Falha na conexão")   

@@ -4,9 +4,9 @@ create database hts;
 USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
-CREATE USER IF NOT EXISTS 'hts'@'localHost' IDENTIFIED BY 'urubu100';
-GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
- FLUSH PRIVILEGES;
+-- CREATE USER IF NOT EXISTS 'hts'@'localHost' IDENTIFIED BY 'urubu100';
+-- GRANT ALL PRIVILEGES ON *.* TO 'hts'@'localhost';
+-- FLUSH PRIVILEGES;
 
 -- Criação das tabelas
 create table endereco(
@@ -217,9 +217,6 @@ insert into
 	tipoRegistro(nome, medida)
 values
 	('Uso de CPU', '%'),
-	('Temperatura de CPU', 'ºC'),
-	('Frequência de CPU', 'GHz'),
-	('Uso de memória virtual', '%'),
 	('Uso de RAM', '%'),
 	('Uso de disco', '%');
 
@@ -259,6 +256,7 @@ create table chamado(
     nivel varchar(45),
     estado varchar(45),
     sla varchar(45),
+    dataHora DATETIME,
     descricao varchar(45),
 	fkRegistro int,
     foreign key(fkRegistro) references registro(idRegistro)
@@ -285,7 +283,7 @@ select
 	"" descriacao,
 	r.idRegistro
 from registro r where r.valor > 85;
-    
+SELECT * FROM chamado;
 create table peca(
 	idPeca int primary key auto_increment,
     nome varchar(45)
@@ -333,20 +331,13 @@ values
 	(9,15,1, 85),
 	(12,15,1, 85);
 
-select * from funcionario;
-desc funcionario;
-    
-   -- INSERT INTO
-     --       funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao)
-       -- VALUES
-       --     ('ef', '2@rr.com', '123456',12345678907, 4, 17, 'Funcionario');
-select * from empresa;
 CREATE OR REPLACE VIEW vw_maquina
 AS 
 	select 
 		r.dataHora,
         MAX(CASE WHEN fkTipoRegistro = 1 THEN r.valor END) AS CPU,
-        MAX(CASE WHEN fkTipoRegistro = 5 THEN r.valor END) AS RAM,
-        MAX(CASE WHEN fkTipoRegistro = 6 THEN r.valor END) AS DISCO
+        MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
+        MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
 select * from vw_maquina;
+select * from maquinario;

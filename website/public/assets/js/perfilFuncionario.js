@@ -46,13 +46,13 @@ function enviarFoto() {
     })
   }
 
-  function pegarInfromacoes(){
+  function pegarInformacoes(){
     
   }
 
   function atualizarDados(){
      var idFuncionario = sessionStorage.ID_USUARIO;
-     fetch(`/funcionario/pegarInfromacoes/${idFuncionario}`)
+     fetch(`/funcionario/pegarInformacoes/${idFuncionario}`)
      .then(function (resposta){
        if(resposta.ok){
          resposta.json()

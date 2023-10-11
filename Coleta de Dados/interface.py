@@ -70,6 +70,28 @@ try:
                                                                                 LIMIT 1));
                 """
             )
+            #Métricas para DISCO
+        if media > 5 and fkTipoRegistro == 3:
+            if media >= 80:
+                nivel = "Alto"
+                sla = "2 Horas"
+            elif media >= 90:
+                nivel = "Médio"
+                sla = "6 Horas"
+            else:
+                nivel = "Baixo"
+                sla = "10 Horas"
+            cursor.execute(
+                f"""
+                    INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
+                                    VALUES ('{nivel}', 'Aberto', '{sla}', NOW(), 'DISCO',
+                                                                                (SELECT idRegistro 
+                                                                                FROM registro 
+                                                                                WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
+                                                                                AND fkTipoRegistro = {fkTipoRegistro}
+                                                                                LIMIT 1));
+                """
+            )
         
     token = input("Insira o token da máquina: ")
 
@@ -179,11 +201,11 @@ try:
 
             inserir_media(cursor, fkMaquina, fkTipoMaquina, cpuPorcent, 1, mediaCpuPorcent)
             inserir_media(cursor, fkMaquina, fkTipoMaquina, ramPorcent, 2, mediaRamPorcent)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 3, discoPorcent)
 
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
-            # inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 3)
 
             conexao.commit()
         

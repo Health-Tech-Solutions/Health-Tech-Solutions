@@ -352,6 +352,31 @@ AS
         MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
-SELECT * FROM funcionario;
-SELECT * FROM chamado;
-SELECT * FROM vw_maquina;
+    
+    
+CREATE OR REPLACE VIEW vw_chamados
+AS
+	SELECT 
+	r.fkMaquina AS idMaquina,
+    TIME_FORMAT(c.dataHora, '%H:%i') AS hora,
+	c.nivel,
+    c.estado,
+    c.sla,
+    c.descricao,
+    m.modelo
+	FROM chamado AS c
+    JOIN registro AS r
+    JOIN maquinario AS maq
+    JOIN modelo AS m
+    WHERE fkMaquina = idMaquinario 
+    AND fkRegistro = idRegistro
+    AND maq.fkModelo = m.idModelo;
+    
+    
+
+    
+    
+
+
+
+

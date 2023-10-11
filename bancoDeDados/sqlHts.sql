@@ -18,7 +18,12 @@ create table endereco(
     cidade VARCHAR(45),
     complemento varchar(40)
 );
+insert into endereco values	(NULL, '04571011', 1747,'Avenida Luis Carlos Berrini',	'Itaim Bibi', 'São Paulo',''),
+							(NULL, '01310000',200,'Avenida Paulista', 'Bela Vista','São Paulo',''),
+							(NULL,'01431000', 953,'Avenida Brasil', 'Jardim América','São Paulo',''),
+                            (NULL,'09910720', 605, 'Rua Manoel da Nóbrega', 'Centro','Diadema', '');
 
+select * from endereco;
 insert into 
 	endereco(cep, numero, complemento) 
 values 
@@ -39,11 +44,18 @@ create table empresa(
     fkEndereco int,
     foreign key (fkEndereco) references endereco(idEndereco)
 );
-select * from empresa;
+-- Av. Brasil, 1085 - Jardim America, São Paulo - SP, 01431-000
 insert into
 	empresa
+    (idEmpresa, nomeFantasia, cnpj,fkEndereco)
 values
-	(NULL, 'MinDray', '09058456000187','5511984563218', 1);
+	(NULL, 'MinDray','5511984563218', 1),
+    (NULL, 'Hospital Santa Catarina', '60922168000186',2),
+    (NULL, 'Hospital Albert Einsten', '60765823000130',3),
+    (NULL, 'Hospital Santa Helena', '34128330000189',4);
+
+select * from empresa;
+    use hts;
 
 create table funcionario(
 	idFuncionario int primary key auto_increment,
@@ -61,7 +73,7 @@ create table funcionario(
 select * from funcionario;
 insert into
 	funcionario(nome, email, senha,funcao, fkIndustria)
-values
+values		
 	("Isabela Mariana Olivia da Rosa","isabelamarianadarosa@imeio.com","8sPiKN8z48","admin", 1),
 	("Antonio Breno Augusto Moura","antonio_breno_moura@br.festo.com","LMgH7kFB6I","funcionario", 1),
 	("Miguel Cauê Pereira","miguel-pereira93@superigi.com.br","P2JIrkFdnF","funcionario", 1),     
@@ -372,6 +384,7 @@ AS
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo;
     
+select * from vw_chamados;
     
 
     

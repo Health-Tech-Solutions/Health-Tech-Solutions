@@ -13,7 +13,7 @@ try:
         port='3306',
         user ='hts',
         password='urubu100'
-    )  
+    )
     def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro, media):
         if fkTipoRegistro == 1:
             print(valor)
@@ -70,7 +70,8 @@ try:
                                                                                 LIMIT 1));
                 """
             )
-            #Métricas para DISCO
+
+        #Métricas para DISCO
         if media > 5 and fkTipoRegistro == 3:
             if media >= 80:
                 nivel = "Alto"

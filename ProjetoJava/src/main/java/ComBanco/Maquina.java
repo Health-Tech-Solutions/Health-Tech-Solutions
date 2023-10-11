@@ -24,9 +24,10 @@ public class Maquina {
                 Opções:
                 1. Cadastrar máquina
                 2. Monitorar máquinas
-                3. Listar máquinas
-                4. Listar usuários
-                5. Sair""");
+                3. Listar processos
+                4. Listar máquinas
+                5. Listar usuários
+                6. Sair""");
             Integer opcaoMenu = scanInt.nextInt();
 
             switch (opcaoMenu) {
@@ -38,13 +39,17 @@ public class Maquina {
                     monitoramento.monitorarMaquinas();
                     break;
                 case 3:
-                    listarMaquinas();
+                    Monitoramento processos = new Monitoramento();
+                    processos.listarProcessos();
                     break;
                 case 4:
+                    listarMaquinas();
+                    break;
+                case 5:
                     Usuario usuario = new Usuario();
                     usuario.listarUsuarios();
                     break;
-                case 5:
+                case 6:
                     return;
             }
         }

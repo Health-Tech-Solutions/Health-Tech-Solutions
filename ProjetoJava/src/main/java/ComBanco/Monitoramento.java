@@ -145,4 +145,10 @@ public class Monitoramento {
         }
     }
 
+    public void listarProcessos() {
+        System.out.println("PROCESSOS:");
+        System.out.println(grupoDeProcessos.getProcessos());
+        System.out.println("Total de processos: " + grupoDeProcessos.getTotalProcessos());
+    }
+
 }

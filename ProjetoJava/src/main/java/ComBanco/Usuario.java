@@ -1,6 +1,5 @@
 package ComBanco;
 
-import SemBanco.Relatorios.App.Maquinario;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 

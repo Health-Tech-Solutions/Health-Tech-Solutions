@@ -73,11 +73,11 @@ function mostrarFoto(req, res) {
         )
 }
 
-function pegarInfromacoes (req,res){
+function pegarInformacoes(req,res){
     console.log("Entrou no pegarInfomações")
     var idFuncionario = req.params.idFuncionario
 
-    funcionarioModel.pegarInfromacoes(idFuncionario)
+    funcionarioModel.pegarInformacoes(idFuncionario)
         .then(
             function(resultado){
                 res.json(resultado);
@@ -98,5 +98,6 @@ module.exports = {
     cadastrar,
     listar,
     enviarFoto,
-    mostrarFoto
+    mostrarFoto,
+    pegarInformacoes
 }

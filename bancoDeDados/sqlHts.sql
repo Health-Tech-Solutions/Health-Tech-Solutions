@@ -273,6 +273,7 @@ VALUES ('valor_nivel', 'Aberto', 'valor_sla', NOW(), 'Foi',
 );
 
 select * from chamado;
+select * from vw_maquina;
 insert into
 	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
 select 

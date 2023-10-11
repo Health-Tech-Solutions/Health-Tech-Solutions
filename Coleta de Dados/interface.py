@@ -151,7 +151,7 @@ try:
             janela.update() 
             cursor = conexao.cursor()
 
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuPorcent, 1)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, cpuPorcent, 1)
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
             #nserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)

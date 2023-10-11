@@ -60,8 +60,15 @@ function enviarFoto() {
 
            function(resposta){
              var nome = resposta[0].nome
+             var email = resposta[0].email
+             var funcao = resposta[0].funcao
+             var senha = resposta[0].senha
+
              console.log("Dados recebidos: ", JSON.stringify(resposta));
-             usuario_nome.innerHTML = `${nome}`
+             ipt_emailFuncionario.value = `${email}`
+             ipt_nomeFuncionario.value = `${nome}`
+             ipt_funcao.value = `${funcao}`
+             ipt_senha.value = `${senha}`
            }
          )
        }

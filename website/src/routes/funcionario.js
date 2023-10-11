@@ -20,5 +20,9 @@ router.get(`/mostrarFoto/:idFuncionario`, (req, res) => {
     funcionarioController.mostrarFoto(req, res);
 });
 
+router.get(`/pegarInformacoes/:idFuncionario`, (req, res) => {
+    funcionarioController.pegarInformacoes(req, res);
+});
+
 
 module.exports = router

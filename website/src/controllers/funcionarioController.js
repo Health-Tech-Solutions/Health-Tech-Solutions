@@ -73,10 +73,31 @@ function mostrarFoto(req, res) {
         )
 }
 
+function pegarInformacoes(req,res){
+    console.log("Entrou no pegarInfomações")
+    var idFuncionario = req.params.idFuncionario
+
+    funcionarioModel.pegarInformacoes(idFuncionario)
+        .then(
+            function(resultado){
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+
+}
+
 
 module.exports = {
     cadastrar,
     listar,
     enviarFoto,
-    mostrarFoto
+    mostrarFoto,
+    pegarInformacoes
 }

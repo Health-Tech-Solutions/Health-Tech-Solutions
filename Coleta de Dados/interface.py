@@ -14,20 +14,24 @@ try:
         user ='hts',
         password='urubu100'
     )  
-    def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro):
+    def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro, media):
         if fkTipoRegistro == 1:
             print(valor)
+            print(f"A média é {media}")
+        if fkTipoRegistro == 2:
+            print(valor)
+            print(f"A média é {media}")
         cursor.execute(
             "INSERT INTO registro (dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro) VALUES "
             "(NOW(), %s, %s, %s, %s)",
             (valor, fkMaquina, fkTipoMaquina, fkTipoRegistro)
         )
-        if valor > 60 and fkTipoRegistro == 1:
-            print(f"O valor da cpu é {valor}")
-            if valor >= 95:
+        #Métricas para CPU
+        if media > 85 and fkTipoRegistro == 1:
+            if media >= 95:
                 nivel = "Alto"
                 sla = "2 Horas"
-            elif valor >= 90:
+            elif media >= 90:
                 nivel = "Médio"
                 sla = "6 Horas"
             else:
@@ -36,12 +40,34 @@ try:
             cursor.execute(
                 f"""
                     INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
-                                    VALUES ('{nivel}', 'Aberto', '{sla}', NOW(), 'Esta indo',
+                                    VALUES ('{nivel}', 'Aberto', '{sla}', NOW(), 'CPU',
                                                                                 (SELECT idRegistro 
                                                                                 FROM registro 
                                                                                 WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
-                                                                                LIMIT 1)
-);
+                                                                                AND fkTipoRegistro = {fkTipoRegistro}
+                                                                                LIMIT 1));
+                """
+            )
+        #Métricas para RAM
+        if media > 5 and fkTipoRegistro == 2:
+            if media >= 5:
+                nivel = "Alto"
+                sla = "2 Horas"
+            elif media >= 20:
+                nivel = "Médio"
+                sla = "6 Horas"
+            else:
+                nivel = "Baixo"
+                sla = "10 Horas"
+            cursor.execute(
+                f"""
+                    INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
+                                    VALUES ('{nivel}', 'Aberto', '{sla}', NOW(), 'RAM',
+                                                                                (SELECT idRegistro 
+                                                                                FROM registro 
+                                                                                WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
+                                                                                AND fkTipoRegistro = {fkTipoRegistro}
+                                                                                LIMIT 1));
                 """
             )
         
@@ -151,14 +177,17 @@ try:
             janela.update() 
             cursor = conexao.cursor()
 
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, cpuPorcent, 1)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, cpuPorcent, 1, mediaCpuPorcent)
+            inserir_media(cursor, fkMaquina, fkTipoMaquina, ramPorcent, 2, mediaRamPorcent)
+
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuTemp, 2)
             #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaCpuFreq, 3)
-            #nserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaRamPorcent, 2)
-            inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 3)
+            #inserir_media(cursor, fkMaquina, fkTipoMaquina, mediaVirtualMemory, 4)
+            # inserir_media(cursor, fkMaquina, fkTipoMaquina, discoPorcent, 3)
 
             conexao.commit()
+        
+
                     
 
     def indefinido() : 

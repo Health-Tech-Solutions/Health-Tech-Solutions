@@ -11,6 +11,8 @@ import com.github.britooo.looca.api.group.temperatura.Temperatura;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,6 +71,9 @@ public class Monitoramento {
 
         tratarDados();
 
+        LocalDateTime dataHora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String dataFormatada = formatter.format(dataHora);
 
         System.out.printf("""
                 Sistema: 
@@ -85,7 +90,7 @@ public class Monitoramento {
                 Microarquitetura: %s
                 Nº de CPUs Físicas: %s
                 Nº de CPUs Lógicas: %s
-                Frequência: %f GHz
+                Frequência: %.2f GHz
                 Em uso: %.0f%%
                 
                 Disco:
@@ -93,6 +98,30 @@ public class Monitoramento {
                 sistema, memEmUso, memDisp, memTotal, processador.getFabricante(), processador.getNome(),
                 processador.getIdentificador(), processador.getMicroarquitetura(), processador.getNumeroCpusFisicas(),
                 processador.getNumeroCpusLogicas(), freqCpu, cpuEmUso);
+
+        // Memória
+        con.update(
+                "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 1, 1, memEmUso, 1
+                );
+        con.update(
+                "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 1, 2, memDisp, 1
+        );
+        con.update(
+                "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 1, 3, memTotal, 1
+        );
+
+        // CPU
+        con.update(
+                "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 2, 4, freqCpu, 2
+        );
+        con.update(
+                "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 2, 1, cpuEmUso, 3
+        );
 
 
         for (Disco disco : discos) {
@@ -107,7 +136,19 @@ public class Monitoramento {
                     Tamanho: %.2f GB
                     
                     """, disco.getSerial(), disco.getNome(), disco.getModelo(), tamDisco);
+
+            // Disco
+            con.update(
+                    "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
+                            "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 3, 3, tamDisco, 4
+            );
         }
+    }
+
+    public void listarProcessos() {
+        System.out.println("PROCESSOS:");
+        System.out.println(grupoDeProcessos.getProcessos());
+        System.out.println("Total de processos: " + grupoDeProcessos.getTotalProcessos());
     }
 
 }

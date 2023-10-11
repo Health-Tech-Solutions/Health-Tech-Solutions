@@ -14,6 +14,17 @@ public class Maquina {
     private Scanner scanInt = new Scanner(System.in);
     private Scanner scanString = new Scanner(System.in);
 
+    // cores
+    private String padrao = "\u001B[0m"; // redefinir a formatação depois de estilizar
+    private String negrito = "\u001B[1m";
+    private String vermelho = "\u001B[31m";
+    private String verde = "\u001B[32m";
+    private String amarelo = "\u001B[33m";
+    private String azul = "\u001B[34m";
+    private String magenta = "\u001B[35m";
+    private String ciano = "\u001B[36m";
+
+
     ConexaoBD conexao = new ConexaoBD();
     JdbcTemplate con = conexao.getConexaoBanco();
 
@@ -21,12 +32,17 @@ public class Maquina {
     public void menuMaquina() {
         while (true) {
             System.out.println("""
-                Opções:
-                1. Cadastrar máquina
-                2. Monitorar máquinas
-                3. Listar máquinas
-                4. Listar usuários
-                5. Sair""");
+                +---------------------------+
+                |           MENU            |
+                +---------------------------+
+                |   Opções:                 |
+                |   1. Cadastrar máquina    |
+                |   2. Monitorar máquinas   |
+                |   3. Listar processos     |
+                |   4. Listar máquinas      |
+                |   5. Listar usuários      |
+                |   6. Sair                 |
+                +---------------------------+""");
             Integer opcaoMenu = scanInt.nextInt();
 
             switch (opcaoMenu) {
@@ -38,13 +54,17 @@ public class Maquina {
                     monitoramento.monitorarMaquinas();
                     break;
                 case 3:
-                    listarMaquinas();
+                    Monitoramento processos = new Monitoramento();
+                    processos.listarProcessos();
                     break;
                 case 4:
+                    listarMaquinas();
+                    break;
+                case 5:
                     Usuario usuario = new Usuario();
                     usuario.listarUsuarios();
                     break;
-                case 5:
+                case 6:
                     return;
             }
         }

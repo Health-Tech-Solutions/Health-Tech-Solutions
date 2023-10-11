@@ -261,9 +261,20 @@ create table chamado(
 	fkRegistro int,
     foreign key(fkRegistro) references registro(idRegistro)
 );
+desc registro;
+select idRegistro from registro WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(now(), '%H:%i') ;
+select * from vw_maquina;
+INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
+VALUES ('valor_nivel', 'Aberto', 'valor_sla', NOW(), 'Foi',
+  (SELECT idRegistro 
+   FROM registro 
+   WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
+   LIMIT 1)
+);
 
+select * from chamado;
 insert into
-	chamado (nivel, estado, sla, descricao, fkRegistro)
+	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
 select 
 	case when r.valor > 95
 		then "Alto"
@@ -280,7 +291,8 @@ select
 			else "10 horas"
 		end
 	end sla,
-	"" descriacao,
+    now() dataHora,
+	"" descricao,
 	r.idRegistro
 from registro r where r.valor > 85;
 SELECT * FROM chamado;
@@ -339,5 +351,6 @@ AS
         MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
-select * from vw_maquina;
-select * from maquinario;
+SELECT * FROM funcionario;
+SELECT * FROM chamado;
+SELECT * FROM vw_maquina;

@@ -15,35 +15,33 @@ try:
         password='urubu100'
     )  
     def inserir_media(cursor, fkMaquina, fkTipoMaquina, valor, fkTipoRegistro):
+        if fkTipoRegistro == 1:
+            print(valor)
         cursor.execute(
             "INSERT INTO registro (dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro) VALUES "
             "(NOW(), %s, %s, %s, %s)",
             (valor, fkMaquina, fkTipoMaquina, fkTipoRegistro)
         )
-        if valor > 85 and fkTipoRegistro == 1:
+        if valor > 60 and fkTipoRegistro == 1:
+            print(f"O valor da cpu é {valor}")
+            if valor >= 95:
+                nivel = "Alto"
+                sla = "2 Horas"
+            elif valor >= 90:
+                nivel = "Médio"
+                sla = "6 Horas"
+            else:
+                nivel = "Baixo"
+                sla = "10 Horas"
             cursor.execute(
-                """
-                    insert into
-                                chamado (nivel, estado, sla, descricao, fkRegistro)
-                            select 
-                                case when r.valor > 95
-                                    then "Alto"
-                                    else case when r.valor > 90
-                                        then "Médio"
-                                        else "Baixo"
-                                    end
-                                end nivel,
-                                "Aberto" estado,
-                                case when r.valor > 95
-                                    then "2 horas"
-                                    else case when r.valor > 90
-                                        then "6 horas"
-                                        else "10 horas"
-                                    end
-                                end sla,
-                                "TA indo" descriscao,
-                                r.idRegistro
-                            from registro r where r.valor > 85;
+                f"""
+                    INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
+                                    VALUES ('{nivel}', 'Aberto', '{sla}', NOW(), 'Esta indo',
+                                                                                (SELECT idRegistro 
+                                                                                FROM registro 
+                                                                                WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
+                                                                                LIMIT 1)
+);
                 """
             )
         

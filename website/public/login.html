@@ -131,11 +131,16 @@
                             alert('Usuário inválido!');
                         } else {
                             console.log(json[0])
+                            let tipo = json[0].tipo
                             sessionStorage.ID_USUARIO = json[0].idFuncionario
                             sessionStorage.NOME_USUARIO = json[0].nome;
                             sessionStorage.FK_EMPRESA = json[0].fkIndustria
                             setTimeout(function () {
-                                window.location = "./dashboard/index.html";
+                                if(tipo == '0'){
+                                    window.location = "./dashboard/index.html";
+                                }else {
+                                    window.location = "./dashboard/dashFuncionario.html";
+                                }
                             }, 1000);
                         }
                     })

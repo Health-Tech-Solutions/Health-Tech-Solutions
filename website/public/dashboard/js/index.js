@@ -8,6 +8,7 @@ function listarHospitais(){
                 .then(
                     function(resposta){
                         console.log(resposta)
+                        dropdown_menu.innerHTML = ``;
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             dropdown_menu.innerHTML += `<a class="dropdown-item" href="#">${nome}</a>` 

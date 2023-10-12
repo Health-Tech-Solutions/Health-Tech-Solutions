@@ -4,9 +4,9 @@ function cadastrar(nome, email, senha, fkEmpresa, fkRepresentante, cpf){
     
     const sql = `
         INSERT INTO 
-            funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao) 
+            funcionario(nome, email, senha, cpf, fkIndustria, fkRepresentante, funcao, tipo) 
         VALUES 
-            ('${nome}', '${email}', '${senha}',${cpf}, ${fkEmpresa}, ${fkRepresentante}, 'Funcionario')
+            ('${nome}', '${email}', '${senha}',${cpf}, ${fkEmpresa}, ${fkRepresentante}, 'funcionario','1')
     `
     console.log("Executando a instrução SQL " + sql)
     return database.executar(sql)

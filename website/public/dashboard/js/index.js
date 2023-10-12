@@ -1,5 +1,5 @@
 function listarHospitais(){
-    alert("Ta chamando")
+
     fetch(`/hospitais/listarHospitais`)
     .then(
         function(resposta){
@@ -8,6 +8,11 @@ function listarHospitais(){
                 .then(
                     function(resposta){
                         console.log(resposta)
+                        for (let i = 0; i < resposta.length; i++) {
+                            let nome = resposta[i].nomeFantasia
+                            dropdown_menu.innerHTML += `<a class="dropdown-item" href="#">${nome}</a>` 
+                        }
+                        
                     }
                 )
             }

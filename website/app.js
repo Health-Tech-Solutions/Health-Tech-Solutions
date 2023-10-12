@@ -14,6 +14,7 @@ var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
+const hospitaisRouter = require("./src/routes/hospitais")
 const maquinaRouter = require("./src/routes/maquinas")
 const funcionarioRouter = require("./src/routes/funcionario")
 
@@ -31,6 +32,7 @@ app.use("/aquarios", aquariosRouter);
 app.use("/empresas", empresasRouter);
 app.use("/maquinas", maquinaRouter);
 app.use("/funcionario", funcionarioRouter)
+app.use("/hospitais", hospitaisRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

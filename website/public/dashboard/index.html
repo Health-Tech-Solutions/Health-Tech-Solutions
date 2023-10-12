@@ -321,20 +321,20 @@
                                 class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</a>
                     </div> -->
                     <!-- Example split danger button -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" >
                         <!-- <button type="button" class="btn btn-danger ">Action</button> -->
-                        <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm""
-                            data-toggle="dropdown" aria-expanded="false" onclick="listarHospitais()">
+                        <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm""
+                            data-toggle="dropdown" aria-expanded="false" onclick="listarHospitais()" id="dropdown_menu" onchange="trocarHospital()">
                             Escolher Hospitais
                             <!-- <span class="sr-only">Toggle Dropdown</span> -->
-                        </button>
-                        <div class="dropdown-menu" id="dropdown_menu">
+                        </select>
+                        <!-- <select class="dropdown-menu d-sm-flex align-items-center justify-content-between mb-4" id="dropdown_menu"> -->
                             <!-- <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a> -->
-                        </div>
+                        <!-- </select> -->
                     </div>
 
                     <!-- Content Row -->

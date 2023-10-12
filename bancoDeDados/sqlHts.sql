@@ -63,6 +63,7 @@ create table funcionario(
     email varchar(60),
     senha varchar(45),
     funcao varchar(45),
+    tipo CHAR(1),
     CPF CHAR(11),
     fkIndustria int,
     foto VARCHAR(300),
@@ -70,7 +71,8 @@ create table funcionario(
     fkRepresentante int,
     foreign key (fkRepresentante) references funcionario(idFuncionario)
 );
-select * from funcionario;
+
+
 insert into
 	funcionario(nome, email, senha,funcao, fkIndustria)
 values		
@@ -88,8 +90,16 @@ values
 	("Gael Murilo dos Santos","gael_murilo_dossantos@rebecacometerra.com.br","fSik4S6Hnk","funcionario", 1),
 	("Isabelly Sara Luciana da Rocha","isabelly_darocha@directnet.com","yjkapiMCxz","admin", 1),
 	("Rosa Emilly Valentina Viana","rosa_viana@pierproj.com.br","xYFG7H7ikq","funcionario", 1),   
-	("Clarice Louise Laura Araújo","clarice_araujo@yahoo.com.ar","RNoeEDd7yb","funcionario", 1);
+	("Clarice Louise Laura Araújo","clarice_araujo@yahoo.com.ar","RNoeEDd7yb","funcionario", 1),
+    ("Henrique Bechis Santana Coelho", "henrique@gmail.com",'123456', 'admin', 1),
+    ('Gabriel Michelon', 'gabriel@gmail.com', '123456', 'admin', 1),
+    ('Vinicius Bazan Cirello', 'vinicius@gmail.com', '123456', 'admin', 1),
+    ('Gilberto Campos', 'gilberto@gmail.com', '123456', 'admin', 1),
+    ('Sofhia Utaka', 'sofhia@gmail.com', '123456', 'admin', 1);
 
+UPDATE funcionario SET tipo = 0 WHERE funcao = 'admin';
+UPDATE funcionario SET tipo = 1 WHERE funcao <> 'admin';
+		
 create table tipo(
 	idTipo int primary key auto_increment,
     nome varchar(45)

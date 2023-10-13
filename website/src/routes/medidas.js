@@ -19,4 +19,12 @@ router.get("/buscarHospitais", function (req,res){
     medidaController.buscarHospitais(req,res)
 });
 
+router.get("/buscarComponente/:fkTipoRegistro", function (req,res){
+    medidaController.buscarComponente(req,res)
+});
+
+router.get("/buscarModelo/:idModelo", function (req,res){
+    medidaController.buscarModelo(req,res)
+});
+
 module.exports = router;

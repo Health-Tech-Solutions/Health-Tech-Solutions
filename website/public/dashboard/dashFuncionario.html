@@ -351,8 +351,8 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Componentes com + alertas</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">45.000</div>
+                                                    Componente com + alertas</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="componenteComMaisAlertas">componente</span></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-digital-tachograph fa-2x text-gray-300"></i>
@@ -370,7 +370,7 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Modelo com + alertas</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">LOGIQ Fortis</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800"><span id="modeloComMaisAlertas">modelo</span></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-laptop-medical fa-2x text-gray-300"></i>
@@ -669,7 +669,7 @@
     const ctx = document.getElementById('chartBar');
 
     var dados = []
-   var myBarChart = new Chart(ctx, {
+    var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: dados,
         options: {
@@ -758,7 +758,42 @@
 
         myBarChart['data'] = dados;
         myBarChart.update()
-
-
     };
+
+    function chamarComponenteComMaisAlertas(fkTipoRegistro) {
+        fetch(`/medidas/buscarComponente`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    resposta.reverse();
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    componenteComMaisAlertas.innerHTML = `${fkTipoRegistro}`
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
+
+    function chamarModeloComMaisAlertas(modelo) {
+        fetch(`/medidas/buscarModelo`, { cache: 'no-store'}).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    resposta.reverse();
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    modeloComMaisAlertas.innerHTML = modelo
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados: ${error.message}`);
+            });
+    }
+        
 </script>

@@ -24,6 +24,9 @@ public class Maquina {
     private String magenta = "\u001B[35m";
     private String ciano = "\u001B[36m";
 
+    private String enfeite15 = "-".repeat(15);
+    private String igual30 = "=".repeat(30);
+
 
     ConexaoBD conexao = new ConexaoBD();
     JdbcTemplate con = conexao.getConexaoBanco();
@@ -31,46 +34,56 @@ public class Maquina {
 
     public void menuMaquina() {
         while (true) {
-            System.out.println("""
+            System.out.printf("""
+                
                 +---------------------------+
-                |           MENU            |
+                |        %s    MENU     %s      |
                 +---------------------------+
-                |   Opções:                 |
-                |   1. Cadastrar máquina    |
-                |   2. Monitorar máquinas   |
-                |   3. Listar processos     |
-                |   4. Listar máquinas      |
-                |   5. Listar usuários      |
-                |   6. Sair                 |
-                +---------------------------+""");
-            Integer opcaoMenu = scanInt.nextInt();
+                |%s Opções:                   |
+                | 1. Cadastrar máquina      |
+                | 2. Monitorar máquinas     |
+                | 3. Listar processos       |
+                | 4. Listar máquinas        |
+                | 5. Listar usuários        |
+                | 6. Sair                 %s  |
+                +---------------------------+
+                """, azul, padrao, negrito, padrao);
 
-            switch (opcaoMenu) {
-                case 1:
-                    cadastrarMaquinas();
-                    break;
-                case 2:
-                    Monitoramento monitoramento = new Monitoramento();
-                    monitoramento.monitorarMaquinas();
-                    break;
-                case 3:
-                    Monitoramento processos = new Monitoramento();
-                    processos.listarProcessos();
-                    break;
-                case 4:
-                    listarMaquinas();
-                    break;
-                case 5:
-                    Usuario usuario = new Usuario();
-                    usuario.listarUsuarios();
-                    break;
-                case 6:
-                    return;
+            if (scanInt.hasNextInt()) {
+                Integer opcaoMenu = scanInt.nextInt();
+                switch (opcaoMenu) {
+                    case 1:
+                        cadastrarMaquinas();
+                        break;
+                    case 2:
+                        Monitoramento monitoramento = new Monitoramento();
+                        monitoramento.monitorarMaquinas();
+                        break;
+                    case 3:
+                        Monitoramento processos = new Monitoramento();
+                        processos.listarProcessos();
+                        break;
+                    case 4:
+                        listarMaquinas();
+                        break;
+                    case 5:
+                        Usuario usuario = new Usuario();
+                        usuario.listarUsuarios();
+                        break;
+                    case 6:
+                        System.out.println(negrito + "Saindo da sua conta..." + padrao);
+                        return;
+                }
+            } else {
+                String entradaInvalida = scanInt.next();
+                System.out.printf("%s'%s' é uma opção inválida! %s", vermelho, entradaInvalida, padrao);
             }
         }
     }
 
     public void cadastrarMaquinas() {
+        System.out.println("\n" + negrito + magenta + enfeite15 + " CADASTRO DE MÁQUINAS " + enfeite15 + padrao);
+
         System.out.println("Digite o tipo de máquina:");
         String tipoMaquina = scanString.nextLine();
         System.out.println("Digite o modelo da máquina:");
@@ -82,25 +95,27 @@ public class Maquina {
                 "INSERT INTO maquina (tipo, modelo, numeroSerie) VALUES (?, ?, ?);",
                 tipoMaquina, modeloMaquina, numSerie);
 
-        System.out.println("Máquina cadastrada com sucesso!");
+        System.out.println("");
+        System.out.println(verde + "Máquina cadastrada com sucesso!" + padrao);
     }
 
     public void listarMaquinas() {
+        System.out.println("\n" + negrito + magenta + enfeite15 + " LISTA DE MÁQUINAS " + enfeite15 + padrao);
+        System.out.println(negrito + igual30 + padrao);
+
         List<Maquina> maquinas = con.query("SELECT * FROM maquina;",
                 new BeanPropertyRowMapper<>(Maquina.class));
 
-        System.out.println("Lista de máquinas:");
         for (int i = 0; i < maquinas.size(); i++) {
-            System.out.println("=".repeat(30));
             Maquina maquinaDaLista = maquinas.get(i);
-            System.out.printf((i+1) + """
-                            .
+            System.out.printf("""
                             ID da máquina: %d
                             Tipo da máquina: %s
                             Modelo da máquina: %s
                             Número de série: %s
                             """, maquinaDaLista.getIdMaquina(), maquinaDaLista.getTipo(),
                     maquinaDaLista.getModelo(), maquinaDaLista.getNumeroSerie());
+            System.out.println(negrito + igual30 + padrao);
             if (maquinas.size() == (i+1)) {
                 return;
             }

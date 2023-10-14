@@ -28,6 +28,17 @@ public class Monitoramento {
 
     private Scanner leitura = new Scanner(System.in);
 
+    private String padrao = "\u001B[0m"; // redefinir a formatação depois de estilizar
+    private String negrito = "\u001B[1m";
+    private String vermelho = "\u001B[31m";
+    private String verde = "\u001B[32m";
+    private String amarelo = "\u001B[33m";
+    private String azul = "\u001B[34m";
+    private String magenta = "\u001B[35m";
+    private String ciano = "\u001B[36m";
+
+    private String enfeite15 = "-".repeat(15);
+
     private double memEmUso;
     private double memDisp;
     private double memTotal;
@@ -75,15 +86,17 @@ public class Monitoramento {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataFormatada = formatter.format(dataHora);
 
+        System.out.println("\n" + negrito + magenta + enfeite15 + " MONITORAMENTO " + enfeite15 + padrao);
+
         System.out.printf("""
-                Sistema: 
+              %sSistema: %s
                 %s
                 Memória: 
                 Em uso: %.2f GiB
                 Disponível: %.2f GiB
                 Total: %.2f GiB
                 
-                Processador: 
+              %sProcessador: %s
                 Fabricante: %s
                 Nome: %s
                 Identificador: %s
@@ -93,34 +106,35 @@ public class Monitoramento {
                 Frequência: %.2f GHz
                 Em uso: %.0f%%
                 
-                Disco:
+              %sDisco: %s
                 """,
-                sistema, memEmUso, memDisp, memTotal, processador.getFabricante(), processador.getNome(),
-                processador.getIdentificador(), processador.getMicroarquitetura(), processador.getNumeroCpusFisicas(),
-                processador.getNumeroCpusLogicas(), freqCpu, cpuEmUso);
+                negrito, padrao, sistema, memEmUso, memDisp, memTotal, negrito, padrao, processador.getFabricante(),
+                processador.getNome(), processador.getIdentificador(), processador.getMicroarquitetura(),
+                processador.getNumeroCpusFisicas(), processador.getNumeroCpusLogicas(), freqCpu, cpuEmUso,
+                negrito, padrao);
 
         // Memória
         con.update(
                 "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
-                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 1, 1, memEmUso, 1
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 2000, 1, 1, memEmUso, 1
                 );
         con.update(
                 "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
-                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 1, 2, memDisp, 1
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 2000, 1, 2, memDisp, 1
         );
         con.update(
                 "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
-                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 1, 3, memTotal, 1
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 2000, 1, 3, memTotal, 1
         );
 
         // CPU
         con.update(
                 "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
-                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 2, 4, freqCpu, 2
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 2000, 2, 4, freqCpu, 2
         );
         con.update(
                 "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
-                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 2, 1, cpuEmUso, 3
+                        "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 2000, 2, 1, cpuEmUso, 3
         );
 
 
@@ -140,15 +154,16 @@ public class Monitoramento {
             // Disco
             con.update(
                     "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) " +
-                            "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 1, 3, 3, tamDisco, 4
+                            "VALUES (?, ?, ?, ?, ?, ? );", dataFormatada, 2000, 3, 3, tamDisco, 4
             );
         }
     }
 
     public void listarProcessos() {
-        System.out.println("PROCESSOS:");
+        System.out.println("\n" + negrito + magenta + enfeite15 + " LISTA DE PROCESSOS " + enfeite15 + padrao);
+
         System.out.println(grupoDeProcessos.getProcessos());
-        System.out.println("Total de processos: " + grupoDeProcessos.getTotalProcessos());
+        System.out.println(negrito + "Total de processos: " + grupoDeProcessos.getTotalProcessos() + padrao);
     }
 
 }

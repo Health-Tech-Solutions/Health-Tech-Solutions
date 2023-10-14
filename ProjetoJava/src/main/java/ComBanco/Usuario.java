@@ -42,6 +42,7 @@ public class Usuario {
 
         while (true) {
             System.out.printf("""
+                                        
                     +---------------------------+
                     | %s  Health Tech Solutions  %s |
                     +---------------------------+
@@ -51,22 +52,28 @@ public class Usuario {
                     | 3. Sair   %s                |
                     +---------------------------+
                     """, vermelho, padrao, negrito, padrao);
-            Integer opcaoEscolhida = scanInt.nextInt();
 
-            switch (opcaoEscolhida) {
-                case 1:
+            if (scanInt.hasNextInt()) {
+                Integer opcaoEscolhida = scanInt.nextInt();
+                if (opcaoEscolhida == 1) {
                     cadastrar();
-                case 2:
+                } else if (opcaoEscolhida == 2) {
                     logar();
-                case 3:
-                    System.out.println("Até logo!");
+                } else if (opcaoEscolhida == 3) {
+                    System.out.println(negrito + "Até logo!" + padrao);
                     return;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-                    break;
+                } else {
+                    System.out.println(vermelho + "Opção inválida!" + padrao);
+                }
+            } else {
+                String entradaInvalida = scanInt.next();
+                System.out.printf("%s'%s' é uma opção inválida! %s", vermelho, entradaInvalida, padrao);
             }
+
         }
     }
+
+
 
     public void cadastrar() {
         System.out.println("\n" + negrito + ciano + enfeite15 + " CADASTRAR " + enfeite15 + padrao);
@@ -109,9 +116,9 @@ public class Usuario {
 
     public void logar() {
         System.out.println("\n" + negrito + ciano + enfeite15 + " LOGIN " + enfeite15 + padrao);
-        System.out.println("User:");
+        System.out.println("User: ");
         String nomeLogin = scanString.nextLine();
-        System.out.println("Senha:");
+        System.out.println("Senha: ");
         String senhaLogin = scanString.nextLine();
 
         List<Usuario> login = con.query(
@@ -121,7 +128,7 @@ public class Usuario {
         for (Usuario u : login) {
             if (u.getNome().equals(nomeLogin) && u.getSenha().equals(senhaLogin)) {
                 loginValidado = true;
-                System.out.println("Entrando...");
+                System.out.println(negrito + "Entrando..." + padrao);
                 menuLogado();
                 break;
             }
@@ -138,16 +145,22 @@ public class Usuario {
                       \n1- Continuar no Login
                       2- Fazer cadastro
                         """);
-                Integer escolha = scanInt.nextInt();
 
-                if (escolha == 1) {
-                    logar();
-                } else if (escolha == 2) {
-                    cadastrar();
-                    return;
+                if (scanInt.hasNextInt()) {
+                    Integer escolha = scanInt.nextInt();
+                    if (escolha == 1) {
+                        logar();
+                    } else if (escolha == 2) {
+                        cadastrar();
+                        return;
+                    } else {
+                        System.out.println(vermelho + "Opção inválida!" + padrao);
+                    }
                 } else {
-                    System.out.println(vermelho + "Opção inválida!" + padrao);
+                    String entradaInvalida = scanInt.next();
+                    System.out.printf("%s'%s' é uma opção inválida! %s", vermelho, entradaInvalida, padrao);
                 }
+
             }
         }
     }

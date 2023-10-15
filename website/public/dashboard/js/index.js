@@ -1,3 +1,6 @@
+
+dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`; 
+
 function listarHospitais(){
 
     fetch(`/hospitais/listarHospitais`)
@@ -8,7 +11,7 @@ function listarHospitais(){
                 .then(
                     function(resposta){
                         console.log(resposta)
-                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`; 
+                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "${dropdown_menu.value}" >${sessionStorage.NOME_HOSPITAL}</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
@@ -33,6 +36,6 @@ function trocarHospital(){
     let nome = teste[1]
     console.log(teste, id, nome)
     sessionStorage.FK_HOSPITAL = id
-
-    // location.reload()
+    sessionStorage.NOME_HOSPITAL = nome
+    location.reload()
 }

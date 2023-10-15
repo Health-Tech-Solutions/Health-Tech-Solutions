@@ -7,7 +7,8 @@ function obterDadosMensais(){
                 resposta.json()
                 .then(
                     function(resposta){
-                        console.log(resposta)
+                        console.log(resposta) 
+                        plotarGrafico(resposta)
                     }
                 )
             }
@@ -20,21 +21,31 @@ function obterDadosMensais(){
     )
 }
 
+function plotarGrafico(resposta){
+    for (let i = 0; i < resposta.length; i++) {
+        let registro = resposta[i];
+        dados.datasets[0].data.push(registro.quantidade)
+    }
+    lineChart.update()
+}
+
 const ctx = document.getElementById('chartLinha');
+labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+// 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
+var dados = {
+    labels: labels,
+    datasets: [{
+        label: '',
+        data: [],
+        borderWidth: 1,
+        backgroundColor: '#030050',
+        borderColor: '#030050'
+    }]
+}
 
-
-new Chart(ctx, {
+var lineChart = new Chart(ctx, {
     type: 'line',
-    data: {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-        datasets: [{
-            label: '',
-            data: [12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7],
-            borderWidth: 1,
-            backgroundColor: '#030050',
-            borderColor: '#030050'
-        }]
-    },
+    data: dados,
     options: {
         scales: {
             y: {

@@ -15,7 +15,7 @@ CREATE TABLE maquina (
 idMaquina INT PRIMARY KEY AUTO_INCREMENT,
 tipo VARCHAR(45),
 modelo VARCHAR(45),
-numeroSerie INT
+numeroSerie VARCHAR(45)
 ) AUTO_INCREMENT = 2000;
 
 SELECT * FROM maquina;
@@ -30,7 +30,6 @@ INSERT INTO tipoRegistro (tipo) VALUES ('Em uso'),
                                        ('Frequência');
 
 
-DROP TABLE medidaRegistro;
 CREATE TABLE medidaRegistro (
 idMedidaRegistro INT PRIMARY KEY AUTO_INCREMENT,
 medida VARCHAR(10)

@@ -22,13 +22,15 @@ function obterDadosMensais(){
 }
 
 function plotarGrafico(resposta){
+   console.lo
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
-        dados.datasets[0].data.push(registro.quantidade)
+        // console.log(registro.mes)
+        dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }
     lineChart.update()
 }
-
+data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const ctx = document.getElementById('chartLinha');
 labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
 // 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
@@ -36,7 +38,7 @@ var dados = {
     labels: labels,
     datasets: [{
         label: '',
-        data: [],
+        data: data,
         borderWidth: 1,
         backgroundColor: '#030050',
         borderColor: '#030050'

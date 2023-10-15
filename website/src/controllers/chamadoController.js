@@ -1,4 +1,4 @@
-const chamadoModel = require("../models/chamado")
+const chamadoModel = require("../models/chamadoModel")
 
 function buscarMensal(req,res){
     chamadoModel.buscarMensal()

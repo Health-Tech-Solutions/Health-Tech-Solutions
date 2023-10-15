@@ -6,7 +6,8 @@ function buscarMensal(){
 	    MONTH(dataHora) AS mes,
 	    COUNT(*) AS quantidade	
 	FROM vw_chamados
-    GROUP BY mes;
+    GROUP BY mes
+    ORDER BY mes;
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)

@@ -1,11 +1,12 @@
 const database = require("../database/config")
 
-function buscarMensal(){
+function buscarMensal(fkHospital){
     const instrucao = `
     SELECT 
 	    MONTH(dataHora) AS mes,
 	    COUNT(*) AS quantidade	
 	FROM vw_chamados
+    WHERE idHospital = ${fkHospital}
     GROUP BY mes
     ORDER BY mes;
     `

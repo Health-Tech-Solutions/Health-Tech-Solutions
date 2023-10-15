@@ -398,8 +398,9 @@ SELECT
 	MONTH(dataHora) AS mes,
 	COUNT(*) AS quantidade	
 	FROM vw_chamados
+    WHERE idHospital = 1
     GROUP BY mes
-    order by mes;
+    ORDER BY mes;
     
 select * from chamado;
     

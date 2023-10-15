@@ -1,7 +1,8 @@
 const chamadoModel = require("../models/chamadoModel")
 
 function buscarMensal(req,res){
-    chamadoModel.buscarMensal()
+    var fkHospital = req.params.fkHospital
+    chamadoModel.buscarMensal(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

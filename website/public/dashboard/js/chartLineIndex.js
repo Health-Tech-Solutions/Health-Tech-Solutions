@@ -1,6 +1,7 @@
 
 function obterDadosMensais(){
-    fetch(`/chamados/buscarMensal`)
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/chamados/buscarMensal/${fkHospital}`)
     .then(
         function(resposta){
             if(resposta.ok){

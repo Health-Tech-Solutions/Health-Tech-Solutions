@@ -8,11 +8,12 @@ function listarHospitais(){
                 .then(
                     function(resposta){
                         console.log(resposta)
-                        dropdown_menu.innerHTML = ``;
+                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
-                            dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id}" >${nome}</option>` 
+                            console.log(id)
+                            dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>` 
                         }
                         
                     }
@@ -27,6 +28,11 @@ function listarHospitais(){
     )
 }
 function trocarHospital(){
-    sessionStorage.FK_HOSPITAL = dropdown_menu.value
-        
+    let teste = dropdown_menu.value.split(';')
+    let id = teste[0]
+    let nome = teste[1]
+    console.log(teste, id, nome)
+    sessionStorage.FK_HOSPITAL = id
+
+    // location.reload()
 }

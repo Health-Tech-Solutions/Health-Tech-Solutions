@@ -5,7 +5,6 @@ from tkinter import *
 import mysql.connector
 import json
 
-
 try:
     conexao = mysql.connector.connect(
         host='localhost',

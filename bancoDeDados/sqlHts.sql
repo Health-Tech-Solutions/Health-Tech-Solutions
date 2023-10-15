@@ -99,7 +99,7 @@ values
 
 UPDATE funcionario SET tipo = 0 WHERE funcao = 'admin';
 UPDATE funcionario SET tipo = 1 WHERE funcao <> 'admin';
-		
+
 create table tipo(
 	idTipo int primary key auto_increment,
     nome varchar(45)
@@ -283,9 +283,7 @@ create table chamado(
 	fkRegistro int,
     foreign key(fkRegistro) references registro(idRegistro)
 );
-desc registro;
-select idRegistro from registro WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(now(), '%H:%i') ;
-select * from vw_maquina;
+
 INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
 VALUES ('valor_nivel', 'Aberto', 'valor_sla', NOW(), 'Foi',
   (SELECT idRegistro 
@@ -314,7 +312,7 @@ select
 			else "10 horas"
 		end
 	end sla,
-    now() dataHora,
+    '2023-03-14 20:36:16' dataHora,
 	"" descricao,
 	r.idRegistro
 from registro r where r.valor > 85;
@@ -380,7 +378,7 @@ CREATE OR REPLACE VIEW vw_chamados
 AS
 	SELECT 
 	r.fkMaquina AS idMaquina,
-    TIME_FORMAT(c.dataHora, '%H:%i') AS hora,
+    c.dataHora AS dataHora,
 	c.nivel,
     c.estado,
     c.sla,
@@ -394,9 +392,13 @@ AS
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo;
     
-select * from vw_chamados;
+SELECT 
+	MONTH(dataHora) AS mes,
+	COUNT(*) AS quantidade	
+	FROM vw_chamados
+    GROUP BY mes;
     
-
+select * from chamado;
     
     
 

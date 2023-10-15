@@ -383,20 +383,23 @@ AS
     c.estado,
     c.sla,
     c.descricao,
+    maq.fkHospital AS idHospital,
     m.modelo
 	FROM chamado AS c
     JOIN registro AS r
     JOIN maquinario AS maq
     JOIN modelo AS m
+    JOIN empresa AS e
     WHERE fkMaquina = idMaquinario 
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo;
-    
+select * from vw_chamados;
 SELECT 
 	MONTH(dataHora) AS mes,
 	COUNT(*) AS quantidade	
 	FROM vw_chamados
-    GROUP BY mes;
+    GROUP BY mes
+    order by mes;
     
 select * from chamado;
     

@@ -698,21 +698,23 @@
         };
     
     const configPie = document.getElementById('chartPie');
-
-    var chartPie = new Chart(configPie, {
-        type: 'pie',
-        data: {
+    
+    var dadosPie = {
             labels: ['Aberto', 'Fechados'],
             datasets: [{
                 label: '',
-                data: [, ],
+                data: [],
                 backgroundColor: [
                     '#e74a3b',
                     '#1cc88a'
                 ],
                 borderWidth: 1
             }]
-        },
+        }
+
+    var chartPie = new Chart(configPie, {
+        type: 'pie',
+        data: dadosPie,
         options: {
             scales: {
                 y: {
@@ -729,7 +731,18 @@
         }
     });
 
+    function plotarDadosPie(resposta){
+        for (let index = 0; index < resposta.length; index++) {
+            let abertos = resposta[index].Abertos;
+            let fechados = resposta[index].Fechados;
+                
+            dadosPie.datasets[0].data.push(abertos)
+            dadosPie.datasets[0].data.push(fechados)
+        }
 
+        chartPie.update()
+
+    }
 
     function obterDadosGrafico(idEmpresa) {
         var fkHospital = sessionStorage.FK_HOSPITAL
@@ -806,7 +819,7 @@
                 response.json().then(function (resposta) {
                     resposta.reverse();
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    
+                    plotarDadosPie(resposta)
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

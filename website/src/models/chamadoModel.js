@@ -16,10 +16,11 @@ function buscarMensal(fkHospital){
 
 function buscarHospitais(idEmpresa){
     const instrucao = `
-    SELECT e.nomeFantasia AS 'Hospital', COUNT(*) AS 'Nº chamados'
-        FROM vw_chamados AS c
-        LEFT JOIN empresa AS e ON c.idHospital = e.${idEmpresa}
-        GROUP BY c.idHospital, e.nomeFantasia;
+    SELECT 
+            hospital,
+            COUNT(*) AS 'Nº chamados'
+        FROM vw_chamados
+        GROUP BY hospital;
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)

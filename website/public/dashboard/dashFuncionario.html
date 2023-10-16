@@ -684,7 +684,7 @@
             }
         }
     });
-    var labels = ['Hospital', 'Hospital2']
+    var labels = []
     var dados = {
             labels: labels,
             datasets:
@@ -754,7 +754,9 @@
        
         for (let i = 0; i < resposta.length; i++) {
             let chamado = resposta[i].chamados
+            let hospital = resposta[i].hospital
             console.log(dados.datasets[0].data)
+            labels.push(hospital)
             dados.datasets[0].data.push(chamado)
         }
         

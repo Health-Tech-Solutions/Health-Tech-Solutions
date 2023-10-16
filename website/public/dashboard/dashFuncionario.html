@@ -24,7 +24,7 @@
 
     </head>
 
-    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico()">
+    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico(), obterDadosEstado()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -699,16 +699,15 @@
     
     const configPie = document.getElementById('chartPie');
 
-    new Chart(configPie, {
+    var chartPie = new Chart(configPie, {
         type: 'pie',
         data: {
-            labels: ['Perigo', 'Em risco', 'Saudável'],
+            labels: ['Aberto', 'Fechados'],
             datasets: [{
                 label: '',
-                data: [2, 9, 30],
+                data: [, ],
                 backgroundColor: [
                     '#e74a3b',
-                    '#f6c23e',
                     '#1cc88a'
                 ],
                 borderWidth: 1
@@ -799,6 +798,24 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados: ${error.message}`);
             });
+    }
+
+    function obterDadosEstado(){
+        fetch("/chamados/buscarEstado").then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    resposta.reverse();
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
         
 </script>

@@ -19,4 +19,8 @@ router.get("/buscarModelo/:idModelo", function(req,res){
     chamadoController.buscarModelo(req,res);
 })
 
+router.get("/buscarEstado", function(req,res){
+    chamadoController.buscarEstado(req,res)
+})
+
 module.exports = router;

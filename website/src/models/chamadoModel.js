@@ -63,9 +63,22 @@ function buscarModelo(idModelo){
     return database.executar(instrucao)
 }
 
+function buscarEstado(){
+    const instrucao = `
+    SELECT 
+        SUM(CASE WHEN estado = 'Aberto' THEN 1 ELSE 0 END) AS Abertos,
+        SUM(CASE WHEN estado = 'Fechado' THEN 1 ELSE 0 END) AS Fechados
+    FROM vw_chamados;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+
+}
+
 module.exports = {
     buscarMensal,
     buscarHospitais,
     buscarComponente,
-    buscarModelo
+    buscarModelo,
+    buscarEstado
 }

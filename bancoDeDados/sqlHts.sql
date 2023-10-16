@@ -1,6 +1,6 @@
 -- Active: 1696856128647@@localhost@3306@stage
 -- drop database if exists hts;
--- create database hts;
+ create database hts;
 USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
@@ -445,6 +445,7 @@ AS
     c.sla,
     c.descricao,
     e.idEmpresa AS idHospital,
+    e.nomeFantasia AS hospital,
     m.modelo
 	FROM chamado AS c
     JOIN registro AS r
@@ -490,4 +491,7 @@ select * from vw_chamado;
     AND maq.fkHospital = e.idEmpresa
     AND e.idEmpresa = 3;
 
-
+SELECT hospital,
+            COUNT(*) AS 'chamados'
+        FROM vw_chamados
+        GROUP BY hospital;

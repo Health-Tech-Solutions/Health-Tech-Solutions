@@ -11,7 +11,8 @@ function listarHospitais(){
                 .then(
                     function(resposta){
                         console.log(resposta)
-                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "${dropdown_menu.value}" >${sessionStorage.NOME_HOSPITAL}</option>`; 
+                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null">Nenhum Hospital Selecionado</option>`; 
+                        // dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >${sessionStorage.NOME_HOSPITAL}</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
@@ -30,7 +31,7 @@ function listarHospitais(){
         }
     )
 }
-function trocarHospital(){
+function trocarHospital(){  
     let teste = dropdown_menu.value.split(';')
     let id = teste[0]
     let nome = teste[1]

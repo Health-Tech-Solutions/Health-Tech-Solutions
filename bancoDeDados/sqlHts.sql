@@ -469,7 +469,7 @@ SELECT
     ORDER BY mes;
 select * from maquinario;
 
-select * from vw_chamado;
+select * from vw_chamados;
     
     SELECT 
 	r.fkMaquina AS idMaquina,
@@ -495,3 +495,7 @@ SELECT hospital,
             COUNT(*) AS 'chamados'
         FROM vw_chamados
         GROUP BY hospital;
+        select * from chamado;
+        UPDATE chamado
+SET estado = "Fechado"
+WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);

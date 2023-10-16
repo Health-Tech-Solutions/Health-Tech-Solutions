@@ -19,7 +19,7 @@ router.get("/buscarModelo", function(req,res){
     chamadoController.buscarModelo(req,res);
 })
 
-router.get("/buscarEstado", function(req,res){
+router.get("/buscarEstado/:fkHospital", function(req,res){
     chamadoController.buscarEstado(req,res)
 })
 

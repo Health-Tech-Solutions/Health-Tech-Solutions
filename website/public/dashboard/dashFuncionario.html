@@ -663,6 +663,7 @@
 <script src="js/index.js"></script>
 
 <script>
+    var fkHospital = null
     const ctx = document.getElementById('chartBar');
 
     var myBarChart = new Chart(ctx, {
@@ -814,7 +815,7 @@
     }
 
     function obterDadosEstado(){
-        fetch("/chamados/buscarEstado").then(function (response) {
+        fetch(`/chamados/buscarEstado/${fkHospital}`).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     resposta.reverse();

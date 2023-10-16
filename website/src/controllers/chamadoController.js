@@ -67,7 +67,8 @@ function buscarModelo(req,res){
 }
 
 function buscarEstado(req,res){
-    chamadoModel.buscarEstado()
+    var fkHospital = req.params.fkHospital
+    chamadoModel.buscarEstado(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

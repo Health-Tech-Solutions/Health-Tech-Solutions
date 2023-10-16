@@ -24,7 +24,7 @@
 
     </head>
 
-    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico(), obterDadosEstado()">
+    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico(), obterDadosEstado(), chamarComponenteComMaisAlertas()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -777,14 +777,14 @@
         myBarChart.update()
     };
 
-    function chamarComponenteComMaisAlertas(fkTipoRegistro) {
+    function chamarComponenteComMaisAlertas() {
         fetch(`/chamados/buscarComponente`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     resposta.reverse();
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    componenteComMaisAlertas.innerHTML = fkTipoRegistro
+                    componenteComMaisAlertas.innerHTML = resposta[0].TipoRegistro
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

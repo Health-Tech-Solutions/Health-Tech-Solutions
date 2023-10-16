@@ -35,8 +35,7 @@ function buscarHospitais(req,res){
 }
 
 function buscarComponente(req,res){
-    var fkTipoRegistro = req.params.fkTipoRegistro
-    chamadoModel.buscarComponente(fkTipoRegistro)
+    chamadoModel.buscarComponente()
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

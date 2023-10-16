@@ -26,7 +26,7 @@ function buscarHospitais(idEmpresa){
     return database.executar(instrucao)
 }
 
-function buscarComponente(fkTipoRegistro){
+function buscarComponente(){
     const instrucao = `
     SELECT
             CASE
@@ -37,7 +37,7 @@ function buscarComponente(fkTipoRegistro){
             END AS TipoRegistro,
             COUNT(c.idChamado) AS NumeroDeChamados
         FROM tipoRegistro AS tr
-        LEFT JOIN registro AS r ON tr.idTipoRegistro = r.${fkTipoRegistro}
+        LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
         LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
         GROUP BY TipoRegistro
         ORDER BY NumeroDeChamados DESC

@@ -11,7 +11,7 @@ router.get("/buscarHospitais/:idEmpresa", function(req,res){
     chamadoController.buscarHospitais(req,res);
 })
 
-router.get("/buscarComponente/:fkTipoRegistro", function(req,res){
+router.get("/buscarComponente", function(req,res){
     chamadoController.buscarComponente(req,res);
 })
 

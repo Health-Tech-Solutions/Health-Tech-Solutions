@@ -47,12 +47,12 @@ function buscarComponente(){
     return database.executar(instrucao)
 }
 
-function buscarModelo(idModelo){
+function buscarModelo(){
     const instrucao = `
     SELECT m.modelo AS Modelo,
             COUNT(c.idChamado) AS NumeroDeChamados
         FROM modelo AS m
-        LEFT JOIN maquinario AS maq ON m.${idModelo} = maq.fkModelo
+        LEFT JOIN maquinario AS maq ON m.idModelo = maq.fkModelo
         LEFT JOIN registro AS r ON maq.idMaquinario = r.fkMaquina
         LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
         GROUP BY Modelo

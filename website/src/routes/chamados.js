@@ -15,7 +15,7 @@ router.get("/buscarComponente", function(req,res){
     chamadoController.buscarComponente(req,res);
 })
 
-router.get("/buscarModelo/:idModelo", function(req,res){
+router.get("/buscarModelo", function(req,res){
     chamadoController.buscarModelo(req,res);
 })
 

@@ -24,7 +24,7 @@
 
     </head>
 
-    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico(), obterDadosEstado(), chamarComponenteComMaisAlertas()">
+    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico(), obterDadosEstado(), chamarComponenteComMaisAlertas(), chamarModeloComMaisAlertas()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -798,14 +798,14 @@
             });
     }
 
-    function chamarModeloComMaisAlertas(idModelo) {
+    function chamarModeloComMaisAlertas() {
         fetch(`/chamados/buscarModelo`, { cache: 'no-store'}).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     resposta.reverse();
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    modeloComMaisAlertas.innerHTML = idModelo
+                    modeloComMaisAlertas.innerHTML = resposta[0].Modelo;
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

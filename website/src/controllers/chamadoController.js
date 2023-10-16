@@ -51,8 +51,7 @@ function buscarComponente(req,res){
 }
 
 function buscarModelo(req,res){
-    var idModelo = req.params.idModelo
-    chamadoModel.buscarModelo(idModelo)
+    chamadoModel.buscarModelo()
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

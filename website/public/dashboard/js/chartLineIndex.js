@@ -23,7 +23,7 @@ function obterDadosMensais(){
 }
 
 function plotarGrafico(resposta){
-   console.lo
+
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
         // console.log(registro.mes)

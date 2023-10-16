@@ -18,7 +18,7 @@ function buscarHospitais(idEmpresa){
     const instrucao = `
     SELECT 
             hospital,
-            COUNT(*) AS 'Nº chamados'
+            COUNT(*) AS 'chamados'
         FROM vw_chamados
         GROUP BY hospital;
     `

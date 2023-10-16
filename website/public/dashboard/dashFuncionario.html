@@ -668,7 +668,6 @@
 <script>
     const ctx = document.getElementById('chartBar');
 
-    var dados = []
     var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: dados,
@@ -685,8 +684,19 @@
             }
         }
     });
-
-
+    var labels = ['Hospital', 'Hospital2']
+    var dados = {
+            labels: labels,
+            datasets:
+                [{
+                    label: "NomeHospital",
+                    backgroundColor: "red",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    data: []
+    
+                }]
+        };
+    
     const configPie = document.getElementById('chartPie');
 
     new Chart(configPie, {
@@ -740,22 +750,14 @@
             });
     }
     function plotarGrafico(resposta) {
-        let labels = []
-
-
-        dados = {
-            labels: labels,
-            datasets:
-                [{
-                    label: "NomeHospital",
-                    backgroundColor: "rgba(78, 115, 223, 0.005)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    data: [],
-
-                }]
-
-        };
-
+        
+       
+        for (let i = 0; i < resposta.length; i++) {
+            let chamado = resposta[i].chamados
+            console.log(dados.datasets[0].data)
+            dados.datasets[0].data.push(chamado)
+        }
+        
 
         myBarChart['data'] = dados;
         myBarChart.update()

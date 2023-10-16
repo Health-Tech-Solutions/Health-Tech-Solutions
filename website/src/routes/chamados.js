@@ -7,4 +7,16 @@ router.get("/buscarMensal/:fkHospital", function(req,res){
     chamadoController.buscarMensal(req,res);
 })
 
+router.get("/buscarHospitais/:idEmpresa", function(req,res){
+    chamadoController.buscarHospitais(req,res);
+})
+
+router.get("/buscarComponente/:fkTipoRegistro", function(req,res){
+    chamadoController.buscarComponente(req,res);
+})
+
+router.get("/buscarModelo/:idModelo", function(req,res){
+    chamadoController.buscarModelo(req,res);
+})
+
 module.exports = router;

@@ -722,8 +722,8 @@
 
 
 
-    function obterDadosGrafico() {
-        fetch(`/medidas/buscarHospitais`, { cache: 'no-store' }).then(function (response) {
+    function obterDadosGrafico(idEmpresa) {
+        fetch(`/chamados/buscarHospitais`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     resposta.reverse();
@@ -761,13 +761,13 @@
     };
 
     function chamarComponenteComMaisAlertas(fkTipoRegistro) {
-        fetch(`/medidas/buscarComponente`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/chamados/buscarComponente`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     resposta.reverse();
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    componenteComMaisAlertas.innerHTML = `${fkTipoRegistro}`
+                    componenteComMaisAlertas.innerHTML = fkTipoRegistro
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -778,14 +778,14 @@
             });
     }
 
-    function chamarModeloComMaisAlertas(modelo) {
-        fetch(`/medidas/buscarModelo`, { cache: 'no-store'}).then(function (response) {
+    function chamarModeloComMaisAlertas(idModelo) {
+        fetch(`/chamados/buscarModelo`, { cache: 'no-store'}).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     resposta.reverse();
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    modeloComMaisAlertas.innerHTML = modelo
+                    modeloComMaisAlertas.innerHTML = idModelo
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

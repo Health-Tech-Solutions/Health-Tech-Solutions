@@ -1,6 +1,6 @@
 -- Active: 1696856128647@@localhost@3306@stage
-drop database if exists hts;
-create database hts;
+-- drop database if exists hts;
+-- create database hts;
 USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
@@ -234,7 +234,7 @@ VALUES
 	(11,1,3,1),
 	(22,1,2,1),
 	(333,1,1,1),
-	(44,1,5,1),
+	(44,1,4,1),
 	(55,1,4,1);
     
 create table tipoRegistro(
@@ -299,52 +299,52 @@ VALUES ('valor_nivel', 'Aberto', 'valor_sla', NOW(), 'Foi',
    WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
    LIMIT 1)
 );
-select * from chamado;
+select * from registro;
 INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
 VALUES 
   ('Alto', 'Aberto', '2 horas', '2023-01-15 12:00:00', 'Foi', 11),
   ('Médio', 'Aberto', '6 horas', '2023-02-20 14:30:00', 'Foi', 22),
-  ('Baixo', 'Aberto', '10 horas', '2023-03-10 09:15:00', 'Foi', 333),
+  ('Baixo', 'Aberto', '10 horas', '2023-03-10 09:15:00', 'Foi', 33),
   ('Alto', 'Aberto', '2 horas', '2023-04-05 16:45:00', 'Foi', 44),
   ('Médio', 'Aberto', '6 horas', '2023-05-30 08:00:00', 'Foi', 55),
   ('Baixo', 'Aberto', '10 horas', '2023-06-10 14:00:00', 'Foi', 11),
   ('Alto', 'Aberto', '2 horas', '2023-07-15 09:30:00', 'Foi', 22),
-  ('Médio', 'Aberto', '6 horas', '2023-08-22 17:15:00', 'Foi', 333),
+  ('Médio', 'Aberto', '6 horas', '2023-08-22 17:15:00', 'Foi', 33),
   ('Baixo', 'Aberto', '10 horas', '2023-09-05 13:45:00', 'Foi', 44),
   ('Alto', 'Aberto', '2 horas', '2023-10-18 11:30:00', 'Foi', 55),
   ('Médio', 'Aberto', '6 horas', '2023-11-25 10:20:00', 'Foi', 11),
   ('Baixo', 'Aberto', '10 horas', '2023-12-29 15:00:00', 'Foi', 22),
-  ('Alto', 'Aberto', '2 horas', '2024-01-07 12:45:00', 'Foi', 333),
+  ('Alto', 'Aberto', '2 horas', '2024-01-07 12:45:00', 'Foi', 33),
   ('Médio', 'Aberto', '6 horas', '2024-02-09 09:10:00', 'Foi', 44),
   ('Baixo', 'Aberto', '10 horas', '2024-03-14 14:30:00', 'Foi', 55),
   ('Alto', 'Aberto', '2 horas', '2024-04-22 10:00:00', 'Foi', 11),
   ('Médio', 'Aberto', '6 horas', '2024-05-28 15:20:00', 'Foi', 22),
-  ('Baixo', 'Aberto', '10 horas', '2024-06-05 09:45:00', 'Foi', 333),
+  ('Baixo', 'Aberto', '10 horas', '2024-06-05 09:45:00', 'Foi', 33),
   ('Alto', 'Aberto', '2 horas', '2024-07-11 16:30:00', 'Foi', 44),
   ('Médio', 'Aberto', '6 horas', '2024-08-20 12:10:00', 'Foi', 55),
   ('Baixo', 'Aberto', '10 horas', '2024-09-27 14:15:00', 'Foi', 11),
   ('Alto', 'Aberto', '2 horas', '2024-10-30 11:30:00', 'Foi', 22),
-  ('Médio', 'Aberto', '6 horas', '2024-11-05 10:25:00', 'Foi', 333),
+  ('Médio', 'Aberto', '6 horas', '2024-11-05 10:25:00', 'Foi', 33),
   ('Baixo', 'Aberto', '10 horas', '2024-12-15 15:40:00', 'Foi', 44),
   ('Alto', 'Aberto', '2 horas', '2025-01-18 13:00:00', 'Foi', 55),
   ('Médio', 'Aberto', '6 horas', '2025-02-20 08:45:00', 'Foi', 11),
   ('Baixo', 'Aberto', '10 horas', '2025-03-25 14:15:00', 'Foi', 22),
-  ('Alto', 'Aberto', '2 horas', '2025-04-02 10:30:00', 'Foi', 333),
+  ('Alto', 'Aberto', '2 horas', '2025-04-02 10:30:00', 'Foi', 33),
   ('Médio', 'Aberto', '6 horas', '2025-05-12 15:10:00', 'Foi', 44),
   ('Baixo', 'Aberto', '10 horas', '2025-06-15 11:30:00', 'Foi', 55),
   ('Alto', 'Aberto', '2 horas', '2025-07-19 09:45:00', 'Foi', 11),
   ('Médio', 'Aberto', '6 horas', '2025-08-28 14:30:00', 'Foi', 22),
-  ('Baixo', 'Aberto', '10 horas', '2025-09-02 10:15:00', 'Foi', 333),
+  ('Baixo', 'Aberto', '10 horas', '2025-09-02 10:15:00', 'Foi', 33),
   ('Alto', 'Aberto', '2 horas', '2025-10-10 15:20:00', 'Foi', 44),
   ('Médio', 'Aberto', '6 horas', '2025-11-12 11:10:00', 'Foi', 55),
   ('Baixo', 'Aberto', '10 horas', '2025-12-25 12:00:00', 'Foi', 11),
   ('Alto', 'Aberto', '2 horas', '2026-01-04 13:30:00', 'Foi', 22),
-  ('Médio', 'Aberto', '6 horas', '2026-02-06 14:15:00', 'Foi', 333),
+  ('Médio', 'Aberto', '6 horas', '2026-02-06 14:15:00', 'Foi', 33),
   ('Baixo', 'Aberto', '10 horas', '2026-03-08 16:45:00', 'Foi', 44),
   ('Alto', 'Aberto', '2 horas', '2026-04-10 10:30:00', 'Foi', 55),
   ('Médio', 'Aberto', '6 horas', '2026-05-12 09:20:00', 'Foi', 11),
   ('Baixo', 'Aberto', '10 horas', '2026-06-18 14:00:00', 'Foi', 22),
-  ('Alto', 'Aberto', '2 horas', '2026-07-20 15:45:00', 'Foi', 333),
+  ('Alto', 'Aberto', '2 horas', '2026-07-20 15:45:00', 'Foi', 33),
   ('Médio', 'Aberto', '6 horas', '2026-08-22 11:30:00', 'Foi', 44),
   ('Baixo', 'Aberto', '10 horas', '2026-09-25 10:15:00', 'Foi', 55);
   
@@ -353,8 +353,7 @@ VALUES
   
   
 
-select * from chamado;
-select * from vw_maquina;
+
 insert into
 	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
 select 
@@ -490,7 +489,5 @@ select * from vw_chamado;
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa
     AND e.idEmpresa = 3;
-
-
 
 

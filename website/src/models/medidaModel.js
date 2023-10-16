@@ -62,12 +62,10 @@ function buscarHospitais() {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT e.nomeFantasia AS hospital, COUNT(c.idChamado) AS numero_de_chamados
-        FROM empresa e
-        LEFT JOIN maquinario m ON e.idEmpresa = m.fkHospital
-        LEFT JOIN registro r ON m.idMaquinario = r.fkMaquina
-        LEFT JOIN chamado c ON r.idRegistro = c.fkRegistro
-        GROUP BY e.nomeFantasia;`
+        instrucaoSql = `SELECT e.nomeFantasia AS 'Hospital', COUNT(*) AS 'Nº chamados'
+        FROM vw_chamados AS c
+        LEFT JOIN empresa AS e ON c.idHospital = e.idEmpresa
+        GROUP BY c.idHospital, e.nomeFantasia;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

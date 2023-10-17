@@ -11,12 +11,14 @@ function listarHospitais(){
                 .then(
                     function(resposta){
                         console.log(resposta)
-                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null">Nenhum Hospital Selecionado</option>`; 
-                        // dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >${sessionStorage.NOME_HOSPITAL}</option>`; 
+                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`; 
+                        dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
                             console.log(id)
+                           
+                            console.log(nome)
                             dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>` 
                         }
                         
@@ -32,9 +34,13 @@ function listarHospitais(){
     )
 }
 function trocarHospital(){  
+  
     let teste = dropdown_menu.value.split(';')
     let id = teste[0]
     let nome = teste[1]
+    if(nome == 'null'){
+        nome = 'todos'
+    }
     console.log(teste, id, nome)
     sessionStorage.FK_HOSPITAL = id
     sessionStorage.NOME_HOSPITAL = nome

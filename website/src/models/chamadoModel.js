@@ -64,7 +64,7 @@ function buscarModelo(){
 }
 
 function buscarEstado(fkHospital){
-    if(fkHospital == null){
+    if(fkHospital == 'null'){
         
         var instrucao = `
         SELECT 

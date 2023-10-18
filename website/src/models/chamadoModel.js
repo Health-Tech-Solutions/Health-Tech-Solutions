@@ -15,18 +15,27 @@ function buscarMensal(fkHospital){
 }
 
 function buscarHospitais(fkHospital){
+    var instrucao = ``
     if(fkHospital == 'null'){
-        console.log('fkHospital está null ' + fkHospital)
-    }else{
-        console.log('fkHospital é: ' + fkHospital) 
-    }
-    const instrucao = `
-    SELECT 
+        instrucao = `
+        SELECT 
             hospital,
-            COUNT(*) AS 'chamados'
+            COUNT(*) AS chamados
         FROM vw_chamados
         GROUP BY hospital;
     `
+    }else{
+        instrucao = `
+        SELECT COUNT(idChamado) AS chamados,
+                tipoRegistro AS hospital,
+                hospital AS h
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital}
+        GROUP BY hospital, tipoRegistro;
+        `
+
+    }
+    
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }

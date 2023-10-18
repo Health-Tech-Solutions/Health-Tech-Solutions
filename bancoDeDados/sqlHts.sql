@@ -440,13 +440,18 @@ AS
 	SELECT 
 	r.fkMaquina AS idMaquina,
     c.dataHora AS dataHora,
+    c.idChamado AS idChamado,
 	c.nivel,
     c.estado,
     c.sla,
     c.descricao,
     e.idEmpresa AS idHospital,
     e.nomeFantasia AS hospital,
-    tr.nome AS tipoRegistro,
+    CASE WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
+		 WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
+		 WHEN tr.nome = 'Uso de Disco' THEN 'Disco'
+         ELSE tr.nome
+    END AS tipoRegistro,
     m.modelo
 	FROM chamado AS c
     JOIN registro AS r
@@ -460,7 +465,44 @@ AS
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
 
+SELECT COUNT(idChamado) AS chamados,
+	   tipoRegistro,
+       hospital FROM vw_chamados
+       WHERE idHospital = 1
+       GROUP BY hospital, tipoRegistro;
 
+
+SELECT tipoRegistro,
+	   COUNT(idChamado) AS numeroDeChamados
+       FROM vw_chamados
+       GROUP BY tipoRegistro
+       ORDER BY numeroDeChamados
+       DESC LIMIT 1;
+
+SELECT
+            CASE
+                WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
+                WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
+                WHEN tr.nome = 'Uso de disco' THEN 'Disco'
+                ELSE tr.nome
+            END AS TipoRegistro,
+            COUNT(c.idChamado) AS NumeroDeChamados
+        FROM tipoRegistro AS tr
+        LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
+        LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
+        GROUP BY TipoRegistro
+        ORDER BY NumeroDeChamados DESC
+        LIMIT 1;
+
+SELECT 
+	CASE WHEN tipoRegistro = 'Uso de CPU' THEN 'CPU'
+		 WHEN tipoRegistro = 'Uso de RAM' THEN 'RAM'
+		 WHEN tipoRegistro = 'Uso de Disco' THEN 'Disco'
+         ELSE tipoRegistro
+    END AS 'tipoRegistro'
+
+    FROM vw_chamados
+     ;
 
 SELECT hospital,
             COUNT(*) AS 'chamados'

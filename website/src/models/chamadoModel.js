@@ -14,7 +14,12 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
-function buscarHospitais(idEmpresa){
+function buscarHospitais(fkHospital){
+    if(fkHospital == 'null'){
+        console.log('fkHospital está null ' + fkHospital)
+    }else{
+        console.log('fkHospital é: ' + fkHospital) 
+    }
     const instrucao = `
     SELECT 
             hospital,

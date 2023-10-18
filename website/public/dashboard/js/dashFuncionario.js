@@ -80,7 +80,7 @@ var fkHospital = null
 
 
 
-    function obterDadosGrafico(idEmpresa) {
+    function obterDadosGrafico() {
         var fkHospital = sessionStorage.FK_HOSPITAL
         fetch(`/chamados/buscarHospitais/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {

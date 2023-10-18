@@ -24,7 +24,7 @@
 
     </head>
 
-    <body id="page-top" onload="mostrarFoto()">
+    <body id="page-top" onload="mostrarFoto(), obterDadosGrafico(), obterDadosEstado(), chamarComponenteComMaisAlertas(), chamarModeloComMaisAlertas()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -419,7 +419,7 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                     Chamados em aberto</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                <div id="totalChamados" class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -470,13 +470,10 @@
                                         </div>
                                         <div class="mt-4 text-center small">
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-danger"></i> Perigo
+                                                <i class="fas fa-circle text-danger"></i> Abertos
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-warning"></i> Em risco
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Saudável
+                                                <i class="fas fa-circle text-success"></i> Fechados
                                             </span>
                                         </div>
                                     </div>
@@ -664,136 +661,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/index.js"></script>
-
-<script>
-    const ctx = document.getElementById('chartBar');
-
-    var dados = []
-    var myBarChart = new Chart(ctx, {
-        type: 'bar',
-        data: dados,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    });
-
-
-    const configPie = document.getElementById('chartPie');
-
-    new Chart(configPie, {
-        type: 'pie',
-        data: {
-            labels: ['Perigo', 'Em risco', 'Saudável'],
-            datasets: [{
-                label: '',
-                data: [2, 9, 30],
-                backgroundColor: [
-                    '#e74a3b',
-                    '#f6c23e',
-                    '#1cc88a'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    display: false
-
-                }
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    });
-
-
-
-    function obterDadosGrafico() {
-        fetch(`/medidas/buscarHospitais`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    resposta.reverse();
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    plotarGrafico(resposta);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
-    function plotarGrafico(resposta) {
-        let labels = []
-
-
-        dados = {
-            labels: labels,
-            datasets:
-                [{
-                    label: "NomeHospital",
-                    backgroundColor: "rgba(78, 115, 223, 0.005)",
-                    borderColor: "rgba(78, 115, 223, 1)",
-                    data: [],
-
-                }]
-
-        };
-
-
-        myBarChart['data'] = dados;
-        myBarChart.update()
-    };
-
-    function chamarComponenteComMaisAlertas(fkTipoRegistro) {
-        fetch(`/medidas/buscarComponente`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    resposta.reverse();
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    componenteComMaisAlertas.innerHTML = `${fkTipoRegistro}`
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados: ${error.message}`);
-            });
-    }
-
-    function chamarModeloComMaisAlertas(modelo) {
-        fetch(`/medidas/buscarModelo`, { cache: 'no-store'}).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    resposta.reverse();
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    modeloComMaisAlertas.innerHTML = modelo
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados: ${error.message}`);
-            });
-    }
-        
-</script>
+<script src="js/dados.js"></script>
+<script src="js/dashFuncionario.js"></script>

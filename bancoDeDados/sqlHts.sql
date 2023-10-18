@@ -1,6 +1,6 @@
--- Active: 1696856128647@@localhost@3306@stage
--- drop database if exists hts;
- create database hts;
+-- Active: 1693260538915@@127.0.0.1@3306@crowley
+drop database if exists hts;
+create database hts;
 USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
@@ -228,6 +228,14 @@ values
 	(18,1,1,23),
 	(18,1,1,24),
 	(57,1,1,24);
+-- insert into
+-- 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
+-- VALUES
+-- 	(11,1,3,1),
+-- 	(22,1,2,1),
+-- 	(333,1,1,1),
+-- 	(44,1,5,1),
+-- 	(55,1,4,1);
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
 VALUES
@@ -279,7 +287,65 @@ values
 	(now(),69, 6 , 3,1),
 	(now(),47, 6 , 3,2),
 	(now(),23, 6 , 3,1),
-	(now(),44, 6 , 3,2);
+	(now(),44, 6 , 3,2),
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1)
+
+	;
 
 create table chamado(
 	idChamado int primary key auto_increment,
@@ -440,56 +506,69 @@ AS
 	SELECT 
 	r.fkMaquina AS idMaquina,
     c.dataHora AS dataHora,
+    c.idChamado AS idChamado,
 	c.nivel,
     c.estado,
     c.sla,
     c.descricao,
     e.idEmpresa AS idHospital,
     e.nomeFantasia AS hospital,
+    CASE WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
+		 WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
+		 WHEN tr.nome = 'Uso de Disco' THEN 'Disco'
+         ELSE tr.nome
+    END AS tipoRegistro,
     m.modelo
 	FROM chamado AS c
     JOIN registro AS r
     JOIN maquinario AS maq
     JOIN modelo AS m
     JOIN empresa AS e
+    JOIN tipoRegistro AS tr
     WHERE fkMaquina = idMaquinario 
+    AND r.fkTipoRegistro = tr.idTipoRegistro
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
-    
 
-select COUNT(*) from vw_chamados group by idHospital; 
-select * from maquinario;
+SELECT COUNT(idChamado) AS chamados,
+	   tipoRegistro,
+       hospital FROM vw_chamados
+       WHERE idHospital = 1
+       GROUP BY hospital, tipoRegistro;
+
+
+SELECT tipoRegistro,
+	   COUNT(idChamado) AS numeroDeChamados
+       FROM vw_chamados
+       GROUP BY tipoRegistro
+       ORDER BY numeroDeChamados
+       DESC LIMIT 1;
+
+SELECT
+            CASE
+                WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
+                WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
+                WHEN tr.nome = 'Uso de disco' THEN 'Disco'
+                ELSE tr.nome
+            END AS TipoRegistro,
+            COUNT(c.idChamado) AS NumeroDeChamados
+        FROM tipoRegistro AS tr
+        LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
+        LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
+        GROUP BY TipoRegistro
+        ORDER BY NumeroDeChamados DESC
+        LIMIT 1;
+
 SELECT 
-	MONTH(dataHora) AS mes,
-	COUNT(*) AS quantidade	
-	FROM vw_chamados
-    WHERE idHospital = 5
-    GROUP BY mes
-    ORDER BY mes;
-select * from maquinario;
+	CASE WHEN tipoRegistro = 'Uso de CPU' THEN 'CPU'
+		 WHEN tipoRegistro = 'Uso de RAM' THEN 'RAM'
+		 WHEN tipoRegistro = 'Uso de Disco' THEN 'Disco'
+         ELSE tipoRegistro
+    END AS 'tipoRegistro'
 
-select * from vw_chamados;
-    
-    SELECT 
-	r.fkMaquina AS idMaquina,
-    c.dataHora AS dataHora,
-	c.nivel,
-    c.estado,
-    c.sla,
-    c.descricao,
-    e.idEmpresa AS idHospital,
-    m.modelo
-	FROM chamado AS c
-    JOIN registro AS r
-    JOIN maquinario AS maq
-    JOIN modelo AS m
-    JOIN empresa AS e
-    WHERE fkMaquina = idMaquinario 
-    AND fkRegistro = idRegistro
-    AND maq.fkModelo = m.idModelo
-    AND maq.fkHospital = e.idEmpresa
-    AND e.idEmpresa = 3;
+    FROM vw_chamados
+     ;
 
 SELECT hospital,
             COUNT(*) AS 'chamados'
@@ -499,3 +578,24 @@ SELECT hospital,
         UPDATE chamado
 SET estado = "Fechado"
 WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
+
+-- SELECT COUNT(*) from chamado where nivel = 'Alto' ;
+
+-- SELECT fkRegistro, COUNT(*) as total_repeticoes
+-- FROM chamado
+-- GROUP BY fkRegistro
+-- HAVING COUNT(*) > 1;
+	
+
+--	SELECT fkRegistro,COUNT(*) from chamado where nivel = 'Alto' group by fkRegistro;
+-- SELECT COUNT(DISTINCT reg.fkMaquina) FROM chamado 
+-- JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
+-- WHERE chamado.nivel = 'Alto';
+	-- SELECT * FROM chamado ;
+--
+
+
+
+-- UPDATE chamado
+-- SET nivel = 'Alto' 
+-- WHERE idChamado > 2200;

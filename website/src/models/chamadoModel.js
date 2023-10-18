@@ -14,14 +14,28 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
-function buscarHospitais(idEmpresa){
-    const instrucao = `
-    SELECT 
+function buscarHospitais(fkHospital){
+    var instrucao = ``
+    if(fkHospital == 'null'){
+        instrucao = `
+        SELECT 
             hospital,
-            COUNT(*) AS 'chamados'
+            COUNT(*) AS chamados
         FROM vw_chamados
         GROUP BY hospital;
     `
+    }else{
+        instrucao = `
+        SELECT COUNT(idChamado) AS chamados,
+                tipoRegistro AS hospital,
+                hospital AS h
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital}
+        GROUP BY hospital, tipoRegistro;
+        `
+
+    }
+    
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
@@ -65,14 +79,12 @@ function buscarModelo(){
 
 function buscarEstado(fkHospital){
     if(fkHospital == 'null'){
-        
         var instrucao = `
         SELECT 
             SUM(CASE WHEN estado = 'Aberto' THEN 1 ELSE 0 END) AS Abertos,
             SUM(CASE WHEN estado = 'Fechado' THEN 1 ELSE 0 END) AS Fechados
         FROM vw_chamados WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);;
         `
-
     } else {
     var instrucao = `
     SELECT 
@@ -81,7 +93,7 @@ function buscarEstado(fkHospital){
     FROM vw_chamados where idHospital = ${fkHospital} AND dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);;
     ` 
 }
-    console.log("Executando a seguinte instrução sql" + instrucao)
+    console.log("Executando a seguinte instrução sql" + instrucao + fkHospital)
     return database.executar(instrucao)
 
 }

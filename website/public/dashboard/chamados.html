@@ -312,13 +312,108 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <div class="divTitulo">
+
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Chamados</h1>
 
+                    </div>
+
+                    <div class="divSelecionarHospital">
+
+                    <select>
+                        <option value="hospital1">Hospital A</option>
+                        <option value="hospital2">Hospital B</option>
+                        <option value="hospital3">Hospital C</option>
+                        <option value="hospital4">Hospital D</option>
+                        <option value="hospital5">Hospital E</option>
+                    </select>
+
                 </div>
-                <!-- /.container-fluid -->
+
+                </div>
+
+                <style>
+
+                    .container-fluid {
+                        display: flex;
+                        width: 100%;
+    
+                    }
+
+                    .divTitulo {
+                        display: flex;
+                        width: 100%;
+                        justify-content: flex-start;
+                    }
+
+                    .divSelecionarHospital {
+                        display: flex;
+                        width: 100%;
+                        justify-content: flex-end;
+                    }
+
+                    select {
+                        height: 35px;
+                        border-radius: 5px;
+                    }
+
+
+                    table {
+                        border-collapse: collapse;
+                        width: 85%;
+                        overflow-x: auto; /* Adiciona uma barra de rolagem horizontal em telas menores */
+                    }
+                    th, td {
+                        border: 1px solid #ccc;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                    th {
+                        background-color: rgba(98, 0, 0, 0.85);
+                        color: white;
+                    }
+
+                    .table-container{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        height: 50%;
+                    }
+
+                </style>
+    
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nível</th>
+                            <th>Estado</th>
+                            <th>SLA</th>
+                            <th>Horário abertura</th>
+                            <th>Descrição</th>
+                            
+                        </tr>
+
+                        <tr>
+                            <td>Dado 1</td>
+                            <td>Dado 2</td>
+                            <td>Dado 3</td>
+                            <td>Dado 4</td>
+                            <td>Dado 5</td>
+                            <td>Dado 6</td>
+                         
+                        </tr>
+                        <!-- Adicione mais linhas conforme necessário -->
+                    </table>
+                </div>
+                
 
             </div>
+
+                <!-- /.container-fluid -->
+                
             <!-- End of Main Content -->
 
             <!-- Footer -->

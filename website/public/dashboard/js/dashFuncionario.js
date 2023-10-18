@@ -149,7 +149,8 @@ var fkHospital = null
             });
     }
 
-    function obterDadosEstado(){
+    function obterDadosEstado(){3
+        var fkHospital = sessionStorage.FK_HOSPITAL;
         fetch(`/chamados/buscarEstado/${fkHospital}`).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {

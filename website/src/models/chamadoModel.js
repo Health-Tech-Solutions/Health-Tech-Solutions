@@ -79,14 +79,12 @@ function buscarModelo(){
 
 function buscarEstado(fkHospital){
     if(fkHospital == 'null'){
-        
         var instrucao = `
         SELECT 
             SUM(CASE WHEN estado = 'Aberto' THEN 1 ELSE 0 END) AS Abertos,
             SUM(CASE WHEN estado = 'Fechado' THEN 1 ELSE 0 END) AS Fechados
         FROM vw_chamados WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);;
         `
-
     } else {
     var instrucao = `
     SELECT 
@@ -95,7 +93,7 @@ function buscarEstado(fkHospital){
     FROM vw_chamados where idHospital = ${fkHospital} AND dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);;
     ` 
 }
-    console.log("Executando a seguinte instrução sql" + instrucao)
+    console.log("Executando a seguinte instrução sql" + instrucao + fkHospital)
     return database.executar(instrucao)
 
 }

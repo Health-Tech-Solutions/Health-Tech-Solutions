@@ -1,6 +1,6 @@
--- Active: 1696856128647@@localhost@3306@stage
--- drop database if exists hts;
- create database hts;
+-- Active: 1693260538915@@127.0.0.1@3306@crowley
+drop database if exists hts;
+create database hts;
 USE hts;
 
 -- Criação do usuario padrão se ele ainda não existe
@@ -228,6 +228,14 @@ values
 	(18,1,1,23),
 	(18,1,1,24),
 	(57,1,1,24);
+-- insert into
+-- 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
+-- VALUES
+-- 	(11,1,3,1),
+-- 	(22,1,2,1),
+-- 	(333,1,1,1),
+-- 	(44,1,5,1),
+-- 	(55,1,4,1);
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
 VALUES
@@ -279,7 +287,65 @@ values
 	(now(),69, 6 , 3,1),
 	(now(),47, 6 , 3,2),
 	(now(),23, 6 , 3,1),
-	(now(),44, 6 , 3,2);
+	(now(),44, 6 , 3,2),
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+	(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1),
+(now(),89, 2 , 13,2),
+	(now(),82, 2 , 13,1),
+	(now(),45, 2 , 13,2),
+	(now(),91, 2 , 13,1),
+	(now(),33, 2 , 13,2),
+	(now(),2, 3 , 15,2),
+	(now(),94, 3 , 15,1),
+	(now(),27, 3 , 15,2),
+	(now(),3, 3 , 15,1),
+	(now(),93, 3 , 15,2),
+	(now(),44, 6 , 3,2),
+	(now(),69, 6 , 3,1),
+	(now(),47, 6 , 3,2),
+	(now(),23, 6 , 3,1)
+
+	;
 
 create table chamado(
 	idChamado int primary key auto_increment,
@@ -512,3 +578,24 @@ SELECT hospital,
         UPDATE chamado
 SET estado = "Fechado"
 WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
+
+-- SELECT COUNT(*) from chamado where nivel = 'Alto' ;
+
+-- SELECT fkRegistro, COUNT(*) as total_repeticoes
+-- FROM chamado
+-- GROUP BY fkRegistro
+-- HAVING COUNT(*) > 1;
+	
+
+--	SELECT fkRegistro,COUNT(*) from chamado where nivel = 'Alto' group by fkRegistro;
+-- SELECT COUNT(DISTINCT reg.fkMaquina) FROM chamado 
+-- JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
+-- WHERE chamado.nivel = 'Alto';
+	-- SELECT * FROM chamado ;
+--
+
+
+
+-- UPDATE chamado
+-- SET nivel = 'Alto' 
+-- WHERE idChamado > 2200;

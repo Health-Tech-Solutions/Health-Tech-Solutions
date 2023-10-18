@@ -18,8 +18,8 @@ function buscarMensal(req,res){
 }
 
 function buscarHospitais(req,res){
-    var idEmpresa = req.params.idEmpresa
-    chamadoModel.buscarHospitais(idEmpresa)
+    var fkHospital = req.params.fkHospital
+    chamadoModel.buscarHospitais(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

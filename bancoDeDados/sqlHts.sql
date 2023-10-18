@@ -454,50 +454,21 @@ AS
     c.descricao,
     e.idEmpresa AS idHospital,
     e.nomeFantasia AS hospital,
+    tr.nome AS tipoRegistro,
     m.modelo
 	FROM chamado AS c
     JOIN registro AS r
     JOIN maquinario AS maq
     JOIN modelo AS m
     JOIN empresa AS e
+    JOIN tipoRegistro AS tr
     WHERE fkMaquina = idMaquinario 
+    AND r.fkTipoRegistro = tr.idTipoRegistro
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
-    
 
-select COUNT(*) from vw_chamados group by idHospital; 
-select * from maquinario;
-SELECT 
-	MONTH(dataHora) AS mes,
-	COUNT(*) AS quantidade	
-	FROM vw_chamados
-    WHERE idHospital = 5
-    GROUP BY mes
-    ORDER BY mes;
-select * from maquinario;
 
-select * from vw_chamados;
-    
-    SELECT 
-	r.fkMaquina AS idMaquina,
-    c.dataHora AS dataHora,
-	c.nivel,
-    c.estado,
-    c.sla,
-    c.descricao,
-    e.idEmpresa AS idHospital,
-    m.modelo
-	FROM chamado AS c
-    JOIN registro AS r
-    JOIN maquinario AS maq
-    JOIN modelo AS m
-    JOIN empresa AS e
-    WHERE fkMaquina = idMaquinario 
-    AND fkRegistro = idRegistro
-    AND maq.fkModelo = m.idModelo
-    AND maq.fkHospital = e.idEmpresa
-    AND e.idEmpresa = 3;
 
 SELECT hospital,
             COUNT(*) AS 'chamados'

@@ -7,7 +7,7 @@ router.get("/buscarMensal/:fkHospital", function(req,res){
     chamadoController.buscarMensal(req,res);
 })
 
-router.get("/buscarHospitais/:idEmpresa", function(req,res){
+router.get("/buscarHospitais/:fkHospital", function(req,res){
     chamadoController.buscarHospitais(req,res);
 })
 

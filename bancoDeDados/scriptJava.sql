@@ -64,8 +64,6 @@ valor DECIMAL(7,2),
 fkMedidaRegistro INT,
 FOREIGN KEY (fkMedidaRegistro) REFERENCES medidaRegistro(idMedidaRegistro)
 );
-SELECT * FROM registro;
-
 
 SELECT 
     r.dataHora,

@@ -83,10 +83,29 @@ function buscarEstado(req,res){
         })
 }
 
+
+function listarChamados(req,res){
+    var idHospital = req.params.idHospital
+    chamadoModel.listarChamados(idHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 module.exports = {
     buscarMensal,
     buscarHospitais,
     buscarComponente,
     buscarModelo,
-    buscarEstado
+    buscarEstado,
+    listarChamados
 }

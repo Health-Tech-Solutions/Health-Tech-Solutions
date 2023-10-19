@@ -78,6 +78,7 @@ function buscarModelo(){
 }
 
 function buscarEstado(fkHospital){
+
     if(fkHospital == 'null'){
         var instrucao = `
         SELECT 
@@ -98,10 +99,27 @@ function buscarEstado(fkHospital){
 
 }
 
+function listarChamados(idHospital){
+
+ if(idHospital == 'null'){
+        var instrucao = `
+        select idMaquina,nivel,estado,sla,dataHora,tipoRegistro from vw_chamados;
+        `
+    } else {
+    var instrucao = `
+    select idMaquina,nivel,estado,sla,dataHora,tipoRegistro from vw_chamados where idHospital = ${idHospital};
+    ` 
+}
+    console.log("Executando a seguinte instrução sql" + instrucao + idHospital)
+    return database.executar(instrucao)
+
+}
+
 module.exports = {
     buscarMensal,
     buscarHospitais,
     buscarComponente,
     buscarModelo,
-    buscarEstado
+    buscarEstado,
+    listarChamados
 }

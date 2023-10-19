@@ -31,7 +31,7 @@ function maquinasInstaveis(fkHospital) {
         instrucao = `
         SELECT COUNT(DISTINCT idMaquina) AS qtdMaquinaInstaveis
         FROM vw_chamados
-        WHERE nivel = 'alto' and idHospital = ${fkHospital};
+        WHERE nivel = 'Alto' and idHospital = ${fkHospital};
         `
     }else{
         instrucao = `

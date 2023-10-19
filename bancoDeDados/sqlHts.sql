@@ -499,7 +499,7 @@ AS
         MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
-    
+    select * from vw_chamados;
     
 CREATE OR REPLACE VIEW vw_chamados
 AS
@@ -513,6 +513,7 @@ AS
     c.descricao,
     e.idEmpresa AS idHospital,
     e.nomeFantasia AS hospital,
+    t.nome AS tipo,
     CASE WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
 		 WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
 		 WHEN tr.nome = 'Uso de Disco' THEN 'Disco'
@@ -525,11 +526,16 @@ AS
     JOIN modelo AS m
     JOIN empresa AS e
     JOIN tipoRegistro AS tr
+    JOIN tipo AS t
     WHERE fkMaquina = idMaquinario 
+    AND m.fkTipo = t.idTipo
     AND r.fkTipoRegistro = tr.idTipoRegistro
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
+SELECT 
+COUNT(idChamado) AS quantidade,
+tipo FROM vw_chamados GROUP BY tipo;
 
 SELECT COUNT(idChamado) AS chamados,
 	   tipoRegistro,
@@ -599,3 +605,9 @@ WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
 -- UPDATE chamado
 -- SET nivel = 'Alto' 
 -- WHERE idChamado > 2200;
+
+select * from chamado;
+select * from registro;
+select count(*), modelo from vw_chamados where estado = "aberto" group by modelo;
+use hts;
+select * from modelo join maquinario on idModelo = fkModelo join registro on idModelo = fkMaquina join chamado on idRegistro = fkRegistro;

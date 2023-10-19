@@ -3,10 +3,11 @@ dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${session
 getTotalMaquinas()
 maquinasInstaveis()
 var qtdTotalMaquinas;
+
 function listarHospitais(){
 
     fetch(`/hospitais/listarHospitais`)
-    .then(
+    .then(  
         function(resposta){
             if(resposta.ok){
                 resposta.json()
@@ -189,4 +190,4 @@ function maquinasInstaveis(){
     .catch(err => {
       console.log("ERRO" + err)
     })
-  }
+  }}

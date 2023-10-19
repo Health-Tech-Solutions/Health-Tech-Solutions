@@ -63,9 +63,11 @@ function situacaoGeral2(req,res){
 
     hospitalModel.situacaoGeral2(fkHospital)
 }
+
+
 function maquinasInstaveis(req,res){
     var fkHospital = req.params.fkHospital;
-
+console.log('TESTE!!!!!!',fkHospital)
     hospitalModel.maquinasInstaveis(fkHospital)
         .then(
             function(resultado){

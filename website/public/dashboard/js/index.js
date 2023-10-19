@@ -1,6 +1,8 @@
 
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`; 
-
+getTotalMaquinas()
+maquinasInstaveis()
+var qtdTotalMaquinas;
 function listarHospitais(){
 
     fetch(`/hospitais/listarHospitais`)
@@ -62,6 +64,59 @@ function totalMaquinas(){
             maquinas = document.getElementById("totalMaquinas")
             maquinas.innerHTML = informacoes.contagem
             
+            
+          }
+        )
+      }
+    })
+    .catch(err => {
+      console.log("ERRO" + err)
+    })
+  }
+  function getTotalMaquinas(){
+    var fkHospital =  sessionStorage.FK_HOSPITAL
+    fetch(`/hospitais/TotalMaquinas/${fkHospital}`)
+    .then(function (resposta){
+      if(resposta.ok){
+        resposta.json()
+        .then(
+          function(resposta){
+            var informacoes = Number(resposta[0].contagem);
+            console.log("ifno",informacoes)
+            qtdTotalMaquinas = informacoes;
+          }
+        )
+      }
+    })
+    .catch(err => {
+      console.log("ERRO" + err)
+     
+    })
+ 
+     
+  }
+
+  
+function maquinasInstaveis(){
+   
+ 
+    var fkHospital =  sessionStorage.FK_HOSPITAL
+    fetch(`/hospitais/maquinasInstaveis/${fkHospital}`)
+    .then(function (resposta){
+      if(resposta.ok){
+        resposta.json()
+        .then(
+          function(resposta){
+            valorMaquinaInstaveis = resposta[0].qtdMaquinaInstaveis;
+            
+            var porcentagem = (Number(valorMaquinaInstaveis) / Number(qtdTotalMaquinas) )* 100
+            
+            var kpiMaquinasInstaveis = document.getElementById('maqInstaveis') 
+            var barraMaquinasInstaveis = document.getElementById('barraMaquinasInstaveis') 
+            
+            kpiMaquinasInstaveis.innerHTML = porcentagem.toFixed(2),"%";
+            barraMaquinasInstaveis.style.width = `${Math.round(porcentagem)}%`
+        
             
           }
         )

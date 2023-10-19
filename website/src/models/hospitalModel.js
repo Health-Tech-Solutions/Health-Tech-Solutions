@@ -29,15 +29,15 @@ function maquinasInstaveis(fkHospital) {
     var instrucao = ""
     if (fkHospital != "null"){
         instrucao = `
-        SELECT COUNT(DISTINCT reg.fkMaquina)as qtdMaquinaInstaveis FROM chamado 
-        JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
-       WHERE chamado.nivel = 'Alto'
+        SELECT COUNT(DISTINCT idMaquina) AS qtdMaquinaInstaveis
+        FROM vw_chamados
+        WHERE nivel = 'alto' and idHospital = ${fkHospital};
         `
     }else{
         instrucao = `
-        SELECT COUNT(DISTINCT reg.fkMaquina) as qtdMaquinaInstaveis FROM chamado 
+        SELECT COUNT(DISTINCT reg.fkMaquina)as qtdMaquinaInstaveis FROM chamado 
         JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
-       WHERE chamado.nivel = 'Alto'
+       WHERE chamado.nivel = 'Alto';
         `
     }
     

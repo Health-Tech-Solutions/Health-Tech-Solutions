@@ -79,6 +79,9 @@ function totalMaquinas(){
   function situacaoMaquinasHospital(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/situacaoGeral/${fkHospital}`)
+  }
+
+  
   function getTotalMaquinas(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/TotalMaquinas/${fkHospital}`)
@@ -105,11 +108,8 @@ function totalMaquinas(){
  
      
   }
-
   
 function maquinasInstaveis(){
-   
- 
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/maquinasInstaveis/${fkHospital}`)
     .then(function (resposta){
@@ -118,14 +118,14 @@ function maquinasInstaveis(){
         .then(
           function(resposta){
             valorMaquinaInstaveis = resposta[0].qtdMaquinaInstaveis;
-            
+      
             var porcentagem = (Number(valorMaquinaInstaveis) / Number(qtdTotalMaquinas) )* 100
             
             var kpiMaquinasInstaveis = document.getElementById('maqInstaveis') 
             var barraMaquinasInstaveis = document.getElementById('barraMaquinasInstaveis') 
-            
+  
             kpiMaquinasInstaveis.innerHTML = porcentagem.toFixed(2),"%";
-            barraMaquinasInstaveis.style.width = `${Math.round(porcentagem)}%`
+            barraMaquinasInstaveis.style.width = `${(porcentagem)}%`
         
             
           }
@@ -190,4 +190,4 @@ function maquinasInstaveis(){
     .catch(err => {
       console.log("ERRO" + err)
     })
-  }}
+  }

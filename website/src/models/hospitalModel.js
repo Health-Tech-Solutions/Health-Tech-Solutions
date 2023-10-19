@@ -26,7 +26,32 @@ function pegarTotalMaquinas(fkHospital) {
 }
 
 
+
+function situacaoGeral(fkHospital) { 
+    const instrucao = `
+    SELECT COUNT(*), modelo FROM vw_chamados WHERE estado = 'aberto' and idHospital = ${fkHospital}  GROUP BY modelo ;
+
+        `
+
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+}
+
+
+
+function situacaoGeral2(fkHospital) { 
+    const instrucao = `
+    SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo where fkHospital = ${fkHospital};
+        `
+
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+}
+
+
 module.exports = {
     listarHospitais,
-    pegarTotalMaquinas
+    pegarTotalMaquinas,
+    situacaoGeral,
+    situacaoGeral2
 }

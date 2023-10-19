@@ -1,6 +1,8 @@
 
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`; 
-
+getTotalMaquinas()
+maquinasInstaveis()
+var qtdTotalMaquinas;
 function listarHospitais(){
 
     fetch(`/hospitais/listarHospitais`)
@@ -71,20 +73,65 @@ function totalMaquinas(){
       console.log("ERRO" + err)
     })
   }
+<<<<<<< HEAD
 
 
   function situacaoMaquinasHospital(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/situacaoGeral/${fkHospital}`)
+=======
+  function getTotalMaquinas(){
+    var fkHospital =  sessionStorage.FK_HOSPITAL
+    fetch(`/hospitais/TotalMaquinas/${fkHospital}`)
+>>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
     .then(function (resposta){
       if(resposta.ok){
         resposta.json()
         .then(
           function(resposta){
+<<<<<<< HEAD
             informacoesMaquinasHospital = resposta;
             console.log(informacoesMaquinasHospital)
             totalModelos = resposta[1]
             console.log(totalModelos)
+=======
+            var informacoes = Number(resposta[0].contagem);
+            console.log("ifno",informacoes)
+            qtdTotalMaquinas = informacoes;
+          }
+        )
+      }
+    })
+    .catch(err => {
+      console.log("ERRO" + err)
+     
+    })
+ 
+     
+  }
+
+  
+function maquinasInstaveis(){
+   
+ 
+    var fkHospital =  sessionStorage.FK_HOSPITAL
+    fetch(`/hospitais/maquinasInstaveis/${fkHospital}`)
+    .then(function (resposta){
+      if(resposta.ok){
+        resposta.json()
+        .then(
+          function(resposta){
+            valorMaquinaInstaveis = resposta[0].qtdMaquinaInstaveis;
+            
+            var porcentagem = (Number(valorMaquinaInstaveis) / Number(qtdTotalMaquinas) )* 100
+            
+            var kpiMaquinasInstaveis = document.getElementById('maqInstaveis') 
+            var barraMaquinasInstaveis = document.getElementById('barraMaquinasInstaveis') 
+            
+            kpiMaquinasInstaveis.innerHTML = porcentagem.toFixed(2),"%";
+            barraMaquinasInstaveis.style.width = `${Math.round(porcentagem)}%`
+        
+>>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
             
           }
         )
@@ -93,6 +140,7 @@ function totalMaquinas(){
     .catch(err => {
       console.log("ERRO" + err)
     })
+<<<<<<< HEAD
   }
 
   function situacaoMaquinasHospital2(){
@@ -148,4 +196,6 @@ function totalMaquinas(){
     .catch(err => {
       console.log("ERRO" + err)
     })
+=======
+>>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
   }

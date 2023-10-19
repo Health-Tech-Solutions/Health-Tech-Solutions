@@ -23,4 +23,8 @@ router.get("/buscarEstado/:fkHospital", function(req,res){
     chamadoController.buscarEstado(req,res)
 })
 
+router.get("/listarChamados/:idHospital", function(req,res){
+    chamadoController.listarChamados(req,res)
+})
+
 module.exports = router;

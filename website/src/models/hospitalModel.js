@@ -25,6 +25,25 @@ function pegarTotalMaquinas(fkHospital) {
     return database.executar(instrucao)
 }
 
+function maquinasInstaveis(fkHospital) {
+    var instrucao = ""
+    if (fkHospital != "null"){
+        instrucao = `
+        SELECT COUNT(DISTINCT reg.fkMaquina)as qtdMaquinaInstaveis FROM chamado 
+        JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
+       WHERE chamado.nivel = 'Alto'
+        `
+    }else{
+        instrucao = `
+        SELECT COUNT(DISTINCT reg.fkMaquina) as qtdMaquinaInstaveis FROM chamado 
+        JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
+       WHERE chamado.nivel = 'Alto'
+        `
+    }
+    
+    console.log("Executando a instrução SQL: \n" + instrucao)
+    return database.executar(instrucao)
+}
 
 
 function situacaoGeral(fkHospital) { 
@@ -52,6 +71,10 @@ function situacaoGeral2(fkHospital) {
 module.exports = {
     listarHospitais,
     pegarTotalMaquinas,
+<<<<<<< HEAD
     situacaoGeral,
     situacaoGeral2
+=======
+    maquinasInstaveis
+>>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
 }

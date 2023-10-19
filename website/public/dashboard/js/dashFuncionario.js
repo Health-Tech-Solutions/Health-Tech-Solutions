@@ -137,7 +137,7 @@ var fkHospital = null
                 response.json().then(function (resposta) {
                     resposta.reverse();
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
+                    
                     modeloComMaisAlertas.innerHTML = resposta[0].Modelo;
                 });
             } else {

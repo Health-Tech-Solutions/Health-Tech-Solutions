@@ -3,7 +3,7 @@ dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${session
 getTotalMaquinas()
 maquinasInstaveis()
 var qtdTotalMaquinas;
-
+sessionStorage.FK_HOSPITAL = 'null'
 function listarHospitais(){
 
     fetch(`/hospitais/listarHospitais`)

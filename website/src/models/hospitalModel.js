@@ -59,6 +59,7 @@ function situacaoGeral(fkHospital) {
 
 
 function situacaoGeral2(fkHospital) { 
+    console.log("Estou no hospital Model, situação geral 2")
     const instrucao = `
     SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo where fkHospital = ${fkHospital};
         `

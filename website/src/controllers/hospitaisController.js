@@ -37,7 +37,6 @@ function pegarTotalMaquinas(req,res){
 
 }
 
-<<<<<<< HEAD
 function situacaoGeral(req,res){
     var fkHospital = req.params.fkHospital;
     console.log("Entrou no situacaoGeral")
@@ -63,13 +62,11 @@ function situacaoGeral2(req,res){
     console.log("Entrou no situacaoGeral")
 
     hospitalModel.situacaoGeral2(fkHospital)
-=======
 function maquinasInstaveis(req,res){
     var fkHospital = req.params.fkHospital;
  
 
     hospitalModel.maquinasInstaveis(fkHospital)
->>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
         .then(
             function(resultado){
                 res.json(resultado);
@@ -85,17 +82,14 @@ function maquinasInstaveis(req,res){
 
 }
 
-
+}
 
 
 
 module.exports = {
     listarHospitais,
     pegarTotalMaquinas,
-<<<<<<< HEAD
     situacaoGeral,
-    situacaoGeral2
-=======
+    situacaoGeral2,
     maquinasInstaveis
->>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
 }

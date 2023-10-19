@@ -189,4 +189,4 @@ function maquinasInstaveis(){
     .catch(err => {
       console.log("ERRO" + err)
     })
-  }
+  }}

@@ -22,6 +22,27 @@ function obterDadosMensais(){
     )
 }
 
+function obterDadosSemanal(){
+    var fkHospital = sessionStorage.FK_HOSPITAL;
+    fetch(`/chamados/buscarSemanal/${fkHospital}`)
+    .then(
+        function(resposta){
+            if(resposta.ok){
+                resposta.json()
+                .then(
+                    console.log(resposta)
+
+                )
+            }
+        }
+    )
+    .catch(
+        err => {
+            console.log("ERRO " + err)
+        }
+    )
+}
+
 function plotarGrafico(resposta){
 
     for (let i = 0; i < resposta.length; i++) {

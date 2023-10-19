@@ -30,6 +30,8 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
+
+
 function buscarHospitais(fkHospital){
     var instrucao = ``
     if(fkHospital == 'null'){
@@ -79,15 +81,12 @@ function buscarComponente(){
 
 function buscarModelo(){
     const instrucao = `
-    SELECT m.modelo AS Modelo,
-            COUNT(c.idChamado) AS NumeroDeChamados
-        FROM modelo AS m
-        LEFT JOIN maquinario AS maq ON m.idModelo = maq.fkModelo
-        LEFT JOIN registro AS r ON maq.idMaquinario = r.fkMaquina
-        LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
-        GROUP BY Modelo
-        ORDER BY NumeroDeChamados DESC
-        LIMIT 1;
+    SELECT 
+        COUNT(idChamado) AS numeroChamados,
+        tipo 
+        FROM vw_chamados 
+        GROUP BY tipo
+        ORDER BY numeroChamados DESC LIMIT 1;
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)

@@ -82,7 +82,7 @@ function maquinasInstaveis(req,res){
 
 }
 
-}
+
 
 
 

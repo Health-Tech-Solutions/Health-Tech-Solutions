@@ -27,4 +27,8 @@ router.get("/listarChamados/:idHospital", function(req,res){
     chamadoController.listarChamados(req,res)
 })
 
+router.get("/buscarSemanal/:fkHospital", function(req,res){
+    chamadoController.buscarSemanal(req,res)
+})
+
 module.exports = router;

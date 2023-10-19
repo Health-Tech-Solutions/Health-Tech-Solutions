@@ -369,7 +369,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                 Modelo em alerta</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">LOGIQ Fortis</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="modeloComMaisAlertas">LOGIQ Fortis</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-laptop-medical fa-2x text-gray-300"></i>
@@ -434,7 +434,9 @@
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
+                            
                             <div class="card shadow mb-4">
+                                
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -442,9 +444,25 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
+                                    
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger">Action</button>
+                                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
+                                          <span class="sr-only"></span>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                          <a class="dropdown-item" href="#">Action</a>
+                                          <a class="dropdown-item" href="#">Another action</a>
+                                          <a class="dropdown-item" href="#">Something else here</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                      </div>
                                     <div>
                                         <canvas id="chartLinha"></canvas>
                                     </div>
+                                    <!-- Example split danger button -->
+
                                 </div>
                             </div>
                         </div>
@@ -661,4 +679,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/index.js"></script>
 <script src="js/dados.js"></script>
+
 <script src="js/chartLineIndex.js"></script>

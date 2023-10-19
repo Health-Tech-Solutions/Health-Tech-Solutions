@@ -71,10 +71,7 @@ function situacaoGeral2(fkHospital) {
 module.exports = {
     listarHospitais,
     pegarTotalMaquinas,
-<<<<<<< HEAD
     situacaoGeral,
-    situacaoGeral2
-=======
+    situacaoGeral2,
     maquinasInstaveis
->>>>>>> 7bcdcc31e42212cee2e319bbd0439aa404229207
 }

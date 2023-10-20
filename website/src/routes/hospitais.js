@@ -20,8 +20,8 @@ router.get("/situacaoGeral/:fkHospital", (req,res) => {
     hospitaisController.situacaoGeral(req,res)
 })
 
-router.get("/situacaoGeral2/:fkHospital", (req,res) => {
-    hospitaisController.situacaoGeral2(req,res)
+router.get("/totalMaquinasPorTipo/:fkHospital", (req,res) => {
+    hospitaisController.totalMaquinasPorTipo(req,res)
 })
 
 module.exports = router

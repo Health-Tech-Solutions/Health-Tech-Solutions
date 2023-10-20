@@ -58,11 +58,11 @@ function situacaoGeral(req,res){
 }
 
 
-function situacaoGeral2(req,res){
+function totalMaquinasPorTipo(req,res){
     var fkHospital = req.params.fkHospital;
-    console.log("Entrou no situacaoGeral2")
+    console.log("Entrou no totalMaquinasPorTipo")
 
-    hospitalModel.situacaoGeral2(fkHospital)
+    hospitalModel.totalMaquinasPorTipo(fkHospital)
         .then(
             function(resultado){
                 res.json(resultado);
@@ -108,6 +108,6 @@ module.exports = {
     listarHospitais,
     pegarTotalMaquinas,
     situacaoGeral,
-    situacaoGeral2,
+    totalMaquinasPorTipo,
     maquinasInstaveis
 }

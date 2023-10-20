@@ -94,7 +94,7 @@ function totalMaquinas(){
         .then(
           function(resposta){
             situacaoMaquinas = resposta;
-            console.log(informacoes)
+            console.log(situacaoMaquinas)
 
 
             for (let index = 0; index < situacaoMaquinas.length; index++) {
@@ -188,9 +188,17 @@ function maquinasInstaveis(){
     })
   }
 
+  var qntFktipo1 = 0
+            var qntFktipo2 = 0
+            var qntFktipo3 = 0
+            var qntFktipo4 = 0
+            var qntFktipo5 = 0
+            var qntFktipo6 = 0
+            var qntFktipo7 = 0
+            var qntFktipo8 = 0
   function situacaoMaquinasHospital2(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
-    fetch(`/hospitais/situacaoGeral2/${fkHospital}`)
+    fetch(`/hospitais/totalMaquinasPorTipo/${fkHospital}`)
     .then(function (resposta){
       if(resposta.ok){
         resposta.json()
@@ -200,14 +208,7 @@ function maquinasInstaveis(){
             console.log(informacoesMaquinasHospital2)
             
 
-            var qntFktipo1 = 0
-            var qntFktipo2 = 0
-            var qntFktipo3 = 0
-            var qntFktipo4 = 0
-            var qntFktipo5 = 0
-            var qntFktipo6 = 0
-            var qntFktipo7 = 0
-            var qntFktipo8 = 0
+            
             for (let index = 0; index < informacoesMaquinasHospital2.length; index++) {
                 if(resposta[index].fkTipo == 1){
                     qntFktipo1 = qntFktipo1 + 1
@@ -231,7 +232,7 @@ function maquinasInstaveis(){
             }
             
            console.log(`${qntFktipo1}, ${qntFktipo2}, ${qntFktipo3},${qntFktipo4},${qntFktipo5},${qntFktipo6},${qntFktipo7},${qntFktipo8}`) 
-           console.log("OLAAAA")
+           
     
 
           }

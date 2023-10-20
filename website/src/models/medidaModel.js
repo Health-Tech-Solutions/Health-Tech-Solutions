@@ -30,7 +30,7 @@ function buscarUltimasMedidas(fkTipo) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarDadosMaquinario(fkHospital,componente,idMaquinario) {
+function buscarDadosMaquinario(fkHospital,idMaquinario,componente) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {

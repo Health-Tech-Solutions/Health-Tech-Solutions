@@ -16,8 +16,8 @@ router.get("/maquinasInstaveis/:fkHospital", (req,res) => {
     hospitaisController.maquinasInstaveis(req,res)
 })
 
-router.get("/situacaoGeral/:fkHospital", (req,res) => {
-    hospitaisController.situacaoGeral(req,res)
+router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital", (req,res) => {
+    hospitaisController.totalMaquinasPorTipoChamadoAberto(req,res)
 })
 
 router.get("/totalMaquinasPorTipo/:fkHospital", (req,res) => {

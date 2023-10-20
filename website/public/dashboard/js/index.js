@@ -87,7 +87,7 @@ function totalMaquinas(){
 
   function situacaoMaquinasHospital(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
-    fetch(`/hospitais/situacaoGeral/${fkHospital}`)
+    fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${fkHospital}`)
     .then(function (resposta){
       if(resposta.ok){
         resposta.json()

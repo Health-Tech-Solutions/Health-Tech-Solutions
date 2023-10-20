@@ -46,7 +46,7 @@ function maquinasInstaveis(fkHospital) {
 }
 
 
-function situacaoGeral(fkHospital) { 
+function totalMaquinasPorTipoChamadoAberto(fkHospital) { 
     const instrucao = `
     SELECT COUNT(idChamado) AS quantidade, tipo FROM vw_chamados GROUP BY tipo;
         `
@@ -71,7 +71,7 @@ function totalMaquinasPorTipo(fkHospital) {
 module.exports = {
     listarHospitais,
     pegarTotalMaquinas,
-    situacaoGeral,
+    totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     maquinasInstaveis
 }

@@ -161,7 +161,7 @@ function listarChamados(idHospital){
     DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,
     tipoRegistro
     from vw_chamados where idHospital = ${idHospital}
-    LIMIT 10;
+        LIMIT 10;
     ` 
 }
     console.log("Executando a seguinte instrução sql" + instrucao + idHospital)

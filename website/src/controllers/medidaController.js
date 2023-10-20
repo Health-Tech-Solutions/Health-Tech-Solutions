@@ -20,6 +20,27 @@ function buscarUltimasMedidas(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+function buscarDadosMaquinario(req, res) {
+
+
+    var fkHospital = req.params.fkHospital;
+    var visualizarDados = req.params.visualizarDados;
+    var whyDado = req.params.whyDado;
+  
+    //console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarDadosMaquinario(fkHospital,whyDado).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 function buscarDadosMaquina(req, res) {
 
@@ -94,5 +115,6 @@ module.exports = {
     buscarDadosMaquina,
     buscarHospitais,
     buscarComponente,
-    buscarModelo
+    buscarModelo,
+    buscarDadosMaquinario
 }

@@ -14,6 +14,7 @@ function buscarUltimasMedidas(fkTipo) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        console.log("model errado")
         instrucaoSql = `
         SELECT maq.idMaquinario,
                m.modelo,
@@ -21,6 +22,39 @@ function buscarUltimasMedidas(fkTipo) {
                 FROM maquinario AS maq 
                 JOIN modelo AS m ON maq.fkModelo = m.idModelo
                 where m.fkTipo = ${fkTipo};`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function buscarDadosMaquinario(fkHospital,whyDado) {
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top ${limite_linhas}
+        dht11_temperatura as temperatura, 
+        dht11_umidade as umidade,  
+                        momento,
+                        FORMAT(momento, 'HH:mm:ss') as momento_grafico
+                    from medida
+                    where fk_aquario = ${idAquario}
+                    order by id desc`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        console.log("model certo")
+        instrucaoSql = `
+        SELECT maq.idMaquinario,
+               m.modelo,
+               m.fkTipo,
+               reg.idRegistro,
+               reg.valor,
+               time_format(reg.dataHora,"%H:%i:%s") as momento_grafico
+                FROM maquinario AS maq 
+                JOIN modelo AS m ON maq.fkModelo = m.idModelo
+                join registro as reg on reg.fkMaquina = maq.idMaquinario
+                where maq.idMaquinario = 2 order by idRegistro;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -135,5 +169,6 @@ module.exports = {
     buscarDadosMaquina,
     buscarHospitais,
     buscarComponente,
-    buscarModelo
+    buscarModelo,
+    buscarDadosMaquinario
 }

@@ -519,7 +519,7 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-            console.log(visualizarDados)
+            
             //Está sempre retornando object/undefined ao colocar no html os dados da resposta
             for (let i = 0; i < resposta.length; i++) {
                  visualizarDados = resposta[i];
@@ -533,9 +533,9 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
                             &nbsp&nbsp</h2><br>
                          <select id="selectGrafico${i}" onchange="mudarGrafico(${i})">
                              <option value=1></option>
-                             <option value=2>CPU</option>
-                             <option value=3>RAM</option>
-                             <option value=4>DISCO</option>
+                             <option value='CPU'>CPU</option>
+                             <option value='RAM'>RAM</option>
+                             <option value='DISCO'>DISCO</option>
                          </select>
                             
                      </div>
@@ -564,7 +564,8 @@ function mudarGrafico(visualizarDados){
     const x = document.getElementById('graficoCPU'+visualizarDados);
     const y = document.getElementById('graficoRAM'+visualizarDados);
     const z = document.getElementById('graficoDisco'+visualizarDados);
-
+    var whyDado = document.getElementById(`selectGrafico${visualizarDados}`) 
+    getDadosGrafico(visualizarDados,whyDado.value)
     x.style.height = "60vh";
     y.style.height = "60vh";
     z.style.height = "60vh";
@@ -652,5 +653,57 @@ function mudarGrafico(visualizarDados){
         z.style.display = "none";
 
     }
+}
+function getDadosGrafico(visualizarDados,whyDado){
+ 
+    var fkHospital = 1;//sessionStorage.FK_HOSPITAL;
+
+    fetch(`/medidas/dadosMaquinario/${fkHospital}/${visualizarDados}/${whyDado}`)
+    .then(
+        function(resposta){
+            if(resposta.ok){
+                resposta.json()
+                .then(
+                    function(resposta){
+                        console.log("dales"+resposta)
+                    }
+                )
+            }
+        }
+    )
+    .catch(
+        err => {
+            console.log("ERRO " + err)
+        }
+    )
+}
+
+function plotarGrafico(resposta){
+
+labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+dados.datasets[0].data = []
+
+for (let i = 0; i < resposta.length; i++) {
+    let registro = resposta[i];
+    // console.log(registro.mes)
+    dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
+}
+dados.labels = labels
+lineChart.update()
+}
+
+data = [0,0,0,0,0,0,0,0,0,0,0,0]
+const ctx = document.getElementById('chartLinha');
+labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+// 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
+var dados = {
+labels: labels,
+datasets: [{
+    label: '',
+    data: data,
+    borderWidth: 1,
+    backgroundColor: '#030050',
+    borderColor: '#030050'
+}]
 }
 </script>

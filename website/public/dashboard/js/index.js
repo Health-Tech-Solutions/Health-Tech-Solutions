@@ -290,3 +290,22 @@ function maquinasInstaveis(){
     //Não tem MonitorSinaisVitais
 
   }
+
+  function chamarModeloComMaisAlertas() {
+    alert("ta chamando")
+    fetch(`/chamados/buscarModelo`, { cache: 'no-store'}).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                
+                modeloComMaisAlertas.innerHTML = resposta[0].tipo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}

@@ -1,5 +1,6 @@
 
 function obterDadosMensais(){
+    obterDadosSemanal()
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/chamados/buscarMensal/${fkHospital}`)
     .then(
@@ -23,6 +24,7 @@ function obterDadosMensais(){
 }
 
 function obterDadosSemanal(){
+
     var fkHospital = sessionStorage.FK_HOSPITAL;
     fetch(`/chamados/buscarSemanal/${fkHospital}`)
     .then(
@@ -30,8 +32,9 @@ function obterDadosSemanal(){
             if(resposta.ok){
                 resposta.json()
                 .then(
-                    console.log(resposta)
-
+                    function(resposta){
+                        console.log(resposta)
+                    }
                 )
             }
         }

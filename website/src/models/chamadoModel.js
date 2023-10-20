@@ -1,5 +1,33 @@
 const database = require("../database/config")
 
+function buscarSemanal(fkHospital){
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if(fkHospital == 'null'){
+        instrucao = `
+        SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        GROUP BY dia
+        ORDER BY dia;
+        `
+    } else {
+        instrucao = `
+        SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE fkHospital = ${fkHospital}
+        GROUP BY dia
+        ORDER BY dia;
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
 function buscarMensal(fkHospital){
     var instrucao = ``
 
@@ -132,6 +160,7 @@ function listarChamados(idHospital){
 
 module.exports = {
     buscarMensal,
+    buscarSemanal,
     buscarHospitais,
     buscarComponente,
     buscarModelo,

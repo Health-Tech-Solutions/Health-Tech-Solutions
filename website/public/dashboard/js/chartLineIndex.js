@@ -1,6 +1,6 @@
 
 function obterDadosMensais(){
-    obterDadosSemanal()
+
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/chamados/buscarMensal/${fkHospital}`)
     .then(
@@ -34,6 +34,7 @@ function obterDadosSemanal(){
                 .then(
                     function(resposta){
                         console.log(resposta)
+                        plotarGraficoSemanal(resposta)
                     }
                 )
             }
@@ -46,15 +47,36 @@ function obterDadosSemanal(){
     )
 }
 
+function plotarGraficoSemanal(resposta){
+    
+    labels = []
+    data = []
+    for (let i = 0; i < resposta.length; i++) {
+        let ocorrencia = resposta[i];
+        labels.push(ocorrencia.dia)
+        data.push(ocorrencia.quantidade)
+    }
+
+    dados.labels = labels
+    dados.datasets[0].data = data
+  
+    lineChart.update()
+}
+
 function plotarGrafico(resposta){
 
+    labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    dados.datasets[0].data = []
+    
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
         // console.log(registro.mes)
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }
+    dados.labels = labels
     lineChart.update()
 }
+
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const ctx = document.getElementById('chartLinha');
 labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']

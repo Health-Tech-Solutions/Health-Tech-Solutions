@@ -93,8 +93,32 @@ function totalMaquinas(){
         resposta.json()
         .then(
           function(resposta){
-            situacaoMaquinas = resposta[0];
+            situacaoMaquinas = resposta;
             console.log(informacoes)
+
+
+            for (let index = 0; index < situacaoMaquinas.length; index++) {
+        
+              if(resposta[index].tipo == "Ultrassom"){
+                Ultrassom = resposta[index].quantidade
+              }else if (resposta[index].tipo == "Cardioversores") {
+                Cardioversores = resposta[index].quantidade
+              }else if (resposta[index].tipo == "Desfibriladores") {
+                Desfibriladores = resposta[index].quantidade 
+              }else if (resposta[index].tipo == "Monitor Cardíaco") {
+                MonitorCardiaco = resposta[index].quantidade
+              }else if (resposta[index].tipo == "Máquina de Anestesia") {
+                MaquinaAnestesia = resposta[index].quantidade
+              }else if (resposta[index].tipo == "Máquina de ECG") {
+                MáquinaECG = resposta[index].quantidade
+              }else if (resposta[index].tipo == "Monitor Fetal") {
+                MonitorFetal = resposta[index].quantidade
+              }else if (resposta[index].tipo == "Monitor de sinais vitais") {
+                MonitorSinaisVitais = resposta[index].quantidade
+              } 
+              
+            }
+            console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MáquinaECG,MonitorFetal,MonitorSinaisVitais)
 
             
             

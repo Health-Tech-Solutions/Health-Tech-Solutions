@@ -276,9 +276,8 @@ function maquinasInstaveis(){
     }else {
       larguraUltrassom.style.backgroundColor = 'green' 
     }
+
     
-
-
     CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
     CardioversoresPorcentagem.innerHTML = linha2
 

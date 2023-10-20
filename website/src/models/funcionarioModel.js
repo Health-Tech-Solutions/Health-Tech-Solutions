@@ -46,6 +46,19 @@ function mostrarFoto(idFuncionario) {
     return database.executar(instrucao)
 }
 
+function mostrarDados(idUsuario){
+    var instrucao = `
+        SELECT
+            nome,
+            foto
+        FROM
+            funcionario 
+        WHERE idFuncionario = ${idUsuario} 
+    `
+    console.log(`Executando a seguinte instrução sql` + instrucao);
+    return database.executar(instrucao)
+}
+
 function pegarInformacoes(idFuncionario) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFuncionario)
     var instrucao = `
@@ -61,5 +74,6 @@ module.exports = {
     listar,
     enviarFoto,
     mostrarFoto,
-    pegarInformacoes
+    pegarInformacoes,
+    mostrarDados
 }

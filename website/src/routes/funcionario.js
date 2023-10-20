@@ -24,5 +24,8 @@ router.get(`/pegarInformacoes/:idFuncionario`, (req, res) => {
     funcionarioController.pegarInformacoes(req, res);
 });
 
+router.get(`/mostrarDados/:idUsuario`, (req,res) => {
+    funcionarioController.mostrarDados(req,res);
+})
 
 module.exports = router

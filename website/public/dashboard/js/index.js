@@ -85,7 +85,7 @@ function totalMaquinas(){
   var MonitorFetal = 0
   var MonitorSinaisVitais = 0
 
-  function situacaoMaquinasHospital(){
+  function MaquinasPorTipoChamadoAberto(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${fkHospital}`)
     .then(function (resposta){
@@ -119,7 +119,7 @@ function totalMaquinas(){
               
             }
             console.log(`Quantidade de cada tipo de fkTipo com chamados abertos:`)
-            console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MáquinaECG,MonitorFetal,MonitorSinaisVitais)
+            console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MaquinaECG,MonitorFetal,MonitorSinaisVitais)
 
             
             
@@ -198,7 +198,7 @@ function maquinasInstaveis(){
             var qntFktipo6 = 0
             var qntFktipo7 = 0
             var qntFktipo8 = 0
-  function situacaoMaquinasHospital2(){
+  function MaquinasPorTipo(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/totalMaquinasPorTipo/${fkHospital}`)
     .then(function (resposta){

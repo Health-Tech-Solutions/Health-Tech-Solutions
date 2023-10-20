@@ -81,7 +81,7 @@ function totalMaquinas(){
   var Desfibriladores = 0
   var MonitorCardiaco = 0
   var MaquinaAnestesia = 0
-  var MáquinaECG = 0
+  var MaquinaECG = 0
   var MonitorFetal = 0
   var MonitorSinaisVitais = 0
 
@@ -110,7 +110,7 @@ function totalMaquinas(){
               }else if (resposta[index].tipo == "Máquina de Anestesia") {
                 MaquinaAnestesia = resposta[index].quantidade
               }else if (resposta[index].tipo == "Máquina de ECG") {
-                MáquinaECG = resposta[index].quantidade
+                MaquinaECG = resposta[index].quantidade
               }else if (resposta[index].tipo == "Monitor Fetal") {
                 MonitorFetal = resposta[index].quantidade
               }else if (resposta[index].tipo == "Monitor de sinais vitais") {
@@ -118,6 +118,7 @@ function totalMaquinas(){
               } 
               
             }
+            console.log(`Quantidade de cada tipo de fkTipo com chamados abertos:`)
             console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MáquinaECG,MonitorFetal,MonitorSinaisVitais)
 
             
@@ -188,6 +189,7 @@ function maquinasInstaveis(){
     })
   }
 
+  
   var qntFktipo1 = 0
             var qntFktipo2 = 0
             var qntFktipo3 = 0
@@ -227,14 +229,14 @@ function maquinasInstaveis(){
                 }else if (resposta[index].fkTipo == 8){
                     qntFktipo8 = qntFktipo8 + 1
                 }
-                console.log(qntFktipo1)
+              
                 
             }
-            
+           console.log(`Quantidade de cada tipo de fkTipo:`)
            console.log(`${qntFktipo1}, ${qntFktipo2}, ${qntFktipo3},${qntFktipo4},${qntFktipo5},${qntFktipo6},${qntFktipo7},${qntFktipo8}`) 
-           
-    
 
+
+          
           }
         )
       }
@@ -242,4 +244,49 @@ function maquinasInstaveis(){
     .catch(err => {
       console.log("ERRO" + err)
     })
+  }
+
+
+  linha1 = 0
+    linha2 = 0 
+    linha3 = 0 
+    linha4 = 0
+    linha5 = 0
+    linha6 = 0 
+    linha7 = 0 
+    linha8 = 0
+  function calculoGraficoSituacaoGeral(){ 
+    linha1 = (Ultrassom*100)/qntFktipo1
+    linha2 = (Cardioversores*100)/qntFktipo2
+    linha3 = (Desfibriladores*100)/qntFktipo3
+    linha4 = (MonitorCardiaco*100)/qntFktipo4
+    linha5 = (MaquinaAnestesia*100)/qntFktipo5
+    linha6 = (MaquinaECG*100)/qntFktipo6
+    linha7 = (MonitorFetal*100)/qntFktipo7
+    linha8 = (MonitorSinaisVitais*100)/qntFktipo8
+    console.log("Calculo:")
+    console.log(linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8)
+
+    UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
+    UltrassomPorcentagem.innerHTML = linha1
+
+    CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
+    CardioversoresPorcentagem.innerHTML = linha2
+
+    DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
+    DesfibriladoresPorcentagem.innerHTML = linha3
+
+   //Não tem monitor cardiaco
+
+    MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
+    MaquinaAnestesiaPorcentagem.innerHTML = linha5
+
+    MaquinaECGPorcentagem = document.getElementById("MaquinaECGGrafico")
+    MaquinaECGPorcentagem.innerHTML = linha6
+
+    MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")
+    MonitorFetalPorcentagem.innerHTML = linha7
+
+    //Não tem MonitorSinaisVitais
+
   }

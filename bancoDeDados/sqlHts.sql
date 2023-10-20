@@ -603,8 +603,10 @@ WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
 	-- SELECT * FROM chamado ;
 --
 use hts;
+select idMaquina,nivel,estado,sla,
+        DATE_FORMAT(dataHora, '%d/%m/%Y %H:%i') AS dataHora,tipoRegistro from vw_chamados LIMIT 10;
 SELECT 
-	    dayofmonth(dataHora) AS dia,
+	   DAYOFMONTH(dataHora) AS dia,
 	    COUNT(*) AS quantidade	
 	FROM vw_chamados
     GROUP BY dia

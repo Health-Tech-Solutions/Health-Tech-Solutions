@@ -127,14 +127,16 @@ function buscarEstado(fkHospital){
         SELECT 
             SUM(CASE WHEN estado = 'Aberto' THEN 1 ELSE 0 END) AS Abertos,
             SUM(CASE WHEN estado = 'Fechado' THEN 1 ELSE 0 END) AS Fechados
-        FROM vw_chamados WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);;
+        FROM vw_chamados WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) 
+        ;
         `
     } else {
     var instrucao = `
     SELECT 
         SUM(CASE WHEN estado = 'Aberto' THEN 1 ELSE 0 END) AS Abertos,
         SUM(CASE WHEN estado = 'Fechado' THEN 1 ELSE 0 END) AS Fechados
-    FROM vw_chamados where idHospital = ${fkHospital} AND dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);;
+    FROM vw_chamados where idHospital = ${fkHospital} AND dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+    ;
     ` 
 }
     console.log("Executando a seguinte instrução sql" + instrucao + fkHospital)
@@ -146,11 +148,20 @@ function listarChamados(idHospital){
 
  if(idHospital == 'null'){
         var instrucao = `
-        select idMaquina,nivel,estado,sla,dataHora,tipoRegistro from vw_chamados;
+        select idMaquina,nivel,estado,sla,
+        DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,tipoRegistro from vw_chamados LIMIT 10;
         `
     } else {
     var instrucao = `
-    select idMaquina,nivel,estado,sla,dataHora,tipoRegistro from vw_chamados where idHospital = ${idHospital};
+    select 
+    idMaquina,
+    nivel,
+    estado,
+    sla,
+    DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,
+    tipoRegistro
+    from vw_chamados where idHospital = ${idHospital}
+    LIMIT 10;
     ` 
 }
     console.log("Executando a seguinte instrução sql" + instrucao + idHospital)

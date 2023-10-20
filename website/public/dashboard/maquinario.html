@@ -519,6 +519,7 @@
 //Essa função é a responsavel de pegar os dados da tabela mySQL
 function obterDadosGrafico(fkTipo) {
 divInferior.innerHTML = "";
+divSelect.innerHTML = "";
 fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
@@ -528,20 +529,6 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
             for (let i = 0; i < resposta.length; i++) {
                  visualizarDados = resposta[i];
                 console.log(visualizarDados.modelo)
-               divInferior.innerHTML += `<div class="container-modelos" id="maquina_modelos">
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary" id="nomeMaquina">
-                            <h3 style="color: #e02d1b;"> ${visualizarDados.modelo} </h3>
-                        </h6>
-                        </div>
-                        <div class="card-body" id="descricaoMaquina">
-                            <p id="textoDescricao">
-                                <p> ${visualizarDados.descricao}</p>  
-                     </p>  
-                   </div>
-               </div>
-           </div> `
            divSelect.style.display = "block";
            divSelect.innerHTML += `
            <div class="container-select">

@@ -48,8 +48,7 @@ function maquinasInstaveis(fkHospital) {
 
 function situacaoGeral(fkHospital) { 
     const instrucao = `
-    SELECT COUNT(*), modelo FROM vw_chamados WHERE estado = 'aberto' and idHospital = ${fkHospital}  GROUP BY modelo ;
-
+    SELECT COUNT(idChamado) AS quantidade, tipo FROM vw_chamados GROUP BY tipo;
         `
 
     console.log("Executando a instrução SQL: \n" + instrucao)

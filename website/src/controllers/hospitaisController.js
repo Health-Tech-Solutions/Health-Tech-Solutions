@@ -57,12 +57,28 @@ function situacaoGeral(req,res){
 
 }
 
+
 function situacaoGeral2(req,res){
     var fkHospital = req.params.fkHospital;
-    console.log("Entrou no situacaoGeral")
+    console.log("Entrou no situacaoGeral2")
 
     hospitalModel.situacaoGeral2(fkHospital)
+        .then(
+            function(resultado){
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+
 }
+
+
 
 
 function maquinasInstaveis(req,res){

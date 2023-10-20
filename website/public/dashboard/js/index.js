@@ -76,9 +76,36 @@ function totalMaquinas(){
   }
 
 
+  var Ultrassom = 0
+  var Cardioversores = 0
+  var Desfibriladores = 0
+  var MonitorCardiaco = 0
+  var MaquinaAnestesia = 0
+  var MáquinaECG = 0
+  var MonitorFetal = 0
+  var MonitorSinaisVitais = 0
+
   function situacaoMaquinasHospital(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/situacaoGeral/${fkHospital}`)
+    .then(function (resposta){
+      if(resposta.ok){
+        resposta.json()
+        .then(
+          function(resposta){
+            situacaoMaquinas = resposta[0];
+            console.log(informacoes)
+
+            
+            
+            
+          }
+        )
+      }
+    })
+    .catch(err => {
+      console.log("ERRO" + err)
+    })
   }
 
   

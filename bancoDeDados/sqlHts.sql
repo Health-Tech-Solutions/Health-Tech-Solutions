@@ -534,8 +534,11 @@ AS
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
 SELECT 
-COUNT(idChamado) AS quantidade,
-tipo FROM vw_chamados GROUP BY tipo;
+COUNT(idChamado) AS numeroChamados,
+tipo 
+FROM vw_chamados 
+GROUP BY tipo
+ORDER BY numeroChamados DESC LIMIT 1;
 
 SELECT COUNT(idChamado) AS chamados,
 	   tipoRegistro,
@@ -599,7 +602,14 @@ WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
 -- WHERE chamado.nivel = 'Alto';
 	-- SELECT * FROM chamado ;
 --
-
+use hts;
+SELECT 
+	    dayofmonth(dataHora) AS dia,
+	    COUNT(*) AS quantidade	
+	FROM vw_chamados
+    GROUP BY dia
+    ORDER BY dia;
+	
 
 
 -- UPDATE chamado
@@ -611,3 +621,18 @@ select * from registro;
 select count(*), modelo from vw_chamados where estado = "aberto" group by modelo;
 use hts;
 select * from modelo join maquinario on idModelo = fkModelo join registro on idModelo = fkMaquina join chamado on idRegistro = fkRegistro;
+desc maquinario;
+SELECT 
+	r.valor,
+    r.dataHora,
+    maq.idMaquinario,
+    m.modelo,
+    t.nome
+FROM maquinario AS maq
+JOIN registro AS r
+JOIN modelo AS m
+JOIN tipo AS t
+WHERE maq.fkModelo = m.idModelo
+AND r.fkMaquina = maq.idMaquinario
+AND m.fkTipo = t.idTipo;
+	

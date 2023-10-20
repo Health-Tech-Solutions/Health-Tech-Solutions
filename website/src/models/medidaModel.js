@@ -14,11 +14,13 @@ function buscarUltimasMedidas(fkTipo) {
                     where fk_aquario = ${idAquario}
                     order by id desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select 
-        modelo, 
-        descricao
-                    from modelo
-                    where fkTipo = ${fkTipo}`;
+        instrucaoSql = `
+        SELECT maq.idMaquinario,
+               m.modelo,
+               m.fkTipo
+                FROM maquinario AS maq 
+                JOIN modelo AS m ON maq.fkModelo = m.idModelo
+                where m.fkTipo = ${fkTipo};`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

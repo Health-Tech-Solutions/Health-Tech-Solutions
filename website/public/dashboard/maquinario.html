@@ -533,6 +533,9 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
            divSelect.innerHTML += `
            <div class="container-select">
                      <div class="main-select">
+                        <h2 style="margin-bottom:20px;">Maquina:#${visualizarDados.idMaquinario}
+                            <br>Modelo:${visualizarDados.modelo}
+                            &nbsp&nbsp</h2><br>
                          <select id="selectGrafico${i}" onchange="mudarGrafico(${i})">
                              <option value=1></option>
                              <option value=2>CPU</option>

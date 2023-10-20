@@ -19,7 +19,7 @@ function buscarSemanal(fkHospital){
             DAYOFMONTH(dataHora) AS dia,
             COUNT(*) AS quantidade	
         FROM vw_chamados
-        WHERE fkHospital = ${fkHospital}
+        WHERE idHospital = ${fkHospital}
         GROUP BY dia
         ORDER BY dia;
         `

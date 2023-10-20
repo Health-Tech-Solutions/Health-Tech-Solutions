@@ -48,7 +48,10 @@ function maquinasInstaveis(fkHospital) {
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital) { 
     const instrucao = `
-    SELECT COUNT(idChamado) AS quantidade, tipo FROM vw_chamados GROUP BY tipo;
+    SELECT 
+    idMaquina AS quantidade, 
+    tipo FROM 
+    vw_chamados group by quantidade, tipo;
         `
 
     console.log("Executando a instrução SQL: \n" + instrucao)

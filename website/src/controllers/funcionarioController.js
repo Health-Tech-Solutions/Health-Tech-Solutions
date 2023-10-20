@@ -73,6 +73,25 @@ function mostrarFoto(req, res) {
         )
 }
 
+function mostrarDados(req,res){
+    var idUsuario = req.params.idUsuario
+
+    funcionarioModel.mostrarDados(idUsuario)
+        .then(
+            function (resultado){
+                res.json(resultado)
+            
+            }
+        )
+        .catch(
+            function (erro){
+                console.log(erro);
+                console.log("Erro ao tentar mostrar os dados: ", erro.sqlMessage)
+                res.status(500).json(erro.sqlMessage)
+            }
+        )
+}
+
 function pegarInformacoes(req,res){
     console.log("Entrou no pegarInfomações")
     var idFuncionario = req.params.idFuncionario
@@ -99,5 +118,6 @@ module.exports = {
     listar,
     enviarFoto,
     mostrarFoto,
-    pegarInformacoes
+    pegarInformacoes,
+    mostrarDados
 }

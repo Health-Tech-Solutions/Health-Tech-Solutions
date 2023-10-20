@@ -118,6 +118,7 @@ function totalMaquinas(){
               } 
               
             }
+            calculoGraficoSituacaoGeral(Ultrassom)
             console.log(`Quantidade de cada tipo de fkTipo com chamados abertos:`)
             console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MaquinaECG,MonitorFetal,MonitorSinaisVitais)
 
@@ -247,16 +248,10 @@ function maquinasInstaveis(){
   }
 
 
-  linha1 = 0
-    linha2 = 0 
-    linha3 = 0 
-    linha4 = 0
-    linha5 = 0
-    linha6 = 0 
-    linha7 = 0 
-    linha8 = 0
+  var linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8 = 0
+    
   function calculoGraficoSituacaoGeral(){ 
-    linha1 = (Ultrassom*100)/qntFktipo1
+    linha1 = ((Ultrassom*100)/qntFktipo1).toFixed(2) 
     linha2 = (Cardioversores*100)/qntFktipo2
     linha3 = (Desfibriladores*100)/qntFktipo3
     linha4 = (MonitorCardiaco*100)/qntFktipo4
@@ -270,6 +265,19 @@ function maquinasInstaveis(){
     UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
     UltrassomPorcentagem.innerHTML = linha1
 
+    larguraUltrassom.style.width = `${linha1}%`
+
+    if(linha1 <= 30){
+      larguraUltrassom.style.backgroundColor = 'red' 
+    }else if(linha1 <= 60){
+      larguraUltrassom.style.backgroundColor = 'orange' 
+    }else if(linha1 <= 89){
+      larguraUltrassom.style.backgroundColor = 'yellow' 
+    }else {
+      larguraUltrassom.style.backgroundColor = 'green' 
+    }
+
+    
     CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
     CardioversoresPorcentagem.innerHTML = linha2
 

@@ -25,7 +25,7 @@
 </head>
 
 <body id="page-top"
-    onload="maquinasInstaveis(),maquinasInstaveis(),mostrarFoto(), obterDadosMensais(), totalMaquinas(), MaquinasPorTipoChamadoAberto(), MaquinasPorTipo(),calculoGraficoSituacaoGeral(),chamarModeloComMaisAlertas()">
+    onload="maquinasInstaveis(),maquinasInstaveis(),mostrarFoto(), obterDadosMensais(), totalMaquinas(), MaquinasPorTipoChamadoAberto(), MaquinasPorTipo(),chamarModeloComMaisAlertas(), mostrarDados()">
 
 
     <!-- Page Wrapper -->
@@ -72,17 +72,9 @@
                         <h6 class="collapse-header">Cadastros disponíveis:</h6>
                         <a class="collapse-item" href="./cadastro-funcionarios.html">Funcionários</a>
                         <a class="collapse-item" href="./register-machine.html">Maquinário</a>
-                        <a class="collapse-item" href="./cadastro-parceiros.html">Parceiros</a>
                     </div>
                 </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="maquinario.html">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Maquinário</span></a>
-            </li>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -99,11 +91,7 @@
                     <i class="fas fa-fw fa-exclamation-circle"></i>
                     <span>Chamados</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./alertas.html">
-                    <i class="fas fa-fw fa-exclamation-triangle"></i>
-                    <span>Alertas</span></a>
-            </li>
+            
 
 
             <!-- Divider -->
@@ -449,7 +437,7 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <div style="display: flex; justify-content: space-between;">
+                                        <div style="display: flex; justify-content: space-between;">
                                         <div> </div>
 
                                         <div class="btn-group">
@@ -538,16 +526,16 @@
                                             id="MaquinaAnestesiaGrafico" class="float-right">40%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" ></div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <h4 class="small font-weight-bold">Ultrassom<span id="UltrassomGrafico"
                                             class="float-right">90%</span>
                                     </h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 90%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress mb-4" >
+                                        <div class="progress-bar " role="progressbar" 
+                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="larguraUltrassom" ></div>
                                     </div>
 
                                     <h4 class="small font-weight-bold">Cardioversores<span id="CardioversoresGrafico"

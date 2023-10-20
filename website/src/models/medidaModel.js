@@ -30,7 +30,7 @@ function buscarUltimasMedidas(fkTipo) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarDadosMaquinario(fkHospital,whyDado) {
+function buscarDadosMaquinario(fkHospital,componente,idMaquinario) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -50,11 +50,15 @@ function buscarDadosMaquinario(fkHospital,whyDado) {
                m.fkTipo,
                reg.idRegistro,
                reg.valor,
+               tiporeg.nome,
                time_format(reg.dataHora,"%H:%i:%s") as momento_grafico
                 FROM maquinario AS maq 
                 JOIN modelo AS m ON maq.fkModelo = m.idModelo
                 join registro as reg on reg.fkMaquina = maq.idMaquinario
-                where maq.idMaquinario = 2 order by idRegistro;`
+                join tiporegistro as tiporeg on tiporeg.idTipoRegistro = reg.fkTipoRegistro
+                where maq.idMaquinario = ${idMaquinario} and maq.fkHospital = ${fkHospital} 
+                and tiporeg.nome like "%${componente}%" 
+                order by idRegistro;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

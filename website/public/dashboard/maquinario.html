@@ -533,9 +533,9 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
                             &nbsp&nbsp</h2><br>
                          <select id="selectGrafico${i}" onchange="mudarGrafico(${i})">
                              <option value=1></option>
-                             <option value='CPU'>CPU</option>
-                             <option value='RAM'>RAM</option>
-                             <option value='DISCO'>DISCO</option>
+                             <option value='CPU+${visualizarDados.idMaquinario}'>CPU</option>
+                             <option value='RAM+${visualizarDados.idMaquinario}'>RAM</option>
+                             <option value='DISCO+${visualizarDados.idMaquinario}'>DISCO</option>
                          </select>
                             
                      </div>
@@ -565,7 +565,9 @@ function mudarGrafico(visualizarDados){
     const y = document.getElementById('graficoRAM'+visualizarDados);
     const z = document.getElementById('graficoDisco'+visualizarDados);
     var whyDado = document.getElementById(`selectGrafico${visualizarDados}`) 
-    getDadosGrafico(visualizarDados,whyDado.value)
+    var [componente, idMaquinario] = (whyDado.value).split("+");
+    alert(componente + idMaquinario)
+    getDadosGrafico(visualizarDados,componente,idMaquinario)
     x.style.height = "60vh";
     y.style.height = "60vh";
     z.style.height = "60vh";
@@ -654,11 +656,11 @@ function mudarGrafico(visualizarDados){
 
     }
 }
-function getDadosGrafico(visualizarDados,whyDado){
+function getDadosGrafico(visualizarDados,componente,idMaquinario){
  
     var fkHospital = 1;//sessionStorage.FK_HOSPITAL;
 
-    fetch(`/medidas/dadosMaquinario/${fkHospital}/${visualizarDados}/${whyDado}`)
+    fetch(`/medidas/dadosMaquinario/${fkHospital}/${idMaquinario}/${componente}`)
     .then(
         function(resposta){
             if(resposta.ok){

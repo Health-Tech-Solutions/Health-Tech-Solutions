@@ -24,12 +24,13 @@ function buscarDadosMaquinario(req, res) {
 
 
     var fkHospital = req.params.fkHospital;
-    var visualizarDados = req.params.visualizarDados;
-    var whyDado = req.params.whyDado;
+ 
+    var componente = req.params.componente;
+    var idMaquinario = req.params.idMaquinario;
   
     //console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarDadosMaquinario(fkHospital,whyDado).then(function (resultado) {
+    medidaModel.buscarDadosMaquinario(fkHospital,componente,idMaquinario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

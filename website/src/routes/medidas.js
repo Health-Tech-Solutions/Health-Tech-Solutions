@@ -10,7 +10,7 @@ router.get("/ultimas/:fkTipo", function (req, res) {
 router.get("/dadosMaquina/:fkMaquina", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
-router.get("/dadosMaquinario/:fkHospital/:visualizarDados/:whyDado", function (req, res) {
+router.get("/dadosMaquinario/:fkHospital/:componente/:idMaquinario", function (req, res) {
     medidaController.buscarDadosMaquinario(req, res);
 });
 

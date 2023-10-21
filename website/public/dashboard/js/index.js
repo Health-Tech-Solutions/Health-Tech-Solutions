@@ -78,7 +78,6 @@ function totalMaquinas(){
     })
   }
 
-
   var Ultrassom = 0
   var Cardioversores = 0
   var Desfibriladores = 0
@@ -87,7 +86,7 @@ function totalMaquinas(){
   var MaquinaECG = 0
   var MonitorFetal = 0
   var MonitorSinaisVitais = 0
-
+  
   function MaquinasPorTipoChamadoAberto(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${fkHospital}`)

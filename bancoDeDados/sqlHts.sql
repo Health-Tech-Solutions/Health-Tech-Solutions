@@ -165,6 +165,8 @@ create table maquinario(
     primary key(idMaquinario, fkModelo)
 );
 
+SELECT COUNT(nivel) AS qtdNivel, nivel FROM chamado group by nivel;
+SELECT * FROM chamado;
 SELECT
         dataHora,
 		COUNT(*) AS quantidade	
@@ -172,9 +174,7 @@ SELECT
        WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
         GROUP BY dataHora;
         
-
-        ;
-        
+SELECT * FROM chamado;
 
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
@@ -544,6 +544,8 @@ AS
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
+SELECT COUNT(nivel) AS qtdNivel,
+	   nivel from vw_chamados GROUP BY nivel;
 SELECT 
 COUNT(idChamado) AS numeroChamados,
 tipo 

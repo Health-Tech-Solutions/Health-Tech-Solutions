@@ -139,7 +139,7 @@ function totalMaquinas(){
             console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MaquinaECG,MonitorFetal,MonitorSinaisVitais)
 
             
-            
+            MaquinasPorTipo()
             
           }
         )

@@ -182,6 +182,16 @@ function buscarGravidade(idTipo){
     console.log("Executando a seguinte instrução sql " + instrucao)
     return database.executar(instrucao)
 }
+function listarModelos(){
+    console.log("Estou no listar modelos")
+    var instrucao = `
+    SELECT 
+        tipo 
+    FROM vw_chamados 
+    GROUP BY tipo;
+    `
+    return database.executar(instrucao)
+}
 
 module.exports = {
     buscarMensal,
@@ -191,5 +201,6 @@ module.exports = {
     buscarModelo,
     buscarEstado,
     listarChamados,
-    buscarGravidade
+    buscarGravidade,
+    listarModelos
 }

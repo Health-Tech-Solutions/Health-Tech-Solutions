@@ -40,14 +40,14 @@ var graficoPizza = new Chart(configPie, {
 
 function buscarGravidade(){
     var idTipo = sessionStorage.POSICAO_EQUIPAMENTO
-    alert("Chamou")
+
     fetch(`/chamados/buscarGravidade/${idTipo}`)
     .then(
-        function(resposta){
+        resposta => {
             if(resposta.ok){
                 resposta.json()
                 .then(
-                    function (resposta){
+                    resposta => {
                         console.log(resposta)
                         plotarGraficoPizza(resposta)
                     }
@@ -75,10 +75,29 @@ function plotarGraficoPizza(resposta){
 }
 var posicao = 0
 function mudarEquipamento(numero){
-    if((posicao == 0 && numero == -1) || (posicao == 8 && numero == 1)){
-        numero = 0 
-    }
-    posicao += numero
-    sessionStorage.POSICAO_EQUIPAMENTO = posicao
-    buscarGravidade()   
+    fetch("/chamados/listarModelos")
+        .then(
+            resposta => {
+                if(resposta.ok){
+                    resposta.json()
+                    .then(
+                        resposta => {
+                            console.log(resposta)
+                        }
+                    )
+                }
+            }
+        )
+        .catch(
+            err =>{
+                console.log("ERRO " + err)
+            }
+        )   
+
+    // if((posicao == 0 && numero == -1) || (posicao == 8 && numero == 1)){
+    //     numero = 0 
+    // }
+    // posicao += numero
+    // sessionStorage.POSICAO_EQUIPAMENTO = posicao
+    // buscarGravidade()   
 }

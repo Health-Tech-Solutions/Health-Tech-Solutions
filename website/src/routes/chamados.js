@@ -23,7 +23,7 @@ router.get("/buscarEstado/:fkHospital", function(req,res){
     chamadoController.buscarEstado(req,res)
 })
 
-router.get("/listarChamados/:idHospital", function(req,res){
+router.get("/listarChamados/:idHospital", (req,res) => {
     chamadoController.listarChamados(req,res)
 })
 
@@ -34,5 +34,9 @@ router.get("/buscarSemanal/:fkHospital", function(req,res){
 router.get("/buscarGravidade/:idTipo", function(req,res){
     chamadoController.buscarGravidade(req,res)
 })
+
+router.get("/listarModelos", (req,res) =>{
+    chamadoController.listarModelos(req,res)
+});
 
 module.exports = router;

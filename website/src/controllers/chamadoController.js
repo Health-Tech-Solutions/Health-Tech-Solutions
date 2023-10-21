@@ -134,6 +134,23 @@ function buscarGravidade(req,res){
         res.status(500).json(erro.sqlMessage)
     })
 }
+
+function listarModelos(req,res){
+    chamadoModel.listarModelos()
+    .then(
+        (resultado) => {
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        }
+    ).catch(erro => {
+        console.log(erro)
+        console.log(`Houve um erro ao tentar listar os modelos de equipamentos`, erro.sqlMessage)
+        res.status(500).json(erro.sqlMessage)
+    })
+}
 module.exports = {
     buscarMensal,
     buscarHospitais,
@@ -142,5 +159,6 @@ module.exports = {
     buscarEstado,
     listarChamados,
     buscarSemanal,
-    buscarGravidade
+    buscarGravidade,
+    listarModelos
 }

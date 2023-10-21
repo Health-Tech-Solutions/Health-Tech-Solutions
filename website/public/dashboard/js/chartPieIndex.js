@@ -4,14 +4,17 @@
 const configPie = document.getElementById('chartPie');
 
 var dadosPizza = {
-    labels: ['Perigo', 'BLÉU', 'Saudável'],
+    labels: [],
     datasets: [{
         label: '',
         data: [],
         backgroundColor: [
-            '#e74a3b',
+            '#1cc88a',
             '#f6c23e',
-            '#1cc88a'
+            '#e74a3b'
+            
+            
+                   
         ],
         borderWidth: 1
     }]
@@ -57,14 +60,13 @@ function buscarGravidade(){
 }
 
 function plotarGraficoPizza(resposta){
-    let labels = ['IHUUUUUU','SHUAAA','poooow']
+    let labels = []
     dadosPizza.labels = labels
     dadosPizza.datasets[0].data = []
     for (let i = 0; i <= 2; i++) {
-        let element = resposta[i].qtdNivel;
-        console.log(element)
-    
-        dadosPizza.datasets[0].data.push(element)
+        let element = resposta[i];
+        dadosPizza.labels.push(element.nivel)
+        dadosPizza.datasets[0].data.push(element.qtdNivel)
     }
 
     graficoPizza.update()

@@ -165,6 +165,17 @@ create table maquinario(
     primary key(idMaquinario, fkModelo)
 );
 
+SELECT
+        dataHora,
+		COUNT(*) AS quantidade	
+        FROM vw_chamados
+       WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        GROUP BY dataHora;
+        
+
+        ;
+        
+
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
 values
@@ -540,6 +551,12 @@ FROM vw_chamados
 GROUP BY tipo
 ORDER BY numeroChamados DESC LIMIT 1;
 
+
+SELECT 
+    idMaquina AS quantidade, 
+    tipo FROM 
+    vw_chamados group by quantidade, tipo;
+
 SELECT COUNT(idChamado) AS chamados,
 	   tipoRegistro,
        hospital FROM vw_chamados
@@ -603,6 +620,7 @@ WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
 	-- SELECT * FROM chamado ;
 --
 use hts;
+SELECT * FROM vw_chamados;
 select idMaquina,nivel,estado,sla,
         DATE_FORMAT(dataHora, '%d/%m/%Y %H:%i') AS dataHora,tipoRegistro from vw_chamados LIMIT 10;
 SELECT 

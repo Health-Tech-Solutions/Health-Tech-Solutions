@@ -135,6 +135,8 @@
                             sessionStorage.ID_USUARIO = json[0].idFuncionario
                             sessionStorage.NOME_USUARIO = json[0].nome;
                             sessionStorage.FK_EMPRESA = json[0].fkIndustria
+                            sessionStorage.FK_HOSPITAL = null
+                            sessionStorage.NOME_HOSPITAL = null
                             setTimeout(function () {
                                 if(tipo == '0'){
                                     window.location = "./dashboard/index.html";

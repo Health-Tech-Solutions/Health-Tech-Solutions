@@ -25,7 +25,9 @@
 
 </head>
 
-<body id="page-top" onload="maquinasInstaveis(),
+<body id="page-top" onload="
+buscarGravidade(),
+maquinasInstaveis(),
 maquinasInstaveis(),
 mostrarFoto(),
 obterDadosMensais(),
@@ -490,13 +492,13 @@ mostrarDados()">
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-danger"></i> Perigo
+                                            <i class="fas fa-circle text-danger"></i> Alto
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-warning"></i> Em risco
+                                            <i class="fas fa-circle text-warning"></i> médio
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Saudável
+                                            <i class="fas fa-circle text-success"></i> baixo
                                         </span>
                                     </div>
                                 </div>
@@ -687,5 +689,5 @@ mostrarDados()">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/index.js"></script>
 <script src="js/dados.js"></script>
-
 <script src="js/chartLineIndex.js"></script>
+<script src="js/chartPieIndex.js"></script>

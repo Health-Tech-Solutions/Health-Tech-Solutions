@@ -22,7 +22,6 @@ function obterDadosMensais(){
         }
     )
 }
-
 function obterDadosSemanal(){
 
     var fkHospital = sessionStorage.FK_HOSPITAL;
@@ -110,35 +109,3 @@ var lineChart = new Chart(ctx, {
 });
 
 
-const configPie = document.getElementById('chartPie');
-
-new Chart(configPie, {
-    type: 'pie',
-    data: {
-        labels: ['Perigo', 'Em risco', 'Saudável'],
-        datasets: [{
-            label: '',
-            data: [2, 9, 30],
-            backgroundColor: [
-                '#e74a3b',
-                '#f6c23e',
-                '#1cc88a'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-                display: false
-
-            }
-        },
-        plugins: {
-            legend: {
-                display: false
-            }
-        }
-    }
-});

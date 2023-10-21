@@ -169,6 +169,19 @@ function listarChamados(idHospital){
 
 }
 
+function buscarGravidade(){
+    console.log("Estou no buscar gravidade")
+    var instrucao = `
+        SELECT 
+            COUNT(nivel) AS qtdNivel,
+            nivel 
+        FROM vw_chamados 
+        GROUP BY nivel;
+    `
+    console.log("Executando a seguinte instrução sql " + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     buscarMensal,
     buscarSemanal,
@@ -176,5 +189,6 @@ module.exports = {
     buscarComponente,
     buscarModelo,
     buscarEstado,
-    listarChamados
+    listarChamados,
+    buscarGravidade
 }

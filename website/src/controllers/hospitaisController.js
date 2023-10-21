@@ -38,10 +38,11 @@ function pegarTotalMaquinas(req,res){
 }
 
 function totalMaquinasPorTipoChamadoAberto(req,res){
+    console.log("ENTROU Controller totalMaquinasPorTipoChamadoAberto")
     var fkHospital = req.params.fkHospital;
-    console.log("Entrou no totalMaquinasPorTipoChamadoAberto")
+    var hospital = req.params.hospital
 
-    hospitalModel.totalMaquinasPorTipoChamadoAberto(fkHospital)
+    hospitalModel.totalMaquinasPorTipoChamadoAberto(fkHospital,hospital)
         .then(
             function(resultado){
                 res.json(resultado);

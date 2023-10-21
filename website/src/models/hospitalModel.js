@@ -46,15 +46,15 @@ function maquinasInstaveis(fkHospital) {
 }
 
 
-function totalMaquinasPorTipoChamadoAberto(fkHospital) { 
+function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
     var instrucao = ""
     if (fkHospital != "null") {
-        instrucao = `
-        SELECT 
-    idMaquina AS quantidade, 
-    tipo, hospital FROM 
-    vw_chamados where hospital = "MinDray" group by quantidade, tipo, hospital;
-            ` 
+         instrucao = `
+         SELECT 
+     idMaquina AS quantidade, 
+     tipo, hospital FROM 
+     vw_chamados where hospital = '${hospital}' group by quantidade, tipo, hospital;
+             ` 
     }else{
         instrucao = `
         SELECT 

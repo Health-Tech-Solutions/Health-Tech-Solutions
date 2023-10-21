@@ -16,7 +16,7 @@ router.get("/maquinasInstaveis/:fkHospital", (req,res) => {
     hospitaisController.maquinasInstaveis(req,res)
 })
 
-router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital", (req,res) => {
+router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {
     hospitaisController.totalMaquinasPorTipoChamadoAberto(req,res)
 })
 

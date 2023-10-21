@@ -452,13 +452,11 @@
 
 <script>
 
-    sessionStorage.FK_HOSPITAL = sessionStorage.ID_HOSPITAL
+    // sessionStorage.FK_HOSPITAL = sessionStorage.ID_HOSPITAL
 
     function listarChamados() {
 
-    let idHospital = sessionStorage.ID_HOSPITAL
-
-    alert(idHospital)
+        let idHospital = sessionStorage.FK_HOSPITAL
 
         fetch(`/chamados/listarChamados/${idHospital}`)
             .then(
@@ -512,46 +510,43 @@
             nome = 'todos'
         }
         console.log(teste, id, nome)
-        sessionStorage.ID_HOSPITAL = id
+        sessionStorage.FK_HOSPITAL = id
         sessionStorage.NOME_HOSPITAL = nome
         location.reload()
     }
 
-    
-dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`; 
 
-function listarHospitais(){
+    // dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL} BLA</option>`;
 
-    fetch(`/hospitais/listarHospitais`)
-    .then(
-        function(resposta){
-            if(resposta.ok){
-                resposta.json()
-                .then(
-                    function(resposta){
-                        console.log(resposta)
-                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`; 
-                        dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`; 
-                        for (let i = 0; i < resposta.length; i++) {
-                            let nome = resposta[i].nomeFantasia
-                            let id = resposta[i].idEmpresa
-                            console.log(id)
-                           
-                            console.log(nome)
-                            dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>` 
-                        }
-                        
+    function listarHospitais() {
+
+        fetch(`/hospitais/listarHospitais`)
+            .then(
+                function (resposta) {
+                    if (resposta.ok) {
+                        resposta.json()
+                            .then(
+                                function (resposta) {
+                                    console.log(resposta)
+                                    dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`;
+                                    dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`;
+                                    for (let i = 0; i < resposta.length; i++) {
+                                        let nome = resposta[i].nomeFantasia
+                                        let id = resposta[i].idEmpresa
+                                        dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>`
+                                    }
+
+                                }
+                            )
                     }
-                )
-            }
-        }
-    )
-    .catch(
-        err => {
-            console.log("ERRO" + err)
-        }
-    )
+                }
+            )
+            .catch(
+                err => {
+                    console.log("ERRO" + err)
+                }
+            )
 
-}
+    }
 
 </script>

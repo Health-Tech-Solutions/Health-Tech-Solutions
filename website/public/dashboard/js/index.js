@@ -1,7 +1,13 @@
-
+if(sessionStorage.FK_HOSPITAL == undefined){
+  sessionStorage.FK_HOSPITAL = null
+}
+if(sessionStorage.NOME_HOSPITAL == undefined){
+  sessionStorage.NOME_HOSPITAL = todos
+}
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`; 
 getTotalMaquinas()
 maquinasInstaveis()
+// listarHospitais()
 var qtdTotalMaquinas;
 
 function listarHospitais(){
@@ -19,9 +25,6 @@ function listarHospitais(){
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
-                            console.log(id)
-                           
-                            console.log(nome)
                             dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>` 
                         }
                         

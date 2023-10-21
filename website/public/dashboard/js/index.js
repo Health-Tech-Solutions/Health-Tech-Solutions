@@ -91,25 +91,22 @@ function totalMaquinas(){
   function MaquinasPorTipoChamadoAberto(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
 
-    var selectElement = document.getElementById("dropdown_menu");
-    var options = selectElement.querySelectorAll("option.dropdown-item");
+    if (fkHospital == 1) {
+    hospital = "MinDray"
+    }else if (fkHospital == 2) {
+    hospital = "Hospital Santa Catarina"
+    }if (fkHospital == 3) {
+    hospital = "Hospital Albert Einsten"
+    }if (fkHospital == 4) {
+    hospital = "Hospital Santa Helena"
+    }
 
-    //Depois deixar o value do select apenas com a fk do hospital para que o for fique automatizado
-    options.forEach(function(option) {
-      if (option.valor == "1;MinDray") {
-        var hospital = "MinDray"
-      }else if (option.valor == "2;Hospital Santa Catarina") {
-        var hospital = "Hospital Santa Catarina"
-      }else if (option.valor == "3;Hospital Albert Einsten") {
-        var hospital = "Hospital Albert Einsten"
-      }else if (option.valor == "4;Hospital Santa Helena") {
-        var hospital = "4;Hospital Santa Helena"
-      }
-    });
-    
+    console.log("VERIFICAÇÃO")
+    console.log(hospital)
+    console.log("VERIFICAÇÃO")
+     
 
-
-    fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${hospital}`)
+    fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${fkHospital}/${hospital}`)
     .then(function (resposta){
       if(resposta.ok){
         resposta.json()

@@ -170,9 +170,21 @@ function listarChamados(idHospital){
 }
 
 function buscarGravidade(idTipo, fkHospital){
+    var instrucao = ``
+    console.log("PLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
     console.log("Estou no buscar gravidade")
-    console.log("PEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
-    var instrucao = `
+    if(fkHospital == 'null'){
+        instrucao = `
+        SELECT 
+            COUNT(nivel) AS qtdNivel,
+            nivel 
+        FROM vw_chamados 
+        WHERE idTipo = ${idTipo}
+        GROUP BY nivel;
+        
+        `
+    } else {
+        instrucao = `
         SELECT 
             COUNT(nivel) AS qtdNivel,
             nivel 
@@ -181,6 +193,8 @@ function buscarGravidade(idTipo, fkHospital){
         AND idHospital = ${fkHospital}
         GROUP BY nivel;
     `
+    }
+    
     console.log("Executando a seguinte instrução sql " + instrucao)
     return database.executar(instrucao)
 }

@@ -119,8 +119,10 @@ function listarChamados(req,res){
 }
 
 function buscarGravidade(req,res){
-    var idTipo = req.params.idTipo
-    var idHospital = req.body.fkHospitalServer
+    var fks = req.params.fks
+    var split = fks.split(',')
+    var idHospital = split[0]
+    var idTipo = split[1]
     chamadoModel.buscarGravidade(idTipo,idHospital)
     .then((resultado) => {
         if(resultado.length > 0){

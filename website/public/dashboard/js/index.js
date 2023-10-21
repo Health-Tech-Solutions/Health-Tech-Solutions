@@ -231,8 +231,6 @@ function maquinasInstaveis(){
             informacoesMaquinasHospital2 = resposta;
             console.log(informacoesMaquinasHospital2)
             
-
-            
             for (let index = 0; index < informacoesMaquinasHospital2.length; index++) {
                 if(resposta[index].fkTipo == 1){
                     qntFktipo1 = qntFktipo1 + 1
@@ -251,8 +249,6 @@ function maquinasInstaveis(){
                 }else if (resposta[index].fkTipo == 8){
                     qntFktipo8 = qntFktipo8 + 1
                 }
-              
-                
             }
            calculoGraficoSituacaoGeral()
            console.log(`Quantidade de cada tipo de fkTipo:`)
@@ -330,7 +326,6 @@ function maquinasInstaveis(){
     larguraCardioversores.style.width = `${linha2}%`
 
      if(linha2 <= 30){
-
        larguraCardioversores.style.backgroundColor = 'red' 
      }else if(linha2 <= 60){
        larguraCardioversores.style.backgroundColor = 'orange' 
@@ -339,9 +334,7 @@ function maquinasInstaveis(){
      }else {
        larguraCardioversores.style.backgroundColor = 'green' 
      }
-     
-     }else{
-      
+     }else{ 
       CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
     CardioversoresPorcentagem.innerHTML = `${linhaCasoDerNull}%`
 

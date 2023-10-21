@@ -22,7 +22,6 @@ function obterDadosMensais(){
         }
     )
 }
-
 function obterDadosSemanal(){
 
     var fkHospital = sessionStorage.FK_HOSPITAL;

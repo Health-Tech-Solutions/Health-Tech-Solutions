@@ -3,21 +3,22 @@
 // Gráfico de pizza, gravidade dos chamados por modelo de máquina
 const configPie = document.getElementById('chartPie');
 
-new Chart(configPie, {
+var dadosPizza = {
+    labels: ['Perigo', 'BLÉU', 'Saudável'],
+    datasets: [{
+        label: '',
+        data: [],
+        backgroundColor: [
+            '#e74a3b',
+            '#f6c23e',
+            '#1cc88a'
+        ],
+        borderWidth: 1
+    }]
+}
+var graficoPizza = new Chart(configPie, {
     type: 'pie',
-    data: {
-        labels: ['Perigo', 'BLÉU', 'Saudável'],
-        datasets: [{
-            label: '',
-            data: [2, 9, 30],
-            backgroundColor: [
-                '#e74a3b',
-                '#f6c23e',
-                '#1cc88a'
-            ],
-            borderWidth: 1
-        }]
-    },
+    data: dadosPizza,
     options: {
         scales: {
             y: {
@@ -35,6 +36,7 @@ new Chart(configPie, {
 });
 
 function buscarGravidade(){
+ 
     fetch(`/chamados/buscarGravidade`)
     .then(
         function(resposta){
@@ -43,7 +45,7 @@ function buscarGravidade(){
                 .then(
                     function (resposta){
                         console.log(resposta)
-                    
+                        plotarGraficoPizza(resposta)
                     }
                 )
             }
@@ -52,4 +54,19 @@ function buscarGravidade(){
     .catch(err =>{
         console.log("ERRO " + err)
     })
+}
+
+function plotarGraficoPizza(resposta){
+    let labels = ['IHUUUUUU','SHUAAA','poooow']
+    dadosPizza.labels = labels
+    dadosPizza.datasets[0].data = []
+    for (let i = 0; i <= 2; i++) {
+        let element = resposta[i].qtdNivel;
+        console.log(element)
+    
+        dadosPizza.datasets[0].data.push(element)
+    }
+
+    graficoPizza.update()
+    
 }

@@ -89,20 +89,17 @@ function totalMaquinas(){
   
   function MaquinasPorTipoChamadoAberto(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
-
+    var hospital = "Todos"
     if (fkHospital == 1) {
     hospital = "MinDray"
     }else if (fkHospital == 2) {
     hospital = "Hospital Santa Catarina"
-    }if (fkHospital == 3) {
+    }else if (fkHospital == 3) {
     hospital = "Hospital Albert Einsten"
-    }if (fkHospital == 4) {
+    }else if (fkHospital == 4) {
     hospital = "Hospital Santa Helena"
     }
 
-    console.log("VERIFICAÇÃO")
-    console.log(hospital)
-    console.log("VERIFICAÇÃO")
      
 
     fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${fkHospital}/${hospital}`)
@@ -134,6 +131,7 @@ function totalMaquinas(){
               }else if (resposta[index].tipo == "Monitor de sinais vitais") {
                 MonitorSinaisVitais += resposta[index].quantidade
               } 
+               
               
             }
             
@@ -247,10 +245,11 @@ function maquinasInstaveis(){
                     qntFktipo8 = qntFktipo8 + 1
                 }
             }
-           calculoGraficoSituacaoGeral()
+            calculoGraficoSituacaoGeral()
            console.log(`Quantidade de cada tipo de fkTipo:`)
-           console.log(`${qntFktipo1}, ${qntFktipo2}, ${qntFktipo3},${qntFktipo4},${qntFktipo5},${qntFktipo6},${qntFktipo7},${qntFktipo8}`) 
-
+           console.log(`${qntFktipo1}, ${qntFktipo2}, ${qntFktipo3},${qntFktipo4},${qntFktipo5},${qntFktipo6},${qntFktipo7},${qntFktipo8}`)
+           
+           
 
           
           }
@@ -266,190 +265,200 @@ function maquinasInstaveis(){
   var linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8 = 0
     
   function calculoGraficoSituacaoGeral(){ 
-    linhaCasoDerNull = 0
-    linha1 = ((Ultrassom*100)/qntFktipo1).toFixed(2)
-    //linha1 = 100
-    linha2 = ((Cardioversores*100)/qntFktipo2).toFixed(2)
-    //linha2 = 20
-    linha3 = ((Desfibriladores*100)/qntFktipo3).toFixed(2)
-    //linha3 = 30
-    linha4 = ((MonitorCardiaco*100)/qntFktipo4).toFixed(2)
-    //linha4 = 40
-    linha5 = ((MaquinaAnestesia*100)/qntFktipo5).toFixed(2)
-    //linha5 = 50
-    linha6 = ((MaquinaECG*100)/qntFktipo6).toFixed(2)
-    //linha6 = 60
-    linha7 = ((MonitorFetal*100)/qntFktipo7).toFixed(2)
-    //linha7 = 70
-    linha8 = ((MonitorSinaisVitais*100)/qntFktipo8).toFixed(2)
-    //linha8 = 80
-    console.log("Calculo:")
-    console.log(linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8)
 
-
-    // VERIFICAÇÃO ULTRASSOM
-    if (linha1 != "NaN" && linha1 != Infinity ) {
-      UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
-    UltrassomPorcentagem.innerHTML = `${linha1}%`
-
-    larguraUltrassom = document.getElementById("larguraUltrassom")
-    larguraUltrassom.style.width = `${linha1}%`
-
-     if(linha1 <= 30){
-       larguraUltrassom.style.backgroundColor = 'red' 
-     }else if(linha1 <= 60){
-       larguraUltrassom.style.backgroundColor = 'orange' 
-     }else if(linha1 <= 89){
-       larguraUltrassom.style.backgroundColor = 'yellow' 
-     }else {
-       larguraUltrassom.style.backgroundColor = 'green' 
-     }
-    }else{
-      UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
-      UltrassomPorcentagem.innerHTML = `${linhaCasoDerNull}%`
+      linhaCasoDerNull = 0
+      linha1 = ((Ultrassom*100)/qntFktipo1).toFixed(2)
+      //linha1 = 100
+      linha2 = ((Cardioversores*100)/qntFktipo2).toFixed(2)
+      //linha2 = 20
+      linha3 = ((Desfibriladores*100)/qntFktipo3).toFixed(2)
+      //linha3 = 30
+      linha4 = ((MonitorCardiaco*100)/qntFktipo4).toFixed(2)
+      //linha4 = 40
+      console.log("Valores Maquina e qntFk:")
+      console.log(MaquinaAnestesia,qntFktipo5)
+      linha5 = ((MaquinaAnestesia*100)/qntFktipo5).toFixed(2)
+      //linha5 = 50
+      linha6 = ((MaquinaECG*100)/qntFktipo6).toFixed(2)
+      //linha6 = 60
+      linha7 = ((MonitorFetal*100)/qntFktipo7).toFixed(2)
+      //linha7 = 70
+      linha8 = ((MonitorSinaisVitais*100)/qntFktipo8).toFixed(2)
+      //linha8 = 80
+      console.log("Calculo:")
+      console.log(linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8)
+  
+  
+      // VERIFICAÇÃO ULTRASSOM
+      if (linha1 != "NaN" && linha1 != Infinity ) {
+        UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
+      UltrassomPorcentagem.innerHTML = `${linha1}%`
   
       larguraUltrassom = document.getElementById("larguraUltrassom")
-      larguraUltrassom.style.width = `${linhaCasoDerNull}%`
-    }
+      larguraUltrassom.style.width = `${linha1}%`
+  
+       if(linha1 <= 30){
+         larguraUltrassom.style.backgroundColor = 'red' 
+       }else if(linha1 <= 60){
+         larguraUltrassom.style.backgroundColor = 'orange' 
+       }else if(linha1 <= 89){
+         larguraUltrassom.style.backgroundColor = 'yellow' 
+       }else {
+         larguraUltrassom.style.backgroundColor = 'green' 
+       }
+      }else{
+        UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
+        UltrassomPorcentagem.innerHTML = `${linhaCasoDerNull}%`
     
-   
-    // VERIFICAÇÃO CARDIOVERSORES
-     if (linha2 != "NaN" && linha2 != Infinity ) {
+        larguraUltrassom = document.getElementById("larguraUltrassom")
+        larguraUltrassom.style.width = `${linhaCasoDerNull}%`
+      }
       
-      CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
-    CardioversoresPorcentagem.innerHTML = `${linha2}%`
-
-    larguraCardioversores = document.getElementById("larguraCardioversores")
-    larguraCardioversores.style.width = `${linha2}%`
-
-     if(linha2 <= 30){
-       larguraCardioversores.style.backgroundColor = 'red' 
-     }else if(linha2 <= 60){
-       larguraCardioversores.style.backgroundColor = 'orange' 
-     }else if(linha2 <= 89){
-       larguraCardioversores.style.backgroundColor = 'yellow' 
-     }else {
-       larguraCardioversores.style.backgroundColor = 'green' 
-     }
-     }else{ 
-      CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
-    CardioversoresPorcentagem.innerHTML = `${linhaCasoDerNull}%`
-
-    larguraCardioversores = document.getElementById("larguraCardioversores")
-    larguraCardioversores.style.width = `${linhaCasoDerNull}%`
-     }
      
-
-     // VERIFICAÇÃO DESFIBRILADORES
-     if (linha3 != "NaN" && linha3 != Infinity ) {
-      DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
-    DesfibriladoresPorcentagem.innerHTML = `${linha3}%`
-
-    larguraDesfibriladores = document.getElementById("larguraDesfibriladores")
-     larguraDesfibriladores.style.width = `${linha3}%`
-
-     if(linha3 <= 30){
-       larguraDesfibriladores.style.backgroundColor = 'red' 
-     }else if(linha3 <= 60){
-       larguraDesfibriladores.style.backgroundColor = 'orange' 
-     }else if(linha3 <= 89){
-       larguraDesfibriladores.style.backgroundColor = 'yellow' 
-     }else {
-       larguraDesfibriladores.style.backgroundColor = 'green' 
-     }
-     }else{
-      DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
-      DesfibriladoresPorcentagem.innerHTML = `${linhaCasoDerNull}%`
+      // VERIFICAÇÃO CARDIOVERSORES
+       if (linha2 != "NaN" && linha2 != Infinity ) {
+        
+        CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
+      CardioversoresPorcentagem.innerHTML = `${linha2}%`
+  
+      larguraCardioversores = document.getElementById("larguraCardioversores")
+      larguraCardioversores.style.width = `${linha2}%`
+  
+       if(linha2 <= 30){
+         larguraCardioversores.style.backgroundColor = 'red' 
+       }else if(linha2 <= 60){
+         larguraCardioversores.style.backgroundColor = 'orange' 
+       }else if(linha2 <= 89){
+         larguraCardioversores.style.backgroundColor = 'yellow' 
+       }else {
+         larguraCardioversores.style.backgroundColor = 'green' 
+       }
+       }else{ 
+        CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
+      CardioversoresPorcentagem.innerHTML = `${linhaCasoDerNull}%`
+  
+      larguraCardioversores = document.getElementById("larguraCardioversores")
+      larguraCardioversores.style.width = `${linhaCasoDerNull}%`
+       }
+       
+  
+       // VERIFICAÇÃO DESFIBRILADORES
+       if (linha3 != "NaN" && linha3 != Infinity ) {
+        DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
+      DesfibriladoresPorcentagem.innerHTML = `${linha3}%`
   
       larguraDesfibriladores = document.getElementById("larguraDesfibriladores")
-       larguraDesfibriladores.style.width = `${linhaCasoDerNull}%`
-     }
+       larguraDesfibriladores.style.width = `${linha3}%`
+  
+       if(linha3 <= 30){
+         larguraDesfibriladores.style.backgroundColor = 'red' 
+       }else if(linha3 <= 60){
+         larguraDesfibriladores.style.backgroundColor = 'orange' 
+       }else if(linha3 <= 89){
+         larguraDesfibriladores.style.backgroundColor = 'yellow' 
+       }else {
+         larguraDesfibriladores.style.backgroundColor = 'green' 
+       }
+       }else{
+        DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
+        DesfibriladoresPorcentagem.innerHTML = `${linhaCasoDerNull}%`
     
-
-   //Não tem monitor cardiaco
-
-   // VERIFICAÇÃO MAQUINA ANESTESIA
-   if (linha5 != "NaN" && linha5 != Infinity ) {
-    MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
-    MaquinaAnestesiaPorcentagem.innerHTML = `${linha5}%`
-
-    larguraMaquinaAnestesia = document.getElementById("larguraMaquinaAnestesia")
-     larguraMaquinaAnestesia.style.width = `${linha5}%`
-
-     if(linha5 <= 30){
-       larguraMaquinaAnestesia.style.backgroundColor = 'red' 
-     }else if(linha5 <= 60){
-       larguraMaquinaAnestesia.style.backgroundColor = 'orange' 
-     }else if(linha5 <= 89){
-       larguraMaquinaAnestesia.style.backgroundColor = 'yellow' 
-     }else {
-       larguraMaquinaAnestesia.style.backgroundColor = 'green' 
-     }
-   }else{
-    MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
-    MaquinaAnestesiaPorcentagem.innerHTML = `${linhaCasoDerNull}%`
-
-    larguraMaquinaAnestesia = document.getElementById("larguraMaquinaAnestesia")
-     larguraMaquinaAnestesia.style.width = `${linhaCasoDerNull}%`
-   }
-    
-    
-    // VERIFICAÇÃO MAQUINA ECG
-     if (linha6 != "NaN" && linha6 != Infinity ) {
-      MaquinaECGPorcentagem = document.getElementById("MaquinaECGGrafico")
-    MaquinaECGPorcentagem.innerHTML = `${linha6}%`
-
-    larguraMaquinaECG = document.getElementById("larguraMaquinaECG")
-     larguraMaquinaECG.style.width = `${linha6}%`
-
-     if(linha6 <= 30){
-       larguraMaquinaECG.style.backgroundColor = 'red' 
-     }else if(linha6 <= 60){
-       larguraMaquinaECG.style.backgroundColor = 'orange' 
-     }else if(linha6 <= 89){
-       larguraMaquinaECG.style.backgroundColor = 'yellow' 
-     }else {
-       larguraMaquinaECG.style.backgroundColor = 'green' 
-     }
-
+        larguraDesfibriladores = document.getElementById("larguraDesfibriladores")
+         larguraDesfibriladores.style.width = `${linhaCasoDerNull}%`
+       }
+      
+  
+     //Não tem monitor cardiaco
+  
+     // VERIFICAÇÃO MAQUINA ANESTESIA
+     if (linha5 != "NaN" && linha5 != Infinity) {
+      console.log("TÁ NO IF 5")
+      MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
+      MaquinaAnestesiaPorcentagem.innerHTML = `${linha5}%`
+  
+      larguraMaquinaAnestesia = document.getElementById("larguraMaquinaAnestesia")
+       larguraMaquinaAnestesia.style.width = `${linha5}%`
+  
+       if(linha5 <= 30){
+         larguraMaquinaAnestesia.style.backgroundColor = 'red' 
+       }else if(linha5 <= 60){
+         larguraMaquinaAnestesia.style.backgroundColor = 'orange' 
+       }else if(linha5 <= 89){
+         larguraMaquinaAnestesia.style.backgroundColor = 'yellow' 
+       }else {
+         larguraMaquinaAnestesia.style.backgroundColor = 'green' 
+       }
      }else{
-      MaquinaECGPorcentagem = document.getElementById("MaquinaECGGrafico")
-    MaquinaECGPorcentagem.innerHTML = `${linhaCasoDerNull}%`
-
-    larguraMaquinaECG = document.getElementById("larguraMaquinaECG")
-     larguraMaquinaECG.style.width = `${linhaCasoDerNull}%`
+      MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
+      MaquinaAnestesiaPorcentagem.innerHTML = `${linhaCasoDerNull}%`
+  
+      larguraMaquinaAnestesia = document.getElementById("larguraMaquinaAnestesia")
+       larguraMaquinaAnestesia.style.width = `${linhaCasoDerNull}%`
      }
+      
+      
+      // VERIFICAÇÃO MAQUINA ECG
+       if (linha6 != "NaN" && linha6 != Infinity ) {
+        MaquinaECGPorcentagem = document.getElementById("MaquinaECGGrafico")
+      MaquinaECGPorcentagem.innerHTML = `${linha6}%`
+  
+      larguraMaquinaECG = document.getElementById("larguraMaquinaECG")
+       larguraMaquinaECG.style.width = `${linha6}%`
+  
+       if(linha6 <= 30){
+         larguraMaquinaECG.style.backgroundColor = 'red' 
+       }else if(linha6 <= 60){
+         larguraMaquinaECG.style.backgroundColor = 'orange' 
+       }else if(linha6 <= 89){
+         larguraMaquinaECG.style.backgroundColor = 'yellow' 
+       }else {
+         larguraMaquinaECG.style.backgroundColor = 'green' 
+       }
+  
+       }else{
+        MaquinaECGPorcentagem = document.getElementById("MaquinaECGGrafico")
+      MaquinaECGPorcentagem.innerHTML = `${linhaCasoDerNull}%`
+  
+      larguraMaquinaECG = document.getElementById("larguraMaquinaECG")
+       larguraMaquinaECG.style.width = `${linhaCasoDerNull}%`
+       }
+      
+  
+      // VERIFICAÇÃO MONITOR FETAL
+       if (linha7 != "NaN" && linha7 != Infinity ) {
+        MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")
+      MonitorFetalPorcentagem.innerHTML = `${linha7}%`
+  
+      larguraMonitorFetal = document.getElementById("larguraMonitorFetal")
+       larguraMonitorFetal.style.width = `${linha7}%`
+  
+       if(linha7 <= 30){
+         larguraMonitorFetal.style.backgroundColor = 'red' 
+       }else if(linha7 <= 60){
+         larguraMonitorFetal.style.backgroundColor = 'orange' 
+       }else if(linha7 <= 89){
+         larguraMonitorFetal.style.backgroundColor = 'yellow' 
+       }else {
+         larguraMonitorFetal.style.backgroundColor = 'green' 
+       }
+       }else{
+        MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")
+      MonitorFetalPorcentagem.innerHTML = `${linhaCasoDerNull}%`
+  
+      larguraMonitorFetal = document.getElementById("larguraMonitorFetal")
+       larguraMonitorFetal.style.width = `${linhaCasoDerNull}%`
+       }
+      
+  
+      //Não tem MonitorSinaisVitais
+
     
-
-    // VERIFICAÇÃO MONITOR FETAL
-     if (linha7 != "NaN" && linha7 != Infinity ) {
-      MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")
-    MonitorFetalPorcentagem.innerHTML = `${linha7}%`
-
-    larguraMonitorFetal = document.getElementById("larguraMonitorFetal")
-     larguraMonitorFetal.style.width = `${linha7}%`
-
-     if(linha7 <= 30){
-       larguraMonitorFetal.style.backgroundColor = 'red' 
-     }else if(linha7 <= 60){
-       larguraMonitorFetal.style.backgroundColor = 'orange' 
-     }else if(linha7 <= 89){
-       larguraMonitorFetal.style.backgroundColor = 'yellow' 
-     }else {
-       larguraMonitorFetal.style.backgroundColor = 'green' 
-     }
-     }else{
-      MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")
-    MonitorFetalPorcentagem.innerHTML = `${linhaCasoDerNull}%`
-
-    larguraMonitorFetal = document.getElementById("larguraMonitorFetal")
-     larguraMonitorFetal.style.width = `${linhaCasoDerNull}%`
-     }
     
-
-    //Não tem MonitorSinaisVitais
+    
 
   }
+
+  
 
   function chamarModeloComMaisAlertas() {
 

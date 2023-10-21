@@ -48,7 +48,7 @@ function maquinasInstaveis(fkHospital) {
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
     var instrucao = ""
-    if (fkHospital != "null" && hospital != "") {
+    if (fkHospital != "null") {
          instrucao = `
          SELECT 
      idMaquina AS quantidade, 

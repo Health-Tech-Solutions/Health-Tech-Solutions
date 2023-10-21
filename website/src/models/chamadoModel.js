@@ -169,13 +169,14 @@ function listarChamados(idHospital){
 
 }
 
-function buscarGravidade(){
+function buscarGravidade(idTipo){
     console.log("Estou no buscar gravidade")
     var instrucao = `
         SELECT 
             COUNT(nivel) AS qtdNivel,
             nivel 
         FROM vw_chamados 
+        WHERE idTipo = ${idTipo}
         GROUP BY nivel;
     `
     console.log("Executando a seguinte instrução sql " + instrucao)

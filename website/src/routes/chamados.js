@@ -31,7 +31,7 @@ router.get("/buscarSemanal/:fkHospital", function(req,res){
     chamadoController.buscarSemanal(req,res)
 })
 
-router.get("/buscarGravidade", function(req,res){
+router.get("/buscarGravidade/:idTipo", function(req,res){
     chamadoController.buscarGravidade(req,res)
 })
 

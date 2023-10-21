@@ -119,7 +119,8 @@ function listarChamados(req,res){
 }
 
 function buscarGravidade(req,res){
-    chamadoModel.buscarGravidade()
+    var idTipo = req.params.idTipo
+    chamadoModel.buscarGravidade(idTipo)
     .then((resultado) => {
         if(resultado.length > 0){
             res.status(200).json(resultado)

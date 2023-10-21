@@ -39,8 +39,9 @@ var graficoPizza = new Chart(configPie, {
 });
 
 function buscarGravidade(){
- 
-    fetch(`/chamados/buscarGravidade`)
+    var idTipo = sessionStorage.POSICAO_EQUIPAMENTO
+    alert("Chamou")
+    fetch(`/chamados/buscarGravidade/${idTipo}`)
     .then(
         function(resposta){
             if(resposta.ok){
@@ -71,4 +72,13 @@ function plotarGraficoPizza(resposta){
 
     graficoPizza.update()
     
+}
+var posicao = 0
+function mudarEquipamento(numero){
+    if((posicao == 0 && numero == -1) || (posicao == 8 && numero == 1)){
+        numero = 0 
+    }
+    posicao += numero
+    sessionStorage.POSICAO_EQUIPAMENTO = posicao
+    buscarGravidade()   
 }

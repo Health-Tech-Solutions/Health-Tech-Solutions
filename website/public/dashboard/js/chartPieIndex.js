@@ -1,5 +1,4 @@
 
-
 // Gráfico de pizza, gravidade dos chamados por modelo de máquina
 const configPie = document.getElementById('chartPie');
 
@@ -74,7 +73,9 @@ function plotarGraficoPizza(resposta){
     
 }
 var posicao = 0
-function mudarEquipamento(numero){
+var equipamentos = []
+function listarEquipamentos(numero){
+    equipamentos = []
     fetch("/chamados/listarModelos")
         .then(
             resposta => {
@@ -83,6 +84,13 @@ function mudarEquipamento(numero){
                     .then(
                         resposta => {
                             console.log(resposta)
+                            for (let i = 0; i < resposta.length; i++) {
+                                const element = resposta[i];
+                                console.log(element)
+                                equipamentos.push(element) 
+                            }   
+                            mudarEquipamento(numero, equipamentos)    
+               
                         }
                     )
                 }
@@ -92,12 +100,19 @@ function mudarEquipamento(numero){
             err =>{
                 console.log("ERRO " + err)
             }
-        )   
+        )  
+        
+    teste("O que")
+       
+}
 
-    // if((posicao == 0 && numero == -1) || (posicao == 8 && numero == 1)){
-    //     numero = 0 
-    // }
-    // posicao += numero
-    // sessionStorage.POSICAO_EQUIPAMENTO = posicao
-    // buscarGravidade()   
+function mudarEquipamento(numero, equipamentos){
+
+    if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
+        numero = 0 
+    }
+    posicao += numero
+    sessionStorage.POSICAO_EQUIPAMENTO = posicao
+    nome_equipamento.innerHTML = equipamentos[posicao - 1].tipo
+    buscarGravidade()
 }

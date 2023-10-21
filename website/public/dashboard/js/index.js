@@ -87,7 +87,26 @@ function totalMaquinas(){
 
   function MaquinasPorTipoChamadoAberto(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
-    fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${fkHospital}`)
+
+    var selectElement = document.getElementById("dropdown_menu");
+    var options = selectElement.querySelectorAll("option.dropdown-item");
+
+    //Depois deixar o value do select apenas com a fk do hospital para que o for fique automatizado
+    options.forEach(function(option) {
+      if (option.valor == "1;MinDray") {
+        var hospital = "MinDray"
+      }else if (option.valor == "2;Hospital Santa Catarina") {
+        var hospital = "Hospital Santa Catarina"
+      }else if (option.valor == "3;Hospital Albert Einsten") {
+        var hospital = "Hospital Albert Einsten"
+      }else if (option.valor == "4;Hospital Santa Helena") {
+        var hospital = "4;Hospital Santa Helena"
+      }
+    });
+    
+
+
+    fetch(`/hospitais/totalMaquinasPorTipoChamadoAberto/${hospital}`)
     .then(function (resposta){
       if(resposta.ok){
         resposta.json()

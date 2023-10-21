@@ -47,12 +47,22 @@ function maquinasInstaveis(fkHospital) {
 
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital) { 
-    const instrucao = `
-    SELECT 
+    var instrucao = ""
+    if (fkHospital != "null") {
+        instrucao = `
+        SELECT 
     idMaquina AS quantidade, 
-    tipo FROM 
-    vw_chamados group by quantidade, tipo;
-        `
+    tipo, hospital FROM 
+    vw_chamados where hospital = "MinDray" group by quantidade, tipo, hospital;
+            ` 
+    }else{
+        instrucao = `
+        SELECT 
+        idMaquina AS quantidade, 
+        tipo FROM 
+        vw_chamados group by quantidade, tipo;
+            ` 
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)
@@ -61,10 +71,16 @@ function totalMaquinasPorTipoChamadoAberto(fkHospital) {
 
 
 function totalMaquinasPorTipo(fkHospital) { 
-    console.log("Estou no hospital Model, situação geral 2")
-    const instrucao = `
-    SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo where fkHospital = ${fkHospital};
-        `
+    var instrucao = ""
+    if (fkHospital != "null"){
+        instrucao = `
+        SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo where fkHospital = ${fkHospital};
+            `
+    }else{
+        instrucao = `
+        SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo;
+            `
+    }
 
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)

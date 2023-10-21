@@ -108,7 +108,6 @@ function listarEquipamentos(numero){
 }
 
 function mudarEquipamento(numero, equipamentos, tipos){
-
     if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
         numero = 0 
     }

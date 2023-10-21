@@ -186,9 +186,10 @@ function listarModelos(){
     console.log("Estou no listar modelos")
     var instrucao = `
     SELECT 
-        tipo 
+        tipo,
+        idTipo 
     FROM vw_chamados 
-    GROUP BY tipo;
+    GROUP BY tipo, idTipo;
     `
     return database.executar(instrucao)
 }

@@ -37,8 +37,7 @@ var graficoPizza = new Chart(configPie, {
     }
 });
 
-function buscarGravidade(){
-    var idTipo = sessionStorage.POSICAO_EQUIPAMENTO
+function buscarGravidade(idTipo){
 
     fetch(`/chamados/buscarGravidade/${idTipo}`)
     .then(
@@ -74,8 +73,10 @@ function plotarGraficoPizza(resposta){
 }
 var posicao = 0
 var equipamentos = []
+var tipos = []
 function listarEquipamentos(numero){
     equipamentos = []
+    tipos = []
     fetch("/chamados/listarModelos")
         .then(
             resposta => {
@@ -87,9 +88,10 @@ function listarEquipamentos(numero){
                             for (let i = 0; i < resposta.length; i++) {
                                 const element = resposta[i];
                                 console.log(element)
-                                equipamentos.push(element) 
+                                equipamentos.push(element.tipo) 
+                                tipos.push(element.idTipo)
                             }   
-                            mudarEquipamento(numero, equipamentos)    
+                            mudarEquipamento(numero, equipamentos, tipos)    
                
                         }
                     )
@@ -101,18 +103,17 @@ function listarEquipamentos(numero){
                 console.log("ERRO " + err)
             }
         )  
-        
-    teste("O que")
+
        
 }
 
-function mudarEquipamento(numero, equipamentos){
+function mudarEquipamento(numero, equipamentos, tipos){
 
     if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
         numero = 0 
     }
     posicao += numero
     sessionStorage.POSICAO_EQUIPAMENTO = posicao
-    nome_equipamento.innerHTML = equipamentos[posicao - 1].tipo
-    buscarGravidade()
+    nome_equipamento.innerHTML = equipamentos[posicao - 1]
+    buscarGravidade(tipos[posicao -1])
 }

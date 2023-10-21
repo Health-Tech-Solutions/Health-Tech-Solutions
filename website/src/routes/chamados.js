@@ -39,7 +39,7 @@ router.get("/listarModelos/:fkHospital", (req,res) =>{
     chamadoController.listarModelos(req,res)
 });
 
-router.get("/quantidadeChamadosAberto", (req,res) =>{
+router.get("/quantidadeChamadosAberto/:fkHospital", (req,res) =>{
     chamadoController.quantidadeChamadosAberto(req,res)
 })
 

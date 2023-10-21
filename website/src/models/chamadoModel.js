@@ -224,14 +224,24 @@ function listarModelos(fkHospital){
     return database.executar(instrucao)
 }
 
-function quantidadeChamadosAberto(){
+function quantidadeChamadosAberto(fkHospital){
     console.log("Estou na função para pegar quantos chamados tem em aberto")
-    var instrucao = `
-    SELECT 
-	    COUNT(idChamado) AS quantidade
-    FROM vw_chamados 
-    WHERE estado = "Aberto";
+    var instrucao = ``
+    if(fkHospital == 'null'){
+        instrucao = `SELECT 
+	        COUNT(idChamado) AS quantidade
+        FROM vw_chamados 
+        WHERE estado = "Aberto"
     `
+    } else {
+        instrucao = `
+        SELECT 
+            COUNT(idChamado) AS quantidade
+        FROM vw_chamados 
+        WHERE estado = "Aberto"
+        AND idHospital = ${fkHospital}
+        `
+    }
     console.log("Executando a seguinte instrução SQL" + instrucao)
     return database.executar(instrucao)
 }

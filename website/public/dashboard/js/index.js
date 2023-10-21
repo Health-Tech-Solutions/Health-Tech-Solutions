@@ -55,8 +55,8 @@ function trocarHospital(){
 
 
 function obterChamadosEmAberto(){
-
-  fetch("/chamados/quantidadeChamadosAberto")
+  var fkHospital = sessionStorage.FK_HOSPITAL
+  fetch(`/chamados/quantidadeChamadosAberto/${fkHospital}`)
   .then(resposta => {
     if(resposta.ok){
       resposta.json()

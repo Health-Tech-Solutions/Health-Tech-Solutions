@@ -158,7 +158,8 @@ function listarModelos(req,res){
 }
 
 function quantidadeChamadosAberto(req,res){
-    chamadoModel.quantidadeChamadosAberto()
+    var fkHospital = req.params.fkHospital
+    chamadoModel.quantidadeChamadosAberto(fkHospital)
     .then(
         (resultado) =>{
             if(resultado.length > 0){

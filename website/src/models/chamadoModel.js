@@ -224,6 +224,18 @@ function listarModelos(fkHospital){
     return database.executar(instrucao)
 }
 
+function quantidadeChamadosAberto(){
+    console.log("Estou na função para pegar quantos chamados tem em aberto")
+    var instrucao = `
+    SELECT 
+	    COUNT(idChamado) AS quantidade
+    FROM vw_chamados 
+    WHERE estado = "Aberto";
+    `
+    console.log("Executando a seguinte instrução SQL" + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     buscarMensal,
     buscarSemanal,
@@ -233,5 +245,6 @@ module.exports = {
     buscarEstado,
     listarChamados,
     buscarGravidade,
-    listarModelos
+    listarModelos,
+    quantidadeChamadosAberto
 }

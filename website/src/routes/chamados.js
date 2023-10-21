@@ -39,4 +39,8 @@ router.get("/listarModelos/:fkHospital", (req,res) =>{
     chamadoController.listarModelos(req,res)
 });
 
+router.get("/quantidadeChamadosAberto", (req,res) =>{
+    chamadoController.quantidadeChamadosAberto(req,res)
+})
+
 module.exports = router;

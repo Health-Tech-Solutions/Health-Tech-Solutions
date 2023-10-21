@@ -1,3 +1,4 @@
+const { ConnectionPool } = require("mssql")
 const chamadoModel = require("../models/chamadoModel")
 
 function buscarMensal(req,res){
@@ -155,6 +156,24 @@ function listarModelos(req,res){
         res.status(500).json(erro.sqlMessage)
     })
 }
+
+function quantidadeChamadosAberto(req,res){
+    chamadoModel.quantidadeChamadosAberto()
+    .then(
+        (resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        }
+    )
+    .catch( erro =>{
+        console.log(erro)
+        comsole.log("Houve um erro ao tentar pegar a quantidade de chamados em aberto")
+        res.status(500).json(erro.sqlMessage)
+    })
+}
 module.exports = {
     buscarMensal,
     buscarHospitais,
@@ -164,5 +183,6 @@ module.exports = {
     listarChamados,
     buscarSemanal,
     buscarGravidade,
-    listarModelos
+    listarModelos,
+    quantidadeChamadosAberto
 }

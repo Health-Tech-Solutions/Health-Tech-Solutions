@@ -54,6 +54,26 @@ function trocarHospital(){
 }
 
 
+function obterChamadosEmAberto(){
+
+  fetch("/chamados/quantidadeChamadosAberto")
+  .then(resposta => {
+    if(resposta.ok){
+      resposta.json()
+      .then(
+        resposta =>{
+          console.log(resposta)
+          qtd_chamados.innerHTML = resposta[0].quantidade
+        }
+      )
+    }
+  }).catch(erro =>{
+    console.log("ERRO " + erro)
+  }
+  )
+}
+
+
 function totalMaquinas(){
     var fkHospital =  sessionStorage.FK_HOSPITAL
     fetch(`/hospitais/TotalMaquinas/${fkHospital}`)

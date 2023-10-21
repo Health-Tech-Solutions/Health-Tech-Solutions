@@ -182,13 +182,15 @@ function buscarGravidade(idTipo){
     console.log("Executando a seguinte instrução sql " + instrucao)
     return database.executar(instrucao)
 }
-function listarModelos(){
+
+function listarModelos(fkHospital){
     console.log("Estou no listar modelos")
     var instrucao = `
     SELECT 
         tipo,
         idTipo 
     FROM vw_chamados 
+    WHERE idHospital = ${fkHospital}
     GROUP BY tipo, idTipo;
     `
     return database.executar(instrucao)

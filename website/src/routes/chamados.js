@@ -35,7 +35,7 @@ router.get("/buscarGravidade/:idTipo", function(req,res){
     chamadoController.buscarGravidade(req,res)
 })
 
-router.get("/listarModelos", (req,res) =>{
+router.get("/listarModelos/:fkHospital", (req,res) =>{
     chamadoController.listarModelos(req,res)
 });
 

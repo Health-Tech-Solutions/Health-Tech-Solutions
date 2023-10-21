@@ -136,7 +136,8 @@ function buscarGravidade(req,res){
 }
 
 function listarModelos(req,res){
-    chamadoModel.listarModelos()
+    var fkHospital = req.params.fkHospital
+    chamadoModel.listarModelos(fkHospital)
     .then(
         (resultado) => {
             if(resultado.length > 0){

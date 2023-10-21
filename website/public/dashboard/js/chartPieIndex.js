@@ -112,8 +112,11 @@ function mudarEquipamento(numero, equipamentos, tipos){
     if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
         numero = 0 
     }
-    posicao += numero
+    posicao += numero 
     sessionStorage.POSICAO_EQUIPAMENTO = posicao
+    if(posicao == 0){
+        posicao = 1
+    }
     nome_equipamento.innerHTML = equipamentos[posicao - 1]
     buscarGravidade(tipos[posicao -1])
 }

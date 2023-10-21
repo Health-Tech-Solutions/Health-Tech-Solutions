@@ -169,14 +169,16 @@ function listarChamados(idHospital){
 
 }
 
-function buscarGravidade(idTipo){
+function buscarGravidade(idTipo, fkHospital){
     console.log("Estou no buscar gravidade")
+    console.log("PEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW")
     var instrucao = `
         SELECT 
             COUNT(nivel) AS qtdNivel,
             nivel 
         FROM vw_chamados 
         WHERE idTipo = ${idTipo}
+        AND idHospital = ${fkHospital}
         GROUP BY nivel;
     `
     console.log("Executando a seguinte instrução sql " + instrucao)
@@ -184,15 +186,27 @@ function buscarGravidade(idTipo){
 }
 
 function listarModelos(fkHospital){
+    var instrucao = ``
     console.log("Estou no listar modelos")
-    var instrucao = `
-    SELECT 
-        tipo,
-        idTipo 
-    FROM vw_chamados 
-    WHERE idHospital = ${fkHospital}
-    GROUP BY tipo, idTipo;
-    `
+    if(fkHospital == 'null'){
+        instrucao = `
+        SELECT 
+            tipo,
+            idTipo
+        FROM vw_chamados
+        GROUP BY tipo,idTipo
+        `
+    } else {
+        instrucao = `
+        SELECT 
+            tipo,
+            idTipo 
+        FROM vw_chamados 
+        WHERE idHospital = ${fkHospital}
+        GROUP BY tipo, idTipo;    
+        `
+    }
+    
     return database.executar(instrucao)
 }
 

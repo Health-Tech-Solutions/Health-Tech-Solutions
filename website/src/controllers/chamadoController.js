@@ -120,7 +120,8 @@ function listarChamados(req,res){
 
 function buscarGravidade(req,res){
     var idTipo = req.params.idTipo
-    chamadoModel.buscarGravidade(idTipo)
+    var idHospital = req.body.fkHospitalServer
+    chamadoModel.buscarGravidade(idTipo,idHospital)
     .then((resultado) => {
         if(resultado.length > 0){
             res.status(200).json(resultado)

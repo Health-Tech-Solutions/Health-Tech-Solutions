@@ -38,8 +38,16 @@ var graficoPizza = new Chart(configPie, {
 });
 
 function buscarGravidade(idTipo){
-
-    fetch(`/chamados/buscarGravidade/${idTipo}`)
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/chamados/buscarGravidade/${idTipo}`,{
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            fkHospitalServer: fkHospital
+        })
+    })
     .then(
         resposta => {
             if(resposta.ok){

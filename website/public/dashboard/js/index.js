@@ -118,7 +118,7 @@ function totalMaquinas(){
               } 
               
             }
-            calculoGraficoSituacaoGeral(Ultrassom)
+            
             console.log(`Quantidade de cada tipo de fkTipo com chamados abertos:`)
             console.log(Ultrassom,Cardioversores,Desfibriladores,MonitorCardiaco,MaquinaAnestesia,MaquinaECG,MonitorFetal,MonitorSinaisVitais)
 
@@ -233,6 +233,7 @@ function maquinasInstaveis(){
               
                 
             }
+           calculoGraficoSituacaoGeral()
            console.log(`Quantidade de cada tipo de fkTipo:`)
            console.log(`${qntFktipo1}, ${qntFktipo2}, ${qntFktipo3},${qntFktipo4},${qntFktipo5},${qntFktipo6},${qntFktipo7},${qntFktipo8}`) 
 
@@ -251,49 +252,128 @@ function maquinasInstaveis(){
   var linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8 = 0
     
   function calculoGraficoSituacaoGeral(){ 
-    linha1 = ((Ultrassom*100)/qntFktipo1).toFixed(2) 
-    linha2 = (Cardioversores*100)/qntFktipo2
-    linha3 = (Desfibriladores*100)/qntFktipo3
-    linha4 = (MonitorCardiaco*100)/qntFktipo4
-    linha5 = (MaquinaAnestesia*100)/qntFktipo5
-    linha6 = (MaquinaECG*100)/qntFktipo6
-    linha7 = (MonitorFetal*100)/qntFktipo7
-    linha8 = (MonitorSinaisVitais*100)/qntFktipo8
+    linha1 = ((Ultrassom*100)/qntFktipo1).toFixed(2)
+    //linha1 = 100
+    linha2 = ((Cardioversores*100)/qntFktipo2).toFixed(2)
+    //linha2 = 20
+    linha3 = ((Desfibriladores*100)/qntFktipo3).toFixed(2)
+    //linha3 = 30
+    linha4 = ((MonitorCardiaco*100)/qntFktipo4).toFixed(2)
+    //linha4 = 40
+    linha5 = ((MaquinaAnestesia*100)/qntFktipo5).toFixed(2)
+    //linha5 = 50
+    linha6 = ((MaquinaECG*100)/qntFktipo6).toFixed(2)
+    //linha6 = 60
+    linha7 = ((MonitorFetal*100)/qntFktipo7).toFixed(2)
+    //linha7 = 70
+    linha8 = ((MonitorSinaisVitais*100)/qntFktipo8).toFixed(2)
+    //linha8 = 80
     console.log("Calculo:")
     console.log(linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8)
 
     UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
     UltrassomPorcentagem.innerHTML = linha1
 
+    larguraUltrassom = document.getElementById("larguraUltrassom")
     larguraUltrassom.style.width = `${linha1}%`
 
-    if(linha1 <= 30){
-      larguraUltrassom.style.backgroundColor = 'red' 
-    }else if(linha1 <= 60){
-      larguraUltrassom.style.backgroundColor = 'orange' 
-    }else if(linha1 <= 89){
-      larguraUltrassom.style.backgroundColor = 'yellow' 
-    }else {
-      larguraUltrassom.style.backgroundColor = 'green' 
-    }
+     if(linha1 <= 30){
+       larguraUltrassom.style.backgroundColor = 'red' 
+     }else if(linha1 <= 60){
+       larguraUltrassom.style.backgroundColor = 'orange' 
+     }else if(linha1 <= 89){
+       larguraUltrassom.style.backgroundColor = 'yellow' 
+     }else {
+       larguraUltrassom.style.backgroundColor = 'green' 
+     }
 
     
     CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
     CardioversoresPorcentagem.innerHTML = linha2
 
+    larguraCardioversores = document.getElementById("larguraCardioversores")
+    larguraCardioversores.style.width = `${linha2}%`
+
+     if(linha2 <= 30){
+       larguraCardioversores.style.backgroundColor = 'red' 
+     }else if(linha2 <= 60){
+       larguraCardioversores.style.backgroundColor = 'orange' 
+     }else if(linha2 <= 89){
+       larguraCardioversores.style.backgroundColor = 'yellow' 
+     }else {
+       larguraCardioversores.style.backgroundColor = 'green' 
+     }
+
+
     DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
     DesfibriladoresPorcentagem.innerHTML = linha3
+
+    larguraDesfibriladores = document.getElementById("larguraDesfibriladores")
+     larguraDesfibriladores.style.width = `${linha3}%`
+
+     if(linha3 <= 30){
+       larguraDesfibriladores.style.backgroundColor = 'red' 
+     }else if(linha3 <= 60){
+       larguraDesfibriladores.style.backgroundColor = 'orange' 
+     }else if(linha3 <= 89){
+       larguraDesfibriladores.style.backgroundColor = 'yellow' 
+     }else {
+       larguraDesfibriladores.style.backgroundColor = 'green' 
+     }
 
    //Não tem monitor cardiaco
 
     MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
     MaquinaAnestesiaPorcentagem.innerHTML = linha5
 
+    larguraMaquinaAnestesia = document.getElementById("larguraMaquinaAnestesia")
+     larguraMaquinaAnestesia.style.width = `${linha5}%`
+
+     if(linha5 <= 30){
+       larguraMaquinaAnestesia.style.backgroundColor = 'red' 
+     }else if(linha5 <= 60){
+       larguraMaquinaAnestesia.style.backgroundColor = 'orange' 
+     }else if(linha5 <= 89){
+       larguraMaquinaAnestesia.style.backgroundColor = 'yellow' 
+     }else {
+       larguraMaquinaAnestesia.style.backgroundColor = 'green' 
+     }
+    
+
+
     MaquinaECGPorcentagem = document.getElementById("MaquinaECGGrafico")
     MaquinaECGPorcentagem.innerHTML = linha6
 
+    larguraMaquinaECG = document.getElementById("larguraMaquinaECG")
+     larguraMaquinaECG.style.width = `${linha6}%`
+
+     if(linha6 <= 30){
+       larguraMaquinaECG.style.backgroundColor = 'red' 
+     }else if(linha6 <= 60){
+       larguraMaquinaECG.style.backgroundColor = 'orange' 
+     }else if(linha6 <= 89){
+       larguraMaquinaECG.style.backgroundColor = 'yellow' 
+     }else {
+       larguraMaquinaECG.style.backgroundColor = 'green' 
+     }
+
+
+
     MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")
     MonitorFetalPorcentagem.innerHTML = linha7
+
+    larguraMonitorFetal = document.getElementById("larguraMonitorFetal")
+     larguraMonitorFetal.style.width = `${linha7}%`
+
+     if(linha7 <= 30){
+       larguraMonitorFetal.style.backgroundColor = 'red' 
+     }else if(linha7 <= 60){
+       larguraMonitorFetal.style.backgroundColor = 'orange' 
+     }else if(linha7 <= 89){
+       larguraMonitorFetal.style.backgroundColor = 'yellow' 
+     }else {
+       larguraMonitorFetal.style.backgroundColor = 'green' 
+     }
 
     //Não tem MonitorSinaisVitais
 

@@ -1,4 +1,4 @@
--- Active: 1693260538915@@127.0.0.1@3306@crowley
+-- Active: 1683812153262@@localhost@3306@hts
 drop database if exists hts;
 create database hts;
 USE hts;
@@ -13,17 +13,16 @@ create table endereco(
 	idEndereco int primary key auto_increment,
     cep char(9),
     numero varchar(10),
+    complemento varchar(40),
     logradouro VARCHAR(45),
     bairro VARCHAR(45),
     cidade VARCHAR(45),
-    complemento varchar(40)
 );
 insert into endereco values	(NULL, '04571011', 1747,'Avenida Luis Carlos Berrini',	'Itaim Bibi', 'São Paulo',''),
 							(NULL, '01310000',200,'Avenida Paulista', 'Bela Vista','São Paulo',''),
 							(NULL,'01431000', 953,'Avenida Brasil', 'Jardim América','São Paulo',''),
                             (NULL,'09910720', 605, 'Rua Manoel da Nóbrega', 'Centro','Diadema', '');
 
-select * from endereco;
 insert into 
 	endereco(cep, numero, complemento) 
 values 
@@ -42,6 +41,8 @@ create table empresa(
     cnpj char(14),
     telefone char(13),
     fkEndereco int,
+	filial INT,
+	Foreign Key (filial) REFERENCES empresa(idEmpresa)
     foreign key (fkEndereco) references endereco(idEndereco)
 );
 -- Av. Brasil, 1085 - Jardim America, São Paulo - SP, 01431-000
@@ -54,8 +55,7 @@ values
     (NULL, 'Hospital Albert Einsten', '60765823000130',3),
     (NULL, 'Hospital Santa Helena', '34128330000189',4);
 
-select * from empresa;
-    use hts;
+
 
 create table funcionario(
 	idFuncionario int primary key auto_increment,
@@ -65,8 +65,8 @@ create table funcionario(
     funcao varchar(45),
     tipo CHAR(1),
     CPF CHAR(11),
-    fkIndustria int,
     foto VARCHAR(300),
+    fkIndustria int,
     foreign key (fkIndustria) references empresa(idEmpresa),
     fkRepresentante int,
     foreign key (fkRepresentante) references funcionario(idFuncionario)
@@ -164,18 +164,7 @@ create table maquinario(
     foreign key (fkModelo) references modelo(idModelo),
     primary key(idMaquinario, fkModelo)
 );
-
-SELECT COUNT(nivel) AS qtdNivel, nivel FROM chamado group by nivel;
-SELECT * FROM chamado;
-SELECT
-        dataHora,
-		COUNT(*) AS quantidade	
-        FROM vw_chamados
-       WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
-        GROUP BY dataHora;
-        
-SELECT * FROM chamado;
-
+     
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
 values
@@ -239,14 +228,7 @@ values
 	(18,1,1,23),
 	(18,1,1,24),
 	(57,1,1,24);
--- insert into
--- 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
--- VALUES
--- 	(11,1,3,1),
--- 	(22,1,2,1),
--- 	(333,1,1,1),
--- 	(44,1,5,1),
--- 	(55,1,4,1);
+
 insert into
 	maquinario(idMaquinario, fkIndustria, fkHospital, fkModelo)
 VALUES
@@ -363,20 +345,12 @@ create table chamado(
     nivel varchar(45),
     estado varchar(45),
     sla varchar(45),
-    dataHora DATETIME,
     descricao varchar(45),
+    dataHora DATETIME,
 	fkRegistro int,
     foreign key(fkRegistro) references registro(idRegistro)
 );
 
-INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
-VALUES ('valor_nivel', 'Aberto', 'valor_sla', NOW(), 'Foi',
-  (SELECT idRegistro 
-   FROM registro 
-   WHERE TIME_FORMAT(registro.dataHora, '%H:%i') = TIME_FORMAT(NOW(), '%H:%i')
-   LIMIT 1)
-);
-select * from registro;
 INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
 VALUES 
   ('Alto', 'Aberto', '2 horas', '2023-01-15 12:00:00', 'Foi', 11),
@@ -431,30 +405,29 @@ VALUES
   
 
 
-insert into
-	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
-select 
-	case when r.valor > 95
-		then "Alto"
-		else case when r.valor > 90
-			then "Médio"
-			else "Baixo"
-		end
-	end nivel,
-	"Aberto" estado,
-	case when r.valor > 95
-		then "2 horas"
-		else case when r.valor > 90
-			then "6 horas"
-			else "10 horas"
-		end
-	end sla,
-    '2023-05-14 20:36:16' dataHora,
-	"" descricao,
-	r.idRegistro
-from registro r where r.valor > 85;
-SELECT * FROM registro;
-SELECT * FROM chamado;
+-- insert into
+-- 	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
+-- select 
+-- 	case when r.valor > 95
+-- 		then "Alto"
+-- 		else case when r.valor > 90
+-- 			then "Médio"
+-- 			else "Baixo"
+-- 		end
+-- 	end nivel,
+-- 	"Aberto" estado,
+-- 	case when r.valor > 95
+-- 		then "2 horas"
+-- 		else case when r.valor > 90
+-- 			then "6 horas"
+-- 			else "10 horas"
+-- 		end
+-- 	end sla,
+--     '2023-05-14 20:36:16' dataHora,
+-- 	"" descricao,
+-- 	r.idRegistro
+-- from registro r where r.valor > 85;
+
 create table peca(
 	idPeca int primary key auto_increment,
     nome varchar(45)

@@ -20,6 +20,8 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="js/dados.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body id="page-top" onload="mostrarDados()">
@@ -490,7 +492,10 @@
                     })
                 }).then(res => {
                     if(res.status == 200){
-                        alert("Modelo Cadastrado")
+                        Swal.fire({
+                        title: 'Máquina cadastrada com sucesso!',
+                        icon: 'success'
+                    })
                     }
                 })
             }

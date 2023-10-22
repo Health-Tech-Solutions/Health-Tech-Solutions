@@ -50,7 +50,7 @@ function enviarFoto(req, res) {
         .then(resultado => {
             res.status(201).send("foto enviada com sucesso para a model");
         }).catch(err => {
-            res.status(500).send(err);
+            res.status(500).send("erroa qui" + err);
         });
 }
 

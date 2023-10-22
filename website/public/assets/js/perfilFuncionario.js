@@ -1,11 +1,11 @@
 
 
 function enviarFoto() {
-    alert("Ta entrando1")
+
     const formData = new FormData();
     console.log(ipt_foto.files[0], formData)
     formData.append('foto', ipt_foto.files[0])
-    alert("Ta entrando2")
+
     // idUsuario = sessionStorage.ID_USUARIO
     var idFuncionario = sessionStorage.ID_USUARIO
     fetch(`/funcionario/enviarFoto/${idFuncionario}`, {
@@ -14,6 +14,7 @@ function enviarFoto() {
     })
       .then(res => {
         console.warn("Ta entrando3")
+        console.log(res)
         //window.location = "./perfil.html"
       })
       .catch(err => {

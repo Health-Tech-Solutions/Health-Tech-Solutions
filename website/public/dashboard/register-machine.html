@@ -19,10 +19,10 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-
+    <script src="js/dados.js"></script>
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="mostrarDados()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -261,9 +261,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="nomeUsuario">Bruna
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="usuario_nome">Bruna
                                     Sanguini</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg" id="usuario_foto">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

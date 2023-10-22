@@ -16,7 +16,7 @@ create table endereco(
     complemento varchar(40),
     logradouro VARCHAR(45),
     bairro VARCHAR(45),
-    cidade VARCHAR(45),
+    cidade VARCHAR(45)
 );
 insert into endereco values	(NULL, '04571011', 1747,'Avenida Luis Carlos Berrini',	'Itaim Bibi', 'São Paulo',''),
 							(NULL, '01310000',200,'Avenida Paulista', 'Bela Vista','São Paulo',''),
@@ -42,7 +42,7 @@ create table empresa(
     telefone char(13),
     fkEndereco int,
 	filial INT,
-	Foreign Key (filial) REFERENCES empresa(idEmpresa)
+	Foreign Key (filial) REFERENCES empresa(idEmpresa),
     foreign key (fkEndereco) references endereco(idEndereco)
 );
 -- Av. Brasil, 1085 - Jardim America, São Paulo - SP, 01431-000
@@ -54,8 +54,6 @@ values
     (NULL, 'Hospital Santa Catarina', '60922168000186',2),
     (NULL, 'Hospital Albert Einsten', '60765823000130',3),
     (NULL, 'Hospital Santa Helena', '34128330000189',4);
-
-
 
 create table funcionario(
 	idFuncionario int primary key auto_increment,
@@ -74,31 +72,28 @@ create table funcionario(
 
 
 insert into
-	funcionario(nome, email, senha,funcao, fkIndustria)
+	funcionario(nome, email, senha,funcao,tipo, fkIndustria)
 values		
-	("Isabela Mariana Olivia da Rosa","isabelamarianadarosa@imeio.com","8sPiKN8z48","admin", 1),
-	("Antonio Breno Augusto Moura","antonio_breno_moura@br.festo.com","LMgH7kFB6I","funcionario", 1),
-	("Miguel Cauê Pereira","miguel-pereira93@superigi.com.br","P2JIrkFdnF","funcionario", 1),     
-	("Helena Sarah Porto","helena_porto@kimmay.com.br","le7y7mi7oh","admin", 1),
-	("Bryan Luan Gomes","bryan-gomes83@uolinc.com","gLD7XFQj5y","funcionario", 1),
-	("Anderson Manuel Galvão","anderson.manuel.galvao@systemsadvisers.com","Y48nEZ5qey","funcionario", 1),
-	("Stefany Bárbara Alessandra Melo","stefany_melo@icloub.com","MSRwLa8e9K","admin", 1),  
-	("Diogo Enrico Nelson Gonçalves","diogo_goncalves@edbrasil.net","M1SM0aBq3r","funcionario", 1),
-	("Lívia Letícia Carolina Dias","livia.leticia.dias@ritmolog.com.br","diH6Brmkli","funcionario", 1),
-	("Aline Esther Bruna Cardoso","aline_cardoso@graffiti.net","ejYPZK6680","admin", 1),    
-	("Elza Allana Rita Moraes","elzaallanamoraes@verdana.com.br","DUrP3YwNX3","funcionario", 1),  
-	("Gael Murilo dos Santos","gael_murilo_dossantos@rebecacometerra.com.br","fSik4S6Hnk","funcionario", 1),
-	("Isabelly Sara Luciana da Rocha","isabelly_darocha@directnet.com","yjkapiMCxz","admin", 1),
-	("Rosa Emilly Valentina Viana","rosa_viana@pierproj.com.br","xYFG7H7ikq","funcionario", 1),   
-	("Clarice Louise Laura Araújo","clarice_araujo@yahoo.com.ar","RNoeEDd7yb","funcionario", 1),
-    ("Henrique Bechis Santana Coelho", "henrique@gmail.com",'123456', 'admin', 1),
-    ('Gabriel Michelon', 'gabriel@gmail.com', '123456', 'admin', 1),
-    ('Vinicius Bazan Cirello', 'vinicius@gmail.com', '123456', 'admin', 1),
-    ('Gilberto Campos', 'gilberto@gmail.com', '123456', 'admin', 1),
-    ('Sofhia Utaka', 'sofhia@gmail.com', '123456', 'admin', 1);
-
-UPDATE funcionario SET tipo = 0 WHERE funcao = 'admin';
-UPDATE funcionario SET tipo = 1 WHERE funcao <> 'admin';
+	('Isabela Mariana Olivia da Rosa','isabelamarianadarosa@imeio.com','123456','admin','0', 1),
+	('Antonio Breno Augusto Moura','antonio_breno_moura@br.festo.com','123456','funcionario','1', 1),
+	('Miguel Cauê Pereira','miguel-pereira93@superigi.com.br','123456','funcionario','1', 1),     
+	('Helena Sarah Porto','helena_porto@kimmay.com.br','123456','admin','0', 1),
+	('Bryan Luan Gomes','bryan-gomes83@uolinc.com','123456','funcionario','1', 1),
+	('Anderson Manuel Galvão','anderson.manuel.galvao@systemsadvisers.com','123456','funcionario','1', 1),
+	('Stefany Bárbara Alessandra Melo','stefany_melo@icloub.com','123456','admin','0', 1),  
+	('Diogo Enrico Nelson Gonçalves','diogo_goncalves@edbrasil.net','123456','funcionario','1', 1),
+	('Lívia Letícia Carolina Dias','livia.leticia.dias@ritmolog.com.br','123456','funcionario','1', 1),
+	('Aline Esther Bruna Cardoso','aline_cardoso@graffiti.net','123456','admin','0', 1),    
+	('Elza Allana Rita Moraes','elzaallanamoraes@verdana.com.br','123456','funcionario','1', 1),  
+	('Gael Murilo dos Santos','gael_murilo_dossantos@rebecacometerra.com.br','123456','funcionario','1', 1),
+	('Isabelly Sara Luciana da Rocha','isabelly_darocha@directnet.com','123456','admin','0',1),
+	('Rosa Emilly Valentina Viana','rosa_viana@pierproj.com.br','123456','funcionario','1', 1),   
+	('Clarice Louise Laura Araújo','clarice_araujo@yahoo.com.ar','123456','funcionario','1', 1),
+    ('Henrique Bechis Santana Coelho', 'henrique@gmail.com','123456', 'admin','0', 1),
+    ('Gabriel Michelon', 'gabriel@gmail.com', '123456', 'admin','0', 1),
+    ('Vinicius Bazan Cirello', 'vinicius@gmail.com', '123456', 'admin','0', 1),
+    ('Gilberto Campos', 'gilberto@gmail.com', '123456', 'admin','0', 1),
+    ('Sofhia Utaka', 'sofhia@gmail.com', '123456', 'admin','0', 1);
 
 create table tipo(
 	idTipo int primary key auto_increment,
@@ -108,14 +103,14 @@ create table tipo(
 insert into
 	tipo(nome)
 values
-	("Ultrassom"),
-    ("Cardioversores"),
-    ("Desfibriladores"),
-    ("Monitor Cardíaco"),
-    ("Máquina de Anestesia"),
-    ("Máquina de ECG"),
-    ("Monitor Fetal"),
-    ("Monitor de sinais vitais");
+	('Ultrassom'),
+    ('Cardioversores'),
+    ('Desfibriladores'),
+    ('Monitor Cardíaco'),
+    ('Máquina de Anestesia'),
+    ('Máquina de ECG'),
+    ('Monitor Fetal'),
+    ('Monitor de sinais vitais');
 
 create table modelo(
 	idModelo int primary key auto_increment,
@@ -128,30 +123,30 @@ create table modelo(
 insert into
 	modelo(modelo, descricao, fkTipo)
 values
-	("U1000", "", 1),
-	("U2000", "", 1),
-	("U2100", "", 1),
-	("C100", "", 2),
-	("C200", "", 2),
-	("C300", "", 2),
-	("DD01", "", 3),
-	("DD05", "", 3),
-	("DD15", "", 3),
-	("Cardiaco-100", "", 4),
-	("Cardiaco-150", "", 4),
-	("Cardiaco-200", "", 4),
-	("ANES-d100", "", 5),
-	("ANES-d200", "", 5),
-	("ANES-d170", "", 5),
-	("MaqE", "", 6),
-	("MaqE", "", 6),
-	("MaqE", "", 6),
-	("Fetal-Mon", "", 7),
-	("Fetal-Son", "", 7),
-	("Fetal-Dad", "", 7),
-	("Vital1", "", 8),
-	("Vital2", "", 8),
-	("Vital3", "", 8);
+	('U1000', '', 1),
+	('U2000', '', 1),
+	('U2100', '', 1),
+	('C100', '', 2),
+	('C200', '', 2),
+	('C300', '', 2),
+	('DD01', '', 3),
+	('DD05', '', 3),
+	('DD15', '', 3),
+	('Cardiaco-100', '', 4),
+	('Cardiaco-150', '', 4),
+	('Cardiaco-200', '', 4),
+	('ANES-d100', '', 5),
+	('ANES-d200', '', 5),
+	('ANES-d170', '', 5),
+	('MaqE', '', 6),
+	('MaqE', '', 6),
+	('MaqE', '', 6),
+	('Fetal-Mon', '', 7),
+	('Fetal-Son', '', 7),
+	('Fetal-Dad', '', 7),
+	('Vital1', '', 8),
+	('Vital2', '', 8),
+	('Vital3', '', 8);
     
     
 create table maquinario(
@@ -323,7 +318,7 @@ values
 	(now(),69, 6 , 3,1),
 	(now(),47, 6 , 3,2),
 	(now(),23, 6 , 3,1),
-(now(),89, 2 , 13,2),
+	(now(),89, 2 , 13,2),
 	(now(),82, 2 , 13,1),
 	(now(),45, 2 , 13,2),
 	(now(),91, 2 , 13,1),
@@ -409,22 +404,22 @@ VALUES
 -- 	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
 -- select 
 -- 	case when r.valor > 95
--- 		then "Alto"
+-- 		then 'Alto'
 -- 		else case when r.valor > 90
--- 			then "Médio"
--- 			else "Baixo"
+-- 			then 'Médio'
+-- 			else 'Baixo'
 -- 		end
 -- 	end nivel,
--- 	"Aberto" estado,
+-- 	'Aberto' estado,
 -- 	case when r.valor > 95
--- 		then "2 horas"
+-- 		then '2 horas'
 -- 		else case when r.valor > 90
--- 			then "6 horas"
--- 			else "10 horas"
+-- 			then '6 horas'
+-- 			else '10 horas'
 -- 		end
 -- 	end sla,
 --     '2023-05-14 20:36:16' dataHora,
--- 	"" descricao,
+-- 	'' descricao,
 -- 	r.idRegistro
 -- from registro r where r.valor > 85;
 
@@ -436,19 +431,19 @@ create table peca(
 insert into 
 	peca(nome)
 values 
-	("i9 9900f"),
-    ("i7 13500k"),
-    ("i3 10900"),
-    ("i7 6900f"),
-    ("i9 5900f"),
-    ("i5 11900f"),
-    ("i3 5900f"),
-    ("8gb fury Kingston"),
-    ("12gb ram crucial"),
-    ("16gb Corsair"),
-    ("1tb hd seagate"),
-    ("500gb ssd samsung"),
-    ("450gb hd Adata");
+	('i9 9900f'),
+    ('i7 13500k'),
+    ('i3 10900'),
+    ('i7 6900f'),
+    ('i9 5900f'),
+    ('i5 11900f'),
+    ('i3 5900f'),
+    ('8gb fury Kingston'),
+    ('12gb ram crucial'),
+    ('16gb Corsair'),
+    ('1tb hd seagate'),
+    ('500gb ssd samsung'),
+    ('450gb hd Adata');
 
 create table limite(
 	idLimite int primary key auto_increment,
@@ -483,7 +478,7 @@ AS
         MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
         MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
-    select * from vw_chamados;
+
     
 CREATE OR REPLACE VIEW vw_chamados
 AS
@@ -517,117 +512,5 @@ AS
     AND fkRegistro = idRegistro
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
-SELECT COUNT(nivel) AS qtdNivel,
-	   nivel from vw_chamados GROUP BY nivel;
-SELECT 
-COUNT(idChamado) AS numeroChamados,
-tipo 
-FROM vw_chamados 
-GROUP BY tipo
-ORDER BY numeroChamados DESC LIMIT 1;
 
 
-SELECT 
-    idMaquina AS quantidade, 
-    tipo FROM 
-    vw_chamados group by quantidade, tipo;
-
-SELECT COUNT(idChamado) AS chamados,
-	   tipoRegistro,
-       hospital FROM vw_chamados
-       WHERE idHospital = 1
-       GROUP BY hospital, tipoRegistro;
-
-
-SELECT tipoRegistro,
-	   COUNT(idChamado) AS numeroDeChamados
-       FROM vw_chamados
-       GROUP BY tipoRegistro
-       ORDER BY numeroDeChamados
-       DESC LIMIT 1;
-
-SELECT
-            CASE
-                WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
-                WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
-                WHEN tr.nome = 'Uso de disco' THEN 'Disco'
-                ELSE tr.nome
-            END AS TipoRegistro,
-            COUNT(c.idChamado) AS NumeroDeChamados
-        FROM tipoRegistro AS tr
-        LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
-        LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
-        GROUP BY TipoRegistro
-        ORDER BY NumeroDeChamados DESC
-        LIMIT 1;
-
-SELECT 
-	CASE WHEN tipoRegistro = 'Uso de CPU' THEN 'CPU'
-		 WHEN tipoRegistro = 'Uso de RAM' THEN 'RAM'
-		 WHEN tipoRegistro = 'Uso de Disco' THEN 'Disco'
-         ELSE tipoRegistro
-    END AS 'tipoRegistro'
-
-    FROM vw_chamados
-     ;
-
-SELECT hospital,
-            COUNT(*) AS 'chamados'
-        FROM vw_chamados
-        GROUP BY hospital;
-        select * from chamado;
-        UPDATE chamado
-SET estado = "Fechado"
-WHERE dataHora >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
-
--- SELECT COUNT(*) from chamado where nivel = 'Alto' ;
-
--- SELECT fkRegistro, COUNT(*) as total_repeticoes
--- FROM chamado
--- GROUP BY fkRegistro
--- HAVING COUNT(*) > 1;
-	
-
---	SELECT fkRegistro,COUNT(*) from chamado where nivel = 'Alto' group by fkRegistro;
--- SELECT COUNT(DISTINCT reg.fkMaquina) FROM chamado 
--- JOIN registro AS reg ON chamado.fkRegistro = reg.idRegistro
--- WHERE chamado.nivel = 'Alto';
-	-- SELECT * FROM chamado ;
---
-use hts;
-SELECT * FROM vw_chamados;
-select idMaquina,nivel,estado,sla,
-        DATE_FORMAT(dataHora, '%d/%m/%Y %H:%i') AS dataHora,tipoRegistro from vw_chamados LIMIT 10;
-SELECT 
-	   DAYOFMONTH(dataHora) AS dia,
-	    COUNT(*) AS quantidade	
-	FROM vw_chamados
-    GROUP BY dia
-    ORDER BY dia;
-	
-
-
--- UPDATE chamado
--- SET nivel = 'Alto' 
--- WHERE idChamado > 2200;
-
-select * from chamado;
-select * from registro;
-select count(*), modelo from vw_chamados where estado = "aberto" group by modelo;
-use hts;
-select * from modelo join maquinario on idModelo = fkModelo join registro on idModelo = fkMaquina join chamado on idRegistro = fkRegistro;
-desc maquinario;
-SELECT 
-	r.valor,
-    r.dataHora,
-    maq.idMaquinario,
-    m.modelo,
-    t.nome
-FROM maquinario AS maq
-JOIN registro AS r
-JOIN modelo AS m
-JOIN tipo AS t
-WHERE maq.fkModelo = m.idModelo
-AND r.fkMaquina = maq.idMaquinario
-AND m.fkTipo = t.idTipo;
-	

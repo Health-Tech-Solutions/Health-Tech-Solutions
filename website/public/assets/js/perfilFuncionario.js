@@ -25,7 +25,6 @@ function enviarFoto() {
 
 
 
-
   function atualizarDados(){
      var idFuncionario = sessionStorage.ID_USUARIO;
      fetch(`/funcionario/pegarInformacoes/${idFuncionario}`)
@@ -39,7 +38,7 @@ function enviarFoto() {
              var email = resposta[0].email
              var funcao = resposta[0].funcao
              var senha = resposta[0].senha
-
+             usuario_nome.innerHTML = nome
              console.log("Dados recebidos: ", JSON.stringify(resposta));
              ipt_emailFuncionario.value = `${email}`
              ipt_nomeFuncionario.value = `${nome}`
@@ -61,12 +60,21 @@ function enviarFoto() {
         .then(
 
           function(resposta){
-            infos = resposta[0];
+            infos = resposta[0].foto;
             console.log(infos)
             Foto = document.getElementById("usuario_foto")
-            Perfil = document.getElementById("foto_perfil")
-            Foto.src = `../assets/${infos.foto}`
-            Perfil.src = `../assets/${infos.foto}`;
+            Foto_perfil = document.getElementById("Foto_usuario")
+            
+            
+            if(infos == null){
+              Foto.src = `../assets/usuario.png`
+              Foto_perfil.src `../assets/usuario.png`
+            } else {
+              
+              Foto.src = `../assets/${infos}`
+              
+              Foto_perfil.src = `../assets/${infos}`
+            }
 
           }
         )

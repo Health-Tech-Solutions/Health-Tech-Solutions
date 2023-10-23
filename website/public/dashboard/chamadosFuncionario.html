@@ -58,20 +58,6 @@
                 Interface
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Cadastros</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Cadastros disponíveis:</h6>
-                        <a class="collapse-item" href="./register-machine Funcionario.html">Maquinário</a>
-                    </div>
-                </div>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="maquinario.html">
@@ -281,17 +267,9 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="./perfilFuncionario.html">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
-                                </a>
-                                <a class="dropdown-item" href="configuracao.html">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Configurações
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Registro de Atividades
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -457,8 +435,11 @@
 
 </html>
 
+<script src="js/dados.js"></script>
+
 
 <script>
+    nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     sessionStorage.FK_HOSPITAL = sessionStorage.ID_HOSPITAL
 

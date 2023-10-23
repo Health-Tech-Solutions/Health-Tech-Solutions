@@ -394,90 +394,90 @@ create table registro(
     dataHora datetime,
     valor decimal(7,2),
     fkMaquina int,
-    foreign key (fkMaquina) references maquinario(idMaquinario),
-    fkModelo int,
-    foreign key (fkModelo) references maquinario(fkModelo),
     fkTipoRegistro int,
+    fkModelo int,
+    foreign key (fkMaquina) references maquinario(idMaquinario),
+    foreign key (fkModelo) references maquinario(fkModelo),
     foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
 );
 
+	
 insert into 
-	registro(dataHora, valor, fkMaquina, fkModelo, fkTipoRegistro)
+	registro(dataHora, valor, fkMaquina,  fkTipoRegistro)
 values
-	(now(),89, 2 , 13,2),
-	(now(),82, 2 , 13,1),
-	(now(),45, 2 , 13,2),
-	(now(),91, 2 , 13,1),
-	(now(),33, 2 , 13,2),
-	(now(),2, 3 , 15,2),
-	(now(),94, 3 , 15,1),
-	(now(),27, 3 , 15,2),
-	(now(),3, 3 , 15,1),
-	(now(),93, 3 , 15,2),
-	(now(),44, 6 , 3,2),
-	(now(),69, 6 , 3,1),
-	(now(),47, 6 , 3,2),
-	(now(),23, 6 , 3,1),
-	(now(),44, 6 , 3,2),
-	(now(),89, 2 , 13,2),
-	(now(),82, 2 , 13,1),
-	(now(),45, 2 , 13,2),
-	(now(),91, 2 , 13,1),
-	(now(),33, 2 , 13,2),
-	(now(),2, 3 , 15,2),
-	(now(),94, 3 , 15,1),
-	(now(),27, 3 , 15,2),
-	(now(),3, 3 , 15,1),
-	(now(),93, 3 , 15,2),
-	(now(),44, 6 , 3,2),
-	(now(),69, 6 , 3,1),
-	(now(),47, 6 , 3,2),
-	(now(),23, 6 , 3,1),
-	(now(),89, 2 , 13,2),
-	(now(),82, 2 , 13,1),
-	(now(),45, 2 , 13,2),
-	(now(),91, 2 , 13,1),
-	(now(),33, 2 , 13,2),
-	(now(),2, 3 , 15,2),
-	(now(),94, 3 , 15,1),
-	(now(),27, 3 , 15,2),
-	(now(),3, 3 , 15,1),
-	(now(),93, 3 , 15,2),
-	(now(),44, 6 , 3,2),
-	(now(),69, 6 , 3,1),
-	(now(),47, 6 , 3,2),
-	(now(),23, 6 , 3,1),
-	(now(),89, 2 , 13,2),
-	(now(),82, 2 , 13,1),
-	(now(),45, 2 , 13,2),
-	(now(),91, 2 , 13,1),
-	(now(),33, 2 , 13,2),
-	(now(),2, 3 , 15,2),
-	(now(),94, 3 , 15,1),
-	(now(),27, 3 , 15,2),
-	(now(),3, 3 , 15,1),
-	(now(),93, 3 , 15,2),
-	(now(),44, 6 , 3,2),
-	(now(),69, 6 , 3,1),
-	(now(),47, 6 , 3,2),
-	(now(),23, 6 , 3,1),
-	(now(),89, 2 , 13,2),
-	(now(),82, 2 , 13,1),
-	(now(),45, 2 , 13,2),
-	(now(),91, 2 , 13,1),
-	(now(),33, 2 , 13,2),
-	(now(),2, 3 , 15,2),
-	(now(),94, 3 , 15,1),
-	(now(),27, 3 , 15,2),
-	(now(),3, 3 , 15,1),
-	(now(),93, 3 , 15,2),
-	(now(),44, 6 , 3,2),
-	(now(),69, 6 , 3,1),
-	(now(),47, 6 , 3,2),
-	(now(),23, 6 , 3,1)
+	(now(),89, 2 ,2),
+	(now(),82, 2 ,1),
+	(now(),45, 2 ,2),
+	(now(),91, 2 ,1),
+	(now(),33, 2 ,2),
+	(now(),2, 3 ,2),
+	(now(),94, 3 ,1),
+	(now(),27, 3 ,2),
+	(now(),3, 3 ,1),
+	(now(),93, 3 ,2),
+	(now(),44, 6 ,2),
+	(now(),69, 6 ,1),
+	(now(),47, 6 ,2),
+	(now(),23, 6 ,1),
+	(now(),44, 6 ,2),
+	(now(),89, 2 ,2),
+	(now(),82, 2 ,1),
+	(now(),45, 2 ,2),
+	(now(),91, 2 ,1),
+	(now(),33, 2 ,2),
+	(now(),2, 3 ,2),
+	(now(),94, 3 ,1),
+	(now(),27, 3 ,2),
+	(now(),3, 3 ,1),
+	(now(),93, 3 ,2),
+	(now(),44, 6 ,2),
+	(now(),69, 6 ,1),
+	(now(),47, 6 ,2),
+	(now(),23, 6 ,1),
+	(now(),89, 2 ,2),
+	(now(),82, 2 ,1),
+	(now(),45, 2 ,2),
+	(now(),91, 2 ,1),
+	(now(),33, 2 ,2),
+	(now(),2, 3 ,2),
+	(now(),94, 3 ,1),
+	(now(),27, 3 ,2),
+	(now(),3, 3 ,1),
+	(now(),93, 3 ,2),
+	(now(),44, 6 ,2),
+	(now(),69, 6 ,1),
+	(now(),47, 6 ,2),
+	(now(),23, 6 ,1),
+	(now(),89, 2 ,2),
+	(now(),82, 2 ,1),
+	(now(),45, 2 ,2),
+	(now(),91, 2 ,1),
+	(now(),33, 2 ,2),
+	(now(),2, 3 ,2),
+	(now(),94, 3 ,1),
+	(now(),27, 3 ,2),
+	(now(),3, 3 ,1),
+	(now(),93, 3 ,2),
+	(now(),44, 6 ,2),
+	(now(),69, 6 ,1),
+	(now(),47, 6 ,2),
+	(now(),23, 6 ,1),
+	(now(),89, 2 ,2),
+	(now(),82, 2 ,1),
+	(now(),45, 2 ,2),
+	(now(),91, 2 ,1),
+	(now(),33, 2 ,2),
+	(now(),2, 3 ,2),
+	(now(),94, 3 ,1),
+	(now(),27, 3 ,2),
+	(now(),3, 3 ,1),
+	(now(),93, 3 ,2),
+	(now(),44, 6 ,2),
+	(now(),69, 6 ,1),
+	(now(),47, 6 ,2),
+	(now(),23, 6 ,1);
 
-	;
-
+	
 create table chamado(
 	idChamado int primary key auto_increment,
     nivel varchar(45),
@@ -537,34 +537,7 @@ VALUES
   ('Médio', 'Aberto', '6 horas', '2026-08-22 11:30:00', 'Foi', 44),
   ('Baixo', 'Aberto', '10 horas', '2026-09-25 10:15:00', 'Foi', 55);
   
-  
-  
-  
-  
 
-
--- insert into
--- 	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
--- select 
--- 	case when r.valor > 95
--- 		then 'Alto'
--- 		else case when r.valor > 90
--- 			then 'Médio'
--- 			else 'Baixo'
--- 		end
--- 	end nivel,
--- 	'Aberto' estado,
--- 	case when r.valor > 95
--- 		then '2 horas'
--- 		else case when r.valor > 90
--- 			then '6 horas'
--- 			else '10 horas'
--- 		end
--- 	end sla,
---     '2023-05-14 20:36:16' dataHora,
--- 	'' descricao,
--- 	r.idRegistro
--- from registro r where r.valor > 85;
 
 create table peca(
 	idPeca int primary key auto_increment,
@@ -636,6 +609,7 @@ AS
     e.idEmpresa AS idHospital,
     e.nomeFantasia AS hospital,
     t.nome AS tipo,
+    t.idTipo,	
     CASE WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
 		 WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
 		 WHEN tr.nome = 'Uso de Disco' THEN 'Disco'
@@ -656,5 +630,66 @@ AS
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
 
-SELECT * FROM maquinarios;
-SELECT * FROM tipo;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS geraRegistros$$
+
+CREATE PROCEDURE geraRegistros()
+BEGIN
+  DECLARE i INT;
+  DECLARE dataHora DATETIME;
+  DECLARE valor FLOAT;
+  DECLARE fkTipoRegistro INT;
+  DECLARE fkMaquina INT;
+
+  SET i = 1;
+
+  WHILE i <= 300 DO
+    -- Gera uma data aleatória entre 1º de janeiro de 2023 e 31 de dezembro de 2023
+    SET dataHora = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * 365) DAY);
+
+    -- Gera um valor aleatório entre 85 e 99
+    SET valor = 85 + (RAND() * 15);
+
+    -- Gera um tipo de registro aleatório entre 1 e 3
+    SET fkTipoRegistro = FLOOR(RAND() * 3) + 1;
+
+    -- Gera uma máquina aleatória entre 1 e 216
+    SET fkMaquina = FLOOR(RAND() * 216) + 1;
+
+    -- Insere os valores no banco de dados
+    INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
+    VALUES (dataHora, valor, fkMaquina, fkTipoRegistro);
+
+    SET i = i + 1;
+  END WHILE;
+END$$
+
+DELIMITER ;
+
+CALL geraRegistros();
+  
+
+insert into
+	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
+select 
+	case when r.valor > 95
+		then 'Alto'
+		else case when r.valor > 90
+			then 'Médio'
+			else 'Baixo'
+		end
+	end nivel,
+	'Aberto' estado,
+	case when r.valor > 95
+		then '2 horas'
+		else case when r.valor > 90
+			then '6 horas'
+			else '10 horas'
+		end
+	end sla,
+	 dataHora,
+	'' descricao,
+	r.idRegistro
+from registro r where r.valor > 85;

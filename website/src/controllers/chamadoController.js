@@ -175,6 +175,15 @@ function quantidadeChamadosAberto(req,res){
         res.status(500).json(erro.sqlMessage)
     })
 }
+function fecharChamado(req,res){
+    var idChamado = req.params.idChamado;
+    chamadoModel.fecharChamado(idChamado)
+        .then(resultado => {
+            res.status(201).send("foto enviada com sucesso para a model");
+        }).catch(err => {
+            res.status(500).send("erroa qui" + err);
+        });
+}
 module.exports = {
     buscarMensal,
     buscarHospitais,
@@ -185,5 +194,6 @@ module.exports = {
     buscarSemanal,
     buscarGravidade,
     listarModelos,
-    quantidadeChamadosAberto
+    quantidadeChamadosAberto,
+    fecharChamado
 }

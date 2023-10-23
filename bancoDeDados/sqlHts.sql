@@ -712,6 +712,9 @@ DELIMITER ;
 CALL fechar_chamados();	
 
 DELIMITER $$
+
+DROP PROCEDURE IF EXISTS inserir_registros2$$
+
 CREATE PROCEDURE inserir_Registros2()
 BEGIN
   DECLARE i INT;

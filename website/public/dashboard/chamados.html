@@ -29,7 +29,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-
+        
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -214,7 +214,9 @@
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
-                                    Chamados
+                                    
+
+                                    
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
@@ -299,7 +301,7 @@
 
                         <!-- Page Heading -->
                         <h1 class="h3 mb-4 text-gray-800">Chamados</h1>
-
+                        <button onclick="fecharChamado()">FECHAR CHAMADO</button>
                     </div>
 
                     <div class="divSelecionarHospital">
@@ -380,7 +382,7 @@
                         <!-- Adicione mais linhas conforme necessário -->
                     </table>
                 </div>
-
+                
 
             </div>
 
@@ -408,7 +410,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
+    
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -472,6 +474,7 @@
                                         let sla = resposta[i].sla
                                         let dataHora = resposta[i].dataHora
                                         let tipoRegistro = resposta[i].tipoRegistro
+                                        let idChamado = resposta[i].idChamado
 
 
                                         tabela.innerHTML += `
@@ -482,6 +485,7 @@
                             <td id="sla">${sla}</td>
                             <td id="dataHora">${dataHora}</td>
                             <td id="desc">${tipoRegistro}</td>
+                            <button onclick="fecharChamado(${idChamado})"> fechar chamado </button>
                             </tr>
                             `
                                     }
@@ -544,6 +548,33 @@
                 }
             )
 
+    }
+
+    function fecharChamado(idChamado){
+        
+
+        fetch(`/chamados/fecharChamado/${idChamado}`, {
+            method: "POST"
+        })
+        .then(
+            resposta =>{
+                if(resposta.ok){
+                    resposta.json()
+                    .then(
+                        resposta =>{
+                            alert('Chamado fechado com sucesso')
+                           console.log(resposta)
+                           location.reload()
+                        }
+                    )
+                }
+            }
+        )
+        .catch(
+            err =>{
+                console.log("ERRO" + err)
+            }
+        )
     }
 
 </script>

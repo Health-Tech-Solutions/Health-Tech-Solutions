@@ -44,9 +44,9 @@ function cadastrar() {
     var logradouroVar = InputLogradouro.value
     var bairroVar = InputBairro.value
     var cidadeVar = InputCidade.value
-
-    var fkEmpresa = sessionStorage.FK_EMPRESA;
-    var fkEndereco = sessionStorage.FK_ENDERECO;
+    var fkEmpresaVar = sessionStorage.FK_EMPRESA
+    console.log("CONFIRMAÇÃO")
+    console.log(fkEmpresaVar)
 
     
         fetch("/hospitais/cadastrar", {
@@ -64,7 +64,7 @@ function cadastrar() {
                 logradouroServer: logradouroVar,
                 bairroServer: bairroVar,
                 cidadeServer: cidadeVar,
-                fkEnderecoServer: fkEndereco
+                fkEmpresaServer: fkEmpresaVar
             })
         })
             .then(res => {
@@ -83,7 +83,7 @@ function cadastrar() {
                         InputLogradouro.value = ""
                         InputBairro.value = ""
                         InputCidade.value = ""
-                        listarHospitais()
+                       // listarHospitais()
                     })
                 } else if (res.status == 400) {
                     alert("Hospital já cadastrado")
@@ -98,29 +98,30 @@ function cadastrar() {
     }
 
 
-function listarHospitais() {
-    fetch(`/hospitais/listar/${sessionStorage.FK_EMPRESA}`)
-        .then(res => res.json())
-        .then(res => {
-            hospitais.innerHTML = ""
-            if (res.hospitais.length > 0) {
-                res.hospitais.map(i => {
-                    hospitais.innerHTML += `
-                        <div class="card-body row row-cols-3 justify-content-between">
-                            <p>${i.nomeFantasia}</p>
-                            <p>${i.cnpj}</p>
-                            <p>${i.telefone}</p>
-                        </div>
-                    `
-                })
-            }
-            else {
-                funcionario.innerHMTL += `
-                    <div class="card-body">
-                        Não há nenhum funcionário cadastrado no momento
-                    </div>
-                `
-            }
-        })
-}
-listarHospitais()
+// function listarHospitais() {
+//     FK_EMPRESA = sessionStorage.FK_EMPRESA
+//     fetch(`/hospitais/listar/${FK_EMPRESA}`)
+//         .then(res => res.json())
+//         .then(res => {
+//             hospitais.innerHTML = ""
+//             if (res.hospitais.length > 0) {
+//                 res.hospitais.map(i => {
+//                     hospitais.innerHTML += `
+//                         <div class="card-body row row-cols-3 justify-content-between">
+//                             <p>${i.nomeFantasia}</p>
+//                             <p>${i.cnpj}</p>
+//                             <p>${i.telefone}</p>
+//                         </div>
+//                     `
+//                 })
+//             }
+//             else {
+//                 funcionario.innerHMTL += `
+//                     <div class="card-body">
+//                         Não há nenhum funcionário cadastrado no momento
+//                     </div>
+//                 `
+//             }
+//         })
+// }
+// listarHospitais()

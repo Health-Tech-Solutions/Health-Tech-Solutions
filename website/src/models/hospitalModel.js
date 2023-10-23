@@ -1,14 +1,17 @@
 const database = require("../database/config")
 
-function cadastrar(cep, numero, logradouro, bairro, cidade, nomeFantasia, cnpj, telefone, fkEndereco){
+function cadastrar(nomeFantasia, cnpj, telefone, cep, numero, complemento, logradouro, bairro, cidade, fkEmpresa){
     const instrucao1 = `
-        INSERT INTO endereco (cep, numero, logradouro, bairro, cidade) VALUES ('${cep}', '${numero}', '${complemento}', '${logradouro}', '${bairro}', '${cidade}');
+        INSERT INTO endereco (cep, numero, complemento, logradouro, bairro, cidade) VALUES ('${cep}', '${numero}', '${complemento}', '${logradouro}', '${bairro}', '${cidade}');
     `
     const instrucao2 = `
-        INSERT INTO empresa (nomeFantasia, cnpj, telefone, fkEndereco) VALUES ('${nomeFantasia}', '${cnpj}', '${telefone}', '${fkEndereco}');
+        INSERT INTO empresa (nomeFantasia, cnpj, telefone, fkEndereco) VALUES ('${nomeFantasia}', '${cnpj}', '${telefone}', ${fkEmpresa});
     `
     console.log("Executando a seguinte instrução no sql " + instrucao1 + instrucao2)
-    return database.executar(instrucao1 + instrucao2)
+
+    const resultado1 = database.executar(instrucao1)
+    const resultado2 = database.executar(instrucao2)
+    return resultado1 && resultado2
 }
 
 function listarHospitais(){

@@ -1,0 +1,15 @@
+CONEXÃO COM BANCO
+
+Colocar o seu user e seu password no banco.py
+
+Script do banco:
+
+create database crawler;
+use crawler;
+
+create table Dados(id int auto_increment primary key,estado varchar(10),dataDecapitura date,
+precipitacao decimal(6,2),pressaoMax decimal(6,2),pressaoMin decimal(6,2),
+temperaturaMax decimal(6,2),temperaturaMin decimal(6,2)
+);
+
+select * from Dados;

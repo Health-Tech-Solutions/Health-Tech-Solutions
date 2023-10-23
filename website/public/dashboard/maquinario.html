@@ -524,7 +524,7 @@ fetch(`/medidas/ultimas/${fkTipo}/${fkHospital}`, { cache: 'no-store' }).then(fu
                 <div class="container-modelos" id="maquina_modelos">
                  <div class="card shadow mb-4">
                     <div class="card-body" id="graficoMaquina">
-                        <h3>${visualizarDados.modelo}</h3>
+                        <h3 >${visualizarDados.modelo}<span id='insertComponente${visualizarDados.idMaquinario}'></span> </h3>
                          <canvas id="graficoCPU${visualizarDados.idMaquinario}#CPU"></canvas> 
                          <canvas id="graficoRAM${visualizarDados.idMaquinario}#RAM"></canvas> 
                          <canvas id="graficoDisco${visualizarDados.idMaquinario}#DISCO"></canvas> 
@@ -547,7 +547,7 @@ function mudarGrafico(visualizarDados){
     // const z = document.getElementById('graficoDisco'+visualizarDados+'#DISCO');
     var whyDado = document.getElementById(`selectGrafico${visualizarDados}`) 
     var [componente, idMaquinario] = (whyDado.value).split("+");
-    alert(componente + idMaquinario)
+    
     getDadosGrafico(visualizarDados,componente,idMaquinario)
     // x.style.height = "60vh";
     // // y.style.height = "60vh";
@@ -662,6 +662,8 @@ function mudarGrafico(visualizarDados){
 // }
 var mudar = false;
 function getDadosGrafico(visualizarDados, componente, idMaquinario) {
+    nomeComponente = document.getElementById(`insertComponente${idMaquinario}`)
+    nomeComponente.innerHTML = ' - '+componente;
     var fkHospital = 1; // Você pode descomentar essa linha se precisar
 
     fetch(`/medidas/dadosMaquinario/${fkHospital}/${idMaquinario}/${componente}`)
@@ -672,6 +674,8 @@ function getDadosGrafico(visualizarDados, componente, idMaquinario) {
                         console.log('Dados recebidos com sucesso:', resultado);
 
                         var ctx = document.getElementById(`graficoCPU${resultado[0].idMaquinario}#CPU`);
+               
+                        
 if (!mudar) { 
 mudar = true
     lineChart = new Chart(ctx, {
@@ -691,8 +695,6 @@ mudar = true
     }
 });
 }else{
-    alert("else")
-    lineChart.destroy()
     lineChart = new Chart(ctx, {
     type: 'bar',
     data: dados,
@@ -722,6 +724,7 @@ mudar = true
                     })
                     .catch(function (erro) {
                         console.error('Erro ao processar a resposta JSON:', erro);
+
                     });
             } else {
                 console.error('Erro na requisição: ', resposta.status, resposta.statusText);
@@ -734,13 +737,11 @@ mudar = true
 
 
 function plotarGrafico(resposta,lineChart,ctx){
- 
-  alert('teste')
+
   labels = []
   data = []
 
-    ctx.style.width = "90%"
-    ctx.style.height = "60vh"
+   
 
    
     
@@ -751,6 +752,8 @@ function plotarGrafico(resposta,lineChart,ctx){
     }
     dados.labels = labels
     dados.datasets[0].data = data
+    ctx.style.width = '90%'
+    ctx.style.height = '60vh'
     lineChart.update()
   
 
@@ -780,6 +783,7 @@ var dados = {
         backgroundColor: '#030050',
         borderColor: '#030050'
     }]
+    
 }
 
   

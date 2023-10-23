@@ -1,4 +1,4 @@
--- Active: 1683809701982@@127.0.0.1@3306@amigospet
+-- Active: 1683809701982@@127.0.0.1@3306@hts
 drop database if exists hts;
 create database hts;
 USE hts;
@@ -736,8 +736,9 @@ BEGIN
 		WHILE counter2 <= 3 do
       INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
       VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), i, counter2, NULL);
-      SET counter = counter + 1;
+      SET counter2 = counter2 + 1;
       end while;
+      set counter = counter + 1;
     END WHILE;
     
     INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)

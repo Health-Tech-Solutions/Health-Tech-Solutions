@@ -5,8 +5,8 @@ import csv
 
 conexao = mysql.connector.connect(
     host= "localhost",
-    user= "",
-    password= "",
+    user= "hts",
+    password= "urubu100",
     port= 3306,
     database="crawler"
 )

@@ -70,20 +70,23 @@ function maquinasInstaveis(fkHospital) {
 
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' )
     var instrucao = ""
     if (fkHospital != "null") {
          instrucao = `
          SELECT 
      idMaquina AS quantidade, 
      tipo, hospital FROM 
-     vw_chamados where hospital = '${hospital}' group by quantidade, tipo, hospital;
+     vw_chamados where idHospital = '${fkHospital}' WHERE estado = 'Aberto' group by quantidade, tipo, hospital;
              ` 
     }else{
         instrucao = `
         SELECT 
         idMaquina AS quantidade, 
         tipo FROM 
-        vw_chamados group by quantidade, tipo;
+        vw_chamados
+        WHERE estado = 'Aberto' 
+        group by quantidade, tipo;
             ` 
     }
 

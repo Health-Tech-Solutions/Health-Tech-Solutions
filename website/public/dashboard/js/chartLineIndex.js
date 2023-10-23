@@ -50,9 +50,15 @@ function plotarGraficoSemanal(resposta){
     
     labels = []
     data = []
+    var dataAtual = new Date()
+    
+    var mes = dataAtual.getMonth() + 1
+    
     for (let i = 0; i < resposta.length; i++) {
+
         let ocorrencia = resposta[i];
-        labels.push(ocorrencia.dia)
+
+        labels.push(ocorrencia.dia + '/' + mes)
         data.push(ocorrencia.quantidade)
     }
 

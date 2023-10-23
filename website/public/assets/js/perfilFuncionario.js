@@ -15,7 +15,7 @@ function enviarFoto() {
       .then(res => {
         console.warn("Ta entrando3")
         console.log(res)
-        //window.location = "./perfil.html"
+        window.location = "./perfilFuncionario.html"
       })
       .catch(err => {
         console.log(err);

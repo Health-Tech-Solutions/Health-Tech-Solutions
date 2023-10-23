@@ -5,10 +5,11 @@ function buscarUltimasMedidas(req, res) {
     //const limite_linhas = 7;
 
     var fkTipo = req.params.fkTipo;
+    var fkHospital = req.params.fkHospital;
 
     //console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidas(fkTipo).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas(fkTipo,fkHospital).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -21,7 +22,7 @@ function buscarUltimasMedidas(req, res) {
     });
 }
 function buscarDadosMaquinario(req, res) {
-
+    console.log('peiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
 
     var fkHospital = req.params.fkHospital;
  
@@ -30,9 +31,11 @@ function buscarDadosMaquinario(req, res) {
   
     //console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarDadosMaquinario(fkHospital,componente,idMaquinario).then(function (resultado) {
+    medidaModel.buscarDadosMaquinario(fkHospital,componente,idMaquinario)
+    .then(function (resultado) {
         if (resultado.length > 0) {
-            res.status(200).json(resultado);
+            console.log('1TESTEEEE')
+            res.status(200).send(resultado);
         } else {
             res.status(204).send("Nenhum resultado encontrado!")
         }

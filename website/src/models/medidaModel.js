@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(fkTipo) {
+function buscarUltimasMedidas(fkTipo,fkHospital) {
 
     instrucaoSql = ''
 
@@ -21,7 +21,7 @@ function buscarUltimasMedidas(fkTipo) {
                m.fkTipo
                 FROM maquinario AS maq 
                 JOIN modelo AS m ON maq.fkModelo = m.idModelo
-                where m.fkTipo = ${fkTipo};`
+                where m.fkTipo = ${fkTipo} and maq.fkHospital = ${fkHospital};`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -51,7 +51,7 @@ function buscarDadosMaquinario(fkHospital,idMaquinario,componente) {
                reg.idRegistro,
                reg.valor,
                tiporeg.nome,
-               time_format(reg.dataHora,"%H:%i:%s") as momento_grafico
+               time_format(reg.dataHora,"%H:%i") as momento_grafico
                 FROM maquinario AS maq 
                 JOIN modelo AS m ON maq.fkModelo = m.idModelo
                 join registro as reg on reg.fkMaquina = maq.idMaquinario

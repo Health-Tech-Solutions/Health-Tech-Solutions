@@ -493,9 +493,10 @@
   var visualizarDados = '';
 //Essa função é a responsavel de pegar os dados da tabela mySQL
 function obterDadosGrafico(fkTipo) {
+var fkHospital = 1
 divInferior.innerHTML = "";
 divSelect.innerHTML = "";
-fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (response) {
+fetch(`/medidas/ultimas/${fkTipo}/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -524,9 +525,9 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
                  <div class="card shadow mb-4">
                     <div class="card-body" id="graficoMaquina">
                         <h3>${visualizarDados.modelo}</h3>
-                         <canvas id="graficoCPU${i}"></canvas> 
-                         <canvas id="graficoRAM${i}"></canvas> 
-                         <canvas id="graficoDisco${i}"></canvas> 
+                         <canvas id="graficoCPU${visualizarDados.idMaquinario}#CPU"></canvas> 
+                         <canvas id="graficoRAM${visualizarDados.idMaquinario}#RAM"></canvas> 
+                         <canvas id="graficoDisco${visualizarDados.idMaquinario}#DISCO"></canvas> 
                     </div>
                 </div>   
             </div>`
@@ -541,152 +542,229 @@ fetch(`/medidas/ultimas/${fkTipo}`, { cache: 'no-store' }).then(function (respon
     });
 }
 function mudarGrafico(visualizarDados){
-    const x = document.getElementById('graficoCPU'+visualizarDados);
-    const y = document.getElementById('graficoRAM'+visualizarDados);
-    const z = document.getElementById('graficoDisco'+visualizarDados);
+    // const x = document.getElementById('graficoCPU'+visualizarDados+'#CPU');
+    // const y = document.getElementById('graficoRAM'+visualizarDados+'#RAM');
+    // const z = document.getElementById('graficoDisco'+visualizarDados+'#DISCO');
     var whyDado = document.getElementById(`selectGrafico${visualizarDados}`) 
     var [componente, idMaquinario] = (whyDado.value).split("+");
     alert(componente + idMaquinario)
     getDadosGrafico(visualizarDados,componente,idMaquinario)
-    x.style.height = "60vh";
-    y.style.height = "60vh";
-    z.style.height = "60vh";
-    x.style.width = "100%";
-    y.style.width = "100%";
-    z.style.width = "100%";
+    // x.style.height = "60vh";
+    // // y.style.height = "60vh";
+    // // z.style.height = "60vh";
+    // // x.style.width = "100%";
+    // // y.style.width = "100%";
+    // // z.style.width = "100%";
 
-    const graficoDados = document.getElementById("selectGrafico"+visualizarDados);
-    var graficoEscolhido = graficoDados.value
-    if(graficoEscolhido == 2){
-    x.style.display = "block";
-    y.style.display = "none";
-    z.style.display = "none";
-     myNewChart = new Chart(x, {
-            type: 'line',
-            data: {
-              labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
-              datasets: [{
-                label: 'Uso médio da CPU',
-                data: [94,95,96,96,97,98,98,96,92,98,91,99],
-                borderWidth: 1,
-                backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
-                borderColor: 'rgba(3, 0, 80, 1)'
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true,
-                }
-              }
-            }
-          });
-    }else if(graficoEscolhido == 3){
-    x.style.display = "none";
-    y.style.display = "block";
-    z.style.display = "none";
-         myNewChart= new Chart(y, {
-            type: 'line',
-            data: {
-                labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
-              datasets: [{
-                label: 'Uso médio da RAM',
-                data: [98,95,96,98,97,98,98,96,94,95,97,97],
-                borderWidth: 1,
-                backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
-                borderColor: 'rgba(3, 0, 80, 1)'
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-    }else if(graficoEscolhido == 4){
-    x.style.display = "none";
-    y.style.display = "none";
-    z.style.display = "block";
-         myNewChart = new Chart(z, {
-            type: 'line',
-            data: {
-                labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
-              datasets: [{
-                label: 'Uso médio do Disco',
-                data: [4,3,3,4,4,2,3,4,4,2,3,4],
-                borderWidth: 1,
-                 backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
-                borderColor: 'rgba(3, 0, 80, 1)'
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-    }else if(graficoEscolhido == 1){
-        x.style.display = "none";
-        y.style.display = "none";
-        z.style.display = "none";
+    // const graficoDados = document.getElementById("selectGrafico"+visualizarDados);
+    // var graficoEscolhido = graficoDados.value
+    // if(graficoEscolhido == 2){
+    // x.style.display = "block";
+    // y.style.display = "none";
+    // z.style.display = "none";
+    //  myNewChart = new Chart(x, {
+    //         type: 'line',
+    //         data: {
+    //           labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
+    //           datasets: [{
+    //             label: 'Uso médio da CPU',
+    //             data: [94,95,96,96,97,98,98,96,92,98,91,99],
+    //             borderWidth: 1,
+    //             backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+    //             borderColor: 'rgba(3, 0, 80, 1)'
+    //           }]
+    //         },
+    //         options: {
+    //           scales: {
+    //             y: {
+    //               beginAtZero: true,
+    //             }
+    //           }
+    //         }
+    //       });
+    // }else if(graficoEscolhido == 3){
+    // x.style.display = "none";
+    // y.style.display = "block";
+    // z.style.display = "none";
+    //      myNewChart= new Chart(y, {
+    //         type: 'line',
+    //         data: {
+    //             labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
+    //           datasets: [{
+    //             label: 'Uso médio da RAM',
+    //             data: [98,95,96,98,97,98,98,96,94,95,97,97],
+    //             borderWidth: 1,
+    //             backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+    //             borderColor: 'rgba(3, 0, 80, 1)'
+    //           }]
+    //         },
+    //         options: {
+    //           scales: {
+    //             y: {
+    //               beginAtZero: true
+    //             }
+    //           }
+    //         }
+    //       });
+    // }else if(graficoEscolhido == 4){
+    // x.style.display = "none";
+    // y.style.display = "none";
+    // z.style.display = "block";
+    //      myNewChart = new Chart(z, {
+    //         type: 'line',
+    //         data: {
+    //             labels: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Decembro'],
+    //           datasets: [{
+    //             label: 'Uso médio do Disco',
+    //             data: [4,3,3,4,4,2,3,4,4,2,3,4],
+    //             borderWidth: 1,
+    //              backgroundColor: 'rgba(rgba(3, 0, 80, 1))',
+    //             borderColor: 'rgba(3, 0, 80, 1)'
+    //           }]
+    //         },
+    //         options: {
+    //           scales: {
+    //             y: {
+    //               beginAtZero: true
+    //             }
+    //           }
+    //         }
+    //       });
+    // }else if(graficoEscolhido == 1){
+    //     x.style.display = "none";
+    //     y.style.display = "none";
+    //     z.style.display = "none";
 
-    }
+    // }
 }
-function getDadosGrafico(visualizarDados,componente,idMaquinario){
- 
-    var fkHospital = 1;//sessionStorage.FK_HOSPITAL;
+// function getDadosGrafico(visualizarDados,componente,idMaquinario){
+
+//     var fkHospital = 1;//sessionStorage.FK_HOSPITAL;
+
+//     fetch(`/medidas/dadosMaquinario/${fkHospital}/${idMaquinario}/${componente}`)
+//     .then(function(resposta){
+//             if(resposta.ok){
+//                 resposta.json()
+//                 .then(
+//                     function(resposta){
+//                         alert('foi!')
+//                         alert("dales"+resposta)
+//                     }
+//                 )
+//             }
+//         }
+//     )
+//     .catch(
+//         err => {
+//             console.log("ERRO " + err)
+//         }
+//     )
+// }
+function getDadosGrafico(visualizarDados, componente, idMaquinario) {
+    var fkHospital = 1; // Você pode descomentar essa linha se precisar
 
     fetch(`/medidas/dadosMaquinario/${fkHospital}/${idMaquinario}/${componente}`)
-    .then(
-        function(resposta){
-            if(resposta.ok){
+        .then(function (resposta) {
+            if (resposta.ok) {
                 resposta.json()
-                .then(
-                    function(resposta){
-                        alert('foi!')
-                        console.log("dales"+resposta)
-                    }
-                )
+                    .then(function (dados) {
+                        console.log('Dados recebidos com sucesso:', dados);
+
+                        plotarGrafico(dados);
+
+                        // Aqui, você pode fazer o que quiser com os dados, como renderizá-los em um gráfico
+                        // Por exemplo, você pode chamar uma função que cria o gráfico e passar os dados para ela.
+
+                        // Exemplo de chamada de uma função para processar os dados
+
+                    })
+                    .catch(function (erro) {
+                        console.error('Erro ao processar a resposta JSON:', erro);
+                    });
+            } else {
+                console.error('Erro na requisição: ', resposta.status, resposta.statusText);
             }
-        }
-    )
-    .catch(
-        err => {
-            console.log("ERRO " + err)
-        }
-    )
+        })
+        .catch(function (erro) {
+            console.error('Erro na requisição fetch:', erro);
+        });
 }
+
 
 function plotarGrafico(resposta){
+    alert('plotardados')
+    var ctx = document.getElementById(`graficoCPU${resposta[0].idMaquinario}#CPU`);   
+    ctx.style.width = "90%"
+    ctx.style.height = "60vh"
 
-labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-dados.datasets[0].data = []
-
-for (let i = 0; i < resposta.length; i++) {
-    let registro = resposta[i];
-    // console.log(registro.mes)
-    dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
+    labels = []
+    data = []
+    var dados = {
+    labels: labels,
+    datasets: [{
+        label: '',
+        data: data,
+        borderWidth: 1,
+        backgroundColor: '#030050',
+        borderColor: '#030050'
+    }]
 }
-dados.labels = labels
-lineChart.update()
-}
 
-data = [0,0,0,0,0,0,0,0,0,0,0,0]
-const ctx = document.getElementById('chartLinha');
-labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    var lineChart = new Chart(ctx, {
+    type: 'bar',
+    data: dados,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+
+
+
+    
+    for (let i = 0; i < resposta.length; i++) {
+        let ocorrencia = resposta[i];
+        labels.push(ocorrencia.momento_grafico)
+        data.push(ocorrencia.valor)
+    }
+   
+   
+
 // 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
-var dados = {
-labels: labels,
-datasets: [{
-    label: '',
-    data: data,
-    borderWidth: 1,
-    backgroundColor: '#030050',
-    borderColor: '#030050'
-}]
+
+
+    dados.labels = labels
+    dados.datasets[0].data = data
+    lineChart.update()
+
+  
+
 }
+
+// var lineChart = new Chart(ctx, {
+//     type: 'line',
+//     data: dados,
+//     options: {
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         },
+//         plugins: {
+//             legend: {
+//                 display: false
+//             }
+//         }
+//     }
+// });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

@@ -14,20 +14,20 @@ function cadastrar(req, res) {
     var fkEmpresa = req.body.fkEmpresaServer
 
     hospitalModel.cadastrar(nomeFantasia, cnpj, telefone, cep, numero, complemento, logradouro, bairro, cidade, fkEmpresa).then((resultado) => {
-            res.status(201).json(resultado);
-        });
+        res.status(201).json(resultado);
+    });
 
-    // hospitalModel.buscarPorCnpj(cnpj).then((resultado) => {
-    //     if (resultado.length > 0) {
-    //       res
-    //         .status(401)
-    //         .json({ mensagem: `o hospital com o cnpj ${cnpj} já existe` });
-    //     } else {
-    //       hospitalModel.cadastrar(nomeFantasia, cnpj, telefone, cep, numero, complemento, logradouro, bairro, cidade, fkEmpresa).then((resultado) => {
-    //         res.status(201).json(resultado);
-    //       });
-    //     }
-    //   });
+    //  hospitalModel.buscarPorCnpj(cnpj).then((resultado) => {
+    //      if (resultado.length > 0) {
+    //        res
+    //          .status(401)
+    //          .json({ mensagem: `o hospital com o cnpj ${cnpj} já existe` });
+    //      } else {
+    //         hospitalModel.cadastrar(nomeFantasia, cnpj, telefone, cep, numero, complemento, logradouro, bairro, cidade, fkEmpresa).then((resultado) => {
+    //             res.status(201).json(resultado);
+    //         });
+    //      }
+    //    });
 }
 
 function listarHospitais(req, res) {

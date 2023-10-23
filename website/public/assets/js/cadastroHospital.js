@@ -98,6 +98,55 @@ function cadastrar() {
     }
 
 
+    function listarHospitais(){
+
+        fetch(`/hospitais/listarHospitais`)
+        .then(  
+            function(resposta){
+                if(resposta.ok){
+                    resposta.json()
+                    .then(
+                        function(resposta){
+                            hospitalResposta = resposta
+                            console.log(hospitalResposta)
+
+                            hospitais.innerHTML = ""
+                            if(hospitalResposta.length > 0){
+
+                                for (let index = 0; index < hospitalResposta.length; index++) {
+                                    hospitais.innerHTML += `
+                                        <div class="card-body row row-cols-3 justify-content-between">
+                                            <p>${hospitalResposta[index].nomeFantasia}</p>
+                                            <p>${hospitalResposta[index].cnpj}</p>
+                                        </div>
+                                    `
+                                    
+                                }
+                            }
+                            else{
+                                funcionario.innerHMTL += `
+                                    <div class="card-body">
+                                        Não há nenhum funcionário cadastrado no momento
+                                    </div>
+                                `   
+                            }
+
+
+                            
+                        }
+                    )
+                }
+            }
+        )
+        .catch(
+            err => {
+                console.log("ERRO" + err)
+            }
+        )
+    }
+
+
+
 // function listarHospitais() {
 //     FK_EMPRESA = sessionStorage.FK_EMPRESA
 //     fetch(`/hospitais/listar/${FK_EMPRESA}`)

@@ -667,39 +667,10 @@ function getDadosGrafico(visualizarDados, componente, idMaquinario) {
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json()
-                    .then(function (dados) {
-                        console.log('Dados recebidos com sucesso:', dados);
-
-                        plotarGrafico(dados);
-
-                        // Aqui, você pode fazer o que quiser com os dados, como renderizá-los em um gráfico
-                        // Por exemplo, você pode chamar uma função que cria o gráfico e passar os dados para ela.
-
-                        // Exemplo de chamada de uma função para processar os dados
-
-                    })
-                    .catch(function (erro) {
-                        console.error('Erro ao processar a resposta JSON:', erro);
-                    });
-            } else {
-                console.error('Erro na requisição: ', resposta.status, resposta.statusText);
-            }
-        })
-        .catch(function (erro) {
-            console.error('Erro na requisição fetch:', erro);
-        });
-}
-
-
-function plotarGrafico(resposta){
-    alert('plotardados')
-    var ctx = document.getElementById(`graficoCPU${resposta[0].idMaquinario}#CPU`);   
-    ctx.style.width = "90%"
-    ctx.style.height = "60vh"
-
-    labels = []
-    data = []
-    var dados = {
+                    .then(function (resultado) {
+                        console.log('Dados recebidos com sucesso:', resultado);
+                        var ctx = document.getElementById(`graficoCPU${resultado[0].idMaquinario}#CPU`);
+                        var dados = {
     labels: labels,
     datasets: [{
         label: '',
@@ -726,16 +697,47 @@ function plotarGrafico(resposta){
         }
     }
 });
+                        ctx.style.width = "90%"
+                        ctx.style.height = "60vh"
+                        plotarGrafico(resultado,lineChart,ctx);
+
+                        // Aqui, você pode fazer o que quiser com os dados, como renderizá-los em um gráfico
+                        // Por exemplo, você pode chamar uma função que cria o gráfico e passar os dados para ela.
+
+                        // Exemplo de chamada de uma função para processar os dados
+
+                    })
+                    .catch(function (erro) {
+                        console.error('Erro ao processar a resposta JSON:', erro);
+                    });
+            } else {
+                console.error('Erro na requisição: ', resposta.status, resposta.statusText);
+            }
+        })
+        .catch(function (erro) {
+            console.error('Erro na requisição fetch:', erro);
+        });
+}
 
 
+function plotarGrafico(resposta,lineChart,ctx){
+  
+  alert('teste')
+  labels = []
+  data = []
 
-
+    ctx.style.width = "90%"
+    ctx.style.height = "60vh"
+    labels = []
+    data = []
+   
     
     for (let i = 0; i < resposta.length; i++) {
         let ocorrencia = resposta[i];
         labels.push(ocorrencia.momento_grafico)
         data.push(ocorrencia.valor)
     }
+
    
    
 
@@ -749,6 +751,7 @@ function plotarGrafico(resposta){
   
 
 }
+
 
 // var lineChart = new Chart(ctx, {
 //     type: 'line',

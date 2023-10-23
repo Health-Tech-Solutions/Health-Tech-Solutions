@@ -58,7 +58,7 @@ function buscarDadosMaquinario(fkHospital,idMaquinario,componente) {
                 join tiporegistro as tiporeg on tiporeg.idTipoRegistro = reg.fkTipoRegistro
                 where maq.idMaquinario = ${idMaquinario} and maq.fkHospital = ${fkHospital} 
                 and tiporeg.nome like "%${componente}%" 
-                order by idRegistro;`
+                order by idRegistro limit 25;`
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

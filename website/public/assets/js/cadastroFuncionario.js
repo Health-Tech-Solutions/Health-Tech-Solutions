@@ -42,9 +42,15 @@ function cadastrar(){
         .then(res => {
             if(res.status == 200){
                 res.json().then(res => {
+                    Swal.fire({
+                        title: 'Funcionário cadastrado com sucesso!',
+                        icon: 'success'
+                    })
+                    // alert("Funcionário cadastrado com sucesso!")
                     InputNome.value = ""
                     InputEmail.value = ""
                     InputSenha.value = ""
+                    InputCPF.value = ""
                     listarFuncionarios()
                 })
                     InputConfirmacaoSenha.value = ""

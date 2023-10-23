@@ -1,5 +1,16 @@
 const database = require("../database/config")
 
+function cadastrar(cep, numero, logradouro, bairro, cidade, nomeFantasia, cnpj, telefone, fkEndereco){
+    const instrucao1 = `
+        INSERT INTO endereco (cep, numero, logradouro, bairro, cidade) VALUES ('${cep}', '${numero}', '${complemento}', '${logradouro}', '${bairro}', '${cidade}');
+    `
+    const instrucao2 = `
+        INSERT INTO empresa (nomeFantasia, cnpj, telefone, fkEndereco) VALUES ('${nomeFantasia}', '${cnpj}', '${telefone}', '${fkEndereco}');
+    `
+    console.log("Executando a seguinte instrução no sql " + instrucao1 + instrucao2)
+    return database.executar(instrucao1 + instrucao2)
+}
+
 function listarHospitais(){
     const instrucao = `
         SELECT * FROM empresa;
@@ -88,6 +99,7 @@ function totalMaquinasPorTipo(fkHospital) {
 
 
 module.exports = {
+    cadastrar,
     listarHospitais,
     pegarTotalMaquinas,
     totalMaquinasPorTipoChamadoAberto,

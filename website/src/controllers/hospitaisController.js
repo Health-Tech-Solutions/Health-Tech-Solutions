@@ -12,10 +12,19 @@ function cadastrar(req, res) {
     var bairro = req.body.bairroServer
     var cidade = req.body.cidadeServer
     var fkEmpresa = req.body.fkEmpresaServer
-
-    hospitalModel.cadastrar(nomeFantasia, cnpj, telefone, cep, numero, complemento, logradouro, bairro, cidade, fkEmpresa).then((resultado) => {
+    console.log("TA NA CONTROLLER")
+    hospitalModel.cadastrar(nomeFantasia, cnpj, telefone, cep, numero, complemento, logradouro, bairro, cidade, fkEmpresa)
+    .then((resultado) => {
         res.status(201).json(resultado);
-    });
+    })
+    .catch((erro) => {
+        console.log(erro);
+        console.log(
+          "\nHouve um erro ao realizar o cadastro! Erro: ",
+          erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+      });
 
     //  hospitalModel.buscarPorCnpj(cnpj).then((resultado) => {
     //      if (resultado.length > 0) {

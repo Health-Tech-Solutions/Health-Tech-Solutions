@@ -22,11 +22,13 @@
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="../assets/js/perfilFuncionario.js"></script>
+        <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
 
     </head>
 
-    <body id="page-top" onload=" obterDadosGrafico(), obterDadosEstado(), chamarComponenteComMaisAlertas(), chamarModeloComMaisAlertas()">
+    <body id="page-top" onload=" obterDadosGrafico(),
+     obterDadosEstado(), chamarComponenteComMaisAlertas(), chamarModeloComMaisAlertas(),
+     mostrarDados()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -276,7 +278,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="nomeUsuario">Bruna
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="usuario_nome">Bruna
                                         Sanguini</span>
                                     <img class="img-profile rounded-circle" id="usuario_foto">
                                 </a>

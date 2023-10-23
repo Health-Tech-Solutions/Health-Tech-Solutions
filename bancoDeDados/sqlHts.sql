@@ -661,7 +661,7 @@ BEGIN
 END$$
 
 DELIMITER ;
-
+use hts;
 
 CALL inserir_registros();
 
@@ -684,7 +684,7 @@ select
 			else '10 horas'
 		end
 	end sla,
-	 dataHora,
+	dataHora,
 	'' descricao,
 	r.idRegistro
 from registro r where r.valor > 85;
@@ -710,7 +710,6 @@ END$$
 		
 DELIMITER ;
 CALL fechar_chamados();	
-
 
 
 

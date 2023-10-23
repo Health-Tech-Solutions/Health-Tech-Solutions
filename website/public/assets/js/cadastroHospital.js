@@ -31,6 +31,7 @@ InputCEP.addEventListener('keypress', () => {
 })
 
 function cadastrar() {
+    
     var nomeFantasiaVar = InputNomeFantasia.value
     var cnpj = InputCNPJ.value
     var cnpjVar = cnpj.replace(/[^0-9]/g, "")
@@ -45,11 +46,11 @@ function cadastrar() {
     var bairroVar = InputBairro.value
     var cidadeVar = InputCidade.value
     var fkEmpresaVar = sessionStorage.FK_EMPRESA
+   
     console.log("CONFIRMAÇÃO")
     console.log(fkEmpresaVar)
-
     
-        fetch("/hospitais/cadastrar", {
+    fetch("/hospitais/cadastrar", {
             method: "POST",
             headers: {
                 "Content-type": 'application/json'
@@ -69,21 +70,25 @@ function cadastrar() {
         })
             .then(res => {
                 if (res.status == 200) {
-                    res.json().then(res => {
-                        Swal.fire({
-                            title: 'Hospital cadastrado com sucesso!',
-                            icon: 'success'
-                        })
-                        InputNomeFantasia.value = ""
-                        InputCNPJ.value = ""
-                        InputTelefone.value = ""
-                        InputCEP.value = ""
-                        InputNumero.value = ""
-                        InputComplemento.value = ""
-                        InputLogradouro.value = ""
-                        InputBairro.value = ""
-                        InputCidade.value = ""
-                       // listarHospitais()
+                    res.json()
+                    .then(res => {
+                        if(res.ok){
+                            Swal.fire({
+                                title: 'Hospital cadastrado com sucesso!',
+                                icon: 'success'
+                            }),
+                            InputNomeFantasia.value = "",
+                            InputCNPJ.value = "",
+                            InputTelefone.value = "",
+                            InputCEP.value = "",
+                            InputNumero.value = "",
+                            InputComplemento.value = "",
+                            InputLogradouro.value = "",
+                            InputBairro.value = "",
+                            InputCidade.value = ""
+                           // listarHospitais()
+                        }
+                        
                     })
                 } else if (res.status == 400) {
                     alert("Hospital já cadastrado")
@@ -92,8 +97,8 @@ function cadastrar() {
                 //     alert("Preencha todos os campos para efetuar o cadastro")
                 // }
             })
-            .catch(res => {
-                console.log("ERRO#" + res.status)
+            .catch(err => {
+                console.log("ERRO#" + err.status)
             })
     }
 

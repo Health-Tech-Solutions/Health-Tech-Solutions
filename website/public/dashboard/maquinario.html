@@ -440,7 +440,7 @@
 </html>
 
 <script>
-    
+    var lineChart;
     // sessionStorage.ID_USUARIO = 
 
     function cadastrar(fkTipoVar) {
@@ -660,6 +660,7 @@ function mudarGrafico(visualizarDados){
 //         }
 //     )
 // }
+var mudar = false;
 function getDadosGrafico(visualizarDados, componente, idMaquinario) {
     var fkHospital = 1; // Você pode descomentar essa linha se precisar
 
@@ -669,19 +670,11 @@ function getDadosGrafico(visualizarDados, componente, idMaquinario) {
                 resposta.json()
                     .then(function (resultado) {
                         console.log('Dados recebidos com sucesso:', resultado);
-                        var ctx = document.getElementById(`graficoCPU${resultado[0].idMaquinario}#CPU`);
-                        var dados = {
-    labels: labels,
-    datasets: [{
-        label: '',
-        data: data,
-        borderWidth: 1,
-        backgroundColor: '#030050',
-        borderColor: '#030050'
-    }]
-}
 
-    var lineChart = new Chart(ctx, {
+                        var ctx = document.getElementById(`graficoCPU${resultado[0].idMaquinario}#CPU`);
+if (!mudar) { 
+mudar = true
+    lineChart = new Chart(ctx, {
     type: 'bar',
     data: dados,
     options: {
@@ -697,6 +690,26 @@ function getDadosGrafico(visualizarDados, componente, idMaquinario) {
         }
     }
 });
+}else{
+    alert("else")
+    lineChart.destroy()
+    lineChart = new Chart(ctx, {
+    type: 'bar',
+    data: dados,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+}
                         ctx.style.width = "90%"
                         ctx.style.height = "60vh"
                         plotarGrafico(resultado,lineChart,ctx);
@@ -721,15 +734,14 @@ function getDadosGrafico(visualizarDados, componente, idMaquinario) {
 
 
 function plotarGrafico(resposta,lineChart,ctx){
-  
+ 
   alert('teste')
   labels = []
   data = []
 
     ctx.style.width = "90%"
     ctx.style.height = "60vh"
-    labels = []
-    data = []
+
    
     
     for (let i = 0; i < resposta.length; i++) {
@@ -737,22 +749,12 @@ function plotarGrafico(resposta,lineChart,ctx){
         labels.push(ocorrencia.momento_grafico)
         data.push(ocorrencia.valor)
     }
-
-   
-   
-
-// 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
-
-
     dados.labels = labels
     dados.datasets[0].data = data
     lineChart.update()
-
   
 
 }
-
-
 // var lineChart = new Chart(ctx, {
 //     type: 'line',
 //     data: dados,
@@ -769,5 +771,17 @@ function plotarGrafico(resposta,lineChart,ctx){
 //         }
 //     }
 // });
+var dados = {
+    labels: [],
+    datasets: [{
+        label: '',
+        data: [],
+        borderWidth: 1,
+        backgroundColor: '#030050',
+        borderColor: '#030050'
+    }]
+}
+
+  
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

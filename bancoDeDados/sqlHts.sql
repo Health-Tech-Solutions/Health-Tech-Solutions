@@ -1,4 +1,4 @@
--- Active: 1683812153262@@localhost@3306@hts
+-- Active: 1683809701982@@127.0.0.1@3306@amigospet
 drop database if exists hts;
 create database hts;
 USE hts;
@@ -710,6 +710,47 @@ END$$
 		
 DELIMITER ;
 CALL fechar_chamados();	
+
+DELIMITER $$
+CREATE PROCEDURE inserir_Registros2()
+BEGIN
+  DECLARE i INT;
+  DECLARE dataHora DATETIME;
+  DECLARE valor FLOAT;
+  DECLARE fkTipoRegistro INT;
+  DECLARE fkMaquina INT;
+  DECLARE counter INT;
+  DECLARE counter2 int;
+  
+  SET i = 1;
+  
+  WHILE i <= 216 DO
+    SET dataHora = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * 365) DAY);
+    SET valor = 85 + (RAND() * 15);
+    SET fkTipoRegistro = FLOOR(RAND() * 3) + 1;
+    SET fkMaquina = FLOOR(RAND() * 216) + 1;
+    
+    SET counter = 1;
+    WHILE counter <= 50 DO
+		set counter2 = 1;
+		WHILE counter2 <= 3 do
+      INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
+      VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), i, counter2, NULL);
+      SET counter = counter + 1;
+      end while;
+    END WHILE;
+    
+    INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
+    VALUES (dataHora, valor, fkMaquina, fkTipoRegistro);
+    
+    SET i = i + 1;
+  END WHILE;
+END$$
+DELIMITER ;
+
+    
+-- call inserir_Registros2();
+use hts;
 
 
 

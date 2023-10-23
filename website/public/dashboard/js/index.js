@@ -2,7 +2,7 @@ if(sessionStorage.FK_HOSPITAL == undefined){
   sessionStorage.FK_HOSPITAL = null
 }
 if(sessionStorage.NOME_HOSPITAL == 'null'){
-  sessionStorage.NOME_HOSPITAL = todos
+  sessionStorage.NOME_HOSPITAL = 'todos'
 }
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`; 
 getTotalMaquinas()

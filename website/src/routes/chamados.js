@@ -43,4 +43,8 @@ router.get("/quantidadeChamadosAberto/:fkHospital", (req,res) =>{
     chamadoController.quantidadeChamadosAberto(req,res)
 })
 
+router.post("/fecharChamado/:idChamado", (req,res) =>{
+    chamadoController.fecharChamado(req,res)
+})
+
 module.exports = router;

@@ -712,6 +712,9 @@ DELIMITER ;
 CALL fechar_chamados();	
 
 DELIMITER $$
+
+DROP PROCEDURE IF EXISTS inserir_registros2$$
+
 CREATE PROCEDURE inserir_Registros2()
 BEGIN
   DECLARE i INT;
@@ -752,6 +755,26 @@ DELIMITER ;
     
 -- call inserir_Registros2();
 use hts;
+
+
+
+SELECT COUNT(*)FROM CHAMADO;
+select * from vw_chamados;
+ SELECT 
+        idMaquina AS quantidade, 
+        tipo FROM 
+        vw_chamados group by quantidade, tipo;
+
+
+INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
+VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), 170, 2
+
+
+
+
+, NULL);
+
+
 
 
 

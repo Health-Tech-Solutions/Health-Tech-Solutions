@@ -77,7 +77,9 @@ function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) {
          SELECT 
      idMaquina AS quantidade, 
      tipo, hospital FROM 
-     vw_chamados where idHospital = '${fkHospital}' WHERE estado = 'Aberto' group by quantidade, tipo, hospital;
+     vw_chamados where idHospital = '${fkHospital}' 
+    AND estado = 'Aberto' 
+    group by quantidade, tipo, hospital;
              ` 
     }else{
         instrucao = `

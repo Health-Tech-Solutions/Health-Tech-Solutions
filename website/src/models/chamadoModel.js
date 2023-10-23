@@ -149,7 +149,7 @@ function listarChamados(idHospital){
  if(idHospital == 'null'){
         var instrucao = `
         select idMaquina,nivel,estado,sla,
-        DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,tipoRegistro from vw_chamados LIMIT 10;
+        DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,tipoRegistro, idChamado from vw_chamados LIMIT 10;
         `
     } else {
     var instrucao = `
@@ -158,6 +158,7 @@ function listarChamados(idHospital){
     nivel,
     estado,
     sla,
+    idChamado,
     DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,
     tipoRegistro
     from vw_chamados where idHospital = ${idHospital}
@@ -246,6 +247,15 @@ function quantidadeChamadosAberto(fkHospital){
     return database.executar(instrucao)
 }
 
+function fecharChamado(idChamado){
+    console.log("Estou no fechar chamados")
+    var instrucao = `
+    UPDATE chamado SET estado = 'fechado' WHERE idChamado = ${idChamado};
+    `
+
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
 module.exports = {
     buscarMensal,
     buscarSemanal,
@@ -256,5 +266,6 @@ module.exports = {
     listarChamados,
     buscarGravidade,
     listarModelos,
-    quantidadeChamadosAberto
+    quantidadeChamadosAberto,
+    fecharChamado
 }

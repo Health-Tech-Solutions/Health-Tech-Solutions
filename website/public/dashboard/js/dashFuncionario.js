@@ -132,7 +132,7 @@ var fkHospital = null
     }
 
     function chamarModeloComMaisAlertas() {
-        alert("ta chamando")
+
         fetch(`/chamados/buscarModelo`, { cache: 'no-store'}).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {

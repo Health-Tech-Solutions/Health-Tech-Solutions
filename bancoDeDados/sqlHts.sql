@@ -491,51 +491,51 @@ create table chamado(
 
 INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
 VALUES 
-  ('Alto', 'Aberto', '2 horas', '2023-01-15 12:00:00', 'Foi', 11),
-  ('Médio', 'Aberto', '6 horas', '2023-02-20 14:30:00', 'Foi', 22),
-  ('Baixo', 'Aberto', '10 horas', '2023-03-10 09:15:00', 'Foi', 33),
-  ('Alto', 'Aberto', '2 horas', '2023-04-05 16:45:00', 'Foi', 44),
-  ('Médio', 'Aberto', '6 horas', '2023-05-30 08:00:00', 'Foi', 55),
-  ('Baixo', 'Aberto', '10 horas', '2023-06-10 14:00:00', 'Foi', 11),
-  ('Alto', 'Aberto', '2 horas', '2023-07-15 09:30:00', 'Foi', 22),
-  ('Médio', 'Aberto', '6 horas', '2023-08-22 17:15:00', 'Foi', 33),
-  ('Baixo', 'Aberto', '10 horas', '2023-09-05 13:45:00', 'Foi', 44),
-  ('Alto', 'Aberto', '2 horas', '2023-10-18 11:30:00', 'Foi', 55),
-  ('Médio', 'Aberto', '6 horas', '2023-11-25 10:20:00', 'Foi', 11),
-  ('Baixo', 'Aberto', '10 horas', '2023-12-29 15:00:00', 'Foi', 22),
-  ('Alto', 'Aberto', '2 horas', '2024-01-07 12:45:00', 'Foi', 33),
-  ('Médio', 'Aberto', '6 horas', '2024-02-09 09:10:00', 'Foi', 44),
-  ('Baixo', 'Aberto', '10 horas', '2024-03-14 14:30:00', 'Foi', 55),
-  ('Alto', 'Aberto', '2 horas', '2024-04-22 10:00:00', 'Foi', 11),
-  ('Médio', 'Aberto', '6 horas', '2024-05-28 15:20:00', 'Foi', 22),
-  ('Baixo', 'Aberto', '10 horas', '2024-06-05 09:45:00', 'Foi', 33),
-  ('Alto', 'Aberto', '2 horas', '2024-07-11 16:30:00', 'Foi', 44),
-  ('Médio', 'Aberto', '6 horas', '2024-08-20 12:10:00', 'Foi', 55),
-  ('Baixo', 'Aberto', '10 horas', '2024-09-27 14:15:00', 'Foi', 11),
-  ('Alto', 'Aberto', '2 horas', '2024-10-30 11:30:00', 'Foi', 22),
-  ('Médio', 'Aberto', '6 horas', '2024-11-05 10:25:00', 'Foi', 33),
-  ('Baixo', 'Aberto', '10 horas', '2024-12-15 15:40:00', 'Foi', 44),
-  ('Alto', 'Aberto', '2 horas', '2025-01-18 13:00:00', 'Foi', 55),
-  ('Médio', 'Aberto', '6 horas', '2025-02-20 08:45:00', 'Foi', 11),
-  ('Baixo', 'Aberto', '10 horas', '2025-03-25 14:15:00', 'Foi', 22),
-  ('Alto', 'Aberto', '2 horas', '2025-04-02 10:30:00', 'Foi', 33),
-  ('Médio', 'Aberto', '6 horas', '2025-05-12 15:10:00', 'Foi', 44),
-  ('Baixo', 'Aberto', '10 horas', '2025-06-15 11:30:00', 'Foi', 55),
-  ('Alto', 'Aberto', '2 horas', '2025-07-19 09:45:00', 'Foi', 11),
-  ('Médio', 'Aberto', '6 horas', '2025-08-28 14:30:00', 'Foi', 22),
-  ('Baixo', 'Aberto', '10 horas', '2025-09-02 10:15:00', 'Foi', 33),
-  ('Alto', 'Aberto', '2 horas', '2025-10-10 15:20:00', 'Foi', 44),
-  ('Médio', 'Aberto', '6 horas', '2025-11-12 11:10:00', 'Foi', 55),
-  ('Baixo', 'Aberto', '10 horas', '2025-12-25 12:00:00', 'Foi', 11),
-  ('Alto', 'Aberto', '2 horas', '2026-01-04 13:30:00', 'Foi', 22),
-  ('Médio', 'Aberto', '6 horas', '2026-02-06 14:15:00', 'Foi', 33),
-  ('Baixo', 'Aberto', '10 horas', '2026-03-08 16:45:00', 'Foi', 44),
-  ('Alto', 'Aberto', '2 horas', '2026-04-10 10:30:00', 'Foi', 55),
-  ('Médio', 'Aberto', '6 horas', '2026-05-12 09:20:00', 'Foi', 11),
-  ('Baixo', 'Aberto', '10 horas', '2026-06-18 14:00:00', 'Foi', 22),
-  ('Alto', 'Aberto', '2 horas', '2026-07-20 15:45:00', 'Foi', 33),
-  ('Médio', 'Aberto', '6 horas', '2026-08-22 11:30:00', 'Foi', 44),
-  ('Baixo', 'Aberto', '10 horas', '2026-09-25 10:15:00', 'Foi', 55);
+  ('Alto', 'Aberto', '2 horas', '2023-01-15 12:00:00', 'O disco está cheio', 11),
+  ('Médio', 'Aberto', '6 horas', '2023-02-20 14:30:00', 'O disco está cheio', 22),
+  ('Baixo', 'Aberto', '10 horas', '2023-03-10 09:15:00', 'CPU esta passando dos limites', 33),
+  ('Alto', 'Aberto', '2 horas', '2023-04-05 16:45:00', 'CPU esta passando dos limites', 44),
+  ('Médio', 'Aberto', '6 horas', '2023-05-30 08:00:00', 'CPU esta passando dos limites', 55),
+  ('Baixo', 'Aberto', '10 horas', '2023-06-10 14:00:00', 'CPU esta passando dos limites', 11),
+  ('Alto', 'Aberto', '2 horas', '2023-07-15 09:30:00', 'CPU esta passando dos limites', 22),
+  ('Médio', 'Aberto', '6 horas', '2023-08-22 17:15:00', 'CPU esta passando dos limites', 33),
+  ('Baixo', 'Aberto', '10 horas', '2023-09-05 13:45:00', 'RAM esta passando dos limites', 44),
+  ('Alto', 'Aberto', '2 horas', '2023-10-18 11:30:00', 'RAM esta passando dos limites', 55),
+  ('Médio', 'Aberto', '6 horas', '2023-11-25 10:20:00', 'RAM esta passando dos limites', 11),
+  ('Baixo', 'Aberto', '10 horas', '2023-12-29 15:00:00', 'RAM esta passando dos limites', 22),
+  ('Alto', 'Aberto', '2 horas', '2024-01-07 12:45:00', 'RAM esta passando dos limites', 33),
+  ('Médio', 'Aberto', '6 horas', '2024-02-09 09:10:00', 'RAM esta passando dos limites', 44),
+  ('Baixo', 'Aberto', '10 horas', '2024-03-14 14:30:00', 'RAM esta passando dos limites', 55),
+  ('Alto', 'Aberto', '2 horas', '2024-04-22 10:00:00', 'RAM esta passando dos limites', 11),
+  ('Médio', 'Aberto', '6 horas', '2024-05-28 15:20:00', 'RAM esta passando dos limites', 22),
+  ('Baixo', 'Aberto', '10 horas', '2024-06-05 09:45:00', 'RAM esta passando dos limites', 33),
+  ('Alto', 'Aberto', '2 horas', '2024-07-11 16:30:00', 'RAM esta passando dos limites', 44),
+  ('Médio', 'Aberto', '6 horas', '2024-08-20 12:10:00', 'RAM esta passando dos limites', 55),
+  ('Baixo', 'Aberto', '10 horas', '2024-09-27 14:15:00', 'RAM esta passando dos limites', 11),
+  ('Alto', 'Aberto', '2 horas', '2024-10-30 11:30:00', 'RAM esta passando dos limites', 22),
+  ('Médio', 'Aberto', '6 horas', '2024-11-05 10:25:00', 'RAM esta passando dos limites', 33),
+  ('Baixo', 'Aberto', '10 horas', '2024-12-15 15:40:00', 'RAM esta passando dos limites', 44),
+  ('Alto', 'Aberto', '2 horas', '2025-01-18 13:00:00', 'RAM esta passando dos limites', 55),
+  ('Médio', 'Aberto', '6 horas', '2025-02-20 08:45:00', 'RAM esta passando dos limites', 11),
+  ('Baixo', 'Aberto', '10 horas', '2025-03-25 14:15:00', 'RAM esta passando dos limites', 22),
+  ('Alto', 'Aberto', '2 horas', '2025-04-02 10:30:00', 'RAM esta passando dos limites', 33),
+  ('Médio', 'Aberto', '6 horas', '2025-05-12 15:10:00', 'RAM esta passando dos limites', 44),
+  ('Baixo', 'Aberto', '10 horas', '2025-06-15 11:30:00', 'RAM esta passando dos limites', 55),
+  ('Alto', 'Aberto', '2 horas', '2025-07-19 09:45:00', 'O disco está cheio', 11),
+  ('Médio', 'Aberto', '6 horas', '2025-08-28 14:30:00', 'O disco está cheio', 22),
+  ('Baixo', 'Aberto', '10 horas', '2025-09-02 10:15:00', 'O disco está cheio', 33),
+  ('Alto', 'Aberto', '2 horas', '2025-10-10 15:20:00', 'O disco está cheio', 44),
+  ('Médio', 'Aberto', '6 horas', '2025-11-12 11:10:00', 'O disco está cheio', 55),
+  ('Baixo', 'Aberto', '10 horas', '2025-12-25 12:00:00', 'O disco está cheio', 11),
+  ('Alto', 'Aberto', '2 horas', '2026-01-04 13:30:00', 'O disco está cheio', 22),
+  ('Médio', 'Aberto', '6 horas', '2026-02-06 14:15:00', 'O disco está cheio', 33),
+  ('Baixo', 'Aberto', '10 horas', '2026-03-08 16:45:00', 'O disco está cheio', 44),
+  ('Alto', 'Aberto', '2 horas', '2026-04-10 10:30:00', 'O disco está cheio', 55),
+  ('Médio', 'Aberto', '6 horas', '2026-05-12 09:20:00', 'O disco está cheio', 11),
+  ('Baixo', 'Aberto', '10 horas', '2026-06-18 14:00:00', 'O disco está cheio', 22),
+  ('Alto', 'Aberto', '2 horas', '2026-07-20 15:45:00', 'O disco está cheio', 33),
+  ('Médio', 'Aberto', '6 horas', '2026-08-22 11:30:00', 'O disco está cheio', 44),
+  ('Baixo', 'Aberto', '10 horas', '2026-09-25 10:15:00', 'O disco está cheio', 55);
   
 
 
@@ -595,7 +595,7 @@ AS
         MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
     from registro AS r GROUP BY r.dataHora;
 
-    
+
 CREATE OR REPLACE VIEW vw_chamados
 AS
 	SELECT 
@@ -630,12 +630,11 @@ AS
     AND maq.fkModelo = m.idModelo
     AND maq.fkHospital = e.idEmpresa;
 
-
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS geraRegistros$$
+DROP PROCEDURE IF EXISTS inserir_registros$$
 
-CREATE PROCEDURE geraRegistros()
+CREATE PROCEDURE inserir_registros()
 BEGIN
   DECLARE i INT;
   DECLARE dataHora DATETIME;
@@ -646,19 +645,14 @@ BEGIN
   SET i = 1;
 
   WHILE i <= 300 DO
-    -- Gera uma data aleatória entre 1º de janeiro de 2023 e 31 de dezembro de 2023
     SET dataHora = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * 365) DAY);
 
-    -- Gera um valor aleatório entre 85 e 99
     SET valor = 85 + (RAND() * 15);
 
-    -- Gera um tipo de registro aleatório entre 1 e 3
     SET fkTipoRegistro = FLOOR(RAND() * 3) + 1;
 
-    -- Gera uma máquina aleatória entre 1 e 216
     SET fkMaquina = FLOOR(RAND() * 216) + 1;
 
-    -- Insere os valores no banco de dados
     INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
     VALUES (dataHora, valor, fkMaquina, fkTipoRegistro);
 
@@ -668,8 +662,9 @@ END$$
 
 DELIMITER ;
 
-CALL geraRegistros();
-  
+
+CALL inserir_registros();
+
 
 insert into
 	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
@@ -693,3 +688,50 @@ select
 	'' descricao,
 	r.idRegistro
 from registro r where r.valor > 85;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS fechar_chamados$$
+
+CREATE PROCEDURE fechar_chamados()
+BEGIN 
+	DECLARE i INT;
+    DECLARE quantidade FLOAT;
+    DECLARE idFechado FLOAT;
+    
+    SET i = 0;
+    SET quantidade = FLOOR(RAND() * (SELECT COUNT(*) FROM chamado WHERE estado = 'Aberto'));
+    WHILE i <= quantidade DO
+		SET idFechado = RAND() * quantidade;
+		UPDATE chamado SET estado = 'fechado' WHERE idChamado = FLOOR(idFechado);
+        SET i = i + 1;
+	END WHILE;
+END$$
+		
+DELIMITER ;
+CALL fechar_chamados();	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

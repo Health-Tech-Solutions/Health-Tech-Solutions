@@ -3,6 +3,9 @@ const router = express.Router()
 
 const hospitaisController = require("../controllers/hospitaisController")
 
+router.post("/cadastrar", (res, req) => {
+    hospitaisController.cadastrar(res, req)
+}) 
 
 router.get("/listarHospitais", (req,res) => {
     hospitaisController.listarHospitais(req,res)

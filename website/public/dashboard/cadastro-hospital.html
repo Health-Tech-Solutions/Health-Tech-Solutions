@@ -11,6 +11,8 @@
 
     <title>Health Tech Solutions</title>
 
+    <link rel="icon" href="img/logoBranca.png">
+
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
     <link
@@ -22,11 +24,11 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
    
     <script src="js/dados.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalermet2@11"></script>
 
 </head>
 
-<body id="page-top" onload="mostrarDados()">
+<body id="page-top" onload="listarHospitais()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -71,6 +73,7 @@
                     <h6 class="collapse-header">Cadastros disponíveis:</h6>
                     <a class="collapse-item" href="./cadastro-funcionarios.html">Funcionários</a>
                     <a class="collapse-item" href="./register-machine.html">Maquinário</a>
+                    <a class="collapse-item" href="./cadastro-hospital.html">Hospital</a>
                 </div>
             </div>
         </li>
@@ -266,7 +269,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="usuario_nome">Douglas</span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg" id="usuario_foto">
+                            <img class="img-profile rounded-circle" id="usuario_foto">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -304,27 +307,48 @@
 
                     <form class="user">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-user" id="InputNome" placeholder="Nome">
+                            <input type="text" class="form-control form-control-user" id="InputNomeFantasia" placeholder="Nome Fantasia">
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="email" class="form-control form-control-user" id="InputEmail"
-                                    placeholder="Email">
+                                <input class="form-control form-control-user" id="InputCNPJ"
+                                    placeholder="CNPJ" maxlength="18">
                             </div>
                             <div class="col-sm-6">
-                                <input type="CPF" class="form-control form-control-user" id="InputCPF"
-                                    placeholder="CPF " maxlength="14">
+                                <input  class="form-control form-control-user" id="InputTelefone"
+                                    placeholder="Telefone" maxlength="14">
                             </div>
                         </div>
+                        <h4 class="h3 mb-4 text-gray-600">Endereço</h4>
                         
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="password" class="form-control form-control-user" id="InputSenha"
-                                    placeholder="Senha">
+                                <input class="form-control form-control-user" id="InputCEP"
+                                    placeholder="CEP" maxlength="9">
                             </div>
                             <div class="col-sm-6">
-                                <input type="password" class="form-control form-control-user" id="InputConfirmacaoSenha"
-                                    placeholder="Confirme a senha">
+                                <input type="number" class="form-control form-control-user" id="InputNumero"
+                                    placeholder="Número">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input class="form-control form-control-user" id="InputComplemento"
+                                    placeholder="Complemento">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-user" id="InputLogradouro"
+                                    placeholder="Logradouro">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input class="form-control form-control-user" id="InputBairro"
+                                    placeholder="Bairro">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-user" id="InputCidade"
+                                    placeholder="Cidade">
                             </div>
                         </div>
                         <a class="btn btn-primary btn-user btn-block" onclick="cadastrar()">
@@ -334,12 +358,12 @@
 
                     <div class="card shadow mb-4" >
                         <!-- Card Header - Accordion -->
-                        <a  href="#funcionarios" class="d-block card-header py-3" data-toggle="collapse"
+                        <a  href="#hospital" class="d-block card-header py-3" data-toggle="collapse"
                             role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">Funcionários cadastrados</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Hospitais cadastrados</h6>
                         </a>
                         <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="funcionarios">   
+                        <div class="collapse show" id="hospitais">   
                         </div>
                     </div>
 
@@ -403,4 +427,9 @@
 
 </body>
 </html>
-<script src="../assets/js/cadastroFuncionario.js"></script>
+
+<script src="../assets/js/cadastroHospital.js"></script>
+<script>
+    usuario_nome.innerHTML = sessionStorage.NOME_USUARIO;
+</script>
+<script src="js/dados.js"></script>

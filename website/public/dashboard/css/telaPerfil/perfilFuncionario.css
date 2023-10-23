@@ -21,8 +21,9 @@
 #accordionSidebar {
     height: 70%;
 }
-#foto_perfil{
+#Foto_usuario, #usuario_foto{
     aspect-ratio:auto 3/4;
+    object-fit: cover;
 }
 
 

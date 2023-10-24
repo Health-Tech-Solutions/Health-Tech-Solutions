@@ -181,7 +181,8 @@ function buscarGravidade(idTipo, fkHospital){
             nivel 
         FROM vw_chamados 
         WHERE idTipo = ${idTipo}
-        GROUP BY nivel;
+        GROUP BY nivel
+        ORDER BY nivel;
         
         `
     } else {

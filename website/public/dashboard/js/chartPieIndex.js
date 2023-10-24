@@ -10,10 +10,7 @@ var dadosPizza = {
         backgroundColor: [
             '#1cc88a',
             '#f6c23e',
-            '#e74a3b'
-            
-            
-                   
+            '#e74a3b'              
         ],
         borderWidth: 1
     }]
@@ -62,14 +59,23 @@ function buscarGravidade(idTipo){
 
 function plotarGraficoPizza(resposta){
     let labels = []
+    let cores = []
     dadosPizza.labels = labels
     dadosPizza.datasets[0].data = []
     for (let i = 0; i <= 2; i++) {
         let element = resposta[i];
+        if(element.nivel == 'Baixo'){
+            cores.push('#1cc88a')
+        } else if(element.nivel == 'Médio'){
+            cores.push('#f6c23e')
+        } else {
+            cores.push('#e74a3b')
+        }
         dadosPizza.labels.push(element.nivel)
         dadosPizza.datasets[0].data.push(element.qtdNivel)
     }
 
+    dadosPizza.datasets[0].backgroundColor = cores
     graficoPizza.update()
     
 }

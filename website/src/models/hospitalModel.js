@@ -74,21 +74,12 @@ function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) {
     var instrucao = ""
     if (fkHospital != "null") {
          instrucao = `
-         SELECT 
-     idMaquina AS quantidade, 
-     tipo, hospital FROM 
-     vw_chamados where idHospital = '${fkHospital}' 
-    AND estado = 'Aberto' 
-    group by quantidade, tipo, hospital;
+         select nome,idMaquinario, count(estado) from tipo join modelo on idTipo = fkTipo join maquinario on idModelo = fkModelo join registro on idMaquinario = fkMaquina join chamado on idRegistro = fkRegistro where estado = "aberto" and fkHospital = '${fkHospital}'  group by nome,idMaquinario;
+
              ` 
     }else{
         instrucao = `
-        SELECT 
-        idMaquina AS quantidade, 
-        tipo FROM 
-        vw_chamados
-        WHERE estado = 'Aberto' 
-        group by quantidade, tipo;
+        select nome,idMaquinario, count(estado) from tipo join modelo on idTipo = fkTipo join maquinario on idModelo = fkModelo join registro on idMaquinario = fkMaquina join chamado on idRegistro = fkRegistro where estado = "aberto" group by nome,idMaquinario;
             ` 
     }
 

@@ -131,26 +131,28 @@ function totalMaquinas(){
           function(resposta){
             situacaoMaquinas = resposta;
             console.log(situacaoMaquinas)
-            console.log("AAAAAAAAAAAAAAAAAAAAAA " + situacaoMaquinas[0] )
+            console.log("AAAAAAAAAAAAAAAAAAAAAA!!!!!!!!!! ")
+            console.log(situacaoMaquinas )
 
             for (let index = 0; index < situacaoMaquinas.length; index++) {
         
-              if(resposta[index].tipo == "Ultrassom"){
-                Ultrassom = resposta[index].quantidade
-              }else if (resposta[index].tipo == "Cardioversores") {
-                Cardioversores = resposta[index].quantidade
-              }else if (resposta[index].tipo == "Desfibriladores") {
-                Desfibriladores = resposta[index].quantidade 
-              }else if (resposta[index].tipo == "Monitor Cardíaco") {
-                MonitorCardiaco = resposta[index].quantidade
-              }else if (resposta[index].tipo == "Máquina de Anestesia") {
-                MaquinaAnestesia = resposta[index].quantidade
-              }else if (resposta[index].tipo == "Máquina de ECG") {
-                MaquinaECG = resposta[index].quantidade
-              }else if (resposta[index].tipo == "Monitor Fetal") {
-                MonitorFetal = resposta[index].quantidade
-              }else if (resposta[index].tipo == "Monitor de sinais vitais") {
-                MonitorSinaisVitais = resposta[index].quantidade
+              if(resposta[index].nome == "Ultrassom"){
+                Ultrassom++
+              }else if (resposta[index].nome == "Cardioversores") {
+                Cardioversores++ 
+
+              }else if (resposta[index].nome == "Desfibriladores") {
+                Desfibriladores++  
+              }else if (resposta[index].nome == "Monitor Cardíaco") {
+                MonitorCardiaco++
+              }else if (resposta[index].nome == "Máquina de Anestesia") {
+                MaquinaAnestesia++
+              }else if (resposta[index].nome == "Máquina de ECG") {
+                MaquinaECG++
+              }else if (resposta[index].nome == "Monitor Fetal") {
+                MonitorFetal++
+              }else if (resposta[index].nome == "Monitor de sinais vitais") {
+                MonitorSinaisVitais++
               } 
                
               
@@ -288,23 +290,31 @@ function maquinasInstaveis(){
   function calculoGraficoSituacaoGeral(){ 
 
       linhaCasoDerNull = 0
-      linha1 = ((qntFktipo1/  Ultrassom)*100).toFixed(2)
+      linha1 = ((Ultrassom/qntFktipo1 )*100).toFixed(2)
+      linha1 = (100 - linha1).toFixed(2)
       //linha1 = 100
-      linha2 = ((qntFktipo2/Cardioversores)*100).toFixed(2)
+      linha2 = ((Cardioversores/qntFktipo2)*100).toFixed(2)
+      linha2 = (100 - linha2).toFixed(2)
       //linha2 = 20
-      linha3 = ((qntFktipo3/Desfibriladores)*100).toFixed(2)
+      linha3 = ((Desfibriladores/qntFktipo3)*100).toFixed(2)
+      linha3 = (100 - linha3).toFixed(2)
       //linha3 = 30
-      linha4 = ((qntFktipo4/MonitorCardiaco)*100).toFixed(2)
+      linha4 = ((MonitorCardiaco/qntFktipo4)*100).toFixed(2)
+      linha4 = (100 - linha4).toFixed(2)
       //linha4 = 40
       console.log("Valores Maquina e qntFk:")
       console.log(MaquinaAnestesia,qntFktipo5)
-      linha5 = ((qntFktipo5/MaquinaAnestesia)*100).toFixed(2)
+      linha5 = ((MaquinaAnestesia/qntFktipo5)*100).toFixed(2)
+      linha5 = (100 - linha5).toFixed(2)
       //linha5 = 50
-      linha6 = ((qntFktipo6/MaquinaECG)*100).toFixed(2)
+      linha6 = ((MaquinaECG/qntFktipo6)*100).toFixed(2)
+      linha6 = (100 - linha6).toFixed(2)
       //linha6 = 60
-      linha7 = ((qntFktipo7/MonitorFetal)*100).toFixed(2)
+      linha7 = ((MonitorFetal/qntFktipo7)*100).toFixed(2)
+      linha7 = (100 - linha7).toFixed(2)
       //linha7 = 70
-      linha8 = ((qntFktipo8/MonitorSinaisVitais)*100).toFixed(2)
+      linha8 = ((MonitorSinaisVitais/qntFktipo8)*100)
+      linha8 = (100 - linha8).toFixed(2)
       //linha8 = 80
       console.log("Calculo:")
       console.log(linha1,linha2,linha3,linha4,linha5,linha6,linha7,linha8)

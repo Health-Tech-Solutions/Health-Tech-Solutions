@@ -90,25 +90,25 @@ public class Monitoramento {
 
         System.out.printf("""
               %sSistema: %s
-                %s
-                Memória: 
-                Em uso: %.2f GiB
-                Disponível: %.2f GiB
-                Total: %.2f GiB
+              %s
+              %sMemória: %s
+              Em uso: %.2f GiB
+              Disponível: %.2f GiB
+              Total: %.2f GiB
                 
               %sProcessador: %s
-                Fabricante: %s
-                Nome: %s
-                Identificador: %s
-                Microarquitetura: %s
-                Nº de CPUs Físicas: %s
-                Nº de CPUs Lógicas: %s
-                Frequência: %.2f GHz
-                Em uso: %.0f%%
+              Fabricante: %s
+              Nome: %s
+              Identificador: %s
+              Microarquitetura: %s
+              Nº de CPUs Físicas: %s
+              Nº de CPUs Lógicas: %s
+              Frequência: %.2f GHz
+              Em uso: %.0f%%
                 
               %sDisco: %s
                 """,
-                negrito, padrao, sistema, memEmUso, memDisp, memTotal, negrito, padrao, processador.getFabricante(),
+                negrito, padrao, sistema, negrito, padrao, memEmUso, memDisp, memTotal, negrito, padrao, processador.getFabricante(),
                 processador.getNome(), processador.getIdentificador(), processador.getMicroarquitetura(),
                 processador.getNumeroCpusFisicas(), processador.getNumeroCpusLogicas(), freqCpu, cpuEmUso,
                 negrito, padrao);

@@ -41,7 +41,7 @@ public class Maquina {
                 +---------------------------+
                 |%s Opções:                   |
                 | 1. Cadastrar máquina      |
-                | 2. Monitorar máquinas     |
+                | 2. Monitorar máquina      |
                 | 3. Listar processos       |
                 | 4. Listar máquinas        |
                 | 5. Listar usuários        |

@@ -775,9 +775,20 @@ VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND()
 , NULL);
 
 
-
-
-
+CREATE TABLE dadosTemperatura (
+idDadosTemperatura INT PRIMARY KEY AUTO_INCREMENT,
+estado VARCHAR(25),
+dataTemperatura DATE,
+precipitacao DECIMAL(5,3),
+pressaoMax DECIMAL(5,3),
+pressaoMin DECIMAL(5,3),
+temperaturaMax DECIMAL(5,3),
+temperaturaMin DECIMAL(5,3),
+fkMaquina int,
+fkModelo int,
+FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
+FOREIGN KEY (fkModelo) REFERENCES maquinario(fkModelo)
+);
 
 
 

@@ -16,12 +16,15 @@ create table endereco(
     complemento varchar(40),
     logradouro VARCHAR(45),
     bairro VARCHAR(45),
-    cidade VARCHAR(45)
+    cidade VARCHAR(45),
+    estado VARCHAR(45)
 );
-insert into endereco values	(NULL, '04571011', 1747,'Avenida Luis Carlos Berrini',	'Itaim Bibi', 'São Paulo',''),
-							(NULL, '01310000',200,'Avenida Paulista', 'Bela Vista','São Paulo',''),
-							(NULL,'01431000', 953,'Avenida Brasil', 'Jardim América','São Paulo',''),
-                            (NULL,'09910720', 605, 'Rua Manoel da Nóbrega', 'Centro','Diadema', '');
+
+insert into endereco values	(NULL, '04571011', 1747,'Avenida Luis Carlos Berrini',	'Itaim Bibi', 'São Paulo','','SP'),
+							(NULL, '01310000',200,'Avenida Paulista', 'Bela Vista','São Paulo','','SP'),
+							(NULL,'01431000', 953,'Avenida Brasil', 'Jardim América','São Paulo','','SP'),
+                            (NULL,'09910720', 605, 'Rua Manoel da Nóbrega', 'Centro','Diadema', '','SP'),
+                            (NULL,'22630010 ', 802, '', '','barra da tijuca', '','RJ');
 
 insert into 
 	endereco(cep, numero, complemento) 
@@ -52,7 +55,8 @@ insert into
 values
     (NULL, 'Hospital Santa Catarina', '60922168000186',2),
    	(NULL, 'Hospital Albert Einsten', '60765823000130',3),
-    (NULL, 'Hospital Santa Helena', '34128330000189',4);
+    (NULL, 'Hospital Santa Helena', '34128330000189',4),
+    (NULL, 'Hospital Rio de Janeiro', '23928730000185',5);
 
 create table funcionario(
 	idFuncionario int primary key auto_increment,
@@ -775,38 +779,45 @@ VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND()
 , NULL);
 
 
+
+
+
 CREATE TABLE dadosTemperatura (
 idDadosTemperatura INT PRIMARY KEY AUTO_INCREMENT,
 estado VARCHAR(25),
 dataTemperatura DATE,
-precipitacao DECIMAL(5,3),
-pressaoMax DECIMAL(5,3),
-pressaoMin DECIMAL(5,3),
-temperaturaMax DECIMAL(5,3),
-temperaturaMin DECIMAL(5,3),
-fkMaquina int,
-fkModelo int,
-FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
-FOREIGN KEY (fkModelo) REFERENCES maquinario(fkModelo)
+precipitacao DECIMAL(8,2),
+pressaoMax DECIMAL(8,2),
+pressaoMin DECIMAL(8,2),
+temperaturaMax DECIMAL(8,2),
+temperaturaMin DECIMAL(8,2)
+);
+
+CREATE TABLE registroTemperatura(
+fkDadosTemperatura int,
+fkHospital int,
+FOREIGN KEY (fkDadosTemperatura) REFERENCES dadosTemperatura(idDadosTemperatura),
+FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa)
 );
 
 
+INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital)
+SELECT idDadosTemperatura, idEmpresa
+FROM endereco
+JOIN empresa ON idEndereco = fkEndereco
+JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado
+WHERE endereco.estado = 'SP';
 
+-- INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital)
+-- SELECT idDadosTemperatura, idEmpresa
+-- FROM endereco
+-- JOIN empresa ON idEndereco = fkEndereco
+-- JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado
+-- WHERE endereco.estado = 'RJ';
 
+-- select fkHospital , count(fkDadosTemperatura) as qntDados from registroTemperatura group by fkHospital;
+-- select * from empresa join registroTemperatura on idEmpresa = fkHospital join dadosTemperatura on fkDadosTemperatura = idDadosTemperatura;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- select * from dadosTemperatura;
+-- select * from registroTemperatura;
 

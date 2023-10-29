@@ -17,9 +17,9 @@ with requests.Session() as s:
 with zipfile.ZipFile('2023.zip', 'r') as zip:
 
 # Pegando o nome do arquivo CSV
-    filename = 'INMET_SE_SP_A771_SAO PAULO - INTERLAGOS_01-01-2023_A_30-09-2023.CSV'
-    
-
+    filename = 'INMET_SE_RJ_A628_ANGRA DOS REIS_01-01-2023_A_30-09-2023.CSV'
+    #Insert csv SÃO PAULO INMET_SE_SP_A771_SAO PAULO - INTERLAGOS_01-01-2023_A_30-09-2023.CSV
+    #Insert csv RIO DE JANEIRO INMET_SE_RJ_A628_ANGRA DOS REIS_01-01-2023_A_30-09-2023.CSV
     # Abrindo o arquivo CSV dentro do arquivo ZIP
     with zip.open(filename) as f:
 
@@ -39,7 +39,6 @@ cr = csv.reader(data_io, delimiter=';')
 my_list = list(cr)
 
 
- 
 
 for row in my_list:
      contador = contador + 1
@@ -57,12 +56,26 @@ for row in my_list:
          pressao_min = row[5]
          temperatura_max = row[9]
          temperatura_min = row[10]
+
+         
         
          print(f" Estado {estado}\nData: {row[0]}\nPrecipitação: {row[2]}\nPressão Max: {row[4]}\nPressão Min: {row[5]}\nTemperatura Max: {row[9]}\nTemperatura Min: {row[10]}")
          banco.dados(estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)
      else:
          print("0")
      print("\n")
+
+
+nome = input("""Deseja fazer uma corelação entre os hospitais da região escolhida e
+             as informações de temperatura da região escolhida (S/N)""")
+if (nome == "S"):
+     banco.registros(estado)
+     print("Informações mandadas para o banco")
+else:
+    print("Fim da aplicação")
+
+
+
 
 
     

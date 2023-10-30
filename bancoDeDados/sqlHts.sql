@@ -1,4 +1,4 @@
--- Active: 1683809701982@@127.0.0.1@3306@hts
+-- Active: 1683809701982@@127.0.0.1@3306@amigospet
 drop database if exists hts;
 create database hts;
 USE hts;
@@ -739,9 +739,8 @@ BEGIN
 		WHILE counter2 <= 3 do
       INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
       VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), i, counter2, NULL);
-      SET counter2 = counter2 + 1;
+      SET counter = counter + 1;
       end while;
-      set counter = counter + 1;
     END WHILE;
     
     INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
@@ -751,12 +750,15 @@ BEGIN
   END WHILE;
 END$$
 DELIMITER ;
-
+	
     
 -- call inserir_Registros2();
 use hts;
 
-
+SELECT c.idChamado 
+	FROM chamado AS c
+    JOIN registro AS r ON fkRegistro = idRegistro
+    AND r.idRegistro = 174;
 
 SELECT COUNT(*)FROM CHAMADO;
 select * from vw_chamados;
@@ -764,7 +766,10 @@ select * from vw_chamados;
         idMaquina AS quantidade, 
         tipo FROM 
         vw_chamados group by quantidade, tipo;
-
+UPDATE chamado SET estado = 'fechado' WHERE idChamado = (SELECT c.idChamado
+																		FROM chamado AS c
+																		JOIN registro AS r ON fkRegistro = idRegistro
+																	AND r.idRegistro = 174);
 
 INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
 VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), 170, 2
@@ -777,7 +782,7 @@ VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND()
 
 
 
-
+SELECT * FROM vw_chamados;
 
 
 

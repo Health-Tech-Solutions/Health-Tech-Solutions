@@ -8,7 +8,7 @@ conexao = mysql.connector.connect(
     user= "hts",
     password= "urubu100",
     port= 3306,
-    database="crawler"
+    database="hts"
 )
 
 comando = conexao.cursor()
@@ -22,7 +22,14 @@ def dados(estado, data, precipitacao, pressao_max, pressao_min, temperatura_max,
         temperatura_max = temperatura_max.replace(',', '.')
         temperatura_min = temperatura_min.replace(',', '.')
 
-        comando.execute("INSERT INTO Dados (estado,dataDecapitura, precipitacao, pressaoMax, pressaoMin, temperaturaMax, temperaturaMin) VALUES (%s, %s, %s, %s, %s, %s, %s);", (estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)) 
+        comando.execute("INSERT INTO dadosTemperatura (estado,dataTemperatura, precipitacao, pressaoMax, pressaoMin, temperaturaMax, temperaturaMin) VALUES (%s, %s, %s, %s, %s, %s, %s);", (estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)) 
         conexao.commit()
     except mysql.connector.Error as Erro:
-        print('Não tem todos os dados', Erro)
+        print('Não tem todos os dados', Erro)   
+
+def registros(estado):
+    try:
+        comando.execute("INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital) SELECT idDadosTemperatura, idEmpresa FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado WHERE endereco.estado = %s;", (estado,))
+        conexao.commit()
+    except mysql.connector.Error as Erro:
+        print('Não tem todos os dados', Erro)  

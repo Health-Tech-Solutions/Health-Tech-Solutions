@@ -41,10 +41,6 @@ function totalMaquinasPorTipo(fkHospital) {
 
 
 module.exports = {
-    cadastrar,
-    listarHospitais,
-    pegarTotalMaquinas,
     totalMaquinasPorTipoChamadoAberto,
-    totalMaquinasPorTipo,
-    maquinasInstaveis
+    totalMaquinasPorTipo
 }

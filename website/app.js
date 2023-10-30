@@ -18,6 +18,7 @@ const hospitaisRouter = require("./src/routes/hospitais")
 const maquinaRouter = require("./src/routes/maquinas")
 const funcionarioRouter = require("./src/routes/funcionario")
 const chamadosRouter = require("./src/routes/chamados")
+const gabrielRouter = require("./src/routes/gabrielRoutes")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +36,7 @@ app.use("/maquinas", maquinaRouter);
 app.use("/funcionario", funcionarioRouter)
 app.use("/hospitais", hospitaisRouter);
 app.use("/chamados", chamadosRouter)
+app.use("/gabrielRoutes", gabrielRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

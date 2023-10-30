@@ -5,7 +5,7 @@ const gabrielController = require("../controllers/gabrielController")
 
 
 router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {
-    hospitaisController.totalMaquinasPorTipoChamadoAberto(req,res)
+    gabrielController.totalMaquinasPorTipoChamadoAberto(req,res)
 })
 
 router.get("/totalMaquinasPorTipo/:fkHospital", (req,res) => {

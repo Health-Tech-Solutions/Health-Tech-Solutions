@@ -23,11 +23,11 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
-    <script src="js/funcoesIndex"></script>
+   
 
 </head>
 
-<body id="page-top" onload="">
+<body id="page-top" onload="MaquinasPorTipoChamadoAberto(), MaquinasPorTipo()">
     <!-- Page Wrapper -->
 
     <div id="wrapper">
@@ -372,7 +372,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Máquinas instáveis
+                                                Média de uso de energia por máquina
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
@@ -403,7 +403,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Chamados em aberto</div>
+                                                Média de temperatura</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="qtd_chamados">18</div>
                                         </div>
                                         <div class="col-auto">
@@ -427,7 +427,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Máquinas em chamado</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Correlação entre desempenho e temperatura</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -470,7 +470,7 @@
                                 <i class="fas fa-fw fa-arrow-right" onclick="listarEquipamentos(1)" style="cursor: pointer;"></i>
                                 
                             </div>
-                            <h5 class="m-0 font-weight-bold text-primary" style="text-align: center; padding: 10%; padding-bottom: 0;">Quantidade de chamados de acordo com o seu nível</h5>
+                            <h5 class="m-0 font-weight-bold text-primary" style="text-align: center; padding: 10%; padding-bottom: 0;">Chamados por temperatura</h5>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2" style="display: flex;
@@ -673,7 +673,7 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/index.js"></script>
+<script src="js/dashGabriel.js"></script>
 <script src="js/dados.js"></script>
 <script src="js/chartLineIndex.js"></script>
 <script src="js/chartPieIndex.js"></script>

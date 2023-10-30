@@ -9,6 +9,57 @@ dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${session
 
 
 
+function listarHospitais(){
+
+    fetch(`/hospitais/listarHospitais`)
+    .then(  
+        function(resposta){
+            if(resposta.ok){
+                resposta.json()
+                .then(
+
+                    function(resposta){
+                        console.log(resposta)
+                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`; 
+                        dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`; 
+                        for (let i = 0; i < resposta.length; i++) {
+                            let nome = resposta[i].nomeFantasia
+                            let id = resposta[i].idEmpresa
+                            dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>` 
+                        }
+                        
+                    }
+                )
+            }
+        }
+    )
+    .catch(
+        err => {
+            console.log("ERRO" + err)
+        }
+    )
+}
+
+
+
+
+function trocarHospital(){  
+  
+    let teste = dropdown_menu.value.split(';')
+    let id = teste[0]
+    let nome = teste[1]
+    if(nome == 'null'){
+        nome = 'Todos'
+    }
+    console.log(teste, id, nome)
+    sessionStorage.FK_HOSPITAL = id
+    sessionStorage.NOME_HOSPITAL = nome
+    location.reload()
+}
+
+
+
+
 var Ultrassom = 0
 var Cardioversores = 0
 var Desfibriladores = 0
@@ -21,12 +72,10 @@ function MaquinasPorTipoChamadoAberto() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     var hospital = "Todos"
     if (fkHospital == 1) {
-        hospital = "MinDray"
-    } else if (fkHospital == 2) {
         hospital = "Hospital Santa Catarina"
-    } else if (fkHospital == 3) {
+    } else if (fkHospital == 2) {
         hospital = "Hospital Albert Einsten"
-    } else if (fkHospital == 4) {
+    } else if (fkHospital == 3) {
         hospital = "Hospital Santa Helena"
     }
 
@@ -95,7 +144,7 @@ var qntFktipo7 = 0
 var qntFktipo8 = 0
 function MaquinasPorTipo() {
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/hospitais/totalMaquinasPorTipo/${fkHospital}`)
+    fetch(`/gabrielRoutes/totalMaquinasPorTipo/${fkHospital}`)
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json()

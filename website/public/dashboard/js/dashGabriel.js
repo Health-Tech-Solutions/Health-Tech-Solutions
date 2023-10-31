@@ -9,6 +9,7 @@ dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${session
 
 
 
+
 function listarHospitais(){
 
     fetch(`/hospitais/listarHospitais`)
@@ -69,15 +70,19 @@ function listarTiposMaquinas(){
                 .then(
 
                     function(resposta){
-                        console.log(resposta)
-                        dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`; 
-                        dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${dropdown_menu.value}" >Todos</option>`; 
-                        for (let i = 0; i < resposta.length; i++) {
-                            let nome = resposta[i].nomeFantasia
-                            let id = resposta[i].idEmpresa
-                            dropdown_menu.innerHTML += `<option class="dropdown-item"  value = "${id};${nome}" >${nome}</option>` 
-                        }
+                        var todasASMaquinas = resposta
+                        console.log("LISTANDO TODAS AS MÁQUINAS:")
+                        console.log(todasASMaquinas)
                         
+                        OpicoesMaquinas.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`; 
+                        OpicoesMaquinas.innerHTML += `<option class="dropdown-item"  value = "${OpicoesMaquinas.value}" >Todos</option>`; 
+                        for (let i = 0; i < resposta.length; i++) {
+                            let id = resposta[i].idTipo
+                            let tipo = resposta[i].nome
+                            OpicoesMaquinas.innerHTML += `<option class="dropdown-item"  value = "${id};${tipo}" >${tipo}</option>` 
+                            
+                        }
+                    
                     }
                 )
             }

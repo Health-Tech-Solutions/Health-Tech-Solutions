@@ -36,7 +36,7 @@
 
 </head>
 
-<body id="page-top" onload="MaquinasPorTipoChamadoAberto(), MaquinasPorTipo()">
+<body id="page-top" onload="MaquinasPorTipoChamadoAberto(), MaquinasPorTipo(), mostrarDados()">
     <!-- Page Wrapper -->
 
     <div id="wrapper">
@@ -384,8 +384,8 @@
                                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                                     <select type="button" class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm "
                                                         data-toggle=" dropdown" aria-expanded="false" onclick="listarTiposMaquinas()"
-                                                        id="OpicoesMaquinas" onchange="">
-                                                        <option class="dropdown-item" value="null;null">Todos</option>
+                                                        id="OpicoesMaquinas" onchange="trocarTipoMaquina()">
+                                                        <option class="dropdown-item1" value="null;null">Todos</option>
                                                         Escolher Hospitais
                                                     </select>
                                                 </div>
@@ -692,5 +692,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/dashGabriel.js"></script>
 <script src="js/dados.js"></script>
-<script src="js/chartLineIndex.js"></script>
-<script src="js/chartPieIndex.js"></script>
+<script src="js/chartLineGabriel.js"></script>
+<script src="js/chartPieGabriel.js"></script>

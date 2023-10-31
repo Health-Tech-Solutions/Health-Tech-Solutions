@@ -74,12 +74,12 @@ function listarTiposMaquinas(){
                         console.log("LISTANDO TODAS AS MÁQUINAS:")
                         console.log(todasASMaquinas)
                         
-                        OpicoesMaquinas.innerHTML = `<option class="dropdown-item"  value = "null;null"></option>`; 
-                        OpicoesMaquinas.innerHTML += `<option class="dropdown-item"  value = "${OpicoesMaquinas.value}" >Todos</option>`; 
+                        OpicoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "null;null"></option>`; 
+                        OpicoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${OpicoesMaquinas.value}" >Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
-                            let id = resposta[i].idTipo
+                            let idTipo = resposta[i].idTipo
                             let tipo = resposta[i].nome
-                            OpicoesMaquinas.innerHTML += `<option class="dropdown-item"  value = "${id};${tipo}" >${tipo}</option>` 
+                            OpicoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${idTipo};${tipo}" >${tipo}</option>` 
                             
                         }
                     
@@ -96,19 +96,19 @@ function listarTiposMaquinas(){
 }
 
 
-
 function trocarTipoMaquina(){  
-  
-    let teste = dropdown_menu.value.split(';')
-    let id = teste[0]
-    let nome = teste[1]
-    if(nome == 'null'){
-        nome = 'Todos'
+    alert("Entrou")
+    let teste = OpicoesMaquinas.value.split(';')
+    let idTipo = teste[0]
+    let tipo = teste[1]
+    if(tipo == 'null'){
+        tipo = 'Todos'
     }
-    console.log(teste, id, nome)
-    sessionStorage.FK_HOSPITAL = id
-    sessionStorage.NOME_HOSPITAL = nome
+    alert(teste, idTipo, tipo)
+    sessionStorage.idTipo = idTipo
+    sessionStorage.tipo = tipo
     location.reload()
+    
 }
 
 

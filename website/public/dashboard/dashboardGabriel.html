@@ -23,7 +23,16 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
+   <style>
+   #OpicoesMaquinas{
+
+    display: flex;
+    height: 25px;
+    font-size: 12px;
+
+   }
    
+   </style>
 
 </head>
 
@@ -372,7 +381,15 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Média de uso de energia por máquina
+                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                                    <select type="button" class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm "
+                                                        data-toggle=" dropdown" aria-expanded="false" onclick="listarTiposMaquinas()"
+                                                        id="OpicoesMaquinas" onchange="trocarHospital()">
+                                                        <option class="dropdown-item" value="null;null">Todos</option>
+                                                        Escolher Hospitais
+                                                    </select>
+                                                </div>
+                                                Uso de energia por máquina
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">

@@ -2,6 +2,15 @@ const { ConnectionPool } = require("mssql")
 const database = require("../database/config")
 
 
+function listarTiposMaquinas(){
+    const instrucao = `
+        SELECT * FROM tipo;
+    `
+    console.log("Executando a seguinte instrução no sql " + instrucao)
+    return database.executar(instrucao)
+}
+
+
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
     console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' )
@@ -41,6 +50,7 @@ function totalMaquinasPorTipo(fkHospital) {
 
 
 module.exports = {
+    listarTiposMaquinas,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo
 }

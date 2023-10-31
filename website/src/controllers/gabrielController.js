@@ -1,6 +1,23 @@
 const gabrielModel = require("../models/gabrielModel")
 
 
+function listarTiposMaquinas(req, res) {
+    gabrielModel.listarTiposMaquinas()
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao procurar os hospitais: ", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
 function totalMaquinasPorTipoChamadoAberto(req, res) {
     console.log("ENTROU Controller totalMaquinasPorTipoChamadoAberto")
     var fkHospital = req.params.fkHospital;
@@ -45,6 +62,7 @@ function totalMaquinasPorTipo(req, res) {
 
 
 module.exports = {
+    listarTiposMaquinas,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo
 }

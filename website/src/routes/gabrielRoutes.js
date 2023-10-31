@@ -4,6 +4,10 @@ const router = express.Router()
 const gabrielController = require("../controllers/gabrielController")
 
 
+router.get("/listarTiposMaquinas", (req,res) => {
+    gabrielController.listarTiposMaquinas(req,res)
+})
+
 router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {
     gabrielController.totalMaquinasPorTipoChamadoAberto(req,res)
 })

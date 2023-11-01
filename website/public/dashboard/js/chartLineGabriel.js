@@ -2,7 +2,7 @@
 function obterDadosMensais(){
 
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/chamados/buscarMensal/${fkHospital}`)
+    fetch(`/gabrielRoutes/buscarMensal/${fkHospital}`)
     .then(
         function(resposta){
             if(resposta.ok){

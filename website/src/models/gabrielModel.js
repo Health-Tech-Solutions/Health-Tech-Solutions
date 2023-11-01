@@ -11,6 +11,16 @@ function listarTiposMaquinas(){
 }
 
 
+// function listarTempo(){
+//     const instrucao = `
+    
+//     `
+
+
+//     return database.executar(instrucao)
+// }
+
+
 
 //Gráficos
 

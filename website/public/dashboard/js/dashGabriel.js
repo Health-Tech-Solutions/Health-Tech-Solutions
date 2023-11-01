@@ -6,8 +6,7 @@ if (sessionStorage.NOME_HOSPITAL == 'null') {
 }
 
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
-
-
+OpcoesMaquinas.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.tipo}</option>`
 
 
 function listarHospitais(){
@@ -74,15 +73,14 @@ function listarTiposMaquinas(){
                         console.log("LISTANDO TODAS AS MÁQUINAS:")
                         console.log(todasASMaquinas)
                         
-                        OpicoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "null;null"></option>`; 
-                        OpicoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${OpicoesMaquinas.value}" >Todos</option>`; 
+                        // OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "null;null"></option>`; 
+                        // OpcoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${OpcoesMaquinas.value}" >Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let idTipo = resposta[i].idTipo
                             let tipo = resposta[i].nome
-                            OpicoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${idTipo};${tipo}" >${tipo}</option>` 
-                            
+                            OpcoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${idTipo};${tipo}" >${tipo}</option>` 
                         }
-                    
+                        
                     }
                 )
             }
@@ -97,18 +95,16 @@ function listarTiposMaquinas(){
 
 
 function trocarTipoMaquina(){  
-    alert("Entrou")
-    let teste = OpicoesMaquinas.value.split(';')
+    let teste = OpcoesMaquinas.value.split(';')
     let idTipo = teste[0]
     let tipo = teste[1]
     if(tipo == 'null'){
         tipo = 'Todos'
     }
-    alert(teste, idTipo, tipo)
     sessionStorage.idTipo = idTipo
     sessionStorage.tipo = tipo
-    location.reload()
     
+    location.reload()
 }
 
 

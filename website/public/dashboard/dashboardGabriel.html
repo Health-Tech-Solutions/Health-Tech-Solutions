@@ -22,9 +22,10 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
    <style>
-   #OpicoesMaquinas{
+   #OpcoesMaquinas{
 
     display: flex;
     height: 25px;
@@ -387,7 +388,7 @@
                                                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                                                     <select type="button" class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm "
                                                         data-toggle=" dropdown" aria-expanded="false" onclick="listarTiposMaquinas()"
-                                                        id="OpicoesMaquinas" onchange="trocarTipoMaquina()">
+                                                        id="OpcoesMaquinas" onchange="trocarTipoMaquina()">
                                                         <option class="dropdown-item1" value="null;null">Todos</option>
                                                         Escolher Hospitais
                                                     </select>
@@ -689,7 +690,11 @@
 
 <script>
 
+
     usuario_nome.innerHTML = sessionStorage.NOME_USUARIO;
+    // OpcoesMaquinas.innerHTML = `${sessionStorage.tipo}`
+
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

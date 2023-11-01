@@ -40,6 +40,7 @@ function listarHospitais(){
         }
     )
 }
+
 function trocarHospital(){  
   
     let teste = dropdown_menu.value.split(';')

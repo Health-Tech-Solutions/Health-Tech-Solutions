@@ -23,19 +23,20 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
-    <script src="js/funcoesIndex"></script>
+   <style>
+   #OpicoesMaquinas{
+
+    display: flex;
+    height: 25px;
+    font-size: 12px;
+
+   }
+   
+   </style>
 
 </head>
 
-<body id="page-top" onload="
-listarEquipamentos(1),
-maquinasInstaveis(),
-obterChamadosEmAberto(),
-obterDadosMensais(),
-totalMaquinas(),
-MaquinasPorTipoChamadoAberto(),
-chamarModeloComMaisAlertas(),
-mostrarDados()">
+<body id="page-top" onload="MaquinasPorTipoChamadoAberto(), MaquinasPorTipo(), mostrarDados()">
     <!-- Page Wrapper -->
 
     <div id="wrapper">
@@ -84,7 +85,7 @@ mostrarDados()">
                     </div>
                 </div>
             </li>
-            <a href="dashboardGabriel.html">DashGabriel</a>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -314,23 +315,26 @@ mostrarDados()">
                                 class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</a>
                     </div> -->
                     <!-- Example split danger button -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-start mb-4">
                         <!-- <button type="button" class="btn btn-danger ">Action</button> -->
-                        <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm""
+                        <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mr-3""
                             data-toggle=" dropdown" aria-expanded="false" onclick="listarHospitais()"
                             id="dropdown_menu" onchange="trocarHospital()">
                             <option class="dropdown-item" value="null;null">Todos</option>
                             Escolher Hospitais
                             <!-- <span class="sr-only">Toggle Dropdown</span> -->
                         </select>
-                        <!-- <select class="dropdown-menu d-sm-flex align-items-center justify-content-between mb-4" id="dropdown_menu"> -->
-                        <!-- <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a> -->
-                        <!-- </select> -->
+                        <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm""
+                        data-toggle=" dropdown" aria-expanded="false" onclick=""
+                        id="dropdown_menuTempo" onchange="">
+                        <option class="dropdown-item" value="null;null">Todos</option>
+                        Escolher Hospitais
+                    </select>
                     </div>
+                    
+
+                    
+
 
                     <!-- Content Row -->
                     <div class="row">
@@ -380,7 +384,15 @@ mostrarDados()">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Máquinas instáveis
+                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                                    <select type="button" class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm "
+                                                        data-toggle=" dropdown" aria-expanded="false" onclick="listarTiposMaquinas()"
+                                                        id="OpicoesMaquinas" onchange="trocarTipoMaquina()">
+                                                        <option class="dropdown-item1" value="null;null">Todos</option>
+                                                        Escolher Hospitais
+                                                    </select>
+                                                </div>
+                                                Uso de energia por máquina
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
@@ -411,7 +423,7 @@ mostrarDados()">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Chamados em aberto</div>
+                                                Média de temperatura</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="qtd_chamados">18</div>
                                         </div>
                                         <div class="col-auto">
@@ -435,7 +447,7 @@ mostrarDados()">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Máquinas em chamado</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Correlação entre desempenho e temperatura</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -478,7 +490,7 @@ mostrarDados()">
                                 <i class="fas fa-fw fa-arrow-right" onclick="listarEquipamentos(1)" style="cursor: pointer;"></i>
                                 
                             </div>
-                            <h5 class="m-0 font-weight-bold text-primary" style="text-align: center; padding: 10%; padding-bottom: 0;">Quantidade de chamados de acordo com o seu nível</h5>
+                            <h5 class="m-0 font-weight-bold text-primary" style="text-align: center; padding: 10%; padding-bottom: 0;">Chamados por temperatura</h5>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2" style="display: flex;
@@ -681,7 +693,7 @@ mostrarDados()">
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/index.js"></script>
+<script src="js/dashGabriel.js"></script>
 <script src="js/dados.js"></script>
-<script src="js/chartLineIndex.js"></script>
-<script src="js/chartPieIndex.js"></script>
+<script src="js/chartLineGabriel.js"></script>
+<script src="js/chartPieGabriel.js"></script>

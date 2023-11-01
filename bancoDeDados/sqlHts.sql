@@ -820,4 +820,17 @@ WHERE endereco.estado = 'SP';
 
 -- select * from dadosTemperatura;
 -- select * from registroTemperatura;
+use hts;
 
+CREATE OR REPLACE VIEW vw_confiabilidade AS
+SELECT 
+	(CASE WHEN estado = 'aberto' 
+		THEN SUM(CAST(REPLACE(sla,'horas','') AS SIGNED))
+			END) as horaAberto,
+	(CASE WHEN estado = 'fechado' 
+		THEN SUM(CAST(REPLACE(sla,'horas','') AS SIGNED))
+			END) AS horaFechado
+FROM vw_chamados
+group by estado;
+
+SELECT (SUM(horaAberto) - SUM(horaFechado)) AS mtbf FROM vw_confiabilidade;	

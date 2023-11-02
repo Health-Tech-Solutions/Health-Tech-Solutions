@@ -10,6 +10,11 @@ router.get("/listarTiposMaquinas", (req,res) => {
 
 
 
+router.get("/listarMeses", (req,res) => {
+    gabrielController.listarMeses(req,res)
+})
+
+
 //Gráficos
 
 router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {

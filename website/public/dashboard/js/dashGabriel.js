@@ -6,7 +6,8 @@ if (sessionStorage.NOME_HOSPITAL == 'null') {
 }
 
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
-OpcoesMaquinas.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.tipo}</option>`
+OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "${sessionStorage.idTipo}" >${sessionStorage.tipo}</option>`
+OpcoesMeses.innerHTML = `<option class="dropdown-item2"  value = "${sessionStorage.mes}" >${sessionStorage.nomeMes}</option>`
 
 
 function listarHospitais(){
@@ -73,8 +74,8 @@ function listarTiposMaquinas(){
                         console.log("LISTANDO TODAS AS MÁQUINAS:")
                         console.log(todasASMaquinas)
                         
-                        // OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "null;null"></option>`; 
-                        // OpcoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${OpcoesMaquinas.value}" >Todos</option>`; 
+                         OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "null;null"></option>`; 
+                         OpcoesMaquinas.innerHTML += `<option class="dropdown-item1"  value = "${OpcoesMaquinas.value}" >Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let idTipo = resposta[i].idTipo
                             let tipo = resposta[i].nome
@@ -106,6 +107,112 @@ function trocarTipoMaquina(){
     
     location.reload()
 }
+
+
+
+
+function listarMeses(){
+
+    fetch(`/gabrielRoutes/listarMeses`)
+    .then(  
+        function(resposta){
+            if(resposta.ok){
+                resposta.json()
+                .then(
+
+                    function(resposta){
+                        var todosOsMeses = resposta
+                        console.log("LISTANDO TODOS OS MESES:")
+                        console.log(todosOsMeses)
+                        
+                         OpcoesMeses.innerHTML = `<option class="dropdown-item2"  value = "null;null"></option>`; 
+                         OpcoesMeses.innerHTML += `<option class="dropdown-item2"  value = "${OpcoesMeses.value}" >Todos</option>`; 
+                        for (let i = 0; i < resposta.length; i++) {
+                            let mes = resposta[i].mes
+                            let nomeMes;
+                            if (mes == 1) {
+                                nomeMes = "Janeiro"
+                            }else if (mes == 2){
+                                nomeMes = "Fevereiro"
+                            }else if (mes == 3){
+                                nomeMes = "Março"
+                            }else if (mes == 4){
+                                nomeMes = "Abriu"
+                            }else if (mes == 5){
+                                nomeMes = "Maio"
+                            }else if (mes == 6){
+                                nomeMes = "Junho"
+                            }else if (mes == 7){
+                                nomeMes = "Julho"
+                            }else if (mes == 8){
+                                nomeMes = "Agosto"
+                            }else if (mes == 9){
+                                nomeMes = "Setembro"
+                            }else if (mes == 10){
+                                nomeMes = "Outubro"
+                            }else if (mes == 11){
+                                nomeMes = "Novembro"
+                            }else if (mes == 12){
+                                nomeMes = "Dezembro"
+                            }
+                            OpcoesMeses.innerHTML += `<option class="dropdown-item2"  value = "${mes}" >${nomeMes}</option>` 
+                        }
+                        
+                    }
+                )
+            }
+        }
+    )
+    .catch(
+        err => {
+            console.log("ERRO" + err)
+        }
+    )
+}
+
+
+function trocarMes(){  
+    let teste = OpcoesMeses.value.split(';')
+    let mes = teste[0]
+    let nomeMes;
+    if(mes == 'null'){
+        mes = 'Todos'
+        nomeMes = 'Todos'
+    }
+
+    if (mes == 1) {
+        nomeMes = "Janeiro"
+    }else if (mes == 2){
+        nomeMes = "Fevereiro"
+    }else if (mes == 3){
+        nomeMes = "Março"
+    }else if (mes == 4){
+        nomeMes = "Abriu"
+    }else if (mes == 5){
+        nomeMes = "Maio"
+    }else if (mes == 6){
+        nomeMes = "Junho"
+    }else if (mes == 7){
+        nomeMes = "Julho"
+    }else if (mes == 8){
+        nomeMes = "Agosto"
+    }else if (mes == 9){
+        nomeMes = "Setembro"
+    }else if (mes == 10){
+        nomeMes = "Outubro"
+    }else if (mes == 11){
+        nomeMes = "Novembro"
+    }else if (mes == 12){
+        nomeMes = "Dezembro"
+    }
+
+    
+    sessionStorage.mes = mes
+    sessionStorage.nomeMes = nomeMes
+    
+    location.reload()
+}
+
 
 
 var Ultrassom = 0

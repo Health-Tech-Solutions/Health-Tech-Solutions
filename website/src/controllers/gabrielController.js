@@ -18,6 +18,26 @@ function listarTiposMaquinas(req, res) {
 }
 
 
+
+
+function listarMeses(req, res) {
+    gabrielModel.listarMeses()
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao procurar os hospitais: ", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
 function totalMaquinasPorTipoChamadoAberto(req, res) {
     console.log("ENTROU Controller totalMaquinasPorTipoChamadoAberto")
     var fkHospital = req.params.fkHospital;
@@ -81,6 +101,7 @@ function buscarMensal(req,res){
 
 module.exports = {
     listarTiposMaquinas,
+    listarMeses,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     buscarMensal

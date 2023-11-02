@@ -11,14 +11,14 @@ function listarTiposMaquinas(){
 }
 
 
-// function listarTempo(){
-//     const instrucao = `
-    
-//     `
+ function listarMeses(){
+     const instrucao = `
+     select month(dataTemperatura) as mes from dadosTemperatura group by mes order by mes desc;
+     `
 
 
-//     return database.executar(instrucao)
-// }
+     return database.executar(instrucao)
+ }
 
 
 
@@ -90,6 +90,7 @@ function buscarSemanal(fkHospital){
 
 module.exports = {
     listarTiposMaquinas,
+    listarMeses,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     buscarSemanal

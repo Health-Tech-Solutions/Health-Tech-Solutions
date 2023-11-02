@@ -554,12 +554,13 @@ function mediaTemperatura(){
                 resposta.json()
                     .then(
                         function (resposta) {
-                            console.log("MEDIAAAAAAAAAAA")
-                            console.log(resposta)
+                            valores = resposta
+                            console.log(valores)
+                            var valorMediaTemperatura = resposta[0].mediaTemperatura
+                            console.log(valorMediaTemperatura)
 
-
-
-
+                            temperaturaMedia.innerHTML = `${valorMediaTemperatura}`
+                            
                         }
                     )
             }
@@ -569,6 +570,6 @@ function mediaTemperatura(){
         })
        
 
-
+       
 
 }

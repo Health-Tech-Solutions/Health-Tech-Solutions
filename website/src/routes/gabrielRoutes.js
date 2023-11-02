@@ -15,7 +15,7 @@ router.get("/listarMeses", (req,res) => {
 })
 
 
-router.get("/mediaTemperatura/:idMes", (req,res) => {
+router.get("/mediaTemperatura/:idMes/:fkHospital", (req,res) => {
     gabrielController.mediaTemperatura(req,res)
 })
 

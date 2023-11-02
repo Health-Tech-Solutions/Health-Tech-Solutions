@@ -39,8 +39,9 @@ function listarMeses(req, res) {
 
 function mediaTemperatura(req,res){
     var idMes = req.params.idMes
+    var fkHospital = req.params.fkHospital
 
-gabrielModel.mediaTemperatura(idMes)
+gabrielModel.mediaTemperatura(idMes, fkHospital)
 .then((resultado) => {
     if (resultado.length > 0) {
         res.status(200).json(resultado)

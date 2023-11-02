@@ -547,7 +547,8 @@ function calculoGraficoSituacaoGeral() {
 
 function mediaTemperatura(){
     var idMes = sessionStorage.mes
-    fetch(`/gabrielRoutes/mediaTemperatura/${idMes}`)
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/gabrielRoutes/mediaTemperatura/${idMes}/${fkHospital}`)
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json()

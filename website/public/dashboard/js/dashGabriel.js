@@ -5,6 +5,13 @@ if (sessionStorage.NOME_HOSPITAL == 'null') {
     sessionStorage.NOME_HOSPITAL = 'Todos'
 }
 
+if (sessionStorage.tipo == undefined) {
+    sessionStorage.tipo = 'Todos'
+}
+if (sessionStorage.nomeMes == undefined) {
+    sessionStorage.nomeMes = 'Todos'
+}
+
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
 OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "${sessionStorage.idTipo}" >${sessionStorage.tipo}</option>`
 OpcoesMeses.innerHTML = `<option class="dropdown-item2"  value = "${sessionStorage.mes}" >${sessionStorage.nomeMes}</option>`
@@ -548,6 +555,7 @@ function calculoGraficoSituacaoGeral() {
 function mediaTemperatura(){
     var idMes = sessionStorage.mes
     var fkHospital = sessionStorage.FK_HOSPITAL
+   
     fetch(`/gabrielRoutes/mediaTemperatura/${idMes}/${fkHospital}`)
         .then(function (resposta) {
             if (resposta.ok) {

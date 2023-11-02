@@ -24,12 +24,27 @@ function listarTiposMaquinas(){
 
 function mediaTemperatura(idMes, fkHospital){
     var instrucao = ""
-    if(fkHospital == "null"){
 
+    if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
+        instrucao = `
+        SELECT year(dataTemperatura) as ano,  round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
+FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado
+group by ano;
+        `
+    }else if(fkHospital == "null" && idMes > 0){
+    
         instrucao = `
         SELECT year(dataTemperatura) as ano, month(dataTemperatura) as mes, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
 FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where month(dataTemperatura) = ${idMes}
 group by ano , mes;
+        `
+
+    } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
+
+        instrucao = `
+        SELECT year(dataTemperatura) as ano, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
+FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where idEmpresa = ${fkHospital}
+group by ano;
         `
 
     }else {

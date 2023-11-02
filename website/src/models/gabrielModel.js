@@ -22,6 +22,17 @@ function listarTiposMaquinas(){
 
 
 
+function mediaTemperatura(idMes){
+    const instrucao = `
+    select year(dataTemperatura) as ano, month(dataTemperatura) as mes, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura    from dadosTemperatura where month(dataTemperatura) = ${idMes} group by ano , mes;
+    `
+
+
+return database.executar(instrucao)
+}
+
+
+
 //Gráficos
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
@@ -91,6 +102,7 @@ function buscarSemanal(fkHospital){
 module.exports = {
     listarTiposMaquinas,
     listarMeses,
+    mediaTemperatura,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     buscarSemanal

@@ -31,9 +31,30 @@ function listarMeses(req, res) {
         })
         .catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao procurar os hospitais: ", erro.sqlMessage)
+            console.log("Houve um erro ao procurar os meses: ", erro.sqlMessage)
             res.status(500).json(erro.sqlMessage);
         });
+}
+
+
+function mediaTemperatura(req,res){
+    var idMes = req.params.idMes
+
+gabrielModel.mediaTemperatura(idMes)
+.then((resultado) => {
+    if (resultado.length > 0) {
+        res.status(200).json(resultado)
+    } else {
+        res.status(204).json([])
+    }
+})
+.catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao procurar os mediaTemperatura: ", erro.sqlMessage)
+    res.status(500).json(erro.sqlMessage);
+});
+
+
 }
 
 
@@ -102,6 +123,7 @@ function buscarMensal(req,res){
 module.exports = {
     listarTiposMaquinas,
     listarMeses,
+    mediaTemperatura,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     buscarMensal

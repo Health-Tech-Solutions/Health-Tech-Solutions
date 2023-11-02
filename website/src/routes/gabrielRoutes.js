@@ -15,6 +15,11 @@ router.get("/listarMeses", (req,res) => {
 })
 
 
+router.get("/mediaTemperatura/:idMes", (req,res) => {
+    gabrielController.mediaTemperatura(req,res)
+})
+
+
 //Gráficos
 
 router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {

@@ -540,10 +540,33 @@ function calculoGraficoSituacaoGeral() {
         larguraMonitorFetal.style.width = `${linhaCasoDerNull}%`
     }
 
-
     //Não tem MonitorSinaisVitais
 
+}
 
+
+function mediaTemperatura(){
+    var idMes = sessionStorage.mes
+    fetch(`/gabrielRoutes/mediaTemperatura/${idMes}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json()
+                    .then(
+                        function (resposta) {
+                            console.log("MEDIAAAAAAAAAAA")
+                            console.log(resposta)
+
+
+
+
+                        }
+                    )
+            }
+        })
+        .catch(err => {
+            console.log("ERRO" + err)
+        })
+       
 
 
 

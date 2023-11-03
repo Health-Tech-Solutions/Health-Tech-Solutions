@@ -33,4 +33,10 @@ router.get("/totalMaquinasPorTipo/:fkHospital", (req,res) => {
 router.get("/buscarMensal/:fkHospital", function(req,res){
     gabrielController.buscarMensal(req,res);
 })
+
+router.get("/graficoPizza/:idMes/:fkHospital", (req,res) => {
+    gabrielController.graficoPizza(req,res)
+})
+
+
 module.exports = router

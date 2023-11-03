@@ -567,7 +567,7 @@ function mediaTemperatura(){
                             var valorMediaTemperatura = resposta[0].mediaTemperatura
                             console.log(valorMediaTemperatura)
 
-                            temperaturaMedia.innerHTML = `${valorMediaTemperatura}`
+                            temperaturaMedia.innerHTML = `${valorMediaTemperatura}ºC`
                             
                         }
                     )

@@ -79,52 +79,54 @@ function plotarGraficoPizza(resposta){
     graficoPizza.update()
     
 }
-var posicao = 0
-var equipamentos = []
-var tipos = []
-function listarEquipamentos(numero){
-    equipamentos = []
-    tipos = []
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/chamados/listarModelos/${fkHospital}`)
-        .then(
-            resposta => {
-                if(resposta.ok){
-                    resposta.json()
-                    .then(
-                        resposta => {
-                            console.log(resposta)
-                            for (let i = 0; i < resposta.length; i++) {
-                                const element = resposta[i];
-                                console.log(element)
-                                equipamentos.push(element.tipo) 
-                                tipos.push(element.idTipo)
-                            }   
-                            mudarEquipamento(numero, equipamentos, tipos)    
+
+
+// var posicao = 0
+// var equipamentos = []
+// var tipos = []
+// function listarEquipamentos(numero){
+//     equipamentos = []
+//     tipos = []
+//     var fkHospital = sessionStorage.FK_HOSPITAL
+//     fetch(`/chamados/listarModelos/${fkHospital}`)
+//         .then(
+//             resposta => {
+//                 if(resposta.ok){
+//                     resposta.json()
+//                     .then(
+//                         resposta => {
+//                             console.log(resposta)
+//                             for (let i = 0; i < resposta.length; i++) {
+//                                 const element = resposta[i];
+//                                 console.log(element)
+//                                 equipamentos.push(element.tipo) 
+//                                 tipos.push(element.idTipo)
+//                             }   
+//                             mudarEquipamento(numero, equipamentos, tipos)    
                
-                        }
-                    )
-                }
-            }
-        )
-        .catch(
-            err =>{
-                console.log("ERRO " + err)
-            }
-        )  
+//                         }
+//                     )
+//                 }
+//             }
+//         )
+//         .catch(
+//             err =>{
+//                 console.log("ERRO " + err)
+//             }
+//         )  
 
        
-}
+// }
 
-function mudarEquipamento(numero, equipamentos, tipos){
-    if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
-        numero = 0 
-    }
-    posicao += numero 
-    sessionStorage.POSICAO_EQUIPAMENTO = posicao
-    if(posicao == 0){
-        posicao = 1
-    }
-    nome_equipamento.innerHTML = equipamentos[posicao - 1]
-    buscarGravidade(tipos[posicao -1])
-}
+// function mudarEquipamento(numero, equipamentos, tipos){
+//     if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
+//         numero = 0 
+//     }
+//     posicao += numero 
+//     sessionStorage.POSICAO_EQUIPAMENTO = posicao
+//     if(posicao == 0){
+//         posicao = 1
+//     }
+//     nome_equipamento.innerHTML = equipamentos[posicao - 1]
+//     buscarGravidade(tipos[posicao -1])
+// }

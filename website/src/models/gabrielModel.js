@@ -102,31 +102,148 @@ function totalMaquinasPorTipo(fkHospital) {
 }
 
 
-function buscarSemanal(fkHospital){
-    console.log("estou na buscarSemanal no chamadoModel")
-    var instrucao = `
-    `
+function buscarMensal(fkHospital){
+    var instrucao = ``
+
     if(fkHospital == 'null'){
         instrucao = `
         SELECT 
-            DAYOFMONTH(dataHora) AS dia,
-            COUNT(*) AS quantidade	
-        FROM vw_chamados
-        GROUP BY dia
-        ORDER BY dia;
+	    MONTH(dataHora) AS mes,
+	    COUNT(*) AS quantidade	
+	FROM vw_chamados
+    GROUP BY mes
+    ORDER BY mes;
         `
-    } else {
-        instrucao = `
-        SELECT 
-            DAYOFMONTH(dataHora) AS dia,
-            COUNT(*) AS quantidade	
-        FROM vw_chamados
-        WHERE idHospital = ${fkHospital}
-        GROUP BY dia
-        ORDER BY dia;
-        `
+
+    }else{
+         instrucao = `
+    SELECT 
+	    MONTH(dataHora) AS mes,
+	    COUNT(*) AS quantidade	
+	FROM vw_chamados
+    WHERE idHospital = ${fkHospital}
+    GROUP BY mes
+    ORDER BY mes;
+    `
+
     }
-    console.log("executando a seguinte instrução SQL " + instrucao)
+    
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+
+
+//Gráfico de pizza 
+function graficoPizza(idMes, fkHospital){   
+   
+
+    if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
+        instrucao = `
+        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) < 4 group by ano, nivel;
+        `
+    }else if(fkHospital == "null" && idMes > 0){
+    
+        instrucao = `
+        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) ${idMes}  group by ano, nivel;
+        `
+
+    } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
+
+        instrucao = `
+        SELECT
+        t.ano,
+        t.mediaTemperatura,
+        e.qntChamado,
+        e.nivel
+    FROM
+        (
+           SELECT
+                YEAR(dataTemperatura) as ano,
+                ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2) as mediaTemperatura
+            FROM
+                empresa 
+            join
+                registroTemperatura
+            on
+                idEmpresa = fkHospital
+            join
+                dadosTemperatura
+            on
+                fkDadosTemperatura = idDadosTemperatura
+                where fkHospital = 1
+            GROUP BY
+                ano
+        ) t
+    JOIN
+        (
+    select 
+        count(idChamado) as qntChamado, nivel 
+    from 
+        endereco 
+    join 
+        empresa on idEndereco = fkEndereco 
+    join 
+        maquinario on idEmpresa = fkHospital 
+    join 
+        registro on idMaquinario = fkMaquina
+    join chamado on idRegistro = fkRegistro
+      where fkHospital = 1 and month(chamado.dataHora) < 4 group by nivel
+        ) e;
+        `
+
+    }else {
+
+        instrucao = `
+        SELECT
+    t.ano,
+    t.mes,
+    t.mediaTemperatura,
+    e.qntChamadoEndereco,
+    e.nivel
+FROM
+    (
+       SELECT
+            YEAR(dataTemperatura) as ano,
+            MONTH(dataTemperatura) as mes,
+            ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2) as mediaTemperatura
+        FROM
+			empresa 
+        join
+			registroTemperatura
+        on
+			idEmpresa = fkHospital
+        join
+            dadosTemperatura
+		on
+			fkDadosTemperatura = idDadosTemperatura
+            where month(dataTemperatura) = 2 and fkHospital = 2
+        GROUP BY
+            ano,
+            mes
+    ) t
+JOIN
+    (
+select 
+	count(idChamado) as qntChamadoEndereco, nivel 
+from 
+	endereco 
+join 
+	empresa on idEndereco = fkEndereco 
+join 
+	maquinario on idEmpresa = fkHospital 
+join 
+	registro on idMaquinario = fkMaquina
+join chamado on idRegistro = fkRegistro
+  where month(registro.dataHora) = 2 and fkHospital = 2 group by nivel
+    ) e;
+        `
+
+    }
+
+
+    
+    console.log("Executando a seguinte instrução sql " + instrucao)
     return database.executar(instrucao)
 }
 
@@ -137,5 +254,6 @@ module.exports = {
     mediaTemperatura,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
-    buscarSemanal
+    buscarMensal,
+    graficoPizza
 }

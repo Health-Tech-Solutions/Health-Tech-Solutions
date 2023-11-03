@@ -121,11 +121,36 @@ function buscarMensal(req,res){
 }
 
 
+
+function graficoPizza(req,res){
+    var idMes = req.params.idMes
+    var fkHospital = req.params.fkHospital
+
+gabrielModel.graficoPizza(idMes, fkHospital)
+.then((resultado) => {
+    if (resultado.length > 0) {
+        res.status(200).json(resultado)
+    } else {
+        res.status(204).json([])
+    }
+})
+.catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao procurar os mediaTemperatura: ", erro.sqlMessage)
+    res.status(500).json(erro.sqlMessage);
+});
+
+
+}
+
+
+
 module.exports = {
     listarTiposMaquinas,
     listarMeses,
     mediaTemperatura,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
-    buscarMensal
+    buscarMensal,
+    graficoPizza
 }

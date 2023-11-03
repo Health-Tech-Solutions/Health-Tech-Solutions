@@ -58,7 +58,7 @@ function graficoPizza1(){
     var idMes = sessionStorage.mes 
     console.log(fkHospital)
     console.log(idMes)
-    fetch(`/gabrielRoutes/graficoPizza/${fkHospital}/${idMes}`)
+    fetch(`/gabrielRoutes/graficoPizza/${idMes}/${fkHospital}`)
     .then(
         resposta => {
             if(resposta.ok){

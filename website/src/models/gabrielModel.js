@@ -136,6 +136,7 @@ function buscarMensal(fkHospital){
 
 //Gráfico de pizza 
 function graficoPizza(idMes, fkHospital){   
+    console.log(idMes, fkHospital)
    
 
     if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
@@ -145,7 +146,7 @@ function graficoPizza(idMes, fkHospital){
     }else if(fkHospital == "null" && idMes > 0){
     
         instrucao = `
-        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) ${idMes}  group by ano, nivel;
+        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) = ${idMes}  group by ano, nivel;
         `
 
     } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
@@ -193,7 +194,6 @@ function graficoPizza(idMes, fkHospital){
         `
 
      }else {
-
          instrucao = `
          SELECT
      t.ano,

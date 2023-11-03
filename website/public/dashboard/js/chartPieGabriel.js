@@ -1,5 +1,24 @@
 
 // Gráfico de pizza, gravidade dos chamados por modelo de máquina
+
+
+if (sessionStorage.FK_HOSPITAL == undefined) {
+    sessionStorage.FK_HOSPITAL = null
+}
+if (sessionStorage.NOME_HOSPITAL == 'null') {
+    sessionStorage.NOME_HOSPITAL = 'Todos'
+}
+
+if (sessionStorage.tipo == undefined) {
+    sessionStorage.tipo = 'Todos'
+}
+if (sessionStorage.nomeMes == undefined) {
+    sessionStorage.nomeMes = 'Todos'
+}
+
+
+
+
 const configPie = document.getElementById('chartPie');
 
 var dadosPizza = {
@@ -33,11 +52,13 @@ var graficoPizza = new Chart(configPie, {
         }
     }
 });
-
-function buscarGravidade(idTipo){
+console.log("PIIZZZZZAAAAAAAAAAAAAAAA")
+function graficoPizza1(){
     var fkHospital = sessionStorage.FK_HOSPITAL
-    var fks = fkHospital + ',' + idTipo
-    fetch(`/chamados/buscarGravidade/${fks}`)
+    var idMes = sessionStorage.mes 
+    console.log(fkHospital)
+    console.log(idMes)
+    fetch(`/gabrielRoutes/graficoPizza/${fkHospital}/${idMes}`)
     .then(
         resposta => {
             if(resposta.ok){
@@ -45,6 +66,7 @@ function buscarGravidade(idTipo){
                 resposta.json()
                 .then(
                     resposta => {
+                        console.log("PIIZZZZZAAAAAAAAAAAAAAAA222222222222222")
                         console.log(resposta)
                         plotarGraficoPizza(resposta)
                     }
@@ -57,28 +79,59 @@ function buscarGravidade(idTipo){
     })
 }
 
-function plotarGraficoPizza(resposta){
-    let labels = []
-    let cores = []
-    dadosPizza.labels = labels
-    dadosPizza.datasets[0].data = []
-    for (let i = 0; i <= 2; i++) {
-        let element = resposta[i];
-        if(element.nivel == 'Baixo'){
-            cores.push('#1cc88a')
-        } else if(element.nivel == 'Médio'){
-            cores.push('#f6c23e')
-        } else {
-            cores.push('#e74a3b')
-        }
-        dadosPizza.labels.push(element.nivel)
-        dadosPizza.datasets[0].data.push(element.qtdNivel)
-    }
+// function plotarGraficoPizza(resposta){
+//     let labels = []
+//     let cores = []
+//     dadosPizza.labels = labels
+//     dadosPizza.datasets[0].data = []
+//     for (let i = 0; i <= 5; i++) {
+//         let element = resposta[i];
+//         if(element.nivel == 'Baixo'){
+//             cores.push('#1cc88a')
+//         } else if(element.nivel == 'Médio'){
+//             cores.push('#f6c23e')
+//         } else {
+//             cores.push('#e74a3b')
+//         }
+//         dadosPizza.labels.push(element.nivel)
+//         dadosPizza.datasets[0].data.push(element.qtdChamado)
+//     }
 
-    dadosPizza.datasets[0].backgroundColor = cores
-    graficoPizza.update()
+//     dadosPizza.datasets[0].backgroundColor = cores
+//     graficoPizza.update()
     
+// }
+
+
+function plotarGraficoPizza(resposta) {
+    let labels = [];
+    let cores = [];
+    dadosPizza.labels = labels;
+    dadosPizza.datasets[0].data = [];
+    for (let i = 0; i < resposta.length; i++) {
+        let element = resposta[i];
+        let nivel = element.nivel || 'Desconhecido'; // Usar 'Desconhecido' se a propriedade 'nivel' não existir
+        console.log(nivel)
+        if (nivel === 'Baixo') {
+            cores.push('#1cc88a');
+        } else if (nivel === 'Médio') {
+            cores.push('#f6c23e');
+        } else {
+            cores.push('#e74a3b');
+        }
+        dadosPizza.labels.push(nivel);
+        dadosPizza.datasets[0].data.push(element.qntChamado);
+    }
+    dadosPizza.datasets[0].backgroundColor = cores;
+    graficoPizza.update();
+    console.log("NÃO SEIIIIIIIIIIIIIIIIIIIIIIII")
 }
+
+
+
+
+
+
 
 
 // var posicao = 0

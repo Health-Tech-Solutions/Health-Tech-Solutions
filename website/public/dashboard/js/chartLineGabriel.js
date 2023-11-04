@@ -16,7 +16,7 @@ var desempenho = []
 
                          
                             for (let i = 0; i < resposta.length; i++) {
-                                dataDados.push(resposta[i].dataTemperatura)
+                                dataDados.push(resposta[i].temperaturaMedia)
                             }
                          
                             for (let index = 0; index < resposta.length; index++) {

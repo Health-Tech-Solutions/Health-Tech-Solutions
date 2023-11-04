@@ -82,15 +82,32 @@ function chamarComponenteComMaisAlertas() {
         });
 }
 
-function chamarModeloComMaisAlertas() {
+function chamarTipoComMaisAlertas() {
+    fetch(`/sofhiaRoute/buscarTipo`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
+                tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarModeloComMaisAlertas() {
     fetch(`/sofhiaRoute/buscarModelo`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                modeloComMaisAlertas.innerHTML = resposta[0].tipo;
+                modeloComMaisAlertas.innerHTML = resposta[0].modelo;
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

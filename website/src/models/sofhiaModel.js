@@ -106,11 +106,24 @@ function buscarComponente(){
     return database.executar(instrucao)
 }
 
-function buscarModelo(){
+function buscarTipo(){
     const instrucao = `
     SELECT 
         COUNT(idChamado) AS numeroChamados,
         tipo 
+        FROM vw_chamados 
+        GROUP BY tipo
+        ORDER BY numeroChamados DESC LIMIT 1;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarModelo(){
+    const instrucao = `
+    SELECT 
+        COUNT(idChamado) AS numeroChamados,
+        modelo 
         FROM vw_chamados 
         GROUP BY modelo
         ORDER BY numeroChamados DESC LIMIT 1;
@@ -123,5 +136,6 @@ function buscarModelo(){
 module.exports = {
     buscarHospitais,
     buscarComponente,
+    buscarTipo,
     buscarModelo
 }

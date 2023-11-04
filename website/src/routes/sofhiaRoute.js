@@ -11,6 +11,10 @@ router.get("/buscarComponente", function(req,res){
     sofhiaController.buscarComponente(req,res);
 })
 
+router.get("/buscarTipo", function(req,res){
+    sofhiaController.buscarTipo(req,res);
+})
+
 router.get("/buscarModelo", function(req,res){
     sofhiaController.buscarModelo(req,res);
 })

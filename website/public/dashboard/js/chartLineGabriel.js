@@ -1,76 +1,47 @@
+var dataDados = []
+var desempenho = []
+ function graficoLinha(){
 
-function obterDadosMensais(){
+     var fkHospital = sessionStorage.FK_HOSPITAL
+     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}`)
+     .then(
+         function(resposta){
+             if(resposta.ok){
+                 resposta.json()
+                 .then(
+                     function(resposta){
+                        console.log("CHARTTTTTTlINHAAAAAAAAAAAAAAAAAAAAAAAA")
+                         console.log(resposta) 
+                         
 
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/gabrielRoutes/buscarMensal/${fkHospital}`)
-    .then(
-        function(resposta){
-            if(resposta.ok){
-                resposta.json()
-                .then(
-                    function(resposta){
-                        console.log(resposta) 
-                        plotarGrafico(resposta)
-                    }
-                )
-            }
-        }
-    )
-    .catch(
-        err => {
-            console.log("ERRO " + err)
-        }
-    )
-}
-function obterDadosSemanal(){
+                         
+                            for (let i = 0; i < resposta.length; i++) {
+                                dataDados.push(resposta[i].dataTemperatura)
+                            }
+                         
+                            for (let index = 0; index < resposta.length; index++) {
+                                desempenho.push(resposta[index].valor)
+                            }
 
-    var fkHospital = sessionStorage.FK_HOSPITAL;
-    fetch(`/chamados/buscarSemanal/${fkHospital}`)
-    .then(
-        function(resposta){
-            if(resposta.ok){
-                resposta.json()
-                .then(
-                    function(resposta){
-                        console.log(resposta)
-                        plotarGraficoSemanal(resposta)
-                    }
-                )
-            }
-        }
-    )
-    .catch(
-        err => {
-            console.log("ERRO " + err)
-        }
-    )
-}
+                            lineChart.update()
+                     }
+                 )
+             }
+         }
+     )
+     .catch(
+         err => {
+             console.log("ERRO " + err)
+         }
+     )
+ }
+ 
 
-function plotarGraficoSemanal(resposta){
-    
-    labels = []
-    data = []
-    var dataAtual = new Date()
-    
-    var mes = dataAtual.getMonth() + 1
-    
-    for (let i = 0; i < resposta.length; i++) {
 
-        let ocorrencia = resposta[i];
-
-        labels.push(ocorrencia.dia + '/' + mes)
-        data.push(ocorrencia.quantidade)
-    }
-
-    dados.labels = labels
-    dados.datasets[0].data = data
-  
-    lineChart.update()
-}
 
 function plotarGrafico(resposta){
 
-    labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    labels = dataDados
     dados.datasets[0].data = []
     
     for (let i = 0; i < resposta.length; i++) {
@@ -84,13 +55,13 @@ function plotarGrafico(resposta){
 
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const ctx = document.getElementById('chartLinha');
-labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+labels = dataDados
 // 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
 var dados = {
-    labels: labels,
+    labels: dataDados,
     datasets: [{
         label: '',
-        data: data,
+        data: desempenho,
         borderWidth: 1,
         backgroundColor: '#030050',
         borderColor: '#030050'

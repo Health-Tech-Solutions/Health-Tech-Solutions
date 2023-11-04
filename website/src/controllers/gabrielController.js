@@ -103,9 +103,9 @@ function totalMaquinasPorTipo(req, res) {
 }
 
 
-function buscarMensal(req,res){
+function graficoLinha(req,res){
     var fkHospital = req.params.fkHospital
-    gabrielModel.buscarMensal(fkHospital)
+    gabrielModel.graficoLinha(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -151,6 +151,6 @@ module.exports = {
     mediaTemperatura,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
-    buscarMensal,
+    graficoLinha,
     graficoPizza
 }

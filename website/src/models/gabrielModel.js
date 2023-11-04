@@ -102,32 +102,13 @@ function totalMaquinasPorTipo(fkHospital) {
 }
 
 
-function buscarMensal(fkHospital){
-    var instrucao = ``
-
-    if(fkHospital == 'null'){
-        instrucao = `
-        SELECT 
-	    MONTH(dataHora) AS mes,
-	    COUNT(*) AS quantidade	
-	FROM vw_chamados
-    GROUP BY mes
-    ORDER BY mes;
-        `
-
-    }else{
-         instrucao = `
-    SELECT 
-	    MONTH(dataHora) AS mes,
-	    COUNT(*) AS quantidade	
-	FROM vw_chamados
-    WHERE idHospital = ${fkHospital}
-    GROUP BY mes
-    ORDER BY mes;
+function graficoLinha(fkHospital){
+    var instrucao = `
+    select dataTemperatura , round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor,nome from tipoRegistro join registro on idTipoRegistro = fkTipoRegistro join dadosTemperatura 
+on dataHora = dataTemperatura group by dataTemperatura, valor, nome;
     `
 
-    }
-    
+
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
@@ -254,6 +235,6 @@ module.exports = {
     mediaTemperatura,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
-    buscarMensal,
+    graficoLinha,
     graficoPizza
 }

@@ -60,6 +60,31 @@ gabrielModel.mediaTemperatura(idMes, fkHospital)
 
 
 
+function mediaDesempenho(req,res){
+    var idMes = req.params.idMes
+    var fkHospital = req.params.fkHospital
+
+gabrielModel.mediaDesempenho(idMes, fkHospital)
+.then((resultado) => {
+    if (resultado.length > 0) {
+        res.status(200).json(resultado)
+    } else {
+        res.status(204).json([])
+    }
+})
+.catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao procurar os mediaDesempenho: ", erro.sqlMessage)
+    res.status(500).json(erro.sqlMessage);
+});
+
+
+}
+
+
+//GRÁFICOS
+
+
 function totalMaquinasPorTipoChamadoAberto(req, res) {
     console.log("ENTROU Controller totalMaquinasPorTipoChamadoAberto")
     var fkHospital = req.params.fkHospital;
@@ -149,6 +174,7 @@ module.exports = {
     listarTiposMaquinas,
     listarMeses,
     mediaTemperatura,
+    mediaDesempenho,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     graficoLinha,

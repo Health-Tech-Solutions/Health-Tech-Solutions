@@ -64,6 +64,16 @@ return database.executar(instrucao)
 }
 
 
+function mediaDesempenho(idMes, fkHospital){
+    var instrucao = `
+    select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro;
+    `
+
+
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
 
 //Gráficos
 
@@ -233,6 +243,7 @@ module.exports = {
     listarTiposMaquinas,
     listarMeses,
     mediaTemperatura,
+    mediaDesempenho,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     graficoLinha,

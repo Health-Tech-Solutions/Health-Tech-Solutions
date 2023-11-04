@@ -20,6 +20,10 @@ router.get("/mediaTemperatura/:idMes/:fkHospital", (req,res) => {
 })
 
 
+router.get("/mediaDesempenho/:idMes/:fkHospital", (req,res) => {
+    gabrielController.mediaDesempenho(req,res)
+})
+
 //Gráficos
 
 router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {

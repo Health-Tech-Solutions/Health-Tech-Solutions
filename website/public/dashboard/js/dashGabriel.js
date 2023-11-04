@@ -578,6 +578,31 @@ function mediaTemperatura(){
         })
        
 
-       
+}
+
+function mediaDesempenho(){
+    var idMes = sessionStorage.mes
+    var fkHospital = sessionStorage.FK_HOSPITAL
+   
+    fetch(`/gabrielRoutes/mediaDesempenho/${idMes}/${fkHospital}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json()
+                    .then(
+                        function (resposta) {
+                            valores = resposta
+                            console.log(valores)
+                            var valorMediaDesempenho = resposta[0].mediaDeDesempenho
+                            console.log(valorMediaDesempenho)
+
+                            desempenhoMedio.innerHTML = `${valorMediaDesempenho}%`
+                            
+                        }
+                    )
+            }
+        })
+        .catch(err => {
+            console.log("ERRO" + err)
+        })
 
 }

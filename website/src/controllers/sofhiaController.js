@@ -79,7 +79,7 @@ function buscarTipo(req,res){
         })
         .catch(function (erro){
             console.log(erro);
-            console.log("Houve um erro ao buscar o componente com mais chamados", erro.sqlMessage)
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
             res.status(500).json(erro.sqlMessage)
         })
 }
@@ -100,10 +100,27 @@ function buscarModelo(req,res){
         })
 }
 
+function buscarAlertas(req,res){
+    sofhiaModel.buscarAlertas()
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar a qtde de alertas", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 
 module.exports = {
     buscarHospitais,
     buscarComponente,
     buscarTipo,
-    buscarModelo
+    buscarModelo,
+    buscarAlertas
 }

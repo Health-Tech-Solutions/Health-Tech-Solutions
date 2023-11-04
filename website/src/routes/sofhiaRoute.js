@@ -19,4 +19,8 @@ router.get("/buscarModelo", function(req,res){
     sofhiaController.buscarModelo(req,res);
 })
 
+router.get("/buscarAlertas", function(req,res){
+    sofhiaController.buscarAlertas(req,res);
+})
+
 module.exports = router

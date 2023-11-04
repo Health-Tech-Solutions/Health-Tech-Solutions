@@ -306,9 +306,12 @@
                                 class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</a>
                     </div> -->
                         <!-- Example split danger button -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <div class="d-sm-flex  justify-content-lg-start mb-4">
+                            <div style="margin-right: 1vw;" class="text-s font-weight-bold text-danger text-uppercase mb-1">
+                                Filtro:
+                            </div>
                             <!-- <button type="button" class="btn btn-danger ">Action</button> -->
-                            <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm""
+                            <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                             data-toggle=" dropdown" aria-expanded="false" onclick="listarHospitais()"
                                 id="dropdown_menu" onchange="trocarHospital()">
 
@@ -332,13 +335,29 @@
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Componente com + alertas</div>
+                                                <div>
+                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                        Componente com + alertas
+                                                    </div>
+
+                                                </div>
+
+                                                
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><span
-                                                        id="componenteComMaisAlertas">componente</span></div>
+                                                        id="componenteComMaisAlertas">componente</span>
+                                                </div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-digital-tachograph fa-2x text-gray-300"></i>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -352,13 +371,22 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Tipo com + alertas</div>
+                                                    Tipo de máquina com + alertas</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                     <span id="tipoComMaisAlertas">tipo</span>
                                                 </div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-laptop-medical fa-2x text-gray-300"></i>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -373,13 +401,22 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                    Modelo com + alertas</div>
+                                                    Modelo de máquina com + alertas</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                     <span id="modeloComMaisAlertas">modelo</span>
                                                 </div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -398,6 +435,18 @@
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de alertas em cada hospital</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
@@ -414,6 +463,18 @@
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                         <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de alertas (geral)</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
                                         <canvas id="chartLinha"></canvas>

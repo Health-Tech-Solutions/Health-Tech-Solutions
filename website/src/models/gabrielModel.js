@@ -65,9 +65,42 @@ return database.executar(instrucao)
 
 
 function mediaDesempenho(idMes, fkHospital){
-    var instrucao = `
-    select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro;
-    `
+    var instrucao = ""
+
+    if(fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined'){
+        var instrucao = `
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro;
+        `
+    }else if(fkHospital == "null" && idMes > 0){
+
+        var instrucao = `
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
+        join maquinario on fkMaquina = idMaquinario 
+        join empresa on fkHospital = idEmpresa
+        where month(dataHora) = ${idMes};
+        `
+
+    }else if (fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined') {
+
+        var instrucao = `
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+        join maquinario on fkMaquina = idMaquinario 
+        join empresa on fkHospital = idEmpresa
+        where idEmpresa = ${fkHospital};
+        `
+
+    }
+    
+    else{
+
+        var instrucao = `
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+        join maquinario on fkMaquina = idMaquinario 
+        join empresa on fkHospital = idEmpresa
+        where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes};
+        `
+    }
+    
 
 
     console.log("Executando a seguinte instrução sql" + instrucao)

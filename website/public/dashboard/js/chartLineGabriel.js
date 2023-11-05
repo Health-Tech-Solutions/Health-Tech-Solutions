@@ -44,11 +44,11 @@ var desempenho = []
 
  function calcularRegressaoLinear() {
     dataDados = dataDados.map(function (valor) {
-        return parseFloat(valor); // Converte a string em número
+        return parseFloat(valor); 
     });
 
     desempenho = desempenho.map(function (valor1) {
-        return parseFloat(valor1); // Converte a string em número
+        return parseFloat(valor1); 
     });
     
     // Calcular a média de x e y
@@ -78,20 +78,21 @@ var desempenho = []
     return { a, b };
 }
 
- // Função para criar o gráfico de linha
+
 function criarGraficoLinha() {
     // Calcula os coeficientes da regressão linear
     var coeficientes = calcularRegressaoLinear();
     var a = coeficientes.a;
     var b = coeficientes.b;
 
-    // Preparar os dados para o gráfico
+    // Pega o valor de a e b do calcularRegressaoLinear e faz o calculo
+    //com base no x (dados do dataDados)
     var labels = dataDados;
     var valoresRegressao = dataDados.map(function (x) {
         return a * x + b;
     });
 
-    // Configuração do gráfico
+    
     var ctx = document.getElementById('chartLinha').getContext('2d');
     var chart = new Chart(ctx, {
         type: 'line',

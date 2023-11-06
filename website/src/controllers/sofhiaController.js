@@ -53,7 +53,8 @@ function buscarHospitais(req,res){
 }
 
 function buscarComponente(req,res){
-    sofhiaModel.buscarComponente()
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarComponente(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

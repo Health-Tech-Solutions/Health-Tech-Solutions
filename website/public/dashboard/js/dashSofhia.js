@@ -63,14 +63,20 @@ function plotarGrafico(resposta) {
     myBarChart.update()
 };
 
-function chamarComponenteComMaisAlertas() {
-    fetch(`/sofhiaRoute/buscarComponente`, { cache: 'no-store' }).then(function (response) {
+function chamarComponenteComMaisAlertas(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarComponente/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                componenteComMaisAlertas.innerHTML = resposta[0].TipoRegistro
+                if(fkHospital == "null") {
+                    componenteComMaisAlertas.innerHTML = resposta[0].TipoRegistro
+                } else {
+                    componenteComMaisAlertas.innerHTML = resposta[0].ComponenteComMaisChamados
+                }
+
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

@@ -7,7 +7,7 @@ router.get("/buscarHospitais/:fkHospital", function(req,res){
     sofhiaController.buscarHospitais(req,res);
 })
 
-router.get("/buscarComponente", function(req,res){
+router.get("/buscarComponente/:fkHospital", function(req,res){
     sofhiaController.buscarComponente(req,res);
 })
 

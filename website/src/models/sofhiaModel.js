@@ -53,16 +53,16 @@ const database = require("../database/config")
 //     `
 
 //     }
-    
+
 //     console.log("Executando a seguinte instrução sql" + instrucao)
 //     return database.executar(instrucao)
 // }
 
 
 
-function buscarHospitais(fkHospital){
+function buscarHospitais(fkHospital) {
     var instrucao = ``
-    if(fkHospital == 'null'){
+    if (fkHospital == 'null') {
         instrucao = `
         SELECT 
             hospital,
@@ -70,7 +70,7 @@ function buscarHospitais(fkHospital){
         FROM vw_chamados
         GROUP BY hospital;
     `
-    } else{
+    } else {
         instrucao = `
         SELECT COUNT(idChamado) AS chamados,
                 tipoRegistro AS hospital,
@@ -85,28 +85,44 @@ function buscarHospitais(fkHospital){
     return database.executar(instrucao)
 }
 
-function buscarComponente(){
-    const instrucao = `
-    SELECT
-            CASE
-                WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
-                WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
-                WHEN tr.nome = 'Uso de disco' THEN 'Disco'
-                ELSE tr.nome
-            END AS TipoRegistro,
-            COUNT(c.idChamado) AS NumeroDeChamados
-        FROM tipoRegistro AS tr
-        LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
-        LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
-        GROUP BY TipoRegistro
+function buscarComponente(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT
+                CASE
+                    WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
+                    WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
+                    WHEN tr.nome = 'Uso de disco' THEN 'Disco'
+                    ELSE tr.nome
+                END AS TipoRegistro,
+                COUNT(c.idChamado) AS NumeroDeChamados
+            FROM tipoRegistro AS tr
+            LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
+            LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
+            GROUP BY TipoRegistro
+            ORDER BY NumeroDeChamados DESC
+            LIMIT 1;
+    `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao =`
+        SELECT
+            hospital,
+            tipoRegistro AS ComponenteComMaisChamados,
+            COUNT(idChamado) AS NumeroDeChamados
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital} 
+        GROUP BY hospital, tipoRegistro
         ORDER BY NumeroDeChamados DESC
         LIMIT 1;
-    `
-    console.log("Executando a seguinte instrução sql" + instrucao)
-    return database.executar(instrucao)
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
 }
 
-function buscarTipo(){
+function buscarTipo() {
     const instrucao = `
     SELECT 
         COUNT(idChamado) AS numeroChamados,
@@ -119,7 +135,7 @@ function buscarTipo(){
     return database.executar(instrucao)
 }
 
-function buscarModelo(){
+function buscarModelo() {
     const instrucao = `
     SELECT 
         COUNT(idChamado) AS numeroChamados,
@@ -132,7 +148,7 @@ function buscarModelo(){
     return database.executar(instrucao)
 }
 
-function listarHospitais(){
+function listarHospitais() {
     const instrucao = `
         SELECT * FROM empresa;
     `

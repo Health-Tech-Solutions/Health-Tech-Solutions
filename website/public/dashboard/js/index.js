@@ -11,7 +11,6 @@ maquinasInstaveis()
 var qtdTotalMaquinas;
 
 function listarHospitais(){
-
     fetch(`/hospitais/listarHospitais`)
     .then(  
         function(resposta){

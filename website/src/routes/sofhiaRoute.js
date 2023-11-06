@@ -23,4 +23,7 @@ router.get("/buscarAlertas", function(req,res){
     sofhiaController.buscarAlertas(req,res);
 })
 
+router.get("/listarHospitais", function(req,res){
+    sofhiaController.listarHospitais(req,res);
+})
 module.exports = router

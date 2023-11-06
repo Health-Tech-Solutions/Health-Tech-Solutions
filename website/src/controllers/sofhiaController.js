@@ -116,11 +116,28 @@ function buscarAlertas(req,res){
         })
 }
 
+function listarHospitais(req,res){
+    sofhiaModel.listarHospitais()
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 
 module.exports = {
     buscarHospitais,
     buscarComponente,
     buscarTipo,
     buscarModelo,
-    buscarAlertas
+    buscarAlertas,
+    listarHospitais
 }

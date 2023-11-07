@@ -20,7 +20,7 @@ const funcionarioRouter = require("./src/routes/funcionario")
 const chamadosRouter = require("./src/routes/chamados")
 const gabrielRouter = require("./src/routes/gabrielRoutes")
 const sofhiaRouter = require("./src/routes/sofhiaRoute")
-const henriqueRouter = require("./src/routes/henrique")
+// const henriqueRouter = require("./src/routes/henrique")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,7 +40,7 @@ app.use("/hospitais", hospitaisRouter);
 app.use("/chamados", chamadosRouter)
 app.use("/gabrielRoutes", gabrielRouter);
 app.use("/sofhiaRoute", sofhiaRouter);
-app.use("/henrique", henriqueRouter)
+// app.use("/henrique", henriqueRouter)
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

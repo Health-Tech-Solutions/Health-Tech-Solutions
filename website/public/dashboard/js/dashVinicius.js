@@ -1,68 +1,38 @@
 var fkHospital = null
-const ctx = document.getElementById('chartBar');
 
-var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: dados,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        },
-        plugins: {
-            legend: {
-                display: false
-            }
-        }
-    }
-});
-var labels = []
-var dados = {
-    labels: labels,
-    datasets:
-        [{
-            label: "NomeHospital",
-            backgroundColor: "red",
-            borderColor: "rgba(78, 115, 223, 1)",
-            data: []
+// const configPie = document.getElementById('chartPie');
 
-        }]
-};
+// var dadosPie = {
+//     labels: ['Aberto', 'Fechados'],
+//     datasets: [{
+//         label: '',
+//         data: [],
+//         backgroundColor: [
+//             '#e74a3b',
+//             '#1cc88a'
+//         ],
+//         borderWidth: 1
+//     }]
+// }
 
-const configPie = document.getElementById('chartPie');
+// var chartPie = new Chart(configPie, {
+//     type: 'pie',
+//     data: dadosPie,
+//     options: {
+//         scales: {
+//             y: {
+//                 beginAtZero: true,
+//                 display: false
 
-var dadosPie = {
-    labels: ['Aberto', 'Fechados'],
-    datasets: [{
-        label: '',
-        data: [],
-        backgroundColor: [
-            '#e74a3b',
-            '#1cc88a'
-        ],
-        borderWidth: 1
-    }]
-}
-
-var chartPie = new Chart(configPie, {
-    type: 'pie',
-    data: dadosPie,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-                display: false
-
-            }
-        },
-        plugins: {
-            legend: {
-                display: false
-            }
-        }
-    }
-});
+//             }
+//         },
+//         plugins: {
+//             legend: {
+//                 display: false
+//             }
+//         }
+//     }
+// });
 
 function plotarDadosPie(resposta) {
     for (let index = 0; index < resposta.length; index++) {
@@ -168,14 +138,4 @@ function obterDadosEstado() {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
 
-}
-
-function mudarTituloGraficoBarras() {
-    var fkHospital = sessionStorage.FK_HOSPITAL
-
-    if (fkHospital != 'null') {
-        tituloGraficoBarras.innerHTML = 'Status das maquinas'
-    } else {
-        tituloGraficoBarras.innerHTML = 'Status das maquinas'
-    }
 }

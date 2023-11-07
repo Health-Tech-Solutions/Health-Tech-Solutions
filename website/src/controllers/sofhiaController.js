@@ -36,8 +36,8 @@ const sofhiaModel = require("../models/sofhiaModel")
 // }
 
 function buscarHospitais(req,res){
-    var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarHospitais(fkHospital)
+    // var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarHospitais()
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -87,7 +87,8 @@ function buscarTipo(req,res){
 }
 
 function buscarModelo(req,res){
-    sofhiaModel.buscarModelo()
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarModelo(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -134,6 +135,23 @@ function listarHospitais(req,res){
         })
 }
 
+function buscarAlertaComponente(req,res){
+    sofhiaModel.buscarAlertaComponente()
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+
 
 module.exports = {
     buscarHospitais,
@@ -141,5 +159,6 @@ module.exports = {
     buscarTipo,
     buscarModelo,
     buscarAlertas,
-    listarHospitais
+    listarHospitais,
+    buscarAlertaComponente
 }

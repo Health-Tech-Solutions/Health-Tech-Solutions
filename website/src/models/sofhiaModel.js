@@ -60,27 +60,25 @@ const database = require("../database/config")
 
 
 
-function buscarHospitais(fkHospital) {
-    var instrucao = ``
-    if (fkHospital == 'null') {
-        instrucao = `
+function buscarHospitais() {
+    var instrucao = `
         SELECT 
             hospital,
             COUNT(*) AS chamados
         FROM vw_chamados
         GROUP BY hospital;
     `
-    } else {
-        instrucao = `
-        SELECT COUNT(idChamado) AS chamados,
-                tipoRegistro AS hospital,
-                hospital AS h
-        FROM vw_chamados
-        WHERE idHospital = ${fkHospital}
-        GROUP BY hospital, tipoRegistro;
-        `
-
-    }
+    
+    // else {
+    //     instrucao = `
+    //     SELECT COUNT(idChamado) AS chamados,
+    //             tipoRegistro AS hospital,
+    //             hospital AS h
+    //     FROM vw_chamados
+    //     WHERE idHospital = ${fkHospital}
+    //     GROUP BY hospital, tipoRegistro;
+    //     `
+    // }
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
@@ -149,17 +147,31 @@ function buscarTipo(fkHospital) {
     }
 }
 
-function buscarModelo() {
-    const instrucao = `
-    SELECT 
-        COUNT(idChamado) AS numeroChamados,
-        modelo 
-        FROM vw_chamados 
-        GROUP BY modelo
-        ORDER BY numeroChamados DESC LIMIT 1;
-    `
-    console.log("Executando a seguinte instrução sql" + instrucao)
-    return database.executar(instrucao)
+function buscarModelo(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados 
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados 
+            WHERE idHospital = ${fkHospital}
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
 }
 
 function listarHospitais() {
@@ -170,11 +182,25 @@ function listarHospitais() {
     return database.executar(instrucao)
 }
 
+function buscarAlertaComponente() {
+    var instrucao = `
+        SELECT COUNT(idChamado) AS chamados,
+                tipoRegistro AS hospital,
+                hospital AS h
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital}
+        GROUP BY hospital, tipoRegistro;
+    `
+    
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
 
 module.exports = {
     buscarHospitais,
     buscarComponente,
     buscarTipo,
     buscarModelo,
-    listarHospitais
+    listarHospitais,
+    buscarAlertaComponente
 }

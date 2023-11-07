@@ -26,7 +26,7 @@
 
     </head>
 
-    <body id="page-top" onload="obterDadosGrafico(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados(), mudarTituloGraficoBarras()">
+    <body id="page-top" onload="obterDadosGrafico(), buscarAlertasDosComponentes(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -160,14 +160,12 @@
                             </li>
 
                             <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
+                            <!-- <li class="nav-item dropdown no-arrow mx-1">
                                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
                                     <span class="badge badge-danger badge-counter">3+</span>
                                 </a>
-                                <!-- Dropdown - Alerts -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="alertsDropdown">
                                     <h6 class="dropdown-header">
@@ -212,17 +210,15 @@
                                         todos os
                                         alertas</a>
                                 </div>
-                            </li>
+                            </li> -->
 
                             <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
+                            <!-- <li class="nav-item dropdown no-arrow mx-1">
                                 <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
                                     <span class="badge badge-danger badge-counter">7</span>
                                 </a>
-                                <!-- Dropdown - Messages -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="messagesDropdown">
                                     <h6 class="dropdown-header">
@@ -255,7 +251,7 @@
                                             <div class="status-indicator bg-warning"></div>
                                         </div>
                                         <div>
-                                            <div class="text-truncate">O modelo de ultrtassom LOGIC está</div>
+                                            <div class="text-truncate">O modelo de ultrassom LOGIC está</div>
                                             <div class="small text-gray-500">Caetano Domingues · 2d</div>
                                         </div>
                                     </a>
@@ -274,18 +270,16 @@
                                         href="./chamados.html">Todos os
                                         chamados</a>
                                 </div>
-                            </li>
+                            </li> -->
 
                             <div class="topbar-divider d-none d-sm-block"></div>
 
-                            <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="usuario_nome"></span>
                                     <img class="img-profile rounded-circle" id="usuario_foto">
                                 </a>
-                                <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="perfilFuncionario.html">
@@ -388,7 +382,7 @@
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Tipo de máquina com + alertas</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    <span id="tipoComMaisAlertas">tipo</span>
+                                                    <span id="tipoComMaisAlertas"></span>
                                                 </div>
                                             </div>
                                             <div class="dropdown no-arrow">
@@ -418,7 +412,7 @@
                                                 <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                                                     Modelo de máquina com + alertas</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    <span id="modeloComMaisAlertas">modelo</span>
+                                                    <span id="modeloComMaisAlertas"></span>
                                                 </div>
                                             </div>
                                             <div class="dropdown no-arrow">
@@ -440,44 +434,12 @@
                         </div>
 
                         <!-- Content Row -->
-
                         <div class="row">
-
-                            <!-- Area Chart -->
-                            <div class="col-xl-6 col-lg-6">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de alertas em cada hospital</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div>
-                                            <canvas id="chartBar"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Pie Chart -->
-                            <div class="col-xl-6 col-lg-6">
+                            <div class="col-xl-8 col-lg-3">
                                 <div class="card shadow mb-4">
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de alertas (geral)</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoLinhas">Quantidade de alertas (geral)</h6>
                                         <div class="dropdown no-arrow">
                                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -497,6 +459,66 @@
                                 </div>
                             
                             </div>
+
+                            <div class="col-xl-4 col-lg-4">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                   
+                                <h5 class="m-0 font-weight-bold text-primary" style="text-align: center; padding: 10%; padding-bottom: 0;">Alertas de cada componente</h5>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-2 pb-2" style="display: flex;
+                                        justify-content: center;">
+                                            <canvas id="chartPie"></canvas>
+                                        </div>
+                                        <div class="mt-4 text-center small">
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-danger"></i> CPU
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-warning"></i> RAM
+                                            </span>
+                                            <span class="mr-2">
+                                                <i class="fas fa-circle text-success"></i> Disco
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Area Chart -->
+                            <div class="col-xl-8 col-lg-2">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de alertas de cada hospital</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body align-items-center">
+                                        <div>
+                                            <canvas id="chartBar"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
                         </div>
                     </div>
                 </div>
@@ -581,3 +603,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/dados.js"></script>
 <script src="js/dashSofhia.js"></script>
+<script src="js/chartBarSofhia.js"></script>
+<script src="js/chartPieSofhia.js"></script>
+<script src="js/chartLineSofhia.js"></script>

@@ -396,13 +396,13 @@ function calculoGraficoSituacaoGeral() {
         larguraUltrassom.style.width = `${linha1}%`
 
         if (linha1 <= 30) {
-            larguraUltrassom.style.backgroundColor = 'red'
-        } else if (linha1 <= 60) {
-            larguraUltrassom.style.backgroundColor = 'orange'
-        } else if (linha1 <= 89) {
-            larguraUltrassom.style.backgroundColor = 'yellow'
-        } else {
             larguraUltrassom.style.backgroundColor = 'green'
+        } else if (linha1 <= 60) {
+            larguraUltrassom.style.backgroundColor = 'yellow'
+        } else if (linha1 <= 89) {
+            larguraUltrassom.style.backgroundColor = 'orange'
+        } else {
+            larguraUltrassom.style.backgroundColor = 'red'
         }
     } else {
         UltrassomPorcentagem = document.getElementById("UltrassomGrafico")
@@ -423,13 +423,13 @@ function calculoGraficoSituacaoGeral() {
         larguraCardioversores.style.width = `${linha2}%`
 
         if (linha2 <= 30) {
-            larguraCardioversores.style.backgroundColor = 'red'
-        } else if (linha2 <= 60) {
-            larguraCardioversores.style.backgroundColor = 'orange'
-        } else if (linha2 <= 89) {
-            larguraCardioversores.style.backgroundColor = 'yellow'
-        } else {
             larguraCardioversores.style.backgroundColor = 'green'
+        } else if (linha2 <= 60) {
+            larguraCardioversores.style.backgroundColor = 'yellow'
+        } else if (linha2 <= 89) {
+            larguraCardioversores.style.backgroundColor = 'orange'
+        } else {
+            larguraCardioversores.style.backgroundColor = 'red'
         }
     } else {
         CardioversoresPorcentagem = document.getElementById("CardioversoresGrafico")
@@ -449,13 +449,13 @@ function calculoGraficoSituacaoGeral() {
         larguraDesfibriladores.style.width = `${linha3}%`
 
         if (linha3 <= 30) {
-            larguraDesfibriladores.style.backgroundColor = 'red'
-        } else if (linha3 <= 60) {
-            larguraDesfibriladores.style.backgroundColor = 'orange'
-        } else if (linha3 <= 89) {
-            larguraDesfibriladores.style.backgroundColor = 'yellow'
-        } else {
             larguraDesfibriladores.style.backgroundColor = 'green'
+        } else if (linha3 <= 60) {
+            larguraDesfibriladores.style.backgroundColor = 'yellow'
+        } else if (linha3 <= 89) {
+            larguraDesfibriladores.style.backgroundColor = 'orange'
+        } else {
+            larguraDesfibriladores.style.backgroundColor = 'red'
         }
     } else {
         DesfibriladoresPorcentagem = document.getElementById("DesfibriladoresGrafico")
@@ -478,13 +478,13 @@ function calculoGraficoSituacaoGeral() {
         larguraMaquinaAnestesia.style.width = `${linha5}%`
 
         if (linha5 <= 30) {
-            larguraMaquinaAnestesia.style.backgroundColor = 'red'
-        } else if (linha5 <= 60) {
-            larguraMaquinaAnestesia.style.backgroundColor = 'orange'
-        } else if (linha5 <= 89) {
-            larguraMaquinaAnestesia.style.backgroundColor = 'yellow'
-        } else {
             larguraMaquinaAnestesia.style.backgroundColor = 'green'
+        } else if (linha5 <= 60) {
+            larguraMaquinaAnestesia.style.backgroundColor = 'yellow'
+        } else if (linha5 <= 89) {
+            larguraMaquinaAnestesia.style.backgroundColor = 'orange'
+        } else {
+            larguraMaquinaAnestesia.style.backgroundColor = 'red'
         }
     } else {
         MaquinaAnestesiaPorcentagem = document.getElementById("MaquinaAnestesiaGrafico")
@@ -504,13 +504,13 @@ function calculoGraficoSituacaoGeral() {
         larguraMaquinaECG.style.width = `${linha6}%`
 
         if (linha6 <= 30) {
-            larguraMaquinaECG.style.backgroundColor = 'red'
-        } else if (linha6 <= 60) {
-            larguraMaquinaECG.style.backgroundColor = 'orange'
-        } else if (linha6 <= 89) {
-            larguraMaquinaECG.style.backgroundColor = 'yellow'
-        } else {
             larguraMaquinaECG.style.backgroundColor = 'green'
+        } else if (linha6 <= 60) {
+            larguraMaquinaECG.style.backgroundColor = 'yellow'
+        } else if (linha6 <= 89) {
+            larguraMaquinaECG.style.backgroundColor = 'orange'
+        } else {
+            larguraMaquinaECG.style.backgroundColor = 'red'
         }
 
     } else {
@@ -531,13 +531,13 @@ function calculoGraficoSituacaoGeral() {
         larguraMonitorFetal.style.width = `${linha7}%`
 
         if (linha7 <= 30) {
-            larguraMonitorFetal.style.backgroundColor = 'red'
-        } else if (linha7 <= 60) {
-            larguraMonitorFetal.style.backgroundColor = 'orange'
-        } else if (linha7 <= 89) {
-            larguraMonitorFetal.style.backgroundColor = 'yellow'
-        } else {
             larguraMonitorFetal.style.backgroundColor = 'green'
+        } else if (linha7 <= 60) {
+            larguraMonitorFetal.style.backgroundColor = 'yellow'
+        } else if (linha7 <= 89) {
+            larguraMonitorFetal.style.backgroundColor = 'orange'
+        } else {
+            larguraMonitorFetal.style.backgroundColor = 'red'
         }
     } else {
         MonitorFetalPorcentagem = document.getElementById("MonitorFetalGrafico")

@@ -63,14 +63,20 @@ function plotarGrafico(resposta) {
     myBarChart.update()
 };
 
-function chamarComponenteComMaisAlertas() {
-    fetch(`/sofhiaRoute/buscarComponente`, { cache: 'no-store' }).then(function (response) {
+function chamarComponenteComMaisAlertas(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarComponente/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                componenteComMaisAlertas.innerHTML = resposta[0].TipoRegistro
+                if(fkHospital == "null") {
+                    componenteComMaisAlertas.innerHTML = resposta[0].TipoRegistro
+                } else {
+                    componenteComMaisAlertas.innerHTML = resposta[0].ComponenteComMaisChamados
+                }
+
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -207,14 +213,17 @@ function listarHospitais(){
 
                     function(resposta){
                         console.log(resposta)
-                        dropdown_menu.innerHTML = `<option class="dropdown-item" value = "null;null"></option>`; 
-                        dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`; 
+                        dropdown_menu.innerHTML = ""
+                        dropdown_menu.innerHTML = `<option class="dropdown-item" value = "null;null">-----------</option>`; 
+                        dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`;
+                        // dropdown_menu.innerHTML = `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
                             dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${id};${nome}" >${nome}</option>` 
                         }
                     }
+                   
                 )
             }
         }

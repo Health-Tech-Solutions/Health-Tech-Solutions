@@ -64,6 +64,7 @@ var desempenho = []
     console.log(xMean,ySum)
     
     // Calcular os coeficientes da regressão
+    // A variável denominator é usada para calcular a soma dos quadrados dos desvios de x em relação à sua média.
     var numerator = 0;
     var denominator = 0;
     for (var i = 0; i < dataDados.length; i++) {
@@ -102,7 +103,8 @@ function criarGraficoLinha() {
                 {
                     label: 'Desempenho Original',
                     data: desempenho,
-                    borderColor: 'blue',
+                    backgroundColor: 'blue',
+                    borderColor: 'transparent',
                     fill: false,
                 },
                 {

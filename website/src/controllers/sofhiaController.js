@@ -70,7 +70,8 @@ function buscarComponente(req,res){
 }
 
 function buscarTipo(req,res){
-    sofhiaModel.buscarTipo()
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarTipo(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

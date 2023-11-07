@@ -11,7 +11,7 @@ router.get("/buscarComponente/:fkHospital", function(req,res){
     sofhiaController.buscarComponente(req,res);
 })
 
-router.get("/buscarTipo", function(req,res){
+router.get("/buscarTipo:fkHospital", function(req,res){
     sofhiaController.buscarTipo(req,res);
 })
 

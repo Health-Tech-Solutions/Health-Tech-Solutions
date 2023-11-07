@@ -87,14 +87,19 @@ function chamarComponenteComMaisAlertas(fkHospital) {
         });
 }
 
-function chamarTipoComMaisAlertas() {
-    fetch(`/sofhiaRoute/buscarTipo`, { cache: 'no-store' }).then(function (response) {
+function chamarTipoComMaisAlertas(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarTipo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+                
+                // if (fkHospital == "null") {
+                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+                // } else {
+                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+                // }
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

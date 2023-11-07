@@ -122,17 +122,31 @@ function buscarComponente(fkHospital) {
     }
 }
 
-function buscarTipo() {
-    const instrucao = `
-    SELECT 
-        COUNT(idChamado) AS numeroChamados,
-        tipo 
-        FROM vw_chamados 
-        GROUP BY tipo
-        ORDER BY numeroChamados DESC LIMIT 1;
-    `
-    console.log("Executando a seguinte instrução sql" + instrucao)
-    return database.executar(instrucao)
+function buscarTipo(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados 
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados 
+            WHERE idHospital = ${fkHospital}
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
 }
 
 function buscarModelo() {

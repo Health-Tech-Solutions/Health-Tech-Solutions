@@ -38,10 +38,6 @@ var desempenho = []
      )
  }
  
-
-
-
-
  function calcularRegressaoLinear() {
     dataDados = dataDados.map(function (valor) {
         return parseFloat(valor); 

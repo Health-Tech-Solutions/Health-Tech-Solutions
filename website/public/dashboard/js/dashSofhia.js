@@ -213,16 +213,17 @@ function listarHospitais(){
 
                     function(resposta){
                         console.log(resposta)
-                        // dropdown_menu.innerHTML = `<option class="dropdown-item" value = "null;null"></option>`; 
-                        dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${dropdown_menu.value}"></option>`; 
-                        dropdown_menu.innerHTML = `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`; 
+                        dropdown_menu.innerHTML = ""
+                        dropdown_menu.innerHTML = `<option class="dropdown-item" value = "null;null">-----------</option>`; 
+                        dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`;
+                        // dropdown_menu.innerHTML = `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`; 
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
                             dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${id};${nome}" >${nome}</option>` 
                         }
                     }
-                    
+                   
                 )
             }
         }

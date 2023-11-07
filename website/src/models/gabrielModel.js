@@ -64,14 +64,16 @@ return database.executar(instrucao)
 }
 
 
-function mediaDesempenho(idMes, fkHospital){
+function mediaDesempenho(idMes, fkHospital, idTipo){
     var instrucao = ""
 
-    if(fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined'){
+    if(fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo == 'null'){
         var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro;
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro join maquinario on fkMaquina = idMaquinario 
+join modelo on maquinario.fkModelo = modelo.idModelo 
+join tipo on fkTipo = idTipo;
         `
-    }else if(fkHospital == "null" && idMes > 0){
+    }else if(fkHospital == "null" && idMes > 0 && idTipo == 'null'){
 
         var instrucao = `
         select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
@@ -80,7 +82,7 @@ function mediaDesempenho(idMes, fkHospital){
         where month(dataHora) = ${idMes};
         `
 
-    }else if (fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined') {
+    }else if (fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined' && idTipo == 'null') {
 
         var instrucao = `
         select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
@@ -91,7 +93,7 @@ function mediaDesempenho(idMes, fkHospital){
 
     }
     
-    else{
+    else if(fkHospital != null && idMes > 0 && idTipo == 'null'){
 
         var instrucao = `
         select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 

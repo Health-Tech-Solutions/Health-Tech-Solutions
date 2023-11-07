@@ -363,10 +363,18 @@
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
+                                    <div class=" d-flex flex-row no-gutters">
+                                        <div>
+                                            <select type="button" class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                                                data-toggle=" dropdown" aria-expanded="false" onclick="listarTiposMaquinas()"
+                                                id="OpcoesMaquinas" onchange="trocarTipoMaquina()" style="margin-right: 1rem;">
+                                                <option class="dropdown-item1" value="null;null">Todos</option>
+                                                Escolher Hospitais
+                                            </select>
+                                        </div>
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                                                Média de desempenho (geral)</div>
+                                                Média de desempenho</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"
                                                 id="desempenhoMedio">LOGIQ Fortis</div>
                                         </div>
@@ -385,14 +393,6 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                                    <select type="button" class=" d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm "
-                                                        data-toggle=" dropdown" aria-expanded="false" onclick="listarTiposMaquinas()"
-                                                        id="OpcoesMaquinas" onchange="trocarTipoMaquina()">
-                                                        <option class="dropdown-item1" value="null;null">Todos</option>
-                                                        Escolher Hospitais
-                                                    </select>
-                                                </div>
                                                 Uso de energia por máquina
                                             </div>
                                             <div class="row no-gutters align-items-center">

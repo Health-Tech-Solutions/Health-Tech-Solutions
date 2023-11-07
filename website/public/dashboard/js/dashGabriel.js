@@ -583,8 +583,9 @@ function mediaTemperatura(){
 function mediaDesempenho(){
     var idMes = sessionStorage.mes
     var fkHospital = sessionStorage.FK_HOSPITAL
+    var idTipo = sessionStorage.idTipo
    
-    fetch(`/gabrielRoutes/mediaDesempenho/${idMes}/${fkHospital}`)
+    fetch(`/gabrielRoutes/mediaDesempenho/${idMes}/${fkHospital}/${idTipo}`)
         .then(function (resposta) {
             if (resposta.ok) {
                 resposta.json()

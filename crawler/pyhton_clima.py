@@ -17,9 +17,9 @@ with requests.Session() as s:
 with zipfile.ZipFile('2023.zip', 'r') as zip:
 
 # Pegando o nome do arquivo CSV
-    filename = 'INMET_SE_SP_A771_SAO PAULO - INTERLAGOS_01-01-2023_A_30-09-2023.CSV'
-    #Insert csv SÃO PAULO INMET_SE_SP_A771_SAO PAULO - INTERLAGOS_01-01-2023_A_30-09-2023.CSV
-    #Insert csv RIO DE JANEIRO INMET_SE_RJ_A628_ANGRA DOS REIS_01-01-2023_A_30-09-2023.CSV
+    filename = 'INMET_SE_SP_A771_SAO PAULO - INTERLAGOS_01-01-2023_A_31-10-2023.CSV'
+    #Insert csv SÃO PAULO INMET_SE_SP_A771_SAO PAULO - INTERLAGOS_01-01-2023_A_31-10-2023.CSV
+    #Insert csv RIO DE JANEIRO INMET_SE_RJ_A628_ANGRA DOS REIS_01-01-2023_A_31-10-2023.CSV
     # Abrindo o arquivo CSV dentro do arquivo ZIP
     with zip.open(filename) as f:
 

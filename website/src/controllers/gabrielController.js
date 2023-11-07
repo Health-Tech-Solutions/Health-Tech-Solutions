@@ -63,8 +63,9 @@ gabrielModel.mediaTemperatura(idMes, fkHospital)
 function mediaDesempenho(req,res){
     var idMes = req.params.idMes
     var fkHospital = req.params.fkHospital
+    var idTipo = req.params.idTipo
 
-gabrielModel.mediaDesempenho(idMes, fkHospital)
+gabrielModel.mediaDesempenho(idMes, fkHospital, idTipo)
 .then((resultado) => {
     if (resultado.length > 0) {
         res.status(200).json(resultado)

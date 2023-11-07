@@ -174,8 +174,8 @@ function mudarTituloGraficoBarras() {
     var fkHospital = sessionStorage.FK_HOSPITAL
 
     if (fkHospital != 'null') {
-        tituloGraficoBarras.innerHTML = 'Status dos componentes'
+        tituloGraficoBarras.innerHTML = 'Status das maquinas'
     } else {
-        tituloGraficoBarras.innerHTML = 'Status dos equipamentos'
+        tituloGraficoBarras.innerHTML = 'Status das maquinas'
     }
 }

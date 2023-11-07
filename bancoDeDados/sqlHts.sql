@@ -389,98 +389,43 @@ create table tipoRegistro(
 insert into 
 	tipoRegistro(nome, medida)
 values
-	('Uso de CPU', '%'),
-	('Uso de RAM', '%'),
-	('Uso de disco', '%');
+	('Percentual de uso', '%');
+    
+
+create table peca(
+	idPeca int primary key auto_increment,
+    nome varchar(45),
+    fkTipoRegistro INT,
+    Foreign Key (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro)
+);
+
+insert into 
+	peca(nome, fkTipoRegistro)
+values 
+	('i9 9900f',1),
+    ('i7 13500k',1),
+    ('i3 10900',1),
+    ('i7 6900f',1),
+    ('i9 5900f',1),
+    ('i5 11900f',1),
+    ('i3 5900f',1),
+    ('8gb fury Kingston',1),
+    ('12gb ram crucial',1),
+    ('16gb Corsair',1),
+    ('1tb hd seagate',1),
+    ('500gb ssd samsung',1),
+    ('450gb hd Adata',1);
+
 
 create table registro(
 	idRegistro int primary key auto_increment,
     dataHora datetime,
     valor decimal(7,2),
     fkMaquina int,
-    fkTipoRegistro int,
-    fkModelo int,
-    foreign key (fkMaquina) references maquinario(idMaquinario),
-    foreign key (fkModelo) references maquinario(fkModelo),
-    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro) 
+    fkPeca INT,
+    Foreign Key (fkPeca) REFERENCES peca(idPeca)
 );
-
 	
-insert into 
-	registro(dataHora, valor, fkMaquina,  fkTipoRegistro)
-values
-	(now(),89, 2 ,2),
-	(now(),82, 2 ,1),
-	(now(),45, 2 ,2),
-	(now(),91, 2 ,1),
-	(now(),33, 2 ,2),
-	(now(),2, 3 ,2),
-	(now(),94, 3 ,1),
-	(now(),27, 3 ,2),
-	(now(),3, 3 ,1),
-	(now(),93, 3 ,2),
-	(now(),44, 6 ,2),
-	(now(),69, 6 ,1),
-	(now(),47, 6 ,2),
-	(now(),23, 6 ,1),
-	(now(),44, 6 ,2),
-	(now(),89, 2 ,2),
-	(now(),82, 2 ,1),
-	(now(),45, 2 ,2),
-	(now(),91, 2 ,1),
-	(now(),33, 2 ,2),
-	(now(),2, 3 ,2),
-	(now(),94, 3 ,1),
-	(now(),27, 3 ,2),
-	(now(),3, 3 ,1),
-	(now(),93, 3 ,2),
-	(now(),44, 6 ,2),
-	(now(),69, 6 ,1),
-	(now(),47, 6 ,2),
-	(now(),23, 6 ,1),
-	(now(),89, 2 ,2),
-	(now(),82, 2 ,1),
-	(now(),45, 2 ,2),
-	(now(),91, 2 ,1),
-	(now(),33, 2 ,2),
-	(now(),2, 3 ,2),
-	(now(),94, 3 ,1),
-	(now(),27, 3 ,2),
-	(now(),3, 3 ,1),
-	(now(),93, 3 ,2),
-	(now(),44, 6 ,2),
-	(now(),69, 6 ,1),
-	(now(),47, 6 ,2),
-	(now(),23, 6 ,1),
-	(now(),89, 2 ,2),
-	(now(),82, 2 ,1),
-	(now(),45, 2 ,2),
-	(now(),91, 2 ,1),
-	(now(),33, 2 ,2),
-	(now(),2, 3 ,2),
-	(now(),94, 3 ,1),
-	(now(),27, 3 ,2),
-	(now(),3, 3 ,1),
-	(now(),93, 3 ,2),
-	(now(),44, 6 ,2),
-	(now(),69, 6 ,1),
-	(now(),47, 6 ,2),
-	(now(),23, 6 ,1),
-	(now(),89, 2 ,2),
-	(now(),82, 2 ,1),
-	(now(),45, 2 ,2),
-	(now(),91, 2 ,1),
-	(now(),33, 2 ,2),
-	(now(),2, 3 ,2),
-	(now(),94, 3 ,1),
-	(now(),27, 3 ,2),
-	(now(),3, 3 ,1),
-	(now(),93, 3 ,2),
-	(now(),44, 6 ,2),
-	(now(),69, 6 ,1),
-	(now(),47, 6 ,2),
-	(now(),23, 6 ,1);
-
 	
 create table chamado(
 	idChamado int primary key auto_increment,
@@ -492,6 +437,106 @@ create table chamado(
 	fkRegistro int,
     foreign key(fkRegistro) references registro(idRegistro)
 );
+
+create table limite(
+	idLimite int primary key auto_increment,
+    valor decimal(5,2),
+    fkPeca int,
+    fkModelo int,
+    foreign key (fkModelo) references modelo(idModelo),
+    foreign key (fkPeca) references peca(idPeca)
+);
+
+-- insert into 
+-- 	limite(fkPeca, fkModelo, fkTipoRegistro, valor)
+-- values
+-- 	(1,15,1, 85),
+-- 	(1,15,2, 85),
+-- 	(8,15,1, 85),
+-- 	(13,15,1, 85),
+-- 	(2,12,1, 85),
+-- 	(10,12,1, 85),
+-- 	(11,12,1, 85),
+-- 	(3,15,1, 85),
+-- 	(9,15,1, 85),
+-- 	(12,15,1, 85);
+
+
+
+-- CREATE OR REPLACE VIEW vw_maquina
+-- AS 
+-- 	select 
+-- 		r.dataHora,
+--         MAX(CASE WHEN fkTipoRegistro = 1 THEN r.valor END) AS CPU,
+--         MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
+--         MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
+--     from registro AS r GROUP BY r.dataHora;
+
+
+CREATE OR REPLACE VIEW vw_chamados
+AS
+	SELECT 
+		r.fkMaquina AS idMaquina,
+		c.dataHora AS dataHora,
+		c.idChamado AS idChamado,
+		c.nivel,
+		c.estado,
+		c.sla,
+		c.descricao,
+		e.idEmpresa AS idHospital,
+		e.nomeFantasia AS hospital,
+		t.nome AS tipo,
+		t.idTipo,	
+		m.modelo,
+		tr.nome,
+		tr.medida
+	FROM chamado AS c
+    JOIN registro AS r
+    JOIN maquinario AS maq
+    JOIN modelo AS m
+    JOIN empresa AS e
+    JOIN tipoRegistro AS tr
+    JOIN tipo AS t
+    WHERE fkMaquina = idMaquinario 
+    AND m.fkTipo = t.idTipo
+    AND fkRegistro = idRegistro
+    AND maq.fkModelo = m.idModelo
+    AND maq.fkHospital = e.idEmpresa;
+
+DELIMITER $$
+
+SELECT * FROM peca;
+DROP PROCEDURE IF EXISTS inserir_registros$$
+
+CREATE PROCEDURE inserir_registros()
+BEGIN
+  DECLARE i INT;
+  DECLARE dataHora DATETIME;
+  DECLARE valor FLOAT;
+  DECLARE fkPeca INT;
+  DECLARE fkMaquina INT;
+
+  SET i = 1;
+
+  WHILE i <= 300 DO
+    SET dataHora = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * 365) DAY);
+
+    SET valor = 85 + (RAND() * 15);
+
+    SET fkPeca = FLOOR(RAND() * 13) + 1;
+
+    SET fkMaquina = FLOOR(RAND() * 216) + 1;
+
+    INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
+    VALUES (dataHora, valor, fkMaquina, fkPeca);
+
+    SET i = i + 1;
+  END WHILE;
+END$$
+
+DELIMITER ;
+
+CALL inserir_registros();
 
 INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
 VALUES 
@@ -541,131 +586,6 @@ VALUES
   ('Médio', 'Aberto', '6 horas', '2026-08-22 11:30:00', 'O disco está cheio', 44),
   ('Baixo', 'Aberto', '10 horas', '2026-09-25 10:15:00', 'O disco está cheio', 55);
   
-
-
-create table peca(
-	idPeca int primary key auto_increment,
-    nome varchar(45)
-);
-
-insert into 
-	peca(nome)
-values 
-	('i9 9900f'),
-    ('i7 13500k'),
-    ('i3 10900'),
-    ('i7 6900f'),
-    ('i9 5900f'),
-    ('i5 11900f'),
-    ('i3 5900f'),
-    ('8gb fury Kingston'),
-    ('12gb ram crucial'),
-    ('16gb Corsair'),
-    ('1tb hd seagate'),
-    ('500gb ssd samsung'),
-    ('450gb hd Adata');
-
-create table limite(
-	idLimite int primary key auto_increment,
-    fkPeca int,
-    foreign key (fkPeca) references peca(idPeca),
-    fkModelo int,
-    foreign key (fkModelo) references modelo(idModelo),
-    fkTipoRegistro int,
-    foreign key (fkTipoRegistro) references tipoRegistro(idTipoRegistro),
-    valor decimal(5,2)
-);
-
-insert into 
-	limite(fkPeca, fkModelo, fkTipoRegistro, valor)
-values
-	(1,15,1, 85),
-	(1,15,2, 85),
-	(8,15,1, 85),
-	(13,15,1, 85),
-	(2,12,1, 85),
-	(10,12,1, 85),
-	(11,12,1, 85),
-	(3,15,1, 85),
-	(9,15,1, 85),
-	(12,15,1, 85);
-
-CREATE OR REPLACE VIEW vw_maquina
-AS 
-	select 
-		r.dataHora,
-        MAX(CASE WHEN fkTipoRegistro = 1 THEN r.valor END) AS CPU,
-        MAX(CASE WHEN fkTipoRegistro = 2 THEN r.valor END) AS RAM,
-        MAX(CASE WHEN fkTipoRegistro = 3 THEN r.valor END) AS DISCO
-    from registro AS r GROUP BY r.dataHora;
-
-
-CREATE OR REPLACE VIEW vw_chamados
-AS
-	SELECT 
-	r.fkMaquina AS idMaquina,
-    c.dataHora AS dataHora,
-    c.idChamado AS idChamado,
-	c.nivel,
-    c.estado,
-    c.sla,
-    c.descricao,
-    e.idEmpresa AS idHospital,
-    e.nomeFantasia AS hospital,
-    t.nome AS tipo,
-    t.idTipo,	
-    CASE WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
-		 WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
-		 WHEN tr.nome = 'Uso de Disco' THEN 'Disco'
-         ELSE tr.nome
-    END AS tipoRegistro,
-    m.modelo
-	FROM chamado AS c
-    JOIN registro AS r
-    JOIN maquinario AS maq
-    JOIN modelo AS m
-    JOIN empresa AS e
-    JOIN tipoRegistro AS tr
-    JOIN tipo AS t
-    WHERE fkMaquina = idMaquinario 
-    AND m.fkTipo = t.idTipo
-    AND r.fkTipoRegistro = tr.idTipoRegistro
-    AND fkRegistro = idRegistro
-    AND maq.fkModelo = m.idModelo
-    AND maq.fkHospital = e.idEmpresa;
-
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS inserir_registros$$
-
-CREATE PROCEDURE inserir_registros()
-BEGIN
-  DECLARE i INT;
-  DECLARE dataHora DATETIME;
-  DECLARE valor FLOAT;
-  DECLARE fkTipoRegistro INT;
-  DECLARE fkMaquina INT;
-
-  SET i = 1;
-
-  WHILE i <= 300 DO
-    SET dataHora = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * 365) DAY);
-
-    SET valor = 85 + (RAND() * 15);
-
-    SET fkTipoRegistro = FLOOR(RAND() * 3) + 1;
-
-    SET fkMaquina = FLOOR(RAND() * 216) + 1;
-
-    INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
-    VALUES (dataHora, valor, fkMaquina, fkTipoRegistro);
-
-    SET i = i + 1;
-  END WHILE;
-END$$
-
-DELIMITER ;
-use hts;
 
 CALL inserir_registros();
 
@@ -770,18 +690,10 @@ select * from vw_chamados;
         idMaquina AS quantidade, 
         tipo FROM 
         vw_chamados group by quantidade, tipo;
-UPDATE chamado SET estado = 'fechado' WHERE idChamado = (SELECT c.idChamado
-																		FROM chamado AS c
-																		JOIN registro AS r ON fkRegistro = idRegistro
-																	AND r.idRegistro = 174);
-
-INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
-VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), 170, 2
 
 
-
-
-, NULL);
+-- INSERT INTO `registro` (`idRegistro`, `dataHora`, `valor`, `fkMaquina`, `fkTipoRegistro`, `fkModelo`) 
+-- VALUES (null, FROM_UNIXTIME(UNIX_TIMESTAMP('2023-12-08 00:00:00') + FLOOR(RAND() * 31536000)), FLOOR(RAND() * 100), 170, 2, NULL);
 
 CREATE TABLE dadosTemperatura (
 	idDadosTemperatura INT PRIMARY KEY AUTO_INCREMENT,

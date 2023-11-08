@@ -395,26 +395,27 @@ values
 create table peca(
 	idPeca int primary key auto_increment,
     nome varchar(45),
+    modelo varchar(45),
     fkTipoRegistro INT,
     Foreign Key (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro)
 );
 
 insert into 
-	peca(nome, fkTipoRegistro)
+	peca(nome, modelo, fkTipoRegistro)
 values 
-	('i9 9900f',1),
-    ('i7 13500k',1),
-    ('i3 10900',1),
-    ('i7 6900f',1),
-    ('i9 5900f',1),
-    ('i5 11900f',1),
-    ('i3 5900f',1),
-    ('8gb fury Kingston',1),
-    ('12gb ram crucial',1),
-    ('16gb Corsair',1),
-    ('1tb hd seagate',1),
-    ('500gb ssd samsung',1),
-    ('450gb hd Adata',1);
+	('CPU','i9 9900f',1),
+    ('CPU', 'i7 13500k',1),
+    ('CPU','i3 10900',1),
+    ('CPU','i7 6900f',1),
+    ('CPU','i9 5900f',1),
+    ('CPU','i5 11900f',1),
+    ('CPU','i3 5900f',1),
+    ('RAM','8gb fury Kingston',1),
+    ('RAM','12gb ram crucial',1),
+    ('RAM','16gb Corsair',1),
+    ('Disco','1tb hd seagate',1),
+    ('Disco','500gb ssd samsung',1),
+    ('Disco','450gb hd Adata',1);
 
 
 create table registro(
@@ -447,19 +448,19 @@ create table limite(
     foreign key (fkPeca) references peca(idPeca)
 );
 
--- insert into 
--- 	limite(fkPeca, fkModelo, fkTipoRegistro, valor)
--- values
--- 	(1,15,1, 85),
--- 	(1,15,2, 85),
--- 	(8,15,1, 85),
--- 	(13,15,1, 85),
--- 	(2,12,1, 85),
--- 	(10,12,1, 85),
--- 	(11,12,1, 85),
--- 	(3,15,1, 85),
--- 	(9,15,1, 85),
--- 	(12,15,1, 85);
+insert into 
+	limite(fkPeca, fkModelo, valor)
+values
+	(1,15, 85),
+	(1,15, 85),
+	(8,15, 85),
+	(13,15, 85),
+	(2,12, 85),
+	(10,12, 85),
+	(11,12, 85),
+	(3,15, 85),
+	(9,15, 85),
+	(12,15, 85);
 
 
 
@@ -537,6 +538,36 @@ END$$
 DELIMITER ;
 
 CALL inserir_registros();
+delimiter $$
+DROP PROCEDURE IF EXISTS inserir_registros_temperatura$$
+
+CREATE PROCEDURE inserir_registros_temperatura()
+BEGIN
+  DECLARE i INT;
+  DECLARE dataHora DATETIME;
+  DECLARE valor FLOAT;
+  DECLARE fkPeca INT;
+  DECLARE fkMaquina INT;
+
+  SET i = 1;
+
+  WHILE i <= 300 DO
+    SET dataHora = DATE_ADD('2023-01-01', INTERVAL FLOOR(RAND() * 365) DAY);
+
+    SET valor = 85 + (RAND() * 15);
+
+    SET fkPeca = FLOOR(RAND() * 13) + 1;
+
+    INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
+    VALUES (dataHora, valor, 5, fkPeca);
+
+    SET i = i + 1;
+  END WHILE;
+END$$
+
+DELIMITER ;
+
+-- call inserir_registros_temperatura();
 
 INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro) 
 VALUES 

@@ -68,7 +68,7 @@ function buscarHospitais() {
         FROM vw_chamados
         GROUP BY hospital;
     `
-    
+
     // else {
     //     instrucao = `
     //     SELECT COUNT(idChamado) AS chamados,
@@ -104,7 +104,7 @@ function buscarComponente(fkHospital) {
         console.log("Executando a seguinte instrução sql" + instrucao)
         return database.executar(instrucao)
     } else {
-        const instrucao =`
+        const instrucao = `
         SELECT
             hospital,
             tipoRegistro AS ComponenteComMaisChamados,
@@ -191,7 +191,130 @@ function buscarAlertaComponente() {
         WHERE idHospital = ${fkHospital}
         GROUP BY hospital, tipoRegistro;
     `
-    
+
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function obterAlertasDoDia(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE DATE(dataHora) = CURDATE() 
+        GROUP BY dia
+        ORDER BY dia;
+
+        `
+    } else {
+        instrucao = `
+        SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE DATE(dataHora) = CURDATE() AND idHospital = ${fkHospital} 
+        GROUP BY dia
+        ORDER BY dia;
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarSemana(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT dia, quantidade FROM (
+            SELECT
+                DAYOFMONTH(dataHora) AS dia,
+                COUNT(*) AS quantidade
+                FROM vw_chamados
+                GROUP BY dia
+                ORDER BY dia DESC
+                LIMIT 7
+        ) AS subquery
+        ORDER BY dia;
+        `
+    } else {
+        instrucao = `
+        SELECT dia, quantidade FROM (
+            SELECT
+                DAYOFMONTH(dataHora) AS dia,
+                COUNT(*) AS quantidade
+            FROM vw_chamados
+            WHERE idHospital = ${fkHospital}
+            GROUP BY dia
+            ORDER BY dia DESC
+            LIMIT 7
+        ) AS subquery
+        ORDER BY dia;
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+function buscarMes(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        GROUP BY dia
+        ORDER BY dia;
+        `
+    } else {
+        instrucao = `
+        SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital}
+        GROUP BY dia
+        ORDER BY dia;
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarAno(fkHospital) {
+    var instrucao = ``
+
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT 
+	        MONTH(dataHora) AS mes,
+	        COUNT(*) AS quantidade	
+	    FROM vw_chamados
+        GROUP BY mes
+        ORDER BY mes;
+        `
+
+    } else {
+        instrucao = `
+        SELECT 
+            MONTH(dataHora) AS mes,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital}
+        GROUP BY mes
+        ORDER BY mes;
+    `
+
+    }
+
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
@@ -202,5 +325,9 @@ module.exports = {
     buscarTipo,
     buscarModelo,
     listarHospitais,
-    buscarAlertaComponente
+    buscarAlertaComponente,
+    obterAlertasDoDia,
+    buscarSemana,
+    buscarMes,
+    buscarAno
 }

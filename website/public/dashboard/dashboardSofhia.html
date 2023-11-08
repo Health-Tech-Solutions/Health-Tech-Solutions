@@ -26,7 +26,7 @@
 
     </head>
 
-    <body id="page-top" onload="obterDadosGrafico(), buscarAlertasDosComponentes(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados()">
+    <body id="page-top" onload="obterDadosGrafico(), obterDadosGraficoLinha(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -445,11 +445,10 @@
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-header">Alertas</div>
+                                                <a class="dropdown-item" href="#">da Última semana</a>
+                                                <a class="dropdown-item" href="#">do Mês</a><a class="dropdown-item" href="#">do Ano</a>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -490,7 +489,7 @@
                         <div class="row">
 
                             <!-- Area Chart -->
-                            <div class="col-xl-8 col-lg-2">
+                            <div class="col-xl-6 col-lg-2">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div
@@ -604,5 +603,5 @@
 <script src="js/dados.js"></script>
 <script src="js/dashSofhia.js"></script>
 <script src="js/chartBarSofhia.js"></script>
-<script src="js/chartPieSofhia.js"></script>
-<script src="js/chartLineSofhia.js"></script>
+<!-- <script src="js/chartPieSofhia.js"></script> -->
+<!-- <script src="js/chartLineSofhia copy.js"></script> -->

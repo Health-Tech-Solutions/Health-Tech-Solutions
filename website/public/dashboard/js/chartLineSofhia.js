@@ -1,6 +1,7 @@
-const constante = document.getElementById('chartLinha');
+var fkHospital = null
+const chart = document.getElementById('chartLinha');
 
-var myLineChart = new Chart(constante, {
+var myLineChart = new Chart(chart, {
     type: 'line',
     data: dados,
     options: {
@@ -30,8 +31,9 @@ var dados = {
 };
 
 
-function obterDadosGraficoLinha() {
-    fetch(`/sofhiaRoute/buscarAlertas`, { cache: 'no-store' }).then(function (response) {
+function obterDadosGraficoLinha(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/obterAlertasDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
@@ -49,9 +51,11 @@ function obterDadosGraficoLinha() {
 
 function plotarGraficoLinha(resposta) {
     for (let i = 0; i < resposta.length; i++) {
-        let chamado = resposta[i].chamados
+        let dia = resposta[i].dia
+        let quantidade = resposta[i].quantidade
         console.log(dados.datasets[0].data)
-        dados.datasets[0].data.push(chamado)
+        labels.push(dia)
+        dados.datasets[0].data.push(quantidade)
     }
 
 

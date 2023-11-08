@@ -26,7 +26,7 @@
 
     </head>
 
-    <body id="page-top" onload="obterDadosGrafico(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados()">
+    <body id="page-top" onload="obterDadosGrafico(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados(), obterDadosSemanal()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -446,8 +446,8 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item" href="#">da Última semana</a>
-                                                <a class="dropdown-item" href="#">do Mês</a><a class="dropdown-item" href="#">do Ano</a>
+                                                <a class="dropdown-item" onclick="obterDadosSemanal()">Semanal</a>
+                                                <a class="dropdown-item" onclick="obterDadosMensais()">Mensal</a>
                                                 
                                             </div>
                                         </div>
@@ -603,5 +603,5 @@
 <script src="js/dados.js"></script>
 <script src="js/dashSofhia.js"></script>
 <script src="js/chartBarSofhia.js"></script>
-<!-- <script src="js/chartPieSofhia.js"></script> -->
-<!-- <script src="js/chartLineSofhia copy.js"></script> -->
+<script src="js/chartPieSofhia.js"></script>
+<script src="js/chartLineSofhia.js"></script>

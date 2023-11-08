@@ -59,8 +59,13 @@ var desempenho = []
     var yMean = ySum / dataDados.length;
     console.log(xMean,ySum)
     
-    // Calcular os coeficientes da regressão
+    // Calcular os coeficientes da regressão:
+    // O numerador é a soma dos produtos dos desvios de X em relação à média de X e dos desvios de Y em relação à média de Y 
+    // para cada par de dados (X - X̄) * (Y - Ȳ)
     // A variável denominator é usada para calcular a soma dos quadrados dos desvios de x em relação à sua média.
+    // X (X - X̄)^2
+    //CALCULAR A INCLINAÇÃO a = Σ((X - X̄)(Y - Ȳ)) / Σ((X - X̄)^2)
+
     var numerator = 0;
     var denominator = 0;
     for (var i = 0; i < dataDados.length; i++) {
@@ -68,7 +73,9 @@ var desempenho = []
         denominator += (dataDados[i] - xMean) * (dataDados[i] - xMean);
         console.log(numerator,denominator)
     }
+    //Inclinação 
     var a = numerator / denominator;
+    //Interceptação
     var b = yMean - a * xMean;
 
     console.log(a, b);
@@ -112,6 +119,8 @@ function criarGraficoLinha() {
             ],
         },
     });
+
+    regressaoLinear.innerHTML = `${a.toFixed(2)}`
 }
 
 

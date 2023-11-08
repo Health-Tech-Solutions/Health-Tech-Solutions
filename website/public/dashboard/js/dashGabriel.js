@@ -11,6 +11,9 @@ if (sessionStorage.tipo == undefined) {
 if (sessionStorage.nomeMes == undefined) {
     sessionStorage.nomeMes = 'Todos'
 }
+if (sessionStorage.idTipo == undefined) {
+    sessionStorage.idTipo = 'null'
+}
 
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
 OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "${sessionStorage.idTipo}" >${sessionStorage.tipo}</option>`

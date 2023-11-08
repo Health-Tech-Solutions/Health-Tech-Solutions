@@ -391,7 +391,6 @@ insert into
 values
 	('Percentual de uso', '%');
     
-
 create table peca(
 	idPeca int primary key auto_increment,
     nome varchar(45),
@@ -461,8 +460,6 @@ values
 	(3,15, 85),
 	(9,15, 85),
 	(12,15, 85);
-
-
 
 -- CREATE OR REPLACE VIEW vw_maquina
 -- AS 

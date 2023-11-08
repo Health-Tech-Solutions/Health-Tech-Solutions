@@ -15,9 +15,9 @@ function cadastrarPeca(peca){
 function cadastrarLimites(valores, idModelo, idPeca){
     const sql = `
         insert into 
-            limite (fkModelo, fkPeca, valor, fkTipoRegistro) 
+            limite (fkModelo, fkPeca, valor) 
         values 
-            ${valores.map(i => `(${idModelo}, ${idPeca},${i.valor}, ${i.medida})`)}
+            ${valores.map(i => `(${idModelo}, ${idPeca},${i.valor})`)}
     `
 
     return database.executar(sql)

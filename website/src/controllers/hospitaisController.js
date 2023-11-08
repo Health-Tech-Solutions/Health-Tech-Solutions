@@ -55,7 +55,6 @@ function listarHospitais(req, res) {
         });
 }
 
-
 function pegarTotalMaquinas(req, res) {
     var fkHospital = req.params.fkHospital;
     console.log("Entrou no pegarTotalMaquinas")

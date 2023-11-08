@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const upload = require('../config/configUpload'); // ARQUIVO COM A CONFIGURAÇÃO DO UPLOAD
-const funcionarioController = require("../controllers/funcionarioController")
+const funcionarioController = require("../controllers/viniciusController")
 
 router.post("/cadastrar", (res, req) => {
     funcionarioController.cadastrar(res, req)
@@ -26,6 +26,12 @@ router.get(`/pegarInformacoes/:idFuncionario`, (req, res) => {
 
 router.get(`/mostrarDados/:idUsuario`, (req,res) => {
     funcionarioController.mostrarDados(req,res);
-})
+});
+
+router.get(`/pegarDadosMaquinas/:fkHospital`,(req,res) => {
+    funcionarioController.pegarDadosMaquinas(req,res);
+});
+
+
 
 module.exports = router

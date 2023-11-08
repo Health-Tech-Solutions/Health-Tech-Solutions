@@ -30,7 +30,7 @@
 
 <body id="page-top" onload="obterDadosGrafico(),
      obterDadosEstado(), chamarComponenteComMaisAlertas(), chamarModeloComMaisAlertas(),
-     mostrarDados(), mudarTituloGraficoBarras()">
+     mostrarDados(), mudarTituloGraficoBarras(), selecionarHospital('null;null')">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -63,7 +63,6 @@
                 Informações
             </div>
 
-
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="./chamadosVinicius.html">
@@ -78,8 +77,6 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
-
 
         </ul>
         <!-- End of Sidebar -->
@@ -97,8 +94,6 @@
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
-
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -284,7 +279,7 @@
                     <!-- Example split danger button -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <!-- <button type="button" class="btn btn-danger ">Action</button> -->
-                        <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm""
+                        <select type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                             data-toggle=" dropdown" aria-expanded="false" onclick="listarHospitais()"
                             id="dropdown_menu" onchange="trocarHospital()">
 
@@ -309,7 +304,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Taxa de Falhas de máquinas nas ultimas 24h</div>
+                                                Total de Falhas de máquinas nas ultimas 24h</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><span
                                                     id="componenteComMaisAlertas">componente</span></div>
                                         </div>
@@ -516,9 +511,6 @@
 
 </html>
 
-<script>
-    nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/index.js"></script>

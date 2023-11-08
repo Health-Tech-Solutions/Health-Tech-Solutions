@@ -20,6 +20,7 @@ const funcionarioRouter = require("./src/routes/funcionario")
 const chamadosRouter = require("./src/routes/chamados")
 const gabrielRouter = require("./src/routes/gabrielRoutes")
 const sofhiaRouter = require("./src/routes/sofhiaRoute")
+const viniciusRouter = require("./src/routes/viniciusRoutes")
 // const henriqueRouter = require("./src/routes/henrique")
 
 app.use(express.json());
@@ -40,6 +41,7 @@ app.use("/hospitais", hospitaisRouter);
 app.use("/chamados", chamadosRouter)
 app.use("/gabrielRoutes", gabrielRouter);
 app.use("/sofhiaRoute", sofhiaRouter);
+app.use("/viniciusRoutes", viniciusRouter);
 // app.use("/henrique", henriqueRouter)
 
 app.listen(PORTA, function () {

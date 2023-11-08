@@ -86,33 +86,26 @@ function buscarHospitais() {
 function buscarComponente(fkHospital) {
     if (fkHospital == "null") {
         const instrucao = `
-        SELECT
-                CASE
-                    WHEN tr.nome = 'Uso de CPU' THEN 'CPU'
-                    WHEN tr.nome = 'Uso de RAM' THEN 'RAM'
-                    WHEN tr.nome = 'Uso de disco' THEN 'Disco'
-                    ELSE tr.nome
-                END AS TipoRegistro,
-                COUNT(c.idChamado) AS NumeroDeChamados
-            FROM tipoRegistro AS tr
-            LEFT JOIN registro AS r ON tr.idTipoRegistro = r.fkTipoRegistro
-            LEFT JOIN chamado AS c ON r.idRegistro = c.fkRegistro
-            GROUP BY TipoRegistro
-            ORDER BY NumeroDeChamados DESC
-            LIMIT 1;
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.estado <> 'fechado'
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
     `
         console.log("Executando a seguinte instrução sql" + instrucao)
         return database.executar(instrucao)
     } else {
         const instrucao = `
-        SELECT
-            hospital,
-            tipoRegistro AS ComponenteComMaisChamados,
-            COUNT(idChamado) AS NumeroDeChamados
-        FROM vw_chamados
-        WHERE idHospital = ${fkHospital} 
-        GROUP BY hospital, tipoRegistro
-        ORDER BY NumeroDeChamados DESC
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} AND c.estado <> 'fechado'
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
         LIMIT 1;
         `
         console.log("Executando a seguinte instrução sql" + instrucao)

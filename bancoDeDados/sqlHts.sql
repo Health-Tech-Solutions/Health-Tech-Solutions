@@ -487,7 +487,8 @@ AS
 		t.idTipo,	
 		m.modelo,
 		tr.nome,
-		tr.medida
+		tr.medida,
+        p.idPeca AS idPeca
 	FROM chamado AS c
     JOIN registro AS r
     JOIN maquinario AS maq
@@ -495,6 +496,7 @@ AS
     JOIN empresa AS e
     JOIN tipoRegistro AS tr
     JOIN tipo AS t
+    JOIN peca AS p
     WHERE fkMaquina = idMaquinario 
     AND m.fkTipo = t.idTipo
     AND fkRegistro = idRegistro

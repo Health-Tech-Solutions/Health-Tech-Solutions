@@ -60,29 +60,13 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
-            </div>
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="maquinario.html">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Maquinário</span></a>
-            </li>
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
                 Informações
             </div>
 
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="./chamadosFuncionario.html">
+                <a class="nav-link" href="./chamadosVinicius.html">
                     <i class="fas fa-fw fa-exclamation-circle"></i>
                     <span>Chamados</span></a>
             </li>
@@ -325,7 +309,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Taxa de Falhas</div>
+                                                Taxa de Falhas de máquinas nas ultimas 24h</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><span
                                                     id="componenteComMaisAlertas">componente</span></div>
                                         </div>
@@ -363,7 +347,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Disponibilidade das Máquinas
+                                                Disponibilidade das Máquinas nas ultimas 24h
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
@@ -430,33 +414,6 @@
                             </div>
                         </div>
 
-                        <script>
-
-                            const ctx = document.getElementById('desempenhoModelo');
-
-                            new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                                    datasets: [{
-                                        label: '# of Votes',
-                                        data: [12, 19, 3, 5, 2, 3],
-                                        backgroundColor: 'rgba(220, 0, 0, 0.60)',
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true
-                                        }
-                                    }
-                                }
-                            });
-
-
-                        </script>
-
                         <!-- Pie Chart -->
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
@@ -483,29 +440,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <script>
-
-
-                        // Dados de estados das máquinas
-                        var estados = ["Em Manutenção", "Operando"];
-                        var quantidades = [15, 85]; // Valores fictícios representando a quantidade de máquinas em cada estado
-
-                        // Configuração do gráfico de pizza
-                        var ctx2 = document.getElementById('estadoDasMaquinas').getContext('2d');
-                        var chart = new Chart(ctx2, {
-                            type: 'pie',
-                            data: {
-                                datasets: [{
-                                    data: quantidades,
-                                    backgroundColor: ['#e74a3b', '#4CAF50'], // Cores para os estados "Em Manutenção" e "Operando"
-                                }]
-                            },
-                            options: {
-                                // Insira opções adicionais aqui, se necessário
-                            }
-                        });
-                    </script>
 
                     <!-- Content Row -->
                     <div class="row">

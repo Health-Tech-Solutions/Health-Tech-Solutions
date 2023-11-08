@@ -1,38 +1,52 @@
 var fkHospital = null
 
-// const configPie = document.getElementById('chartPie');
+// Area dos gráficos da dashboard
 
-// var dadosPie = {
-//     labels: ['Aberto', 'Fechados'],
-//     datasets: [{
-//         label: '',
-//         data: [],
-//         backgroundColor: [
-//             '#e74a3b',
-//             '#1cc88a'
-//         ],
-//         borderWidth: 1
-//     }]
-// }
+// Grafico de barras
+const ctx = document.getElementById('desempenhoModelo');
 
-// var chartPie = new Chart(configPie, {
-//     type: 'pie',
-//     data: dadosPie,
-//     options: {
-//         scales: {
-//             y: {
-//                 beginAtZero: true,
-//                 display: false
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Monitor de S.V', 'Monitor C.', 'Monitor F.', 'Desfibriladores', 'Cardioversores', 'Ultrassom', 'Máquina de A.', 'Máquinas ECG'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3, 7, 4],
+            backgroundColor: 'rgba(220, 0, 0, 0.60)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 
-//             }
-//         },
-//         plugins: {
-//             legend: {
-//                 display: false
-//             }
-//         }
-//     }
-// });
+// Grafico de Pie
+
+// Dados de estados das máquinas
+var estados = ["Em Manutenção", "Operando"];
+var quantidades = [15, 85]; // Valores fictícios representando a quantidade de máquinas em cada estado
+
+// Configuração do gráfico de pizza
+var ctx2 = document.getElementById('estadoDasMaquinas').getContext('2d');
+var chart = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        datasets: [{
+            data: quantidades,
+            backgroundColor: ['#e74a3b', '#4CAF50'],
+        }]
+    },
+    options: {
+        // Insira opções adicionais aqui, se necessário
+    }
+});
+
+
 
 function plotarDadosPie(resposta) {
     for (let index = 0; index < resposta.length; index++) {
@@ -47,7 +61,6 @@ function plotarDadosPie(resposta) {
     chartPie.update()
 
 }
-
 
 
 function obterDadosGrafico() {
@@ -121,7 +134,7 @@ function chamarModeloComMaisAlertas() {
 }
 
 function obterDadosEstado() {
-    3
+
     var fkHospital = sessionStorage.FK_HOSPITAL;
     fetch(`/chamados/buscarEstado/${fkHospital}`).then(function (response) {
         if (response.ok) {

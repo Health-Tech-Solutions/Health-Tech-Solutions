@@ -149,8 +149,8 @@ function totalMaquinasPorTipo(fkHospital) {
 
 function graficoLinha(fkHospital){
     var instrucao = `
-    select dataTemperatura , round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor,nome from tipoRegistro join registro on idTipoRegistro = fkTipoRegistro join dadosTemperatura 
-on dataHora = dataTemperatura group by dataTemperatura, valor, nome;
+    select dataTemperatura , round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor from registro join dadosTemperatura 
+on dataHora = dataTemperatura group by dataTemperatura, valor;
     `
 
 

@@ -5,12 +5,8 @@ function chamarComponenteComMaisAlertas(fkHospital) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                if(fkHospital == "null") {
-                    componenteComMaisAlertas.innerHTML = resposta[0].TipoRegistro
-                } else {
-                    componenteComMaisAlertas.innerHTML = resposta[0].ComponenteComMaisChamados
-                }
+                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+                
 
             });
         } else {

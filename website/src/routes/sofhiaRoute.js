@@ -30,4 +30,12 @@ router.get("/listarHospitais", function(req,res){
 router.get("/buscarAlertaComponente/:fkHospital", function(req,res){
     sofhiaController.listarHospitais(req,res);
 })
+
+router.get("/buscarMensal/:fkHospital", function(req,res){
+    sofhiaController.buscarMensal(req,res);
+})
+
+router.get("/buscarSemanal/:fkHospital", function(req,res){
+    sofhiaController.buscarSemanal(req,res);
+})
 module.exports = router

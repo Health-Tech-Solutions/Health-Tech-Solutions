@@ -1,6 +1,4 @@
-
 function obterDadosMensais(){
-
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/chamados/buscarMensal/${fkHospital}`)
     .then(
@@ -22,6 +20,7 @@ function obterDadosMensais(){
         }
     )
 }
+
 function obterDadosSemanal(){
 
     var fkHospital = sessionStorage.FK_HOSPITAL;
@@ -75,7 +74,6 @@ function plotarGrafico(resposta){
     
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
-        // console.log(registro.mes)
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }
 
@@ -86,14 +84,12 @@ function plotarGrafico(resposta){
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const ctx = document.getElementById('chartLinha');
 labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-// 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
 var dados = {
     labels: labels,
     datasets: [{
         label: '',
         data: data,
         borderWidth: 2,
-
         backgroundColor: '#030050',
         borderColor: '#030050',
         trendlineLinear: {

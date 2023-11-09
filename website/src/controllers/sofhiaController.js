@@ -1,39 +1,39 @@
 const { ConnectionPool } = require("mssql")
 const sofhiaModel = require("../models/sofhiaModel")
 
-// function buscarMensal(req,res){
-//     var fkHospital = req.params.fkHospital
-//     sofhiaModel.buscarMensal(fkHospital)
-//         .then((resultado) =>{
-//             if(resultado.length > 0){
-//                 res.status(200).json(resultado)
-//             } else {
-//                 res.status(204).json([])
-//             }
-//         })
-//         .catch(function (erro){
-//             console.log(erro);
-//             console.log("Houve um erro ao buscar o histórico mensal", erro.sqlMessage)
-//             res.status(500).json(erro.sqlMessage)
-//         })
-// }
+function buscarMensal(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarMensal(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o histórico mensal", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
 
-// function buscarSemanal(req,res){
-//     var fkHospital = req.params.fkHospital
-//     sofhiaModel.buscarSemanal(fkHospital)
-//         .then((resultado) => {
-//             if(resultado.length >0){
-//                 res.status(200).json(resultado)
-//             } else {
-//                 res.status(204).json([])
-//             }
-//         })
-//         .catch(function (erro){
-//             console.log(erro)
-//             console.log("Houve um erro ao buscar o histórico semanal ", erro.sqlMessage)
-//             res.status(500).json(erro.sqlMessage)
-//         })
-// }
+function buscarSemanal(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarSemanal(fkHospital)
+        .then((resultado) => {
+            if(resultado.length >0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro)
+            console.log("Houve um erro ao buscar o histórico semanal ", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
 
 
 function buscarHospitais(req,res){
@@ -137,7 +137,8 @@ function listarHospitais(req,res){
 }
 
 function buscarAlertaComponente(req,res){
-    sofhiaModel.buscarAlertaComponente()
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponente(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

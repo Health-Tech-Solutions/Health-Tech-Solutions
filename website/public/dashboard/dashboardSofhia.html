@@ -26,7 +26,7 @@
 
     </head>
 
-    <body id="page-top" onload="obterDadosGrafico(), chamarComponenteComMaisAlertas(), chamarTipoComMaisAlertas(), chamarModeloComMaisAlertas(), mostrarDados(), obterDadosSemanal()">
+        <body id="page-top" onload="funcoes(), buscarAlertasDosComponentes(), obterDadosGrafico()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -472,13 +472,13 @@
                                         </div>
                                         <div class="mt-4 text-center small">
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-danger"></i> CPU
+                                                <i class="fas fa-circle" style="color: #DC143C;"></i> CPU
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-warning"></i> RAM
+                                                <i class="fas fa-circle" style="color: #8B0000;"></i> RAM
                                             </span>
                                             <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Disco
+                                                <i class="fas fa-circle" style="color: #C71585;"></i> Disco
                                             </span>
                                         </div>
                                     </div>
@@ -605,3 +605,14 @@
 <script src="js/chartBarSofhia.js"></script>
 <script src="js/chartPieSofhia.js"></script>
 <script src="js/chartLineSofhia.js"></script>
+
+<script>
+    function funcoes() {
+        obterDadosGrafico()
+        chamarComponenteComMaisAlertas()
+        chamarTipoComMaisAlertas()
+        chamarModeloComMaisAlertas()
+        mostrarDados()
+        obterDadosSemanal()
+    }
+</script>

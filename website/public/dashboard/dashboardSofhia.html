@@ -26,7 +26,7 @@
 
     </head>
 
-        <body id="page-top" onload="funcoes(), buscarAlertasDosComponentes()">
+        <body id="page-top" onload="funcoes(), buscarAlertasDosComponentes(), obterDadosGrafico()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -602,17 +602,17 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/dados.js"></script>
 <script src="js/dashSofhia.js"></script>
-<!-- <script src="js/chartBarSofhia.js"></script> -->
+<script src="js/chartBarSofhia.js"></script>
 <script src="js/chartPieSofhia.js"></script>
-<!-- <script src="js/chartLineSofhia.js"></script> -->
+<script src="js/chartLineSofhia.js"></script>
 
 <script>
     function funcoes() {
-        // obterDadosGrafico()
+        obterDadosGrafico()
         chamarComponenteComMaisAlertas()
         chamarTipoComMaisAlertas()
         chamarModeloComMaisAlertas()
         mostrarDados()
-        // obterDadosSemanal()
+        obterDadosSemanal()
     }
 </script>

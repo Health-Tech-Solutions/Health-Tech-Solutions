@@ -78,6 +78,7 @@ function plotarGrafico(resposta){
         // console.log(registro.mes)
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }
+
     dados.labels = labels
     lineChart.update()
 }
@@ -91,12 +92,14 @@ var dados = {
     datasets: [{
         label: '',
         data: data,
-        borderWidth: 1,
+        borderWidth: 2,
+
         backgroundColor: '#030050',
         borderColor: '#030050',
         trendlineLinear: {
-            style: "rgba(255,105,180, .8)",
-            lineStyle: "line    ",
+            colorMin: "red",
+            colorMax: "red",
+            lineStyle: "solid",
             width: 1
         }
     }]

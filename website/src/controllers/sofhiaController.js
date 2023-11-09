@@ -137,7 +137,8 @@ function listarHospitais(req,res){
 }
 
 function buscarAlertaComponente(req,res){
-    sofhiaModel.buscarAlertaComponente()
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponente(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)

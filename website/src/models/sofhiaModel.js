@@ -175,18 +175,34 @@ function listarHospitais() {
     return database.executar(instrucao)
 }
 
-function buscarAlertaComponente() {
-    var instrucao = `
-        SELECT COUNT(idChamado) AS chamados,
-                tipoRegistro AS hospital,
-                hospital AS h
-        FROM vw_chamados
-        WHERE idHospital = ${fkHospital}
-        GROUP BY hospital, tipoRegistro;
+function buscarAlertaComponente(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca;
     `
-
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
+
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital};
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }
+
+    
 }
 
 function obterAlertasDoDia(fkHospital) {

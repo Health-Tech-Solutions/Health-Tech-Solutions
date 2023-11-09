@@ -28,7 +28,7 @@ router.get("/listarHospitais", function(req,res){
 })
 
 router.get("/buscarAlertaComponente/:fkHospital", function(req,res){
-    sofhiaController.listarHospitais(req,res);
+    sofhiaController.buscarAlertaComponente(req,res);
 })
 
 router.get("/buscarMensal/:fkHospital", function(req,res){

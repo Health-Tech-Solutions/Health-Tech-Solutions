@@ -6,9 +6,9 @@ var dadosPizza = {
         label: '',
         data: [],
         backgroundColor: [
-            '#1cc88a',
-            '#f6c23e',
-            '#e74a3b'              
+            '#DC143C',   
+            '#8B0000',   
+            '#C71585'   
         ],
         borderWidth: 1
     }]
@@ -28,7 +28,8 @@ var graficoPizza = new Chart(configPie, {
             legend: {
                 display: false
             }
-        }
+        },
+        hover: false
     }
 });
 
@@ -39,6 +40,7 @@ function buscarAlertasDosComponentes(fkHospital) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoPizza(resposta)
 
             });
         } else {
@@ -51,17 +53,20 @@ function buscarAlertasDosComponentes(fkHospital) {
 }
 
 function plotarGraficoPizza(resposta){
+    let labels = []
+    let cores = []
+    dadosPizza.labels = labels
+    dadosPizza.datasets[0].data = []
+
     for (let index = 0; index < resposta.length; index++) {
-        let cpu = resposta[index].CPU;
-        let ram = resposta[index].RAM;
-        let disco = resposta[index].DISCO;
+        let cpu = resposta[index].Total_de_Chamados_CPU;
+        let ram = resposta[index].Total_de_Chamados_RAM;
+        let disco = resposta[index].Total_de_Chamados_Disco;
 
-        dadosPie.datasets[0].data.push(cpu)
-        dadosPie.datasets[0].data.push(ram)
-        dadosPie.datasets[0].data.push(disco)
+        dadosPizza.datasets[0].data.push(cpu)
+        dadosPizza.datasets[0].data.push(ram)
+        dadosPizza.datasets[0].data.push(disco)
     }
-
-    chartPie.update()
-    
+    graficoPizza.update()
 }
 

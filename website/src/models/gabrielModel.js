@@ -93,7 +93,7 @@ join tipo on fkTipo = idTipo where year(dataHora) = 2023;
 
     }
     
-    else if(fkHospital != null && idMes > 0 && idTipo == 'null'){
+    else if(fkHospital != "null" && idMes > 0 && idTipo == 'null'){
 
         var instrucao = `
         select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
@@ -101,6 +101,39 @@ join tipo on fkTipo = idTipo where year(dataHora) = 2023;
         join empresa on fkHospital = idEmpresa
         where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes} and year(dataHora) = 2023;
         `
+    }else if (fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+        
+        var instrucao = `  select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro join maquinario on fkMaquina = idMaquinario 
+        join modelo on maquinario.fkModelo = modelo.idModelo 
+        join tipo on fkTipo = idTipo where year(dataHora) = 2023 and fkPeca = ${idTipo};`
+
+    }else if (fkHospital != "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+
+        var instrucao = `select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+        join maquinario on fkMaquina = idMaquinario 
+        join empresa on fkHospital = idEmpresa
+        where idEmpresa = ${fkHospital} and year(registro.dataHora) = 2023 and fkPeca = ${idTipo};`
+
+    }else if (fkHospital == "null" && idMes > 0 && idTipo > 0) {
+        var instrucao = `
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
+        join maquinario on fkMaquina = idMaquinario 
+        join empresa on fkHospital = idEmpresa
+        where month(dataHora) = ${idMes} and year(registro.dataHora) = 2023 and fkPeca = ${idTipo};
+        `
+    }
+    
+    
+    
+    else{
+
+        var instrucao = `
+        select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+        join maquinario on fkMaquina = idMaquinario 
+        join empresa on fkHospital = idEmpresa
+        where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes} and year(dataHora) = 2023 and fkPeca = ${idTipo};
+        `
+
     }
     
 
@@ -167,7 +200,7 @@ function graficoPizza(idMes, fkHospital){
 
     if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
         instrucao = `
-        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) < 4 group by ano, nivel;
+        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) < 13 group by ano, nivel;
         `
     }else if(fkHospital == "null" && idMes > 0){
     
@@ -215,7 +248,7 @@ function graficoPizza(idMes, fkHospital){
     join 
         registro on idMaquinario = fkMaquina
     join chamado on idRegistro = fkRegistro
-      where fkHospital = ${fkHospital} and month(chamado.dataHora) < 4 group by nivel
+      where fkHospital = ${fkHospital} and month(chamado.dataHora) < 13 group by nivel
         ) e;
         `
 

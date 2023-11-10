@@ -1,5 +1,7 @@
 var dataDados = []
 var desempenho = []
+var dadosDataTemperatura = []
+var juntarTempDATA = []
  function graficoLinha(){
 
      var fkHospital = sessionStorage.FK_HOSPITAL
@@ -18,9 +20,28 @@ var desempenho = []
                             for (let i = 0; i < resposta.length; i++) {
                                 dataDados.push(resposta[i].temperaturaMedia)
                             }
+                            console.log("1")
                          
                             for (let index = 0; index < resposta.length; index++) {
                                 desempenho.push(resposta[index].valor)
+                            }
+                            console.log("2")
+
+                            for (let index = 0; index < resposta.length; index++) {
+                                var apenasData = (resposta[index].dataTemperatura).split("T",1)
+                                dadosDataTemperatura.push(apenasData)
+                            }
+                            console.log("3")
+                            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+                            console.log(dataDados)
+                            for (let index = 0; index < dataDados.length; index++) {
+                                let temp = dataDados[index]
+                                let data = dadosDataTemperatura[index]
+                                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+                        
+                                juntarTempDATA.push(`${temp}°C ${data}`)
+                        
+                                
                             }
 
                             criarGraficoLinha()
@@ -112,12 +133,13 @@ function criarGraficoLinha() {
         return b + x * a;
     });
 
+   
     
     var ctx = document.getElementById('chartLinha').getContext('2d');
     var chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: juntarTempDATA,
             datasets: [
                 {
                     label: 'Desempenho Original',
@@ -130,6 +152,7 @@ function criarGraficoLinha() {
                     label: 'Regressão Linear',
                     data: valoresRegressao,
                     borderColor: 'red',
+                    pointRadius: 0,
                     fill: false,
                 },
             ],

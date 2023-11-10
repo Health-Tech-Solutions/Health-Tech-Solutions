@@ -22,9 +22,15 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+  
     
     <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
+    
+
+    
    <style>
+
    #OpcoesMaquinas{
 
     display: flex;
@@ -440,24 +446,21 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                        <div style="display: flex; justify-content: space-between;">
+                                        <div style="display: flex; justify-content: end;">
                                         <div> </div>
 
-                                        <div class="btn-group">
-                                            <!-- <button type="button" class="btn btn-danger">Trocar</button>
-                                            <button type="button"
-                                                class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                <span class="sr-only"></span>
-                                            </button> -->
-                                            <!-- <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#" onclick="obterDadosSemanal()">Buscar histórico
-                                                    diario</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#" onclick="graficoLinha()">Buscar histórico
-                                                    Mensal</a>
-                                            </div> -->
-                                        </div>
+                                        <div class="form-check" style="margin-right: 10px;">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                              1° semestre
+                                            </label>
+                                          </div>
+                                          <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                            <label class="form-check-label" for="exampleRadios2">
+                                              anual 
+                                            </label>
+                                          </div>
                                     </div>
                                     <div>
                                         <canvas id="chartLinha"></canvas>

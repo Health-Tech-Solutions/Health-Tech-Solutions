@@ -50,10 +50,31 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="./dashVinicius.html">
+                <a class="nav-link" href="./dashFuncionario.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="./dashVinicius.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard Vinicius</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="maquinario.html">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Maquinário</span></a>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -63,9 +84,10 @@
                 Informações
             </div>
 
+
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="./chamadosVinicius.html">
+                <a class="nav-link" href="./chamadosFuncionario.html">
                     <i class="fas fa-fw fa-exclamation-circle"></i>
                     <span>Chamados</span></a>
             </li>
@@ -77,6 +99,8 @@
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+
+
 
         </ul>
         <!-- End of Sidebar -->
@@ -346,7 +370,7 @@
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5%
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="porcentagemMaquinasOperando">5%
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -513,6 +537,6 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/index.js"></script>
-<script src="js/dados.js"></script>
+<!-- <script src="js/index.js"></script>
+<script src="js/dados.js"></script> -->
 <script src="js/dashVinicius.js"></script>

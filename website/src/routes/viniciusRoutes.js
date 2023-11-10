@@ -32,6 +32,11 @@ router.get(`/pegarDadosMaquinas/:fkHospital`,(req,res) => {
     funcionarioController.pegarDadosMaquinas(req,res);
 });
 
+router.get(`/taxaMaquinasOperando/:fkHospital`,(req,res) => {
+    funcionarioController.taxaMaquinasOperando(req,res);
+});
+
+
 
 
 module.exports = router

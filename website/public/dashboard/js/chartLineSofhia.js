@@ -91,8 +91,8 @@ var dados = {
         label: '',
         data: data,
         borderWidth: 1,
-        backgroundColor: '#ff0000',
-        borderColor: '#ff0000'
+        backgroundColor: '#f41743',
+        borderColor: '#f41743'
     }]
 }
 

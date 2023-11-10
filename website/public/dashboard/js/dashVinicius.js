@@ -1,7 +1,24 @@
 let totalMaquinas
 let maquinasOperando
+let TotalChamados
+
 
 var fkHospital = sessionStorage.getItem("FK_HOSPITAL");
+
+
+fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                TotalChamados = resposta[0].totalChamados
+                totalChamados.innerHTML = TotalChamados
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
 
 fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
     .then(function (response) {
@@ -29,16 +46,39 @@ fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
 
                 console.log(totalMaquinas,maquinasOperando)
 
-                let porcentagemExibição = `${((maquinasOperando/totalMaquinas)*100).toFixed(2)}%`
+                let porcentagemExibicao = (maquinasOperando/totalMaquinas)*100
                 
                 if(totalMaquinas == 0){
-                    porcentagemExibição = '0%'
+                    porcentagemExibicao = 0
                 }
 
-                if(porcentagemExibição > 100){
-                    porcentagemExibição = '100%'
+                if(porcentagemExibicao > 100){
+                    porcentagemExibicao = 100
                 } 
-                porcentagemMaquinasOperando.innerHTML = porcentagemExibição
+
+                porcentagemMaquinasOperando.innerHTML = porcentagemExibicao.toFixed(2) + '%'
+
+               const barraSize = barraPai.offsetWidth 
+
+               console.log(barraSize * (porcentagemExibicao/100))
+
+               let valorBarra = barraSize * (porcentagemExibicao/100) + 'px'
+
+               
+               console.log(porcentagemExibicao)
+               
+                let color 
+
+               if(valorBarra < 60){
+                   color = '#4CAF50'
+                } else if (valorBarra < 80){
+                    color = '#FFC107'
+                } else {
+                    color = '#e74a3b'
+                }
+
+                barraProgressao.style = `background-color: '${color}'; width: ${valorBarra};`
+
 
             });
         } else {

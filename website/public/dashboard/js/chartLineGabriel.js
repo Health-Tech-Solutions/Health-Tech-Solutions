@@ -25,7 +25,6 @@ var desempenho = []
 
                             criarGraficoLinha()
 
-                            //lineChart.update()
                      }
                  )
              }
@@ -64,22 +63,34 @@ var desempenho = []
     // para cada par de dados (X - X̄) * (Y - Ȳ)
     // A variável denominator é usada para calcular a soma dos quadrados dos desvios de x em relação à sua média.
     // X (X - X̄)^2
-    //CALCULAR A INCLINAÇÃO a = Σ((X - X̄)(Y - Ȳ)) / Σ((X - X̄)^2)
+    //CALCULAR A INCLINAÇÃO a = Σ((X - X̄)(Y - Ȳ)) / Σ((X - X̄))
 
     var numerator = 0;
     var denominator = 0;
     for (var i = 0; i < dataDados.length; i++) {
         numerator += (dataDados[i] - xMean) * (desempenho[i] - yMean);
-        denominator += (dataDados[i] - xMean) * (dataDados[i] - xMean);
+        denominator += (dataDados[i] - xMean) * (dataDados[i] - xMean)^2;
         console.log(numerator,denominator)
     }
-    //Inclinação 
-    var a = numerator / denominator;
-    //Interceptação
+    //Inclinação (Beta)
+     var a = numerator / denominator;
+    //var a = 0.04
+    //Interceptação (Alfa)
     var b = yMean - a * xMean;
+    //var b = 91.7
 
     console.log(a, b);
-    return { a, b };
+
+    var r = RSquared(yMean,a,b);
+    var Rsq = r.Rsq
+    console.log("R")
+    console.log(Rsq)
+
+
+    return { a, b, Rsq };
+
+
+
 }
 
 
@@ -88,12 +99,17 @@ function criarGraficoLinha() {
     var coeficientes = calcularRegressaoLinear();
     var a = coeficientes.a;
     var b = coeficientes.b;
+    var Rsq = coeficientes.Rsq
+    
 
     // Pega o valor de a e b do calcularRegressaoLinear e faz o calculo
     //com base no x (dados do dataDados)
+    // filtrar por máquina e no filtro mostrar o tipo dela
     var labels = dataDados;
     var valoresRegressao = dataDados.map(function (x) {
-        return a * x + b;
+    // alfa + beta * x formula da regressão linear
+    // b + x * a seguindo as variaveis da função calcularRegressaoLinear
+        return b + x * a;
     });
 
     
@@ -120,41 +136,30 @@ function criarGraficoLinha() {
         },
     });
 
-    regressaoLinear.innerHTML = `${a.toFixed(2)}`
+    regressaoLinear.innerHTML = `${Rsq.toFixed(5)}`
 }
 
+function RSquared(yMean,a,b) {
 
 
 
-//GRÁFICO ANTIGO
+  // Calcular a soma dos quadrados totais (SSTO)
+  var SSTO = 0;
+  for (var i = 0; i < dataDados.length; i++) {
+      SSTO += Math.pow((desempenho[i] - yMean), 2);
+  }
+  
+  // Calcular a soma dos quadrados dos erros (SSE)
+  var SSE = 0;
+  for (var i = 0; i < dataDados.length; i++) {
+      SSE += Math.pow((desempenho[i] - (a * dataDados[i] + b)), 2);
+  }
 
-// const ctx = document.getElementById('chartLinha');
-// labels = dataDados
-// // 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
-// var dados = {
-//     labels: dataDados,
-//     datasets: [{
-//         label: '',
-//         data: desempenho,
-//         borderWidth: 1,
-//         backgroundColor: '#030050',
-//         borderColor: '#030050'
-//     }]
-// }
+  // Calcular o R-quadrado múltiplo
+  var Rsq = 1 - (SSE / SSTO);
 
-// var lineChart = new Chart(ctx, {
-//     type: 'line',
-//     data: dados,
-//     options: {
-//         scales: {
-//             y: {
-//                 beginAtZero: true
-//             }
-//         },
-//         plugins: {
-//             legend: {
-//                 display: false
-//             }
-//         }
-//     }
-// });
+  return {Rsq}
+
+
+}
+

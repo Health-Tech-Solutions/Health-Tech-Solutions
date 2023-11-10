@@ -47,8 +47,6 @@ for row in my_list:
      if (contador == 2):
         print(row[1])
         estado = row[1]
-     if (contador == 2000):
-         break
      if len(row) >= 11:  #Verificando se tem 11 elementos na linha
          data = row[0]
          precipitacao = row[2]

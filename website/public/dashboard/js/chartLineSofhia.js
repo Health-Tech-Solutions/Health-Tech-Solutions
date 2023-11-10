@@ -1,5 +1,5 @@
 function obterDadosMensais(){
-
+    alert('CHUAAAAA')
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarMensal/${fkHospital}`)
     .then(

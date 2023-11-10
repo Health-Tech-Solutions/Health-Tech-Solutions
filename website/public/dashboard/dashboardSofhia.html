@@ -26,7 +26,9 @@
 
     </head>
 
-        <body id="page-top" onload="funcoes(), buscarAlertasDosComponentes(), obterDadosGrafico()">
+        <body id="page-top" onload="
+          funcoes()  
+        ">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -612,6 +614,16 @@
 
 <script>
     nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
+    function funcoes(){
+        chamarComponenteComMaisAlertas(),
+            chamarTipoComMaisAlertas(),
+            chamarModeloComMaisAlertas(),
+            mostrarDados(),
+            obterDadosMensais(),
+            buscarAlertasDosComponentes(),
+            obterDadosGraficoBarra(),
+            obterDadosGrafico()
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -620,13 +632,3 @@
 <script src="js/chartPieSofhia.js"></script>
 <script src="js/chartBarSofhia.js"></script>
 <script src="js/chartLineSofhia.js"></script>
-
-<script>
-    function funcoes() {
-        chamarComponenteComMaisAlertas()
-        chamarTipoComMaisAlertas()
-        chamarModeloComMaisAlertas()
-        mostrarDados()
-        obterDadosSemanal()
-    }
-</script>

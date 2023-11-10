@@ -1,13 +1,13 @@
-function chamarComponenteComMaisAlertas(fkHospital) {
+function chamarComponenteComMaisAlertas() {
+    alert('heheheheheh')
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarComponente/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/sofhiaRoute/buscarComponente/${fkHospital}`, { cache: 'no-store' })
+    .then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
-                
-
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

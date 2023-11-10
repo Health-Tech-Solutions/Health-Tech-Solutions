@@ -154,13 +154,13 @@ function listarChamados(idHospital){
     } else {
     var instrucao = `
     select 
-    idMaquina,
-    nivel,
-    estado,
-    sla,
-    idChamado,
-    DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,
-    tipoRegistro
+        idMaquina,
+        nivel,
+        estado,
+        sla,
+        idChamado,
+        DATE_FORMAT(dataHora, '%H:%i - %d/%m/%Y ') AS dataHora,
+        tipoRegistro
     from vw_chamados where idHospital = ${idHospital}
         LIMIT 10;
     ` 

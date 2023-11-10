@@ -70,9 +70,60 @@ function buscarComponente(req,res){
         })
 }
 
+function buscarComponenteDoDia(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarComponenteDoDia(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o componente com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 function buscarTipo(req,res){
     var fkHospital = req.params.fkHospital
     sofhiaModel.buscarTipo(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarTipoDoDia(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarTipoDoDia(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarTipoDaSemana(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarTipoDaSemana(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -192,7 +243,10 @@ function buscarSemanal(req,res){
 module.exports = {
     buscarHospitais,
     buscarComponente,
+    buscarComponenteDoDia,
     buscarTipo,
+    buscarTipoDoDia,
+    buscarTipoDaSemana,
     buscarModelo,
     buscarAlertas,
     listarHospitais,

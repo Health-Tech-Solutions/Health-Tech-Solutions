@@ -68,17 +68,6 @@ function buscarHospitais() {
         FROM vw_chamados
         GROUP BY hospital;
     `
-
-    // else {
-    //     instrucao = `
-    //     SELECT COUNT(idChamado) AS chamados,
-    //             tipoRegistro AS hospital,
-    //             hospital AS h
-    //     FROM vw_chamados
-    //     WHERE idHospital = ${fkHospital}
-    //     GROUP BY hospital, tipoRegistro;
-    //     `
-    // }
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
@@ -113,6 +102,38 @@ function buscarComponente(fkHospital) {
     }
 }
 
+function buscarComponenteDoDia(fkHospital) {
+    console.log("cheguei aquii")
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE DATE(c.dataHora) = CURDATE() 
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+    `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE idHospital = ${fkHospital}
+            AND DATE(c.dataHora) = CURDATE() 
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
 function buscarTipo(fkHospital) {
     if (fkHospital == "null") {
         const instrucao = `
@@ -132,6 +153,63 @@ function buscarTipo(fkHospital) {
             tipo 
             FROM vw_chamados 
             WHERE idHospital = ${fkHospital}
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarTipoDoDia(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) = CURDATE() 
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} AND DATE(c.dataHora) = CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarTipoDaSemana(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
             GROUP BY tipo
             ORDER BY numeroChamados DESC LIMIT 1;
         `
@@ -331,7 +409,10 @@ function buscarAno(fkHospital) {
 module.exports = {
     buscarHospitais,
     buscarComponente,
+    buscarComponenteDoDia,
     buscarTipo,
+    buscarTipoDoDia,
+    buscarTipoDaSemana,
     buscarModelo,
     listarHospitais,
     buscarAlertaComponente,

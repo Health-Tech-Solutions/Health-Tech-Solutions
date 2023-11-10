@@ -11,8 +11,20 @@ router.get("/buscarComponente/:fkHospital", function(req,res){
     sofhiaController.buscarComponente(req,res);
 })
 
+router.get("/buscarComponenteDoDia/:fkHospital", function(req,res){
+    sofhiaController.buscarComponenteDoDia(req,res);
+})
+
 router.get("/buscarTipo/:fkHospital", function(req,res){
     sofhiaController.buscarTipo(req,res);
+})
+
+router.get("/buscarTipoDoDia/:fkHospital", function(req,res){
+    sofhiaController.buscarTipoDoDia(req,res);
+})
+
+router.get("/buscarTipoDaSemana/:fkHospital", function(req,res){
+    sofhiaController.buscarTipoDaSemana(req,res);
 })
 
 router.get("/buscarModelo/:fkHospital", function(req,res){

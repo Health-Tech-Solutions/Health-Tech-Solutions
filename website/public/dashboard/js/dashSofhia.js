@@ -18,9 +18,67 @@ function chamarComponenteComMaisAlertas(fkHospital) {
         });
 }
 
+function chamarComponenteComMaisAlertasDoDia(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+                
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
 function chamarTipoComMaisAlertas(fkHospital) {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarTipo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                
+                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarTipoComMaisAlertasDoDia(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarTipoDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                
+                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarTipoComMaisAlertasDaSemana(fkHospital) {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarTipoDaSemana/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();

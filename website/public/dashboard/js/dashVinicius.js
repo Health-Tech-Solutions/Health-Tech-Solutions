@@ -44,8 +44,6 @@ fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
                 totalMaquinas = resposta[0].totalMaquinas
                 maquinasOperando = resposta[0].maquinasOperando
 
-                console.log(totalMaquinas,maquinasOperando)
-
                 let porcentagemExibicao = (maquinasOperando/totalMaquinas)*100
                 
                 if(totalMaquinas == 0){
@@ -57,27 +55,17 @@ fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
                 } 
 
                 porcentagemMaquinasOperando.innerHTML = porcentagemExibicao.toFixed(2) + '%'
-
-               const barraSize = barraPai.offsetWidth 
-
-               console.log(barraSize * (porcentagemExibicao/100))
-
-               let valorBarra = barraSize * (porcentagemExibicao/100) + 'px'
-
-               
-               console.log(porcentagemExibicao)
                
                 let color 
-
-               if(valorBarra < 60){
-                   color = '#4CAF50'
-                } else if (valorBarra < 80){
+               if(porcentagemExibicao < 60){
+                   color = '#e74a3b'
+                } else if (porcentagemExibicao < 80){
                     color = '#FFC107'
                 } else {
-                    color = '#e74a3b'
+                    color = '#4CAF50'
                 }
 
-                barraProgressao.style = `background-color: '${color}'; width: ${valorBarra};`
+                barraProgressao.style = `background: ${color}; width: ${porcentagemExibicao}%;`
 
 
             });
@@ -109,27 +97,6 @@ new Chart(ctx, {
                 beginAtZero: true
             }
         }
-    }
-});
-
-// Grafico de Pie
-
-// Dados de estados das máquinas
-var estados = ["Em Manutenção", "Operando"];
-var quantidades = [15, 85]; // Valores fictícios representando a quantidade de máquinas em cada estado
-
-// Configuração do gráfico de pizza
-var ctx2 = document.getElementById('estadoDasMaquinas').getContext('2d');
-var chart = new Chart(ctx2, {
-    type: 'pie',
-    data: {
-        datasets: [{
-            data: quantidades,
-            backgroundColor: ['#e74a3b', '#4CAF50'],
-        }]
-    },
-    options: {
-        // Insira opções adicionais aqui, se necessário
     }
 });
 
@@ -207,4 +174,52 @@ function obterChamadosEmAberto() {
             console.log("ERRO " + erro)
         }
         )
+}
+
+const configPie = document.getElementById('chartPie');
+
+var dadosPie = {
+    labels: ['Aberto', 'Fechados'],
+    datasets: [{
+        label: '',
+        data: [],
+        backgroundColor: [
+            '#e74a3b',
+            '#1cc88a'
+        ],
+        borderWidth: 1
+    }]
+}
+
+var chartPie = new Chart(configPie, {
+    type: 'pie',
+    data: dadosPie,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                display: false
+
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+function plotarDadosPie(resposta) {
+    for (let index = 0; index < resposta.length; index++) {
+        let abertos = resposta[index].Abertos;
+        let fechados = resposta[index].Fechados;
+
+        dadosPie.datasets[0].data.push(abertos)
+        dadosPie.datasets[0].data.push(fechados)
+        totalChamados.innerHTML = abertos
+    }
+
+    chartPie.update()
+
 }

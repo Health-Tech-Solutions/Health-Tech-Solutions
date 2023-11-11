@@ -1,23 +1,3 @@
-function chamarComponenteComMaisAlertas() {
-    // alert('heheheheheh')
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarComponente/${fkHospital}`, { cache: 'no-store' })
-    .then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
-}
-
 function chamarComponenteComMaisAlertasDoDia() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
@@ -38,15 +18,56 @@ function chamarComponenteComMaisAlertasDoDia() {
         });
 }
 
-function chamarTipoComMaisAlertas() {
+function chamarComponenteComMaisAlertasDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarTipo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/sofhiaRoute/buscarComponenteDaSemana/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
                 
-                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarComponenteComMaisAlertasDoMes() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarComponenteDoMes/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+                
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarComponenteComMaisAlertasDoAno() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarComponenteDoAno/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+                
+
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -133,9 +154,9 @@ function chamarTipoComMaisAlertasDoAno() {
         });
 }
 
-function chamarModeloComMaisAlertas() {
+function chamarModeloComMaisAlertasDoDia() {
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarModelo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/sofhiaRoute/buscarModeloDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
@@ -152,6 +173,62 @@ function chamarModeloComMaisAlertas() {
         });
 }
 
+function chamarModeloComMaisAlertasDaSemana() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarModeloDaSemana/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarModeloComMaisAlertasDoMes() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarModeloDoMes/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarModeloComMaisAlertasDoAno() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarModeloDoAno/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
 
 // function mudarTituloGraficoBarras(fkHospital) {
 //     var fkHospital = sessionStorage.FK_HOSPITAL

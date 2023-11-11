@@ -7,16 +7,20 @@ router.get("/buscarHospitais", function(req,res){
     sofhiaController.buscarHospitais(req,res);
 })
 
-router.get("/buscarComponente/:fkHospital", function(req,res){
-    sofhiaController.buscarComponente(req,res);
-})
-
 router.get("/buscarComponenteDoDia/:fkHospital", function(req,res){
     sofhiaController.buscarComponenteDoDia(req,res);
 })
 
-router.get("/buscarTipo/:fkHospital", function(req,res){
-    sofhiaController.buscarTipo(req,res);
+router.get("/buscarComponenteDaSemana/:fkHospital", function(req,res){
+    sofhiaController.buscarComponenteDaSemana(req,res);
+})
+
+router.get("/buscarComponenteDoMes/:fkHospital", function(req,res){
+    sofhiaController.buscarComponenteDoMes(req,res);
+})
+
+router.get("/buscarComponenteDoAno/:fkHospital", function(req,res){
+    sofhiaController.buscarComponenteDoAno(req,res);
 })
 
 router.get("/buscarTipoDoDia/:fkHospital", function(req,res){
@@ -35,8 +39,20 @@ router.get("/buscarTipoDoAno/:fkHospital", function(req,res){
     sofhiaController.buscarTipoDoAno(req,res);
 })
 
-router.get("/buscarModelo/:fkHospital", function(req,res){
-    sofhiaController.buscarModelo(req,res);
+router.get("/buscarModeloDoDia/:fkHospital", function(req,res){
+    sofhiaController.buscarModeloDoDia(req,res);
+})
+
+router.get("/buscarModeloDaSemana/:fkHospital", function(req,res){
+    sofhiaController.buscarModeloDaSemana(req,res);
+})
+
+router.get("/buscarModeloDoMes/:fkHospital", function(req,res){
+    sofhiaController.buscarModeloDoMes(req,res);
+})
+
+router.get("/buscarModeloDoAno/:fkHospital", function(req,res){
+    sofhiaController.buscarModeloDoAno(req,res);
 })
 
 router.get("/buscarAlertas", function(req,res){

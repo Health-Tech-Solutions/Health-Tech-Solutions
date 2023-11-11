@@ -433,7 +433,7 @@ function listarHospitais() {
     return database.executar(instrucao)
 }
 
-function buscarAlertaComponente(fkHospital) {
+function buscarAlertaComponenteDoDia(fkHospital) {
     if(fkHospital == "null") {
         var instrucao = `
         SELECT 
@@ -441,7 +441,8 @@ function buscarAlertaComponente(fkHospital) {
             SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
             SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
         FROM peca p
-        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca;
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora = CURDATE();
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
@@ -454,13 +455,99 @@ function buscarAlertaComponente(fkHospital) {
             SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
         FROM peca p
         LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
-        WHERE c.idHospital = ${fkHospital};
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora = CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }   
+}
+
+function buscarAlertaComponenteDaSemana(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE();
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
     }
+}
 
-    
+function buscarAlertaComponenteDoMes(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }
+}
+
+function buscarAlertaComponenteDoAno(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }
 }
 
 function obterAlertasDoDia(fkHospital) {
@@ -602,7 +689,10 @@ module.exports = {
     buscarModeloDoMes,
     buscarModeloDoAno,
     listarHospitais,
-    buscarAlertaComponente,
+    buscarAlertaComponenteDoDia,
+    buscarAlertaComponenteDaSemana,
+    buscarAlertaComponenteDoMes,
+    buscarAlertaComponenteDoAno,
     buscarMensal,
     buscarSemanal
 }

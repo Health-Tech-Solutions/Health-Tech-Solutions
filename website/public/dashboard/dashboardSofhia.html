@@ -472,9 +472,10 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item" onclick="obterDadosSemanal()">do Mês</a>
-                                                <a class="dropdown-item" onclick="obterDadosMensais()">do Ano</a>
-                                                
+                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDoDia()">do Dia</a>
+                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDaSemana()">da Semana</a>
+                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDoMes()">dos últimos 30 dias</a>
+                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDoAno()">dos últimos 365 dias</a>
                                             </div>
                                         </div>
                                     </div>
@@ -622,7 +623,7 @@
         chamarModeloComMaisAlertasDoDia(),
         mostrarDados(),
         obterDadosSemanal(),
-        buscarAlertasDosComponentes(),
+        buscarAlertasDosComponentesDoDia(),
         obterDadosGraficoBarra(),
         obterDadosGrafico()
     }

@@ -33,9 +33,66 @@ var graficoPizza = new Chart(configPie, {
     }
 });
 
-function buscarAlertasDosComponentes(fkHospital) {
+function buscarAlertasDosComponentesDoDia() {
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarAlertaComponente/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/sofhiaRoute/buscarAlertaComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoPizza(resposta)
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function buscarAlertasDosComponentesDaSemana() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarAlertaComponenteDaSemana/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoPizza(resposta)
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function buscarAlertasDosComponentesDoMes() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarAlertaComponenteDoMes/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoPizza(resposta)
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function buscarAlertasDosComponentesDoAno() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarAlertaComponenteDoAno/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();

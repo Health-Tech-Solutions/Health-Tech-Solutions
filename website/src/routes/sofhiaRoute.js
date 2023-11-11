@@ -63,8 +63,20 @@ router.get("/listarHospitais", function(req,res){
     sofhiaController.listarHospitais(req,res);
 })
 
-router.get("/buscarAlertaComponente/:fkHospital", function(req,res){
-    sofhiaController.buscarAlertaComponente(req,res);
+router.get("/buscarAlertaComponenteDoDia/:fkHospital", function(req,res){
+    sofhiaController.buscarAlertaComponenteDoDia(req,res);
+})
+
+router.get("/buscarAlertaComponenteDaSemana/:fkHospital", function(req,res){
+    sofhiaController.buscarAlertaComponenteDaSemana(req,res);
+})
+
+router.get("/buscarAlertaComponenteDoMes/:fkHospital", function(req,res){
+    sofhiaController.buscarAlertaComponenteDoMes(req,res);
+})
+
+router.get("/buscarAlertaComponenteDoAno/:fkHospital", function(req,res){
+    sofhiaController.buscarAlertaComponenteDoAno(req,res);
 })
 
 router.get("/buscarMensal/:fkHospital", function(req,res){

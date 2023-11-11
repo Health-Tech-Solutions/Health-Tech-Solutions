@@ -289,9 +289,60 @@ function listarHospitais(req,res){
         })
 }
 
-function buscarAlertaComponente(req,res){
+function buscarAlertaComponenteDoDia(req,res){
     var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarAlertaComponente(fkHospital)
+    sofhiaModel.buscarAlertaComponenteDoDia(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarAlertaComponenteDaSemana(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponenteDaSemana(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarAlertaComponenteDoMes(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponenteDoMes(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarAlertaComponenteDoAno(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponenteDoAno(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -358,7 +409,10 @@ module.exports = {
     buscarModeloDoAno,
     buscarAlertas,
     listarHospitais,
-    buscarAlertaComponente,
+    buscarAlertaComponenteDoDia,
+    buscarAlertaComponenteDaSemana,
+    buscarAlertaComponenteDoMes,
+    buscarAlertaComponenteDoAno,
     buscarMensal,
     buscarSemanal
 }

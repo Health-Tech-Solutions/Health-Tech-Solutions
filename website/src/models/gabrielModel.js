@@ -12,6 +12,7 @@ function listarTiposMaquinas(){
 
 
  function listarMeses(){
+    
      const instrucao = `
      select month(dataTemperatura) as mes from dadosTemperatura group by mes order by mes desc;
      `
@@ -141,6 +142,17 @@ join tipo on fkTipo = idTipo where year(dataHora) = 2023;
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
+
+
+function listarMaquina(fkHospital){
+  
+     var instrucao = `
+     select idMaquinario, nome from maquinario join modelo on fkModelo = idModelo join tipo on fkTipo = idTipo where fkHospital = ${fkHospital} order by idMaquinario;
+     `
+
+    return database.executar(instrucao)
+}
+
 
 
 //Gráficos
@@ -312,6 +324,7 @@ module.exports = {
     listarMeses,
     mediaTemperatura,
     mediaDesempenho,
+    listarMaquina,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     graficoLinha,

@@ -83,6 +83,25 @@ gabrielModel.mediaDesempenho(idMes, fkHospital, idTipo)
 }
 
 
+function listarMaquina(req, res) {
+    var fkHospital = req.params.fkHospital
+    gabrielModel.listarMaquina(fkHospital)
+        .then((resultado) => {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao procurar as maquina: ", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+
+
 //GRÁFICOS
 
 
@@ -176,6 +195,7 @@ module.exports = {
     listarMeses,
     mediaTemperatura,
     mediaDesempenho,
+    listarMaquina,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     graficoLinha,

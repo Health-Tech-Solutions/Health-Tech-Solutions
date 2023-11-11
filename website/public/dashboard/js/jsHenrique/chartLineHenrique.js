@@ -119,3 +119,14 @@ var lineChart = new Chart(ctx, {
 });
 
 
+function predicao(){
+    var dadosReais = dados.datasets[0].data
+    var vetorAux = []
+    for(let i = 0; i < dadosReais.length; i++){
+        let formula = dadosReais[i] - 16.6  + 2 * i
+        vetorAux.push(formula)
+}
+dados.datasets[0].data = vetorAux
+lineChart.update()
+
+}

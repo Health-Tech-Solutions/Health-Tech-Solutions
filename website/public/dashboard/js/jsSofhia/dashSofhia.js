@@ -1,5 +1,5 @@
 function chamarComponenteComMaisAlertas() {
-    alert('heheheheheh')
+    // alert('heheheheheh')
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarComponente/${fkHospital}`, { cache: 'no-store' })
     .then(function (response) {
@@ -18,7 +18,7 @@ function chamarComponenteComMaisAlertas() {
         });
 }
 
-function chamarComponenteComMaisAlertasDoDia(fkHospital) {
+function chamarComponenteComMaisAlertasDoDia() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
@@ -38,7 +38,7 @@ function chamarComponenteComMaisAlertasDoDia(fkHospital) {
         });
 }
 
-function chamarTipoComMaisAlertas(fkHospital) {
+function chamarTipoComMaisAlertas() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarTipo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
@@ -57,7 +57,7 @@ function chamarTipoComMaisAlertas(fkHospital) {
         });
 }
 
-function chamarTipoComMaisAlertasDoDia(fkHospital) {
+function chamarTipoComMaisAlertasDoDia() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarTipoDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
@@ -76,7 +76,7 @@ function chamarTipoComMaisAlertasDoDia(fkHospital) {
         });
 }
 
-function chamarTipoComMaisAlertasDaSemana(fkHospital) {
+function chamarTipoComMaisAlertasDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarTipoDaSemana/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
@@ -95,7 +95,7 @@ function chamarTipoComMaisAlertasDaSemana(fkHospital) {
         });
 }
 
-function chamarModeloComMaisAlertas(fkHospital) {
+function chamarModeloComMaisAlertas() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarModelo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {

@@ -54,7 +54,6 @@ function buscarAlertasDosComponentes(fkHospital) {
 
 function plotarGraficoPizza(resposta){
     let labels = []
-    let cores = []
     dadosPizza.labels = labels
     dadosPizza.datasets[0].data = []
 

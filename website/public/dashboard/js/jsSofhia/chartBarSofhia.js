@@ -38,6 +38,11 @@ function obterDadosGraficoBarraDoDia() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
+
+                graficoBarrasDia.style.backgroundColor = "#d3d3d3"
+                graficoBarrasSemana.style.backgroundColor = ""
+                graficoBarrasMes.style.backgroundColor = ""
+                graficoBarrasAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -56,6 +61,11 @@ function obterDadosGraficoBarraDaSemana() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
+
+                graficoBarrasDia.style.backgroundColor = ""
+                graficoBarrasSemana.style.backgroundColor = "#d3d3d3"
+                graficoBarrasMes.style.backgroundColor = ""
+                graficoBarrasAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -74,6 +84,11 @@ function obterDadosGraficoBarraDoMes() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
+
+                graficoBarrasDia.style.backgroundColor = ""
+                graficoBarrasSemana.style.backgroundColor = ""
+                graficoBarrasMes.style.backgroundColor = "#d3d3d3"
+                graficoBarrasAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -92,6 +107,11 @@ function obterDadosGraficoBarraDoAno() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
+
+                graficoBarrasDia.style.backgroundColor = ""
+                graficoBarrasSemana.style.backgroundColor = ""
+                graficoBarrasMes.style.backgroundColor = ""
+                graficoBarrasAno.style.backgroundColor = "#d3d3d3"
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

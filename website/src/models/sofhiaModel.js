@@ -218,6 +218,64 @@ function buscarTipoDaSemana(fkHospital) {
     }
 }
 
+function buscarTipoDoMes(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarTipoDoAno(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
 function buscarModelo(fkHospital) {
     if (fkHospital == "null") {
         const instrucao = `
@@ -413,6 +471,8 @@ module.exports = {
     // buscarTipo,
     buscarTipoDoDia,
     buscarTipoDaSemana,
+    buscarTipoDoMes,
+    buscarTipoDoAno,
     buscarModelo,
     listarHospitais,
     buscarAlertaComponente,

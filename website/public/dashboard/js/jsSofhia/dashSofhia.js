@@ -95,6 +95,44 @@ function chamarTipoComMaisAlertasDaSemana() {
         });
 }
 
+function chamarTipoComMaisAlertasDoMes() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarTipoDoMes/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                
+                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
+function chamarTipoComMaisAlertasDoAno() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarTipoDoAno/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                
+                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+}
+
 function chamarModeloComMaisAlertas() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarModelo/${fkHospital}`, { cache: 'no-store' }).then(function (response) {

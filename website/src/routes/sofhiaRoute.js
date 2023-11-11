@@ -27,6 +27,14 @@ router.get("/buscarTipoDaSemana/:fkHospital", function(req,res){
     sofhiaController.buscarTipoDaSemana(req,res);
 })
 
+router.get("/buscarTipoDoMes/:fkHospital", function(req,res){
+    sofhiaController.buscarTipoDoMes(req,res);
+})
+
+router.get("/buscarTipoDoAno/:fkHospital", function(req,res){
+    sofhiaController.buscarTipoDoAno(req,res);
+})
+
 router.get("/buscarModelo/:fkHospital", function(req,res){
     sofhiaController.buscarModelo(req,res);
 })

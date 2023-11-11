@@ -138,6 +138,40 @@ function buscarTipoDaSemana(req,res){
         })
 }
 
+function buscarTipoDoMes(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarTipoDoMes(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarTipoDoAno(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarTipoDoAno(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 function buscarModelo(req,res){
     var fkHospital = req.params.fkHospital
     sofhiaModel.buscarModelo(fkHospital)
@@ -247,6 +281,8 @@ module.exports = {
     buscarTipo,
     buscarTipoDoDia,
     buscarTipoDaSemana,
+    buscarTipoDoMes,
+    buscarTipoDoAno,
     buscarModelo,
     buscarAlertas,
     listarHospitais,

@@ -192,12 +192,32 @@ function totalMaquinasPorTipo(fkHospital) {
 }
 
 
-function graficoLinha(fkHospital,tempGraficoLinha){
-    var instrucao = `
-    select dataTemperatura , round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor from registro join dadosTemperatura 
-on dataHora = dataTemperatura where fkMaquina = 5 and month(dataTemperatura) < 7 group by dataTemperatura, valor;
-    `
+function graficoLinha(fkHospital){
 
+
+    if (fkHospital == "null") {
+        var instrucao = `
+    select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
+    from registro 
+    join maquinario on registro.fkMaquina = idMaquinario 
+    join empresa on maquinario.fkHospital = idEmpresa 
+    join dadosTemperatura on dataHora = dataTemperatura  
+    where month(dataTemperatura) < 7
+    group by fkHospital, fkMaquina, dataTemperatura, valor;
+    `
+    }else{
+        var instrucao = `
+        select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
+        from registro 
+        join maquinario on registro.fkMaquina = idMaquinario 
+        join empresa on maquinario.fkHospital = idEmpresa 
+        join dadosTemperatura on dataHora = dataTemperatura  
+        where fkMaquina = 5 and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
+        group by fkHospital, fkMaquina, dataTemperatura, valor;
+        `
+    }
+
+    
 
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)

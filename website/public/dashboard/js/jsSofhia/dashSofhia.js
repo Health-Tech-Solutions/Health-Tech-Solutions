@@ -6,6 +6,11 @@ function chamarComponenteComMaisAlertasDoDia() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+
+                    componenteDia.style.backgroundColor = "#d3d3d3"
+                    componenteSemana.style.backgroundColor = ""
+                    componenteMes.style.backgroundColor = ""
+                    componenteAno.style.backgroundColor = ""
                 
 
             });
@@ -26,8 +31,11 @@ function chamarComponenteComMaisAlertasDaSemana() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
-                
 
+                    componenteDia.style.backgroundColor = ""
+                    componenteSemana.style.backgroundColor = "#d3d3d3"
+                    componenteMes.style.backgroundColor = ""
+                    componenteAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -46,8 +54,11 @@ function chamarComponenteComMaisAlertasDoMes() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
-                
 
+                    componenteDia.style.backgroundColor = ""
+                    componenteSemana.style.backgroundColor = ""
+                    componenteMes.style.backgroundColor = "#d3d3d3"
+                    componenteAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -67,7 +78,10 @@ function chamarComponenteComMaisAlertasDoAno() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
                 
-
+                    componenteDia.style.backgroundColor = ""
+                    componenteSemana.style.backgroundColor = ""
+                    componenteMes.style.backgroundColor = ""
+                    componenteAno.style.backgroundColor = "#d3d3d3"
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -87,6 +101,11 @@ function chamarTipoComMaisAlertasDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+                    tipoDia.style.backgroundColor = "#d3d3d3"
+                    tipoSemana.style.backgroundColor = ""
+                    tipoMes.style.backgroundColor = ""
+                    tipoAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -106,6 +125,11 @@ function chamarTipoComMaisAlertasDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+                    tipoDia.style.backgroundColor = ""
+                    tipoSemana.style.backgroundColor = "#d3d3d3"
+                    tipoMes.style.backgroundColor = ""
+                    tipoAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -125,6 +149,11 @@ function chamarTipoComMaisAlertasDoMes() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+                    tipoDia.style.backgroundColor = ""
+                    tipoSemana.style.backgroundColor = ""
+                    tipoMes.style.backgroundColor = "#d3d3d3"
+                    tipoAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -144,6 +173,11 @@ function chamarTipoComMaisAlertasDoAno() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+                    tipoDia.style.backgroundColor = ""
+                    tipoSemana.style.backgroundColor = ""
+                    tipoMes.style.backgroundColor = ""
+                    tipoAno.style.backgroundColor = "#d3d3d3"
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -163,6 +197,11 @@ function chamarModeloComMaisAlertasDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+
+                modeloDia.style.backgroundColor = "#d3d3d3"
+                modeloSemana.style.backgroundColor = ""
+                modeloMes.style.backgroundColor = ""
+                modeloAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -182,6 +221,11 @@ function chamarModeloComMaisAlertasDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+
+                modeloDia.style.backgroundColor = ""
+                modeloSemana.style.backgroundColor = "#d3d3d3"
+                modeloMes.style.backgroundColor = ""
+                modeloAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -201,6 +245,11 @@ function chamarModeloComMaisAlertasDoMes() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+
+                modeloDia.style.backgroundColor = ""
+                modeloSemana.style.backgroundColor = ""
+                modeloMes.style.backgroundColor = "#d3d3d3"
+                modeloAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -220,6 +269,11 @@ function chamarModeloComMaisAlertasDoAno() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+
+                modeloDia.style.backgroundColor = ""
+                modeloSemana.style.backgroundColor = ""
+                modeloMes.style.backgroundColor = ""
+                modeloAno.style.backgroundColor = "#d3d3d3"
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

@@ -16,6 +16,7 @@ function chamarComponenteComMaisAlertas() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+ 
 }
 
 function chamarComponenteComMaisAlertasDoDia(fkHospital) {

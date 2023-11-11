@@ -14,10 +14,18 @@ if (sessionStorage.nomeMes == undefined) {
 if (sessionStorage.idTipo == undefined) {
     sessionStorage.idTipo = 'null'
 }
+if (sessionStorage.maquina == undefined) {
+    sessionStorage.maquina = 'null'
+}
+if (sessionStorage.nomeTipo == undefined) {
+    sessionStorage.nomeTipo = 'Todos'
+}
+
 
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
 OpcoesMaquinas.innerHTML = `<option class="dropdown-item1"  value = "${sessionStorage.idTipo}" >${sessionStorage.tipo}</option>`
 OpcoesMeses.innerHTML = `<option class="dropdown-item2"  value = "${sessionStorage.mes}" >${sessionStorage.nomeMes}</option>`
+listarMaquinas.innerHTML = `<option class="dropdown-item3"  value = "${sessionStorage.maquina};${sessionStorage.nomeTipo}" >${sessionStorage.maquina}/${sessionStorage.nomeTipo}</option>`
 
 
 function listarHospitais(){
@@ -609,4 +617,56 @@ function mediaDesempenho(){
             console.log("ERRO" + err)
         })
 
+}
+
+
+function listarMaquina(){
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/gabrielRoutes/listarMaquina/${fkHospital}`)
+    .then(  
+        function(resposta){
+            if(resposta.ok){
+                resposta.json()
+                .then(
+
+                    function(resposta){
+                        var maquina = resposta
+                        console.log("LISTANDO MÁQUINA:")
+                        console.log(maquina)
+                        
+                         listarMaquinas.innerHTML = `<option class="dropdown-item3"  value = "null;null">Escolher máquina</option>`; 
+                         listarMaquinas.innerHTML += `<option class="dropdown-item3"  value = "${listarMaquinas.value}" >Todos</option>`; 
+                         for (let i = 0; i < resposta.length; i++) {
+                             let maquina = resposta[i].idMaquinario
+                             let nomeTipo = resposta[i].nome
+                             listarMaquinas.innerHTML += `<option class="dropdown-item3"  value = "${maquina};${nomeTipo}" >${maquina}/${nomeTipo}</option>` 
+                         }
+                        
+                    }
+                )
+            }
+        }
+    )
+    .catch(
+        err => {
+            console.log("ERRO" + err)
+        }
+    )
+}
+
+function trocarMaquina(){  
+    console.log("VAAAAAAAAAAAAAAAAAIIIIIIIIIIIIIIII")
+    let teste = listarMaquinas.value.split(';')
+    let maquina = teste[0]
+    console.log("MAAAAAAAQUIIIIIIIIINAAAAAAAAAAAAAAAAAAAAA")
+    console.log(maquina)
+    let nomeTipo = teste[1]
+    console.log(nomeTipo)
+    if(nomeTipo == 'null'){
+        nomeTipo = 'Todos'
+    }
+    console.log(teste, maquina, nomeTipo)
+    sessionStorage.maquina = maquina
+    sessionStorage.nomeTipo = nomeTipo
+    location.reload()
 }

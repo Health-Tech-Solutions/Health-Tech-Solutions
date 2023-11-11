@@ -24,6 +24,10 @@ router.get("/mediaDesempenho/:idMes/:fkHospital/:idTipo", (req,res) => {
     gabrielController.mediaDesempenho(req,res)
 })
 
+router.get("/listarMaquina/:fkHospital", (req,res) => {
+    gabrielController.listarMaquina(req,res)
+})
+
 //Gráficos
 
 router.get("/totalMaquinasPorTipoChamadoAberto/:fkHospital/:hospital", (req,res) => {
@@ -34,7 +38,7 @@ router.get("/totalMaquinasPorTipo/:fkHospital", (req,res) => {
     gabrielController.totalMaquinasPorTipo(req,res)
 })
 
-router.get("/graficoLinha/:fkHospital", function(req,res){
+router.get("/graficoLinha/:fkHospital/:tempGraficoLinha", function(req,res){
     gabrielController.graficoLinha(req,res);
 })
 

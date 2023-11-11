@@ -26,9 +26,7 @@
 
     </head>
 
-        <body id="page-top" onload="
-          funcoes()  
-        ">
+        <body id="page-top" onload="funcoes()">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -363,11 +361,11 @@
                                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-header">Escolha:</div>
-                                                    <a class="dropdown-item" onclick="chamarComponenteComMaisAlertasDoDia()">de Hoje</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                    <div class="dropdown-header">Alertas:</div>
+                                                    <a class="dropdown-item" id="componenteDia" onclick="chamarComponenteComMaisAlertasDoDia()">de Hoje</a>
+                                                    <a class="dropdown-item" id="componenteSemana" onclick="chamarComponenteComMaisAlertasDaSemana()">da Semana</a>
+                                                    <a class="dropdown-item" id="componenteMes" onclick="chamarComponenteComMaisAlertasDoMes()">dos últimos 30 dias</a>
+                                                    <a class="dropdown-item" id="componenteAno"  onclick="chamarComponenteComMaisAlertasDoAno()">dos últimos 365 dias</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -392,9 +390,11 @@
                                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-header">Escolha:</div>
-                                                    <a class="dropdown-item" onclick="chamarTipoComMaisAlertasDoDia()">de Hoje</a>
-                                                    <a class="dropdown-item" onclick="chamarTipoComMaisAlertasDaSemana()">da Semana</a>
+                                                    <div class="dropdown-header">Alertas:</div>
+                                                    <a class="dropdown-item" id="tipoDia" onclick="chamarTipoComMaisAlertasDoDia()">de Hoje</a>
+                                                    <a class="dropdown-item" id="tipoSemana" onclick="chamarTipoComMaisAlertasDaSemana()">da Semana</a>
+                                                    <a class="dropdown-item" id="tipoMes" onclick="chamarTipoComMaisAlertasDoMes()">dos últimos 30 dias</a>
+                                                    <a class="dropdown-item" id="tipoAno" onclick="chamarTipoComMaisAlertasDoAno()">dos últimos 365 dias</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -420,11 +420,12 @@
                                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                    <div class="dropdown-header">Dropdown Header:</div>
-                                                    <a class="dropdown-item" href="#">Action</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                    <div class="dropdown-header">Alertas:</div>
+                                                    <a class="dropdown-item" id="modeloDia" onclick="chamarModeloComMaisAlertasDoDia()">de Hoje</a>
+                                                    <a class="dropdown-item" id="modeloSemana" onclick="chamarModeloComMaisAlertasDaSemana()">da Semana</a>
+                                                    <a class="dropdown-item" id="modeloMes" onclick="chamarModeloComMaisAlertasDoMes()">dos últimos 30 dias</a>
+                                                    <a class="dropdown-item" id="modeloAno"
+                                                    onclick="chamarModeloComMaisAlertasDoAno()">dos últimos 365 dias</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -446,8 +447,8 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item" onclick="obterDadosSemanal()">do Mês</a>
-                                                <a class="dropdown-item" onclick="obterDadosMensais()">do Ano</a>
+                                                <a class="dropdown-item" id="graficoLinhaMes" onclick="obterDadosSemanal()">do Mês</a>
+                                                <a class="dropdown-item" id="graficoLinhaAno" onclick="obterDadosMensais()">do Ano</a>
                                                 
                                             </div>
                                         </div>
@@ -472,9 +473,10 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item" onclick="obterDadosSemanal()">do Mês</a>
-                                                <a class="dropdown-item" onclick="obterDadosMensais()">do Ano</a>
-                                                
+                                                <a class="dropdown-item" id="graficoPizzaDia"  onclick="buscarAlertasDosComponentesDoDia()">do Dia</a>
+                                                <a class="dropdown-item" id="graficoPizzaSemana" onclick="buscarAlertasDosComponentesDaSemana()">da Semana</a>
+                                                <a class="dropdown-item" id="graficoPizzaMes" onclick="buscarAlertasDosComponentesDoMes()">dos últimos 30 dias</a>
+                                                <a class="dropdown-item" id="graficoPizzaAno" onclick="buscarAlertasDosComponentesDoAno()">dos últimos 365 dias</a>
                                             </div>
                                         </div>
                                     </div>
@@ -517,11 +519,11 @@
                                                 <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="dropdown-header">Alertas:</div>
+                                                <a class="dropdown-item" id="graficoBarrasDia" onclick="obterDadosGraficoBarraDoDia()">de Hoje</a>
+                                                <a class="dropdown-item" id="graficoBarrasSemana" onclick="obterDadosGraficoBarraDaSemana()">da Semana</a>
+                                                <a class="dropdown-item" id="graficoBarrasMes" onclick="obterDadosGraficoBarraDoMes()">dos últimos 30 dias</a>
+                                                <a class="dropdown-item" id="graficoBarrasAno" onclick="obterDadosGraficoBarraDoAno()">dos últimos 365 dias</a>
                                             </div>
                                         </div>
                                     </div>
@@ -614,21 +616,23 @@
 
 <script>
     nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
-    function funcoes(){
-        chamarComponenteComMaisAlertas(),
-            chamarTipoComMaisAlertas(),
-            chamarModeloComMaisAlertas(),
-            mostrarDados(),
-            obterDadosMensais(),
-            buscarAlertasDosComponentes(),
-            obterDadosGraficoBarra(),
-            obterDadosGrafico()
+
+    function funcoes() {
+        chamarComponenteComMaisAlertasDoDia(),
+        // chamarTipoComMaisAlertas(),
+        chamarTipoComMaisAlertasDoDia(),
+        chamarModeloComMaisAlertasDoDia(),
+        mostrarDados(),
+        obterDadosSemanal(),
+        buscarAlertasDosComponentesDoDia(),
+        obterDadosGraficoBarraDoDia(),
+        obterDadosGrafico()
     }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/dados.js"></script>
-<script src="js/dashSofhia.js"></script>
-<script src="js/chartPieSofhia.js"></script>
-<script src="js/chartBarSofhia.js"></script>
-<script src="js/chartLineSofhia.js"></script>
+<script src="js/jsSofhia/dashSofhia.js"></script>
+<script src="js/jsSofhia/chartBarSofhia.js"></script>
+<script src="js/jsSofhia/chartPieSofhia.js"></script>
+<script src="js/jsSofhia/chartLineSofhia.js"></script>

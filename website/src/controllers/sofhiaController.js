@@ -35,10 +35,8 @@ function buscarSemanal(req,res){
         })
 }
 
-
-function buscarHospitais(req,res){
-    // var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarHospitais()
+function buscarHospitaisDoDia(req,res){
+    sofhiaModel.buscarHospitaisDoDia()
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -53,9 +51,8 @@ function buscarHospitais(req,res){
         })
 }
 
-function buscarComponente(req,res){
-    var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarComponente(fkHospital)
+function buscarHospitaisDaSemana(req,res){
+    sofhiaModel.buscarHospitaisDaSemana()
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -65,7 +62,39 @@ function buscarComponente(req,res){
         })
         .catch(function (erro){
             console.log(erro);
-            console.log("Houve um erro ao buscar o componente com mais chamados", erro.sqlMessage)
+            console.log("Houve um erro ao buscar os chamados de cada hospital", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarHospitaisDoMes(req,res){
+    sofhiaModel.buscarHospitaisDoMes()
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar os chamados de cada hospital", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarHospitaisDoAno(req,res){
+    sofhiaModel.buscarHospitaisDoAno()
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar os chamados de cada hospital", erro.sqlMessage)
             res.status(500).json(erro.sqlMessage)
         })
 }
@@ -87,9 +116,9 @@ function buscarComponenteDoDia(req,res){
         })
 }
 
-function buscarTipo(req,res){
+function buscarComponenteDaSemana(req,res){
     var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarTipo(fkHospital)
+    sofhiaModel.buscarComponenteDaSemana(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -99,10 +128,45 @@ function buscarTipo(req,res){
         })
         .catch(function (erro){
             console.log(erro);
-            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            console.log("Houve um erro ao buscar o componente com mais chamados", erro.sqlMessage)
             res.status(500).json(erro.sqlMessage)
         })
 }
+
+function buscarComponenteDoMes(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarComponenteDoMes(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o componente com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarComponenteDoAno(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarComponenteDoAno(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o componente com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
 
 function buscarTipoDoDia(req,res){
     var fkHospital = req.params.fkHospital
@@ -138,9 +202,94 @@ function buscarTipoDaSemana(req,res){
         })
 }
 
-function buscarModelo(req,res){
+function buscarTipoDoMes(req,res){
     var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarModelo(fkHospital)
+    sofhiaModel.buscarTipoDoMes(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarTipoDoAno(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarTipoDoAno(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o tipo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarModeloDoDia(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarModeloDoDia(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o modelo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarModeloDaSemana(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarModeloDaSemana(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o modelo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarModeloDoMes(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarModeloDoMes(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao buscar o modelo com mais chamados", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarModeloDoAno(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarModeloDoAno(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -187,9 +336,60 @@ function listarHospitais(req,res){
         })
 }
 
-function buscarAlertaComponente(req,res){
+function buscarAlertaComponenteDoDia(req,res){
     var fkHospital = req.params.fkHospital
-    sofhiaModel.buscarAlertaComponente(fkHospital)
+    sofhiaModel.buscarAlertaComponenteDoDia(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarAlertaComponenteDaSemana(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponenteDaSemana(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarAlertaComponenteDoMes(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponenteDoMes(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch(function (erro){
+            console.log(erro);
+            console.log("Houve um erro ao listar os hospitais", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
+
+function buscarAlertaComponenteDoAno(req,res){
+    var fkHospital = req.params.fkHospital
+    sofhiaModel.buscarAlertaComponenteDoAno(fkHospital)
         .then((resultado) =>{
             if(resultado.length > 0){
                 res.status(200).json(resultado)
@@ -241,16 +441,28 @@ function buscarSemanal(req,res){
 
 
 module.exports = {
-    buscarHospitais,
-    buscarComponente,
+    buscarHospitaisDoDia,
+    buscarHospitaisDaSemana,
+    buscarHospitaisDoMes,
+    buscarHospitaisDoAno,
     buscarComponenteDoDia,
-    buscarTipo,
+    buscarComponenteDaSemana,
+    buscarComponenteDoMes,
+    buscarComponenteDoAno,
     buscarTipoDoDia,
     buscarTipoDaSemana,
-    buscarModelo,
+    buscarTipoDoMes,
+    buscarTipoDoAno,
+    buscarModeloDoDia,
+    buscarModeloDaSemana,
+    buscarModeloDoMes,
+    buscarModeloDoAno,
     buscarAlertas,
     listarHospitais,
-    buscarAlertaComponente,
+    buscarAlertaComponenteDoDia,
+    buscarAlertaComponenteDaSemana,
+    buscarAlertaComponenteDoMes,
+    buscarAlertaComponenteDoAno,
     buscarMensal,
     buscarSemanal
 }

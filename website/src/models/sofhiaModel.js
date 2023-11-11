@@ -58,52 +58,59 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
-
-
-function buscarHospitais() {
+function buscarHospitaisDoDia() {
     var instrucao = `
         SELECT 
             hospital,
             COUNT(*) AS chamados
-        FROM vw_chamados
+        FROM vw_chamados c
+        WHERE c.dataHora = CURDATE()
         GROUP BY hospital;
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
 
-function buscarComponente(fkHospital) {
-    if (fkHospital == "null") {
-        const instrucao = `
+function buscarHospitaisDaSemana() {
+    var instrucao = `
         SELECT 
-            p.nome AS Nome_da_Peca
-        FROM peca p
-        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
-        WHERE c.estado <> 'fechado'
-        GROUP BY p.nome
-        ORDER BY COUNT(c.idChamado) DESC
-        LIMIT 1;
+            hospital,
+            COUNT(*) AS chamados
+        FROM vw_chamados c
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+        GROUP BY hospital;
     `
-        console.log("Executando a seguinte instrução sql" + instrucao)
-        return database.executar(instrucao)
-    } else {
-        const instrucao = `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarHospitaisDoMes() {
+    var instrucao = `
         SELECT 
-            p.nome AS Nome_da_Peca
-        FROM peca p
-        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
-        WHERE c.idHospital = ${fkHospital} AND c.estado <> 'fechado'
-        GROUP BY p.nome
-        ORDER BY COUNT(c.idChamado) DESC
-        LIMIT 1;
-        `
-        console.log("Executando a seguinte instrução sql" + instrucao)
-        return database.executar(instrucao)
-    }
+            hospital,
+            COUNT(*) AS chamados
+        FROM vw_chamados c
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+        GROUP BY hospital;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarHospitaisDoAno() {
+    var instrucao = `
+        SELECT 
+            hospital,
+            COUNT(*) AS chamados
+        FROM vw_chamados c
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+        GROUP BY hospital;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
 }
 
 function buscarComponenteDoDia(fkHospital) {
-    console.log("cheguei aquii")
     if (fkHospital == "null") {
         const instrucao = `
         SELECT 
@@ -134,27 +141,93 @@ function buscarComponenteDoDia(fkHospital) {
     }
 }
 
-function buscarTipo(fkHospital) {
+function buscarComponenteDaSemana(fkHospital) {
     if (fkHospital == "null") {
         const instrucao = `
         SELECT 
-            COUNT(idChamado) AS numeroChamados,
-            tipo 
-            FROM vw_chamados 
-            GROUP BY tipo
-            ORDER BY numeroChamados DESC LIMIT 1;
-        `
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+    `
         console.log("Executando a seguinte instrução sql" + instrucao)
         return database.executar(instrucao)
     } else {
         const instrucao = `
         SELECT 
-            COUNT(idChamado) AS numeroChamados,
-            tipo 
-            FROM vw_chamados 
-            WHERE idHospital = ${fkHospital}
-            GROUP BY tipo
-            ORDER BY numeroChamados DESC LIMIT 1;
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE idHospital = ${fkHospital}
+            AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE() 
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarComponenteDoMes(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+    `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE idHospital = ${fkHospital}
+            AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE() 
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarComponenteDoAno(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
+    `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            p.nome AS Nome_da_Peca
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE idHospital = ${fkHospital}
+            AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE() 
+        GROUP BY p.nome
+        ORDER BY COUNT(c.idChamado) DESC
+        LIMIT 1;
         `
         console.log("Executando a seguinte instrução sql" + instrucao)
         return database.executar(instrucao)
@@ -218,13 +291,72 @@ function buscarTipoDaSemana(fkHospital) {
     }
 }
 
-function buscarModelo(fkHospital) {
+function buscarTipoDoMes(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarTipoDoAno(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+            GROUP BY tipo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarModeloDoDia(fkHospital) {
     if (fkHospital == "null") {
         const instrucao = `
         SELECT 
             COUNT(idChamado) AS numeroChamados,
             modelo 
-            FROM vw_chamados 
+            FROM vw_chamados c
+            WHERE c.dataHora = CURDATE()
             GROUP BY modelo
             ORDER BY numeroChamados DESC LIMIT 1;
         `
@@ -235,8 +367,96 @@ function buscarModelo(fkHospital) {
         SELECT 
             COUNT(idChamado) AS numeroChamados,
             modelo 
-            FROM vw_chamados 
-            WHERE idHospital = ${fkHospital}
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND c.dataHora = CURDATE()
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarModeloDaSemana(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados c
+            WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarModeloDoMes(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados c
+            WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    }
+}
+
+function buscarModeloDoAno(fkHospital) {
+    if (fkHospital == "null") {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados c
+            WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+            GROUP BY modelo
+            ORDER BY numeroChamados DESC LIMIT 1;
+        `
+        console.log("Executando a seguinte instrução sql" + instrucao)
+        return database.executar(instrucao)
+    } else {
+        const instrucao = `
+        SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            modelo 
+            FROM vw_chamados c
+            WHERE idHospital = ${fkHospital} 
+                AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
             GROUP BY modelo
             ORDER BY numeroChamados DESC LIMIT 1;
         `
@@ -253,7 +473,7 @@ function listarHospitais() {
     return database.executar(instrucao)
 }
 
-function buscarAlertaComponente(fkHospital) {
+function buscarAlertaComponenteDoDia(fkHospital) {
     if(fkHospital == "null") {
         var instrucao = `
         SELECT 
@@ -261,7 +481,8 @@ function buscarAlertaComponente(fkHospital) {
             SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
             SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
         FROM peca p
-        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca;
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora = CURDATE();
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
@@ -274,13 +495,99 @@ function buscarAlertaComponente(fkHospital) {
             SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
         FROM peca p
         LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
-        WHERE c.idHospital = ${fkHospital};
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora = CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }   
+}
+
+function buscarAlertaComponenteDaSemana(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE();
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
     }
+}
 
-    
+function buscarAlertaComponenteDoMes(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }
+}
+
+function buscarAlertaComponenteDoAno(fkHospital) {
+    if(fkHospital == "null") {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    } else {
+        var instrucao = `
+        SELECT 
+            SUM(p.nome = 'CPU') AS Total_de_Chamados_CPU,
+            SUM(p.nome = 'RAM') AS Total_de_Chamados_RAM,
+            SUM(p.nome = 'Disco') AS Total_de_Chamados_Disco
+        FROM peca p
+        LEFT JOIN vw_chamados c ON p.idPeca = c.idPeca
+        WHERE c.idHospital = ${fkHospital} 
+            AND c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE();
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+    }
 }
 
 function obterAlertasDoDia(fkHospital) {
@@ -407,15 +714,28 @@ function buscarAno(fkHospital) {
 }
 
 module.exports = {
-    buscarHospitais,
-    buscarComponente,
+    buscarHospitaisDoDia,
+    buscarHospitaisDaSemana,
+    buscarHospitaisDoMes,
+    buscarHospitaisDoAno,
     buscarComponenteDoDia,
-    buscarTipo,
+    buscarComponenteDaSemana,
+    buscarComponenteDoMes,
+    buscarComponenteDoAno,
+    // buscarTipo,
     buscarTipoDoDia,
     buscarTipoDaSemana,
-    buscarModelo,
+    buscarTipoDoMes,
+    buscarTipoDoAno,
+    buscarModeloDoDia,
+    buscarModeloDaSemana,
+    buscarModeloDoMes,
+    buscarModeloDoAno,
     listarHospitais,
-    buscarAlertaComponente,
+    buscarAlertaComponenteDoDia,
+    buscarAlertaComponenteDaSemana,
+    buscarAlertaComponenteDoMes,
+    buscarAlertaComponenteDoAno,
     buscarMensal,
     buscarSemanal
 }

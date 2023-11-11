@@ -1,9 +1,53 @@
 var dataDados = []
 var desempenho = []
+var dadosDataTemperatura = []
+var juntarTempDATA = []
+
+ function trocarTempoDoGrifco(){
+// Obtenha a referência ao elemento checkbox
+const checkbox = document.getElementById("exampleRadios1");
+
+// Adicione um listener ao evento "change" do checkbox
+checkbox.addEventListener("change", function() {
+  // Verifique se o checkbox está marcado
+  if (checkbox.checked) {
+    // Pegue o valor do checkbox
+    const value = checkbox.value;
+    sessionStorage.tempGraficoLinha = value
+
+    // Faça algo com o valor do checkbox
+    console.log("O valor da checkBox é:", value);
+  }
+});
+ }
+
+ function trocarTempoAnual(){
+    // Obtenha a referência ao elemento checkbox
+    const checkbox = document.getElementById("exampleRadios2");
+    
+    // Adicione um listener ao evento "change" do checkbox
+    checkbox.addEventListener("change", function() {
+      // Verifique se o checkbox está marcado
+      if (checkbox.checked) {
+        // Pegue o valor do checkbox
+        const value = checkbox.value;
+        sessionStorage.tempGraficoLinha = value
+    
+        // Faça algo com o valor do checkbox
+        console.log("O valor da checkBox é:", value);
+      }
+    });
+     }
+
+
  function graficoLinha(){
 
+     trocarTempoDoGrifco()
+    var tempGraficoLinha = sessionStorage.tempGraficoLinha
+
      var fkHospital = sessionStorage.FK_HOSPITAL
-     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}`)
+    
+     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}/${tempGraficoLinha}`)
      .then(
          function(resposta){
              if(resposta.ok){
@@ -21,6 +65,20 @@ var desempenho = []
                          
                             for (let index = 0; index < resposta.length; index++) {
                                 desempenho.push(resposta[index].valor)
+                            }
+
+                            for (let index = 0; index < resposta.length; index++) {
+                                var apenasData = (resposta[index].dataTemperatura).split("T",1)
+                                dadosDataTemperatura.push(apenasData)
+                            }
+                            console.log(dataDados)
+                            for (let index = 0; index < dataDados.length; index++) {
+                                let temp = dataDados[index]
+                                let data = dadosDataTemperatura[index]
+                        
+                                juntarTempDATA.push(`${temp}°C ${data}`)
+                        
+                                
                             }
 
                             criarGraficoLinha()
@@ -112,12 +170,13 @@ function criarGraficoLinha() {
         return b + x * a;
     });
 
+   
     
     var ctx = document.getElementById('chartLinha').getContext('2d');
     var chart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: juntarTempDATA,
             datasets: [
                 {
                     label: 'Desempenho Original',
@@ -130,6 +189,7 @@ function criarGraficoLinha() {
                     label: 'Regressão Linear',
                     data: valoresRegressao,
                     borderColor: 'red',
+                    pointRadius: 0,
                     fill: false,
                 },
             ],

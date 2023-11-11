@@ -12,6 +12,7 @@ function listarTiposMaquinas(){
 
 
  function listarMeses(){
+    
      const instrucao = `
      select month(dataTemperatura) as mes from dadosTemperatura group by mes order by mes desc;
      `
@@ -143,6 +144,17 @@ join tipo on fkTipo = idTipo where year(dataHora) = 2023;
 }
 
 
+function listarMaquina(fkHospital){
+  
+     var instrucao = `
+     select idMaquinario, nome from maquinario join modelo on fkModelo = idModelo join tipo on fkTipo = idTipo where fkHospital = ${fkHospital} order by idMaquinario;
+     `
+
+    return database.executar(instrucao)
+}
+
+
+
 //Gráficos
 
 function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
@@ -180,7 +192,7 @@ function totalMaquinasPorTipo(fkHospital) {
 }
 
 
-function graficoLinha(fkHospital){
+function graficoLinha(fkHospital,tempGraficoLinha){
     var instrucao = `
     select dataTemperatura , round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor from registro join dadosTemperatura 
 on dataHora = dataTemperatura where fkMaquina = 5 and month(dataTemperatura) < 7 group by dataTemperatura, valor;
@@ -312,6 +324,7 @@ module.exports = {
     listarMeses,
     mediaTemperatura,
     mediaDesempenho,
+    listarMaquina,
     totalMaquinasPorTipoChamadoAberto,
     totalMaquinasPorTipo,
     graficoLinha,

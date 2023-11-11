@@ -118,15 +118,20 @@ var lineChart = new Chart(ctx, {
     }
 });
 
-
+// 16 - 2
 function predicao(){
     var dadosReais = dados.datasets[0].data
     var vetorAux = []
     for(let i = 0; i < dadosReais.length; i++){
-        let formula = dadosReais[i] - 16.6  + 2 * i
+        // let formula = dadosReais[i] - 16.6  + 2 * i
+        let formula = diferenca(dadosReais[i],689) + 1.4 * i
         vetorAux.push(formula)
 }
 dados.datasets[0].data = vetorAux
 lineChart.update()
 
+}
+
+function diferenca(num1, num2){
+    return num1 + (num1 - num2)
 }

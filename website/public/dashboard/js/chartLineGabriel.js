@@ -8,9 +8,10 @@ var juntarTempDATA = []
  function graficoLinha(){
 
      var fkHospital = sessionStorage.FK_HOSPITAL
-     var fkMaquina = sessionStorage.maquina
+     var maquina = sessionStorage.maquina
+     console.log("EEEEEEEEIIIIIIIIIIIII " + maquina)
     
-     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}`)
+     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}/${maquina}`)
      .then(
          function(resposta){
              if(resposta.ok){

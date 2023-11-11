@@ -192,8 +192,7 @@ function totalMaquinasPorTipo(fkHospital) {
 }
 
 
-function graficoLinha(fkHospital){
-
+function graficoLinha(fkHospital,maquina){
 
     if (fkHospital == "null") {
         var instrucao = `
@@ -212,7 +211,7 @@ function graficoLinha(fkHospital){
         join maquinario on registro.fkMaquina = idMaquinario 
         join empresa on maquinario.fkHospital = idEmpresa 
         join dadosTemperatura on dataHora = dataTemperatura  
-        where fkMaquina = 5 and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
+        where fkMaquina = ${maquina} and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
         group by fkHospital, fkMaquina, dataTemperatura, valor;
         `
     }

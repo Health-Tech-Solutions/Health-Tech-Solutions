@@ -447,8 +447,8 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item" onclick="obterDadosSemanal()">do Mês</a>
-                                                <a class="dropdown-item" onclick="obterDadosMensais()">do Ano</a>
+                                                <a class="dropdown-item" id="graficoLinhaMes" onclick="obterDadosSemanal()">do Mês</a>
+                                                <a class="dropdown-item" id="graficoLinhaAno" onclick="obterDadosMensais()">do Ano</a>
                                                 
                                             </div>
                                         </div>
@@ -473,10 +473,10 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDoDia()">do Dia</a>
-                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDaSemana()">da Semana</a>
-                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDoMes()">dos últimos 30 dias</a>
-                                                <a class="dropdown-item" onclick="buscarAlertasDosComponentesDoAno()">dos últimos 365 dias</a>
+                                                <a class="dropdown-item" id="graficoPizzaDia"  onclick="buscarAlertasDosComponentesDoDia()">do Dia</a>
+                                                <a class="dropdown-item" id="graficoPizzaSemana" onclick="buscarAlertasDosComponentesDaSemana()">da Semana</a>
+                                                <a class="dropdown-item" id="graficoPizzaMes" onclick="buscarAlertasDosComponentesDoMes()">dos últimos 30 dias</a>
+                                                <a class="dropdown-item" id="graficoPizzaAno" onclick="buscarAlertasDosComponentesDoAno()">dos últimos 365 dias</a>
                                             </div>
                                         </div>
                                     </div>

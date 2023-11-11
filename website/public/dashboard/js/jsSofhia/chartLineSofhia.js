@@ -1,25 +1,3 @@
-function obterDadosMensais(){
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarMensal/${fkHospital}`)
-    .then(
-        function(resposta){
-            if(resposta.ok){
-                resposta.json()
-                .then(
-                    function(resposta){
-                        console.log(resposta) 
-                        plotarGrafico(resposta)
-                    }
-                )
-            }
-        }
-    )
-    .catch(
-        err => {
-            console.log("ERRO " + err)
-        }
-    )
-}
 function obterDadosSemanal(){
 
     var fkHospital = sessionStorage.FK_HOSPITAL;
@@ -32,6 +10,9 @@ function obterDadosSemanal(){
                     function(resposta){
                         console.log(resposta)
                         plotarGraficoSemanal(resposta)
+
+                        graficoLinhaMes.style.backgroundColor = "#d3d3d3"
+                        graficoLinhaAno.style.backgroundColor = ""
                     }
                 )
             }
@@ -43,6 +24,33 @@ function obterDadosSemanal(){
         }
     )
 }
+
+function obterDadosMensais(){
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/sofhiaRoute/buscarMensal/${fkHospital}`)
+    .then(
+        function(resposta){
+            if(resposta.ok){
+                resposta.json()
+                .then(
+                    function(resposta){
+                        console.log(resposta) 
+                        plotarGrafico(resposta)
+
+                        graficoLinhaMes.style.backgroundColor = ""
+                        graficoLinhaAno.style.backgroundColor = "#d3d3d3"
+                    }
+                )
+            }
+        }
+    )
+    .catch(
+        err => {
+            console.log("ERRO " + err)
+        }
+    )
+}
+
 
 function plotarGraficoSemanal(resposta){
     

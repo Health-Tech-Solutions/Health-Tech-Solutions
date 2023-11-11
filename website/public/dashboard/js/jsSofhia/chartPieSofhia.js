@@ -42,6 +42,11 @@ function buscarAlertasDosComponentesDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                graficoPizzaDia.style.backgroundColor = "#d3d3d3"
+                graficoPizzaSemana.style.backgroundColor = ""
+                graficoPizzaMes.style.backgroundColor = ""
+                graficoPizzaAno.style.backgroundColor = ""
+
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -61,6 +66,10 @@ function buscarAlertasDosComponentesDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                graficoPizzaDia.style.backgroundColor = ""
+                graficoPizzaSemana.style.backgroundColor = "#d3d3d3"
+                graficoPizzaMes.style.backgroundColor = ""
+                graficoPizzaAno.style.backgroundColor = ""
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -79,6 +88,11 @@ function buscarAlertasDosComponentesDoMes() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
+
+                graficoPizzaDia.style.backgroundColor = ""
+                graficoPizzaSemana.style.backgroundColor = ""
+                graficoPizzaMes.style.backgroundColor = "#d3d3d3"
+                graficoPizzaAno.style.backgroundColor = ""
 
             });
         } else {
@@ -99,6 +113,10 @@ function buscarAlertasDosComponentesDoAno() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                graficoPizzaDia.style.backgroundColor = ""
+                graficoPizzaSemana.style.backgroundColor = ""
+                graficoPizzaMes.style.backgroundColor = ""
+                graficoPizzaAno.style.backgroundColor = "#d3d3d3"
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');

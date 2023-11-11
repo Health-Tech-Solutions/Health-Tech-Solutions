@@ -192,7 +192,7 @@ function totalMaquinasPorTipo(fkHospital) {
 }
 
 
-function graficoLinha(fkHospital){
+function graficoLinha(fkHospital,tempGraficoLinha){
     var instrucao = `
     select dataTemperatura , round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor from registro join dadosTemperatura 
 on dataHora = dataTemperatura where fkMaquina = 5 and month(dataTemperatura) < 7 group by dataTemperatura, valor;

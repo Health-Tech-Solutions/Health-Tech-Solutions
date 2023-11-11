@@ -2,10 +2,52 @@ var dataDados = []
 var desempenho = []
 var dadosDataTemperatura = []
 var juntarTempDATA = []
+
+ function trocarTempoDoGrifco(){
+// Obtenha a referência ao elemento checkbox
+const checkbox = document.getElementById("exampleRadios1");
+
+// Adicione um listener ao evento "change" do checkbox
+checkbox.addEventListener("change", function() {
+  // Verifique se o checkbox está marcado
+  if (checkbox.checked) {
+    // Pegue o valor do checkbox
+    const value = checkbox.value;
+    sessionStorage.tempGraficoLinha = value
+
+    // Faça algo com o valor do checkbox
+    console.log("O valor da checkBox é:", value);
+  }
+});
+ }
+
+ function trocarTempoAnual(){
+    // Obtenha a referência ao elemento checkbox
+    const checkbox = document.getElementById("exampleRadios2");
+    
+    // Adicione um listener ao evento "change" do checkbox
+    checkbox.addEventListener("change", function() {
+      // Verifique se o checkbox está marcado
+      if (checkbox.checked) {
+        // Pegue o valor do checkbox
+        const value = checkbox.value;
+        sessionStorage.tempGraficoLinha = value
+    
+        // Faça algo com o valor do checkbox
+        console.log("O valor da checkBox é:", value);
+      }
+    });
+     }
+
+
  function graficoLinha(){
 
+     trocarTempoDoGrifco()
+    var tempGraficoLinha = sessionStorage.tempGraficoLinha
+
      var fkHospital = sessionStorage.FK_HOSPITAL
-     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}`)
+    
+     fetch(`/gabrielRoutes/graficoLinha/${fkHospital}/${tempGraficoLinha}`)
      .then(
          function(resposta){
              if(resposta.ok){
@@ -20,24 +62,19 @@ var juntarTempDATA = []
                             for (let i = 0; i < resposta.length; i++) {
                                 dataDados.push(resposta[i].temperaturaMedia)
                             }
-                            console.log("1")
                          
                             for (let index = 0; index < resposta.length; index++) {
                                 desempenho.push(resposta[index].valor)
                             }
-                            console.log("2")
 
                             for (let index = 0; index < resposta.length; index++) {
                                 var apenasData = (resposta[index].dataTemperatura).split("T",1)
                                 dadosDataTemperatura.push(apenasData)
                             }
-                            console.log("3")
-                            console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
                             console.log(dataDados)
                             for (let index = 0; index < dataDados.length; index++) {
                                 let temp = dataDados[index]
                                 let data = dadosDataTemperatura[index]
-                                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
                         
                                 juntarTempDATA.push(`${temp}°C ${data}`)
                         

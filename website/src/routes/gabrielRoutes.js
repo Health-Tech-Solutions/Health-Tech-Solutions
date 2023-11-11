@@ -38,7 +38,7 @@ router.get("/totalMaquinasPorTipo/:fkHospital", (req,res) => {
     gabrielController.totalMaquinasPorTipo(req,res)
 })
 
-router.get("/graficoLinha/:fkHospital", function(req,res){
+router.get("/graficoLinha/:fkHospital/:tempGraficoLinha", function(req,res){
     gabrielController.graficoLinha(req,res);
 })
 

@@ -85,7 +85,8 @@ gabrielModel.mediaDesempenho(idMes, fkHospital, idTipo)
 
 function listarMaquina(req, res) {
     var fkHospital = req.params.fkHospital
-    gabrielModel.listarMaquina(fkHospital)
+    var tempGraficoLinha = req.params.tempGraficoLinha
+    gabrielModel.listarMaquina(fkHospital,tempGraficoLinha)
         .then((resultado) => {
             if (resultado.length > 0) {
                 res.status(200).json(resultado)

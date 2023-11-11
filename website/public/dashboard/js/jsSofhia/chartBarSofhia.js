@@ -30,14 +30,11 @@ var dadosBarra = {
         }]
 };
 
-
-
-function obterDadosGraficoBarra() {
-  
-    // var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarHospitais`, { cache: 'no-store' }).then(function (response) {
+function obterDadosGraficoBarraDoDia() {
+    fetch(`/sofhiaRoute/buscarHospitaisDoDia`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
+                limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
@@ -51,12 +48,69 @@ function obterDadosGraficoBarra() {
         });
 }
 
-function plotarGraficoBarra(resposta) {
-    
+function obterDadosGraficoBarraDaSemana() {
+    fetch(`/sofhiaRoute/buscarHospitaisDaSemana`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                limparGraficoBarra()
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoBarra(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+function obterDadosGraficoBarraDoMes() {
+    fetch(`/sofhiaRoute/buscarHospitaisDoMes`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                limparGraficoBarra()
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoBarra(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+function obterDadosGraficoBarraDoAno() {
+    fetch(`/sofhiaRoute/buscarHospitaisDoAno`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                limparGraficoBarra()
+                resposta.reverse();
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                plotarGraficoBarra(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+function limparGraficoBarra() {
+    labelsBarra.length = 0;
+    dadosBarra.datasets[0].data.length = 0;
+}
+
+function plotarGraficoBarra(resposta) {    
     for (let i = 0; i < resposta.length; i++) {
         let chamado = resposta[i].chamados
         let hospital = resposta[i].hospital
-        console.log(dadosBarra.datasets[0].data + 'PLAAAAAAAAAAAAAAAU')
         labelsBarra.push(hospital)
         dadosBarra.datasets[0].data.push(chamado)
     }

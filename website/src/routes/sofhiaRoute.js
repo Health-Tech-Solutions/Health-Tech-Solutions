@@ -3,8 +3,20 @@ const router = express.Router()
 
 const sofhiaController = require("../controllers/sofhiaController")
 
-router.get("/buscarHospitais", function(req,res){
-    sofhiaController.buscarHospitais(req,res);
+router.get("/buscarHospitaisDoDia", function(req,res){
+    sofhiaController.buscarHospitaisDoDia(req,res);
+})
+
+router.get("/buscarHospitaisDaSemana", function(req,res){
+    sofhiaController.buscarHospitaisDaSemana(req,res);
+})
+
+router.get("/buscarHospitaisDoMes", function(req,res){
+    sofhiaController.buscarHospitaisDoMes(req,res);
+})
+
+router.get("/buscarHospitaisDoAno", function(req,res){
+    sofhiaController.buscarHospitaisDoAno(req,res);
 })
 
 router.get("/buscarComponenteDoDia/:fkHospital", function(req,res){

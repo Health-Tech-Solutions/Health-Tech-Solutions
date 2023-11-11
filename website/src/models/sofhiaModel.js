@@ -58,12 +58,52 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
-function buscarHospitais() {
+function buscarHospitaisDoDia() {
     var instrucao = `
         SELECT 
             hospital,
             COUNT(*) AS chamados
-        FROM vw_chamados
+        FROM vw_chamados c
+        WHERE c.dataHora = CURDATE()
+        GROUP BY hospital;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarHospitaisDaSemana() {
+    var instrucao = `
+        SELECT 
+            hospital,
+            COUNT(*) AS chamados
+        FROM vw_chamados c
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND CURDATE()
+        GROUP BY hospital;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarHospitaisDoMes() {
+    var instrucao = `
+        SELECT 
+            hospital,
+            COUNT(*) AS chamados
+        FROM vw_chamados c
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND CURDATE()
+        GROUP BY hospital;
+    `
+    console.log("Executando a seguinte instrução sql" + instrucao)
+    return database.executar(instrucao)
+}
+
+function buscarHospitaisDoAno() {
+    var instrucao = `
+        SELECT 
+            hospital,
+            COUNT(*) AS chamados
+        FROM vw_chamados c
+        WHERE c.dataHora BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
         GROUP BY hospital;
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
@@ -674,7 +714,10 @@ function buscarAno(fkHospital) {
 }
 
 module.exports = {
-    buscarHospitais,
+    buscarHospitaisDoDia,
+    buscarHospitaisDaSemana,
+    buscarHospitaisDoMes,
+    buscarHospitaisDoAno,
     buscarComponenteDoDia,
     buscarComponenteDaSemana,
     buscarComponenteDoMes,

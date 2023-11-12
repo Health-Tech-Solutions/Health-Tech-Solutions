@@ -40,6 +40,11 @@ router.get(`/chamadosAbertos/:fkHospital`,(req,res) => {
     funcionarioController.chamadosAbertos(req,res);
 });
 
+router.get(`/estadoMaquinas/:fkHospital`,(req,res) => {
+    funcionarioController.estadoMaquinas(req,res);
+});
+
+
 
 
 

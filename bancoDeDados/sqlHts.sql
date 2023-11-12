@@ -195,14 +195,14 @@ BEGIN
     CASE WHEN 
 			NEW.nivel = 'Alto' 
 		THEN 
-			UPDATE ordemManutencao SET estado = 'parado' 
-				WHERE fkMaquina = (SELECT 
-										fkMaquina 
-                                    FROM registro 
-                                    WHERE idRegistro = NEW.fkRegistro) ;
+			UPDATE ordemManutencao SET estado = 'parado' ,
+										dataAbertura = now()
+										WHERE fkMaquina = (SELECT 
+												fkMaquina 
+										FROM registro 
+										WHERE idRegistro = NEW.fkRegistro) ;
 		else 
-        UPDATE ordemManutencao SET estado = 'funcionando',
-							   dataAbertura = now()
+        UPDATE ordemManutencao SET estado = 'funcionando'
 							   WHERE fkMaquina = (SELECT 
 													fkMaquina 
 												  FROM registro 
@@ -211,6 +211,19 @@ BEGIN
 		
 END
 
+$
+
+DELIMITER $
+CREATE TRIGGER tr_fechamento_chamado
+AFTER UPDATE ON chamado
+FOR EACH ROW
+BEGIN
+	UPDATE ordemManutencao SET dataFechamento = now()
+		WHERE fkMAquina = (SELECT 
+							  fkMaquina
+						   FROM registro
+                           WHERE idRegistro = NEW.fkRegistro);
+END
 $
 
 DELIMITER $$

@@ -53,7 +53,15 @@ SELECT * FROM chamado ORDER BY idChamado DESC LIMIT 1;
 SELECT COUNT(*) FROM registro;
 CALL fechar_chamados();
 
-INSERT INTO chamado VALUES(NULL, 'alto','Aberto','2 horas','deu certo',NOW(),55);
+INSERT INTO chamado VALUES(NULL, 'alto','Aberto','2 horas','deu certo',NOW(),83);
+
+SELECT * FROM ordemManutencao order by dataAbertura DESC;
+
+UPDATE chamado SET estado = 'fechado' WHERE idChamado = (SELECT idChamado FROM chamado ORDER BY idChamado DESC LIMIT 1);
+
+
+
+DROP TRIGGER tr_atualiza_ordem;
 
     
     

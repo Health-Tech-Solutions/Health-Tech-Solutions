@@ -44,6 +44,10 @@ router.get(`/estadoMaquinas/:fkHospital`,(req,res) => {
     funcionarioController.estadoMaquinas(req,res);
 });
 
+router.get(`/desempenhoPorModelo/:fkHospital`,(req,res) => {
+    funcionarioController.desempenhoPorModelo(req,res);
+});
+
 
 
 

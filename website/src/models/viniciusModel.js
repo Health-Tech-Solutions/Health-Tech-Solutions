@@ -90,9 +90,39 @@ function estadoMaquinas(fkHospital) {
     return database.executar(instrucao)
 }
 
+function desempenhoPorModelo(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT 
+        COUNT(DISTINCT idMaquina) AS maquinasOperando,
+        (SELECT COUNT(DISTINCT idMaquina) 
+        FROM vw_chamados 
+        WHERE nivel = 'Alto') AS maquinasParadas 
+        FROM vw_chamados 
+        WHERE nivel = 'Médio' OR nivel = 'Baixo';
+        `
+    } else {
+        instrucao = `
+        SELECT 
+        COUNT(DISTINCT idMaquina) AS maquinasOperando,
+        (SELECT COUNT(DISTINCT idMaquina) 
+        FROM vw_chamados 
+        WHERE nivel = 'Alto') AS maquinasParadas 
+        FROM vw_chamados 
+        WHERE nivel = 'Médio' OR nivel = 'Baixo'and idHospital = ${fkHospital};
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     pegarDadosMaquinas,
     taxaMaquinasOperando,
     chamadosAbertos,
-    estadoMaquinas
+    estadoMaquinas,
+    desempenhoPorModelo
 }

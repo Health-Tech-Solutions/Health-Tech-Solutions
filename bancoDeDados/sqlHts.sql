@@ -113,6 +113,7 @@ CREATE TABLE ordemManutencao (
 	mediaManutencao TIME,
 	fkMaquina INT,
     fkChamado INT,
+    qtdFalhas INT,
 	FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
     FOREIGN KEY (fkChamado) REFERENCES chamado(idChamado)
 );
@@ -183,7 +184,7 @@ CREATE TRIGGER tr_abre_ordem
 AFTER INSERT ON maquinario
 FOR EACH ROW
 BEGIN 
-	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina) VALUES ('funcionando',now(),new.idMaquinario);
+	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina,qtdFalhas) VALUES ('funcionando',now(),new.idMaquinario, 0);
 end
 $
 
@@ -196,7 +197,8 @@ BEGIN
 			NEW.nivel = 'Alto' 
 		THEN 
 			UPDATE ordemManutencao SET estado = 'parado' ,
-										dataAbertura = now()
+										dataAbertura = now(),
+                                        qtdFalhas = qtdFalhas + 1
 										WHERE fkMaquina = (SELECT 
 												fkMaquina 
 										FROM registro 

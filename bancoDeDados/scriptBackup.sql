@@ -747,18 +747,4 @@
 		FROM vw_chamados
 		group by estado;
 
-CREATE TABLE ordemManutencao (
-	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(50)
-);
-
-DELIMITER $
-CREATE TRIGGER tr_abre_ordem
-AFTER INSERT ON registro
-FOR EACH ROW
-BEGIN 
-	INSERT INTO ordemManutencao(estado) VALUES ('funcionando');
-end
-$
-CALL inserir_registros();
-SELECT * FROM ordemManutencao;
+		

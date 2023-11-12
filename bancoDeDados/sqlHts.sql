@@ -178,16 +178,17 @@ AS
 	AND maq.fkModelo = m.idModelo
 	AND maq.fkHospital = e.idEmpresa;
     
-    DROP FUNCTION subtrai_data;
     
 DELIMITER $
 	CREATE FUNCTION subtrai_data(data1 DATETIME, data2 DATETIME)
-    RETURNS DATETIME
+    RETURNS INT
     DETERMINISTIC
     BEGIN
     DECLARE dataFinal INT;
-        SET dataFinal = TIMEDIFF(data1,data2);
-    RETURN dataFinal;
+    DECLARE minutos INT;
+        SET dataFinal = TIME_TO_SEC(TIMEDIFF(data1,data2));
+        SET minutos = datafinal / 60;
+    RETURN minutos;
     END
 $
 

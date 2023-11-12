@@ -53,14 +53,19 @@ SELECT * FROM chamado ORDER BY idChamado DESC LIMIT 1;
 SELECT COUNT(*) FROM registro;
 CALL fechar_chamados();
 
-INSERT INTO chamado VALUES(NULL, 'alto','Aberto','2 horas','deu certo',NOW(),83);
+INSERT INTO chamado VALUES(NULL, 'alto','Aberto','2 horas','deu certo',NOW(),87);
 
 SELECT * FROM ordemManutencao order by dataAbertura DESC;
 
-UPDATE chamado SET estado = 'fechado' WHERE idChamado = (SELECT idChamado FROM chamado ORDER BY idChamado DESC LIMIT 1);
+
+UPDATE ordemManutencao SET estado = 'parado' ,
+										dataAbertura = now(),
+                                        qtdFalhas = qtdFalhas + 1;
+
+UPDATE chamado SET estado = 'fechado' WHERE idChamado = 559;
 
 
-
+INSERT INTO ordemManutencao(mediaFuncionamento) VALUES(subtrai_data(NOW(),'2023-11-11 00:00:00'));
 DROP TRIGGER tr_atualiza_ordem;
 
     

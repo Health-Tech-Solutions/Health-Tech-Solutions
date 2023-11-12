@@ -749,16 +749,30 @@
 
 CREATE TABLE ordemManutencao (
 	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
-    estado VARCHAR(50)
+    estado VARCHAR(50),
+    dataAbertura DATETIME,
+    dataFechamento DATETIME,
+    mediaFuncionamento TIME,
+    mediaManutencao TIME,
+    fkMaquina INT,
+    FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario)
 );
+INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina) VALUES ('funcionando',now(),(SELECT LAST_INSERT_ID() FROM maquinario));
+
+-- gatilhos
+
+DROP TRIGGER tr_abre_ordem;
 
 DELIMITER $
+
 CREATE TRIGGER tr_abre_ordem
-AFTER INSERT ON registro
+AFTER INSERT ON maquinario
 FOR EACH ROW
 BEGIN 
-	INSERT INTO ordemManutencao(estado) VALUES ('funcionando');
+	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina) VALUES ('funcionando',now(),(SELECT idMaquinario FROM maquinario ORDER BY idMaquinario DESC LIMIT 1));
 end
 $
 CALL inserir_registros();
 SELECT * FROM ordemManutencao;
+
+select * from maquinario;

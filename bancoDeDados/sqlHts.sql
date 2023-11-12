@@ -70,19 +70,6 @@ create table maquinario(
 	primary key(idMaquinario, fkModelo)
 );
 
-CREATE TABLE ordemManutencao (
-	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
-	estado VARCHAR(50),
-	dataAbertura DATETIME,
-	dataFechamento DATETIME,
-	mediaFuncionamento TIME,
-	mediaManutencao TIME,
-	fkMaquina INT,
-	FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario)
-);
-
-
-
 create table tipoRegistro(
 	idTipoRegistro int primary key auto_increment,
 	nome varchar(45),
@@ -115,6 +102,19 @@ create table chamado(
 	dataHora DATETIME,
 	fkRegistro int,
 	foreign key(fkRegistro) references registro(idRegistro)
+);
+
+CREATE TABLE ordemManutencao (
+	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
+	estado VARCHAR(50),
+	dataAbertura DATETIME,
+	dataFechamento DATETIME,
+	mediaFuncionamento TIME,
+	mediaManutencao TIME,
+	fkMaquina INT,
+    fkChamado INT,
+	FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
+    FOREIGN KEY (fkChamado) REFERENCES chamado(idChamado)
 );
 
 create table limite(
@@ -183,11 +183,33 @@ CREATE TRIGGER tr_abre_ordem
 AFTER INSERT ON maquinario
 FOR EACH ROW
 BEGIN 
-	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina) VALUES ('funcionando',now(),(SELECT idMaquinario 
-																								FROM maquinario 
-																								ORDER BY idMaquinario 
-																									DESC LIMIT 1));
+	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina) VALUES ('funcionando',now(),new.idMaquinario);
 end
+$
+
+DELIMITER $
+CREATE TRIGGER tr_atualiza_ordem
+AFTER INSERT ON chamado
+FOR EACH ROW
+BEGIN 
+    CASE WHEN 
+			NEW.nivel = 'Alto' 
+		THEN 
+			UPDATE ordemManutencao SET estado = 'parado' 
+				WHERE fkMaquina = (SELECT 
+										fkMaquina 
+                                    FROM registro 
+                                    WHERE idRegistro = NEW.fkRegistro) ;
+		else 
+        UPDATE ordemManutencao SET estado = 'funcionando' 
+				WHERE fkMaquina = (SELECT 
+										fkMaquina 
+                                    FROM registro 
+                                    WHERE idRegistro = NEW.fkRegistro) ;
+	END CASE;
+		
+END
+
 $
 
 DELIMITER $$
@@ -733,7 +755,7 @@ select
 	dataHora,
 	'' descricao,
 	r.idRegistro
-from registro r where r.valor > 85;
+from registro AS r where r.valor > 85;
 
 
 CALL fechar_chamados();	

@@ -1,11 +1,12 @@
 import requests
 import json
 
-def abrir_chamado(mediaCPU):
+def abrir_chamado():
     # token do bot
     slack_token = ''
+    
     # canal que o bot irá mandar as mensagens
-    slack_channel = ''
+    slack_channel = 'C065QKU4RJM'
 
     # Configurações do bot com o python
     def post_message_to_slack(text, blocks = None):
@@ -20,8 +21,12 @@ def abrir_chamado(mediaCPU):
     slack_info = f"""
 
         🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥                                                                                                     
-    A porcentagem de uso da sua máquina está ultrapassando o limite estipulado, está em {mediaCPU} %
+    A porcentagem de uso da sua máquina está ultrapassando o limite estipulado, está em 20%
     
     """
-    
     post_message_to_slack(slack_info)
+    print(slack_info)
+abrir_chamado()
+
+
+

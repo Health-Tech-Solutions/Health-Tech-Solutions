@@ -17,7 +17,7 @@ function pegarDadosMaquinas(fkHospital) {
         FROM vw_chamados
         WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR) 
         AND idHospital = ${fkHospital};
-        `   
+        `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
     return database.executar(instrucao)
@@ -38,7 +38,7 @@ function taxaMaquinasOperando(fkHospital) {
         Select count(*) as totalMaquinas,(SELECT COUNT(*) 
         FROM vw_chamados
         WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR)) as maquinasOperando from maquinario where fkHospital = ${fkHospital};
-        `   
+        `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
     return database.executar(instrucao)
@@ -55,7 +55,36 @@ function chamadosAbertos(fkHospital) {
     } else {
         instrucao = `
         select count(*) as totalChamados from vw_chamados where estado = 'aberto' and idHospital = ${fkHospital};
-        `   
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
+function estadoMaquinas(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT 
+        COUNT(DISTINCT idMaquina) AS maquinasOperando,
+        (SELECT COUNT(DISTINCT idMaquina) 
+        FROM vw_chamados 
+        WHERE nivel = 'Alto') AS maquinasParadas 
+        FROM vw_chamados 
+        WHERE nivel = 'Médio' OR nivel = 'Baixo';
+        `
+    } else {
+        instrucao = `
+        SELECT 
+        COUNT(DISTINCT idMaquina) AS maquinasOperando,
+        (SELECT COUNT(DISTINCT idMaquina) 
+        FROM vw_chamados 
+        WHERE nivel = 'Alto') AS maquinasParadas 
+        FROM vw_chamados 
+        WHERE nivel = 'Médio' OR nivel = 'Baixo'and idHospital = ${fkHospital};
+        `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
     return database.executar(instrucao)
@@ -64,5 +93,6 @@ function chamadosAbertos(fkHospital) {
 module.exports = {
     pegarDadosMaquinas,
     taxaMaquinasOperando,
-    chamadosAbertos
+    chamadosAbertos,
+    estadoMaquinas
 }

@@ -35,7 +35,35 @@ fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
         }
     })
 
-    fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
+
+fetch(`/viniciusRoutes/estadoMaquinas/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+
+                    for (let index = 0; index < resposta.length; index++) {
+                        let maquinasOperando = resposta[index].maquinasOperando;
+                        let maquinasParadas = resposta[index].maquinasParadas;
+                
+                        dadosPie.datasets[0].data.push(maquinasOperando)
+                        dadosPie.datasets[0].data.push(maquinasParadas)
+                
+                        console.log(maquinasOperando, maquinasParadas)
+                
+                    }
+                
+                    chartPie.update()
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+
+
+fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
     .then(function (response) {
         console.log(response)
         if (response.ok) {
@@ -44,22 +72,22 @@ fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
                 totalMaquinas = resposta[0].totalMaquinas
                 maquinasOperando = resposta[0].maquinasOperando
 
-                let porcentagemExibicao = (maquinasOperando/totalMaquinas)*100
-                
-                if(totalMaquinas == 0){
+                let porcentagemExibicao = (maquinasOperando / totalMaquinas) * 100
+
+                if (totalMaquinas == 0) {
                     porcentagemExibicao = 0
                 }
 
-                if(porcentagemExibicao > 100){
+                if (porcentagemExibicao > 100) {
                     porcentagemExibicao = 100
-                } 
+                }
 
                 porcentagemMaquinasOperando.innerHTML = porcentagemExibicao.toFixed(2) + '%'
-               
-                let color 
-               if(porcentagemExibicao < 60){
-                   color = '#e74a3b'
-                } else if (porcentagemExibicao < 80){
+
+                let color
+                if (porcentagemExibicao < 60) {
+                    color = '#e74a3b'
+                } else if (porcentagemExibicao < 80) {
                     color = '#FFC107'
                 } else {
                     color = '#4CAF50'
@@ -107,8 +135,7 @@ if (sessionStorage.NOME_HOSPITAL == 'null') {
     sessionStorage.NOME_HOSPITAL = 'Todos'
 }
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
-getTotalMaquinas()
-maquinasInstaveis()
+
 // listarHospitais()
 var qtdTotalMaquinas;
 
@@ -157,35 +184,18 @@ function trocarHospital() {
 }
 
 
-function obterChamadosEmAberto() {
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/chamados/quantidadeChamadosAberto/${fkHospital}`)
-        .then(resposta => {
-            if (resposta.ok) {
-                resposta.json()
-                    .then(
-                        resposta => {
-                            console.log(resposta)
-                            qtd_chamados.innerHTML = resposta[0].quantidade
-                        }
-                    )
-            }
-        }).catch(erro => {
-            console.log("ERRO " + erro)
-        }
-        )
-}
+
 
 const configPie = document.getElementById('chartPie');
 
 var dadosPie = {
-    labels: ['Aberto', 'Fechados'],
     datasets: [{
         label: '',
         data: [],
         backgroundColor: [
-            '#e74a3b',
-            '#1cc88a'
+            '#1cc88a',
+            '#e74a3b'
+           
         ],
         borderWidth: 1
     }]
@@ -204,7 +214,7 @@ var chartPie = new Chart(configPie, {
         },
         plugins: {
             legend: {
-                display: false
+
             }
         }
     }
@@ -212,14 +222,15 @@ var chartPie = new Chart(configPie, {
 
 function plotarDadosPie(resposta) {
     for (let index = 0; index < resposta.length; index++) {
-        let abertos = resposta[index].Abertos;
-        let fechados = resposta[index].Fechados;
+        let maquinasOperando = resposta[index].maquinasOperando;
+        let maquinasParadas = resposta[index].maquinasParadas;
 
-        dadosPie.datasets[0].data.push(abertos)
-        dadosPie.datasets[0].data.push(fechados)
-        totalChamados.innerHTML = abertos
+        dadosPie.datasets[0].data.push(maquinasOperando)
+        dadosPie.datasets[0].data.push(maquinasParadas)
+
+        console.log(maquinasOperando, maquinasParadas)
+
     }
 
     chartPie.update()
-
 }

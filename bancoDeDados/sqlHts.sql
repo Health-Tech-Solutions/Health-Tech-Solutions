@@ -201,11 +201,12 @@ BEGIN
                                     FROM registro 
                                     WHERE idRegistro = NEW.fkRegistro) ;
 		else 
-        UPDATE ordemManutencao SET estado = 'funcionando' 
-				WHERE fkMaquina = (SELECT 
-										fkMaquina 
-                                    FROM registro 
-                                    WHERE idRegistro = NEW.fkRegistro) ;
+        UPDATE ordemManutencao SET estado = 'funcionando',
+							   dataAbertura = now()
+							   WHERE fkMaquina = (SELECT 
+													fkMaquina 
+												  FROM registro 
+												  WHERE idRegistro = NEW.fkRegistro) ;
 	END CASE;
 		
 END

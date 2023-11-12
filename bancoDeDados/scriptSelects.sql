@@ -40,8 +40,21 @@ SELECT (SUM(horaAberto) - SUM(horaFechado)) AS mtbf FROM vw_confiabilidade;
 				tipo FROM 
 				vw_chamados group by quantidade, tipo;
                 
+USE hts;
+SELECT * FROM maquinario;
+SELECT * FROM ordemManutencao;
+-- SELECT CONFIABILIDADE
 SELECT
-	TIMEDIFF(c.dataHora, m.dataCadastramento) AS diferençaTempo
+	TIMEDIFF(c.dataHora, m.dataCadastramento) AS diferençaTempo,
+    c.estado AS estado,
+    c.nivel AS nivel,
+    m.idMaquinario AS idMaquinario
     FROM chamado AS c
     JOIN registro AS r ON c.fkRegistro = r.idRegistro
-    JOIN maquinario AS m ON r.fkMaquina = m.idMaquinario;
+    JOIN maquinario AS m ON r.fkMaquina = m.idMaquinario
+    WHERE estado = 'aberto'
+    AND nivel = 'alto'
+    ;
+    INSERT INTO maquinario(idMaquinario,fkModelo) VALUES (3856,1);
+    select * from maquinario; 
+    SELECT idMaquinario FROM maquinario ORDER BY idMaquinario DESC LIMIT 1;

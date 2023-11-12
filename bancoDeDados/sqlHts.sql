@@ -109,8 +109,8 @@ CREATE TABLE ordemManutencao (
 	estado VARCHAR(50),
 	dataAbertura DATETIME,
 	dataFechamento DATETIME,
-	mediaFuncionamento TIME,
-	mediaManutencao TIME,
+	mediaFuncionamento INT,
+	mediaManutencao INT,
 	fkMaquina INT,
     fkChamado INT,
     qtdFalhas INT,
@@ -177,6 +177,19 @@ AS
 	AND fkRegistro = idRegistro
 	AND maq.fkModelo = m.idModelo
 	AND maq.fkHospital = e.idEmpresa;
+    
+    DROP FUNCTION subtrai_data;
+    
+DELIMITER $
+	CREATE FUNCTION subtrai_data(data1 DATETIME, data2 DATETIME)
+    RETURNS DATETIME
+    DETERMINISTIC
+    BEGIN
+    DECLARE dataFinal INT;
+        SET dataFinal = TIMEDIFF(data1,data2);
+    RETURN dataFinal;
+    END
+$
 
 DELIMITER $
 

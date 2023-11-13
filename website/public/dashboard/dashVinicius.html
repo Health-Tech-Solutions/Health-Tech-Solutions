@@ -406,6 +406,20 @@
                                             .dropdown-item {
                                                 color: white;
                                             }
+
+                                            #botaoRestaurarDados {
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                background-color: #9a0801;
+                                                border: none;
+                                                color: white;
+                                                padding: 10px;
+                                                border-radius: 5px;
+                                                cursor: pointer;
+                                                height: 35px;
+                                            }
+
                                         </style>
 
                                         <div class="col-auto">
@@ -449,7 +463,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de falhas
                                         por Modelo</h6>
 
-                                        <button onclick="restaurarDados()">Restaurar Dados</button>
+                                        <button id="botaoRestaurarDados" onclick="restaurarDados()">Restaurar Dados</button>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">

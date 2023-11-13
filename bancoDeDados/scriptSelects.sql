@@ -84,3 +84,8 @@ SELECT
             idTipo
         FROM vw_chamados
         GROUP BY tipo,idTipo;
+
+select count(*) as maquinasOperando ,(select count(*) from vw_teste where estado = 'parado' and idHospital = '4') as maquinasParadas from vw_teste where estado = 'funcionando' and idHospital = '4';
+
+select count(*) from vw_teste where idHospital = 1 and estado = 'funcionando';
+

@@ -406,7 +406,20 @@
                                             .dropdown-item {
                                                 color: white;
                                             }
-                                            
+
+                                            #botaoRestaurarDados {
+                                                display: flex;
+                                                justify-content: center;
+                                                align-items: center;
+                                                background-color: #9a0801;
+                                                border: none;
+                                                color: white;
+                                                padding: 10px;
+                                                border-radius: 5px;
+                                                cursor: pointer;
+                                                height: 35px;
+                                            }
+
                                         </style>
 
                                         <div class="col-auto">
@@ -447,13 +460,15 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Desempenho
+                                    <h6 class="m-0 font-weight-bold text-primary" id="tituloGraficoBarras">Quantidade de falhas
                                         por Modelo</h6>
+
+                                        <button id="botaoRestaurarDados" onclick="restaurarDados()">Restaurar Dados</button>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div>
-                                        <canvas id="desempenhoModelo"></canvas>
+                                        <canvas id="myChart"></canvas>
                                     </div>
                                 </div>
 
@@ -476,10 +491,10 @@
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-danger"></i> Com defeitos
+                                            <i class="fas fa-circle text-danger"></i> Paradas
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Sem defeitos
+                                            <i class="fas fa-circle text-success"></i> Operando
                                         </span>
                                     </div>
                                 </div>

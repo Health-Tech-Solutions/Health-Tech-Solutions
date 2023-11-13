@@ -107,26 +107,60 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
 // Grafico de barras
 const ctx = document.getElementById('desempenhoModelo');
 
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Monitor de S.V', 'Monitor C.', 'Monitor F.', 'Desfibriladores', 'Cardioversores', 'Ultrassom', 'Máquina de A.', 'Máquinas ECG'],
-        datasets: [{
-            label: 'Desenpenho dos modelos',
-            data: [12, 19, 3, 5, 2, 3, 7, 4],
-            backgroundColor: 'rgba(220, 0, 0, 0.60)',
-            borderWidth: 1
-        }]
-    },
-    options: {
+document.addEventListener('DOMContentLoaded', function() {
+    // Dados iniciais
+    var dadosPrimordiais = {
+      labels: ['Categoria 1', 'Categoria 2', 'Categoria 3', 'Categoria 4'],
+      datasets: [{
+        label: 'Dados Iniciais',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+        data: [10, 20, 30, 40]
+      }]
+    };
 
-        scales: {
-            y: {
-                beginAtZero: true
-            }
+    // Configurações iniciais do gráfico
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: dadosPrimordiais,
+    options: {
+      onClick: function(event, elements) {
+        // Verifica se algum elemento foi clicado
+        if (elements.length > 0) {
+          var clickedIndex = elements[0]._index;
+          
+          // Aqui, você pode alterar os dados conforme necessário
+          // Vamos apenas inverter os valores como exemplo
+          var dadosAlterados = {
+            labels: dadosPrimordiais.labels,
+            datasets: [{
+              label: 'Dados Alterados',
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1,
+              data: dadosPrimordiais.datasets[0].data.map(function(value) {
+                return value * -1;
+              })
+            }]
+          };
+
+          // Atualiza o gráfico com os novos dados
+          myChart.data = dadosAlterados;
+          myChart.update();
         }
+      }
     }
+  });
+
+  // Função para restaurar os dados primordiais
+  window.restaurarDados = function() {
+    myChart.data = dadosPrimordiais;
+    myChart.update();
+  };
 });
+
 
 if (sessionStorage.FK_HOSPITAL == undefined) {
     sessionStorage.FK_HOSPITAL = null
@@ -135,6 +169,8 @@ if (sessionStorage.NOME_HOSPITAL == 'null') {
     sessionStorage.NOME_HOSPITAL = 'Todos'
 }
 dropdown_menu.innerHTML = `<option class="dropdown-item"  value = "0" >${sessionStorage.NOME_HOSPITAL}</option>`;
+
+
 
 // listarHospitais()
 var qtdTotalMaquinas;
@@ -190,7 +226,7 @@ const configPie = document.getElementById('chartPie');
 
 var dadosPie = {
     datasets: [{
-        label: '',
+        label: 'Estados das máquinas',
         data: [],
         backgroundColor: [
             '#1cc88a',

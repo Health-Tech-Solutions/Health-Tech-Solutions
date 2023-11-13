@@ -67,23 +67,15 @@ function estadoMaquinas(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        SELECT 
-        COUNT(DISTINCT idMaquina) AS maquinasOperando,
-        (SELECT COUNT(DISTINCT idMaquina) 
-        FROM vw_chamados 
-        WHERE nivel = 'Alto') AS maquinasParadas 
-        FROM vw_chamados 
-        WHERE nivel = 'Médio' OR nivel = 'Baixo';
+        select count(*) as maquinasOperando ,
+        (select count(*) from vw_vinicius where estado = 'parado' and idHospital = '4') as maquinasParadas
+         from vw_vinicius where estado = 'funcionando' and idHospital = '4';
         `
     } else {
         instrucao = `
-        SELECT 
-        COUNT(DISTINCT idMaquina) AS maquinasOperando,
-        (SELECT COUNT(DISTINCT idMaquina) 
-        FROM vw_chamados 
-        WHERE nivel = 'Alto') AS maquinasParadas 
-        FROM vw_chamados 
-        WHERE nivel = 'Médio' OR nivel = 'Baixo'and idHospital = ${fkHospital};
+        select count(*) as maquinasOperando ,
+        (select count(*) from vw_vinicius where estado = 'parado' and idHospital = ${fkHospital}) as maquinasParadas
+         from vw_vinicius where estado = 'funcionando' and idHospital = ${fkHospital};
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)

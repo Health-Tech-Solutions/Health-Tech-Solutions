@@ -11,7 +11,7 @@ function pegarModelos(){
     WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
     GROUP BY tipo,modelo
     ORDER BY numeroChamados
-    LIMIT 8;
+    LIMIT 15;
     `
     return database.executar(instrucao)
 }

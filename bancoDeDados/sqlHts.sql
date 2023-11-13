@@ -791,6 +791,49 @@ from registro AS r where r.valor > 85;
 CALL fechar_chamados();	
 -- gatilhos
 
+-- view VINICIUS
+CREATE OR REPLACE VIEW vw_vinicius
+AS
+	SELECT 
+		r.fkMaquina AS idMaquina,
+		c.dataHora AS dataHora,
+		c.idChamado AS idChamado,
+		c.nivel,
+		c.estado,
+		c.sla,
+		c.descricao,
+		e.idEmpresa AS idHospital,
+		e.nomeFantasia AS hospital,
+		t.nome AS tipo,
+		t.idTipo,	
+		m.modelo,
+		tr.nome,
+		tr.medida,
+        p.idPeca AS idPeca,
+        t.nome as nomeTipo,
+		p.nome as nomePeca
+	FROM chamado AS c
+    JOIN registro AS r
+    JOIN maquinario AS maq
+    JOIN modelo AS m
+    JOIN empresa AS e
+    JOIN tipoRegistro AS tr
+    JOIN tipo AS t
+    JOIN peca AS p
+    WHERE fkMaquina = idMaquinario 
+    AND m.fkTipo = t.idTipo
+    AND fkRegistro = idRegistro
+    AND maq.fkModelo = m.idModelo
+    AND maq.fkHospital = e.idEmpresa;
+
+DELIMITER $$
+    
+select * from vw_vinicius;
+
+-- select count(*) from vw_vinicius where nomeTipo = 'Vital1' and idHospital = 1;
+
+
+
 
 
 

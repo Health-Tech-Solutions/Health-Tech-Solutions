@@ -68,7 +68,6 @@ UPDATE chamado SET estado = 'fechado' WHERE idChamado = 559;
 INSERT INTO ordemManutencao(mediaFuncionamento) VALUES(subtrai_data(NOW(),'2023-11-11 00:00:00'));
 DROP TRIGGER tr_atualiza_ordem;
 
-    
-    
-    
+select count(*) from vw_vinicius where modelo = 'DD15';
+select count(*) from vw_vinicius where nomeTipo = 'Desfibriladores';
 

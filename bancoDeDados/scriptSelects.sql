@@ -49,6 +49,14 @@ INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
 
 SELECT * FROM chamado ORDER BY idChamado DESC LIMIT 1;
 
+SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo,
+            modelo
+            FROM vw_chamados c
+            WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+            GROUP BY tipo,modelo
+            ORDER BY numeroChamados;
 
 SELECT COUNT(*) FROM registro;
 CALL fechar_chamados();
@@ -70,4 +78,9 @@ DROP TRIGGER tr_atualiza_ordem;
 
 select count(*) from vw_vinicius where modelo = 'DD15';
 select count(*) from vw_vinicius where nomeTipo = 'Desfibriladores';
-
+use hts;
+SELECT 
+            tipo,
+            idTipo
+        FROM vw_chamados
+        GROUP BY tipo,idTipo;

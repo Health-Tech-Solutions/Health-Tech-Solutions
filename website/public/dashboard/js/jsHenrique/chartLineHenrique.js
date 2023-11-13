@@ -125,6 +125,7 @@ function predicao(){
     for(let i = 0; i < dadosReais.length; i++){
         // let formula = dadosReais[i] - 16.6  + 2 * i
         let formula = diferenca(dadosReais[i],393) + 1.4 * i
+        // let formula = 393 + 1.4 * i
         vetorAux.push(formula)
 }
 dados.datasets[0].data = vetorAux

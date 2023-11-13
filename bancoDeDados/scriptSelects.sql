@@ -71,3 +71,7 @@ DROP TRIGGER tr_atualiza_ordem;
 select count(*) from vw_vinicius where modelo = 'DD15';
 select count(*) from vw_vinicius where nomeTipo = 'Desfibriladores';
 
+select count(*) as maquinasOperando ,(select count(*) from vw_teste where estado = 'parado' and idHospital = '4') as maquinasParadas from vw_teste where estado = 'funcionando' and idHospital = '4';
+
+select count(*) from vw_teste where idHospital = 1 and estado = 'funcionando';
+

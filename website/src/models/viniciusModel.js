@@ -111,10 +111,60 @@ function desempenhoPorModelo(fkHospital) {
     return database.executar(instrucao)
 }
 
+
+function tiposDeMaquinasCadastradas(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        select 
+	    t.nome,
+        t.idTipo 
+        from tipo as t
+        JOIN modelo as m ON t.idTipo = m.fkTipo
+        JOIN maquinario as maq ON m.idModelo = maq.fkModelo;
+        `
+    } else {
+        instrucao = `
+        select 
+        t.nome,
+        t.idTipo 
+        from tipo as t
+        JOIN modelo as m ON t.idTipo = m.fkTipo
+        JOIN maquinario as maq ON m.idModelo = maq.fkModelo
+        WHERE maq.fkHospital = ${fkHospital};	
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
+function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        select modelo,idModelo from modelo where fkTipo = ${fkTipo};
+        `
+    } else {
+        instrucao = `
+        select modelo,idModelo from modelo where fkTipo = 1 and fkHospital = ${fkHospital};
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
+
 module.exports = {
     pegarDadosMaquinas,
     taxaMaquinasOperando,
     chamadosAbertos,
     estadoMaquinas,
-    desempenhoPorModelo
+    desempenhoPorModelo,
+    tiposDeMaquinasCadastradas,
+    modelosDeMaquinasCadastradas
+    
 }

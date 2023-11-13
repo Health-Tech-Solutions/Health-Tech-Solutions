@@ -48,6 +48,14 @@ router.get(`/desempenhoPorModelo/:fkHospital`,(req,res) => {
     funcionarioController.desempenhoPorModelo(req,res);
 });
 
+router.get(`/tiposDeMaquinasCadastradas/:fkHospital`,(req,res) => {
+    funcionarioController.tiposDeMaquinasCadastradas(req,res);
+});
+
+router.get(`/modelosDeMaquinasCadastradas/:fkTipo/:fkHospital`,(req,res) => {
+    funcionarioController.modelosDeMaquinasCadastradas(req,res);
+});
+
 
 
 

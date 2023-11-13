@@ -1,9 +1,17 @@
 let totalMaquinas
 let maquinasOperando
 let TotalChamados
+let totalChamadosModelo 
+let totalChamadosMaquina
+let nomeTipo
+
+
+
 
 
 var fkHospital = sessionStorage.getItem("FK_HOSPITAL");
+var tipo = "Monitor de S.V";
+var nomeModelo = "IntelliVue MP5SC"
 
 
 fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
@@ -102,21 +110,51 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
+    
+    fetch(`/viniciusRoutes/tiposDeMaquinasCadastradas/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                console.log("DADOSSSSS" + resposta)
+                plotarDadosBar(resposta)
+
+                // let idTipo = resposta[0].idTipo
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+
+    fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                TotalChamados = resposta[0].totalChamados
+                totalChamados.innerHTML = TotalChamados
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
 
 
 // Grafico de barras
 const ctx = document.getElementById('desempenhoModelo');
-
+var labels = []
 document.addEventListener('DOMContentLoaded', function() {
     // Dados iniciais
-    var dadosPrimordiais = {
-      labels: ['Categoria 1', 'Categoria 2', 'Categoria 3', 'Categoria 4'],
+    var dadosBar = {
+      labels: labels,
       datasets: [{
         label: 'Dados Iniciais',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
-        data: [10, 20, 30, 40]
+        data: dadosBar
       }]
     };
 
@@ -124,8 +162,16 @@ document.addEventListener('DOMContentLoaded', function() {
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
-    data: dadosPrimordiais,
+    data: dadosBar,
     options: {
+        onHover: function (event, elements) {
+            if (elements && elements[0]) {
+                document.getElementById('myChart').style.cursor = 'pointer';
+            } else {
+                document.getElementById('myChart').style.cursor = 'default';
+            }
+        
+    },
       onClick: function(event, elements) {
         // Verifica se algum elemento foi clicado
         if (elements.length > 0) {
@@ -134,13 +180,13 @@ document.addEventListener('DOMContentLoaded', function() {
           // Aqui, você pode alterar os dados conforme necessário
           // Vamos apenas inverter os valores como exemplo
           var dadosAlterados = {
-            labels: dadosPrimordiais.labels,
+            labels: dadosBar.labels,
             datasets: [{
               label: 'Dados Alterados',
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1,
-              data: dadosPrimordiais.datasets[0].data.map(function(value) {
+              data: dadosBar.datasets[0].data.map(function(value) {
                 return value * -1;
               })
             }]
@@ -154,9 +200,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+
+
   // Função para restaurar os dados primordiais
   window.restaurarDados = function() {
-    myChart.data = dadosPrimordiais;
+    myChart.data = dadosBar;
     myChart.update();
   };
 });
@@ -270,3 +318,14 @@ function plotarDadosPie(resposta) {
 
     chartPie.update()
 }
+
+function plotarDadosBar(resposta) {
+
+    for (let i = 0; i < resposta.length; i++) {
+        const element = resposta[i];
+        labels.push(element.nome)
+    }
+
+    chartPie.update()
+}
+

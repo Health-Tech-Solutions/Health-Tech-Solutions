@@ -110,8 +110,8 @@ CREATE TABLE ordemManutencao (
     dataInicioFunc DATETIME,
 	dataAbertura DATETIME,
 	dataFechamento DATETIME,
-	mediaFuncionamento INT,
-	mediaManutencao INT,
+	somaFuncionamento INT,
+	somaManutencao INT,
 	fkMaquina INT,
     fkChamado INT,
     qtdFalhas INT,
@@ -237,7 +237,8 @@ AFTER UPDATE ON chamado
 FOR EACH ROW
 BEGIN
 	UPDATE ordemManutencao SET dataFechamento = now(),
-								estado = 'funcionando'
+								estado = 'funcionando',
+                                somaManutencao = subtrai_data(dataFechamento, dataAbertura)
 								WHERE fkMaquina = (SELECT 
 													  fkMaquina
 												   FROM registro

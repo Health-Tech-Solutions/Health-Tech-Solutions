@@ -42,6 +42,8 @@ SELECT (SUM(horaAberto) - SUM(horaFechado)) AS mtbf FROM vw_confiabilidade;
 -- inserts e selects henrique
 USE hts;
 SELECT * FROM maquinario;
+SELECT * FROM ordemManutencao;
+
 
 SELECT * FROM ordemManutencao WHERE estado = 'parado';
 INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
@@ -65,13 +67,15 @@ INSERT INTO chamado VALUES(NULL, 'alto','Aberto','2 horas','deu certo',NOW(),87)
 
 SELECT * FROM ordemManutencao order by dataAbertura DESC;
 
+INSERT INTO ordemManutencao(estado,dataInicioFunc,fkMaquina,qtdFalhas) VALUES ('funcionando',now(),12, 0);
+
 
 UPDATE ordemManutencao SET estado = 'parado' ,
 										dataAbertura = now(),
                                         qtdFalhas = qtdFalhas + 1;
 
-UPDATE chamado SET estado = 'fechado' WHERE idChamado = 559;
-
+UPDATE chamado SET estado = 'fechado' WHERE idChamado = 92;
+SELECT * FROM ordemManutencao WHERE fkChamado = 92;
 
 INSERT INTO ordemManutencao(mediaFuncionamento) VALUES(subtrai_data(NOW(),'2023-11-11 00:00:00'));
 DROP TRIGGER tr_atualiza_ordem;

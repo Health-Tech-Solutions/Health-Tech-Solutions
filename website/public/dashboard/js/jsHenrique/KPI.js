@@ -1,4 +1,4 @@
-function buscarSomas(){
+
 
 fetch("/henrique/buscarSomaFuncionamento", { cache: 'no-store'})
     .then(function (resposta) {
@@ -7,7 +7,7 @@ fetch("/henrique/buscarSomaFuncionamento", { cache: 'no-store'})
         .then(function (resposta) {
             resposta.reverse();
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-           
+   
             // for (let i = 0; i < resposta.length; i++) {
             //     const element = resposta[i];
             //     dadosWord[i].x = element.modelo
@@ -24,6 +24,3 @@ fetch("/henrique/buscarSomaFuncionamento", { cache: 'no-store'})
     .catch(function (error) {
         console.error(`Erro na obtenção dos dados: ${error.message}`);
     });
-
-}
-

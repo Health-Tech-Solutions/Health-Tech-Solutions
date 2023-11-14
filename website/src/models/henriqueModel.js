@@ -17,13 +17,15 @@ function pegarModelos(){
 }
 
 function buscarSomaFuncionamento(){
+    
     var instrucao = `
-    SELECT 
-	    qtdFalhas,
+    SELECT
+        qtdFalhas,
         somaManutencao
     FROM ordemManutencao
     WHERE somaManutencao <> 0;
     `
+    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
     return database.executar(instrucao)
 }
 

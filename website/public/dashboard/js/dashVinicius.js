@@ -119,6 +119,21 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
+    fetch(`/viniciusRoutes/modelosDeMaquinasCadastradas/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                plotarDadosBar(resposta)
+
+                // let idTipo = resposta[0].idTipo
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+
     fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
     .then(function (response) {
         console.log(response)
@@ -155,6 +170,7 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
 // Grafico de barras
 const ctx = document.getElementById('desempenhoModelo');
 var labels = []
+var labels2 = []
 var data = [10,22,41,21,16,18,32,12]
 document.addEventListener('DOMContentLoaded', function() {
     // Dados iniciais
@@ -187,19 +203,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Verifica se algum elemento foi clicado
         if (elements.length > 0) {
           var clickedIndex = elements[0]._index;
-          
           // Aqui, você pode alterar os dados conforme necessário
           // Vamos apenas inverter os valores como exemplo
           var dadosAlterados = {
-            labels: dadosBar.labels,
+            labels: labels2,
             datasets: [{
               label: 'Dados Alterados',
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1,
-              data: dadosBar.datasets[0].data.map(function(value) {
-                return value * 2;
-              })
+              data: [10,22,41,21,16,18,32,12]
             }]
           };
 
@@ -333,6 +346,16 @@ function plotarDadosBar(resposta) {
     for (let i = 0; i < resposta.length; i++) {
         const element = resposta[i];
         labels.push(element.nome)
+    }
+
+    chartPie.update()
+}
+
+function plotarDadosBar2(resposta) {
+
+    for (let i = 0; i < resposta.length; i++) {
+        const element = resposta[i];
+        labels2.push(element.nome)
     }
 
     chartPie.update()

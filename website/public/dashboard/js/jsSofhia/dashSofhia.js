@@ -1,11 +1,14 @@
 function chamarComponenteComMaisAlertasDoDia() {
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/sofhiaRoute/buscarComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+        
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+        
+                        componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+                 
 
                     tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
 
@@ -23,6 +26,10 @@ function chamarComponenteComMaisAlertasDoDia() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(componenteComMaisAlertas.value == undefined){
+            componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+        }
+       
 }
 
 function chamarComponenteComMaisAlertasDaSemana() {
@@ -48,6 +55,9 @@ function chamarComponenteComMaisAlertasDaSemana() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(componenteComMaisAlertas.value == undefined){
+            componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+        }
 }
 
 function chamarComponenteComMaisAlertasDoMes() {
@@ -73,6 +83,10 @@ function chamarComponenteComMaisAlertasDoMes() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(componenteComMaisAlertas.value == undefined){
+            componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+        }
+    
 }
 
 function chamarComponenteComMaisAlertasDoAno() {
@@ -98,6 +112,9 @@ function chamarComponenteComMaisAlertasDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(componenteComMaisAlertas.value == undefined){
+            componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+        }
 }
 
 function chamarTipoComMaisAlertasDoDia() {
@@ -124,6 +141,9 @@ function chamarTipoComMaisAlertasDoDia() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(tipoComMaisAlertas.value == undefined){
+            tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+        }
 }
 
 function chamarTipoComMaisAlertasDaSemana() {
@@ -150,6 +170,9 @@ function chamarTipoComMaisAlertasDaSemana() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(tipoComMaisAlertas.value == undefined){
+            tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+        }
 }
 
 function chamarTipoComMaisAlertasDoMes() {
@@ -176,6 +199,9 @@ function chamarTipoComMaisAlertasDoMes() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(tipoComMaisAlertas.value == undefined){
+            tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+        }
 }
 
 function chamarTipoComMaisAlertasDoAno() {
@@ -202,6 +228,9 @@ function chamarTipoComMaisAlertasDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(tipoComMaisAlertas.value == undefined){
+            tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+        }
 }
 
 function chamarModeloComMaisAlertasDoDia() {
@@ -228,6 +257,9 @@ function chamarModeloComMaisAlertasDoDia() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(modeloComMaisAlertas.value == undefined){
+            modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+        }
 }
 
 function chamarModeloComMaisAlertasDaSemana() {
@@ -254,6 +286,9 @@ function chamarModeloComMaisAlertasDaSemana() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(modeloComMaisAlertas.value == undefined){
+            modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+        }
 }
 
 function chamarModeloComMaisAlertasDoMes() {
@@ -280,6 +315,9 @@ function chamarModeloComMaisAlertasDoMes() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(modeloComMaisAlertas.value == undefined){
+            modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+        }
 }
 
 function chamarModeloComMaisAlertasDoAno() {
@@ -306,6 +344,9 @@ function chamarModeloComMaisAlertasDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        if(modeloComMaisAlertas.value == undefined){
+            modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+        }
 }
 
 // function mudarTituloGraficoBarras(fkHospital) {

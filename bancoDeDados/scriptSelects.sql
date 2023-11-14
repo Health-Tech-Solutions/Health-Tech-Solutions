@@ -74,14 +74,16 @@ UPDATE ordemManutencao SET estado = 'parado' ,
 										dataAbertura = now(),
                                         qtdFalhas = qtdFalhas + 1;
 
-UPDATE chamado SET estado = 'fechado' WHERE idChamado = 92;
-SELECT * FROM ordemManutencao WHERE fkChamado = 92;
-
+UPDATE chamado SET estado = 'fechado' WHERE idChamado = 202;
+SELECT * FROM ordemManutencao WHERE fkChamado = 202;
+SELECT * FROM ordemManutencao WHERE estado = 'parado';
+SELECT * FROM ordemManutencao ;
+CALL inserir_registros;
+CALL fechar_chamados();
 INSERT INTO ordemManutencao(mediaFuncionamento) VALUES(subtrai_data(NOW(),'2023-11-11 00:00:00'));
 DROP TRIGGER tr_atualiza_ordem;
 
 -- Henrique
-
 
 select count(*) from vw_vinicius where modelo = 'DD15';
 select count(*) from vw_vinicius where nomeTipo = 'Desfibriladores';

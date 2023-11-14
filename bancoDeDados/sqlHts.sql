@@ -203,6 +203,7 @@ BEGIN
 end
 $
 
+
 DELIMITER $
 CREATE TRIGGER tr_atualiza_ordem
 AFTER INSERT ON chamado
@@ -214,6 +215,7 @@ BEGIN
 			UPDATE ordemManutencao SET estado = 'parado' ,
 										dataAbertura = now(),
                                         qtdFalhas = qtdFalhas + 1,
+                                        somaFuncionamento = subtrai_data(now(), dataInicioFunc),
                                         fkChamado = NEW.idChamado
 										WHERE fkMaquina = (SELECT 
 												fkMaquina 
@@ -241,7 +243,7 @@ BEGIN
                                 somaManutencao = subtrai_data(dataFechamento, dataAbertura)
 								WHERE fkMaquina = (SELECT 
 													  fkMaquina
-												   FROM registro
+												   FROM registrox	
 												   WHERE idRegistro = NEW.fkRegistro);
 END
 $

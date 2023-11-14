@@ -42,6 +42,8 @@ function buscarAlertasDosComponentesDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (de hoje)'
+
                 graficoPizzaDia.style.backgroundColor = "#d3d3d3"
                 graficoPizzaSemana.style.backgroundColor = ""
                 graficoPizzaMes.style.backgroundColor = ""
@@ -66,6 +68,8 @@ function buscarAlertasDosComponentesDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (da semana)'
+
                 graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = "#d3d3d3"
                 graficoPizzaMes.style.backgroundColor = ""
@@ -88,6 +92,8 @@ function buscarAlertasDosComponentesDoMes() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
+
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (dos últimos 30 dias)'
 
                 graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = ""
@@ -112,6 +118,8 @@ function buscarAlertasDosComponentesDoAno() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
+
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (dos últimos 365 dias)'
 
                 graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = ""

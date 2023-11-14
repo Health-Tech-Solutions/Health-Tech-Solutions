@@ -193,28 +193,10 @@ function totalMaquinasPorTipo(fkHospital) {
 
 
 function graficoLinha(fkHospital,maquina){
+    var instrucao = ""
 
-    if (fkHospital == "null") {
-        var instrucao = `
-    select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
-    from registro 
-    join maquinario on registro.fkMaquina = idMaquinario 
-    join empresa on maquinario.fkHospital = idEmpresa 
-    join dadosTemperatura on dataHora = dataTemperatura  
-    where month(dataTemperatura) < 7
-    group by fkHospital, fkMaquina, dataTemperatura, valor;
-    `
-    }else if (fkHospital != "null" && maquina == "null") {
-        var instrucao = `
-        select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
-        from registro 
-        join maquinario on registro.fkMaquina = idMaquinario 
-        join empresa on maquinario.fkHospital = idEmpresa 
-        join dadosTemperatura on dataHora = dataTemperatura  
-        where month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
-        group by fkHospital, fkMaquina, dataTemperatura, valor;
-        `  
-    }else{
+
+    if(fkHospital > 0 && maquina > 0){
         var instrucao = `
         select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
         from registro 

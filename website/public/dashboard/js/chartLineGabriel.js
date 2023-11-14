@@ -85,7 +85,7 @@ var juntarTempDATA = []
     // para cada par de dados (X - X̄) * (Y - Ȳ)
     // A variável denominator é usada para calcular a soma dos quadrados dos desvios de x em relação à sua média.
     // X (X - X̄)^2
-    //CALCULAR A INCLINAÇÃO a = Σ((X - X̄)(Y - Ȳ)) / Σ((X - X̄))
+    //CALCULAR A INCLINAÇÃO a = Σ((X - X̄)(Y - Ȳ)) / Σ((X - X̄)²)
 
     var numerator = 0;
     var denominator = 0;
@@ -153,6 +153,7 @@ function criarGraficoLinha() {
                     label: 'Regressão Linear',
                     data: valoresRegressao,
                     borderColor: 'red',
+                    backgroundColor: 'red',
                     pointRadius: 0,
                     fill: false,
                 },
@@ -160,11 +161,11 @@ function criarGraficoLinha() {
         },
     });
 
-    regressaoLinear.innerHTML = `${Rsq.toFixed(5)}`
+    regressaoLinear.innerHTML = `${Rsq.toFixed(2)}%`
 }
 
 function RSquared(yMean,a,b) {
-
+  // formula: Rsq = 1 - (SSE / SSTO)
 
 
   // Calcular a soma dos quadrados totais (SSTO)
@@ -181,6 +182,7 @@ function RSquared(yMean,a,b) {
 
   // Calcular o R-quadrado múltiplo
   var Rsq = 1 - (SSE / SSTO);
+  Rsq =  Rsq * 100
 
   return {Rsq}
 

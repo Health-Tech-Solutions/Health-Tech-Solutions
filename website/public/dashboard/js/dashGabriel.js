@@ -15,10 +15,10 @@ if (sessionStorage.idTipo == undefined) {
     sessionStorage.idTipo = 'null'
 }
 if (sessionStorage.maquina == undefined) {
-    sessionStorage.maquina = 'null'
+    sessionStorage.maquina = ''
 }
 if (sessionStorage.nomeTipo == undefined) {
-    sessionStorage.nomeTipo = 'Todos'
+    sessionStorage.nomeTipo = 'Escolher máquina'
 }
 
 
@@ -635,7 +635,7 @@ function listarMaquina(){
                         console.log(maquina)
                         
                          listarMaquinas.innerHTML = `<option class="dropdown-item3"  value = "null;null">Escolher máquina</option>`; 
-                         listarMaquinas.innerHTML += `<option class="dropdown-item3"  value = "${listarMaquinas.value}" >Todos</option>`; 
+                          
                          for (let i = 0; i < resposta.length; i++) {
                              let maquina = resposta[i].idMaquinario
                              let nomeTipo = resposta[i].nome
@@ -663,7 +663,7 @@ function trocarMaquina(){
     let nomeTipo = teste[1]
     console.log(nomeTipo)
     if(nomeTipo == 'null'){
-        nomeTipo = 'Todos'
+        nomeTipo = 'Escolher máquina'
     }
     console.log(teste, maquina, nomeTipo)
     sessionStorage.maquina = maquina

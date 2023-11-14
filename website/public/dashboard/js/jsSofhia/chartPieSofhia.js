@@ -128,19 +128,19 @@ function buscarAlertasDosComponentesDoAno() {
 }
 
 function plotarGraficoPizza(resposta){
-    let labels = []
-    dadosPizza.labels = labels
+    let labelsPie = []
+    
     dadosPizza.datasets[0].data = []
 
     for (let index = 0; index < resposta.length; index++) {
-        let cpu = resposta[index].Total_de_Chamados_CPU;
-        let ram = resposta[index].Total_de_Chamados_RAM;
-        let disco = resposta[index].Total_de_Chamados_Disco;
+        let qtdComponente = resposta[index].quantidade;
+        let nomePeca = resposta[index].nomePeca;
 
-        dadosPizza.datasets[0].data.push(cpu)
-        dadosPizza.datasets[0].data.push(ram)
-        dadosPizza.datasets[0].data.push(disco)
+        labelsPie.push(nomePeca)
+        dadosPizza.datasets[0].data.push(qtdComponente)
+       
     }
+    dadosPizza.labels = labelsPie
     graficoPizza.update()
 }
 

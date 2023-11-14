@@ -19,7 +19,8 @@ var dadosWord = [
 fetch("/henrique/pegarModelos", { cache: 'no-store'})
     .then(function (response) {
     if (response.ok) {
-        response.json().then(function (resposta) {
+        response.json()
+        .then(function (resposta) {
             resposta.reverse();
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
            

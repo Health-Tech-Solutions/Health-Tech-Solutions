@@ -19,18 +19,18 @@ function pegarModelos(req, res) {
 
 function buscarSomaFuncionamento(req,res){
     henriqueModel.buscarSomaFuncionamento()
-        .then((resultado) =>{
-            if(resultado.length > 0){
+        .then((resultado) => {
+            if (resultado.length > 0) {
                 res.status(200).json(resultado)
             } else {
                 res.status(204).json([])
             }
         })
-        .catch(erro => {
-            console.log(erro)
-            console.log("Houve um erro ao tentar buscar a soma de funcionamento")
-            res.status(500).json(erro.sqlMessage)
-        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao procurar os hospitais: ", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage);
+        });
 
 }
 

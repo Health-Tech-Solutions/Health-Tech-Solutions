@@ -107,6 +107,7 @@ create table chamado(
 CREATE TABLE ordemManutencao (
 	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
 	estado VARCHAR(50),
+    dataInicioFunc DATETIME,
 	dataAbertura DATETIME,
 	dataFechamento DATETIME,
 	mediaFuncionamento INT,

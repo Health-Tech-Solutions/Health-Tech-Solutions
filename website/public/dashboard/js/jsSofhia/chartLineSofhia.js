@@ -58,7 +58,7 @@ function plotarGraficoSemanal(resposta){
     data = []
     var dataAtual = new Date()
     
-    var mes = dataAtual.getMonth() + 1
+    var mes = dataAtual.getMonth() 
     
     for (let i = 0; i < resposta.length; i++) {
 
@@ -76,7 +76,7 @@ function plotarGraficoSemanal(resposta){
 
 function plotarGrafico(resposta){
 
-    labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov']
     dados.datasets[0].data = []
     
     for (let i = 0; i < resposta.length; i++) {
@@ -90,7 +90,7 @@ function plotarGrafico(resposta){
 
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const constante = document.getElementById('chartLinha');
-labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov']
 // 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
 var dados = {
     labels: labels,

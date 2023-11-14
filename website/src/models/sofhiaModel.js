@@ -34,22 +34,22 @@ function buscarMensal(fkHospital){
     if(fkHospital == 'null'){
         instrucao = `
         SELECT 
-	    MONTH(dataHora) AS mes,
-	    COUNT(*) AS quantidade	
-	FROM vw_chamados
-    GROUP BY mes
-    ORDER BY mes;
+	        MONTH(dataHora) AS mes,
+	        COUNT(*) AS quantidade	
+        FROM vw_chamados
+        GROUP BY mes
+        ORDER BY mes;
         `
 
     }else{
          instrucao = `
-    SELECT 
-	    MONTH(dataHora) AS mes,
-	    COUNT(*) AS quantidade	
-	FROM vw_chamados
-    WHERE idHospital = ${fkHospital}
-    GROUP BY mes
-    ORDER BY mes;
+        SELECT 
+            MONTH(dataHora) AS mes,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE idHospital = ${fkHospital}
+        GROUP BY mes
+        ORDER BY mes;
     `
 
     }

@@ -107,6 +107,7 @@ create table chamado(
 CREATE TABLE ordemManutencao (
 	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
 	estado VARCHAR(50),
+    dataInicioFunc DATETIME,
 	dataAbertura DATETIME,
 	dataFechamento DATETIME,
 	somaFuncionamento INT,
@@ -199,7 +200,7 @@ CREATE TRIGGER tr_abre_ordem
 AFTER INSERT ON maquinario
 FOR EACH ROW
 BEGIN 
-	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina,qtdFalhas) VALUES ('funcionando',now(),new.idMaquinario, 0);
+	INSERT INTO ordemManutencao(estado,dataInicioFunc,fkMaquina,qtdFalhas) VALUES ('funcionando',now(),new.idMaquinario, 0);
 end
 $
 
@@ -215,6 +216,7 @@ BEGIN
 			UPDATE ordemManutencao SET estado = 'parado' ,
 										dataAbertura = now(),
                                         qtdFalhas = qtdFalhas + 1,
+                                        somaFuncionamento = subtrai_data(NOW(),dataInicioFunc),
                                         fkChamado = NEW.idChamado
 										WHERE fkMaquina = (SELECT 
 												fkMaquina 

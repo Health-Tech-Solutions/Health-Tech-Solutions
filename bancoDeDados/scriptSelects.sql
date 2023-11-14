@@ -41,6 +41,19 @@ SELECT (SUM(horaAberto) - SUM(horaFechado)) AS mtbf FROM vw_confiabilidade;
 				vw_chamados group by quantidade, tipo;
 -- inserts e selects henrique
 USE hts;
+select * from ordemMAnutencao;
+ SELECT
+		SUM(om.qtdFalhas) AS qtdFalhas,
+        SUM(om.somaManutencao) AS tempoManutencao,
+        SUM(om.somaFuncionamento) AS tempoFuncionamento,
+        maq.fkModelo,
+        m.modelo
+    FROM ordemManutencao AS om
+    JOIN maquinario AS maq ON fkMaquina = idMaquinario
+    JOIN modelo AS m ON m.idModelo = maq.fkModelo
+    WHERE somaManutencao <> 0
+	GROUP BY maq.fkModelo;
+
 SELECT * FROM maquinario;
 SELECT * FROM ordemManutencao;
 
@@ -117,7 +130,7 @@ call inserir_registros;
 SELECT COUNT(*) AS qtd,
 		nomePeca
 		FROM vw_vinicius
-        GROUP BY nomePeca
+        GROUP BY nomePeca;
     
 select * from vw_vinicius;
 

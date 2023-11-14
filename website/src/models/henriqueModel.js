@@ -20,10 +20,15 @@ function buscarSomaFuncionamento(){
     
     var instrucao = `
     SELECT
-        qtdFalhas,
-        somaManutencao
-    FROM ordemManutencao
-    WHERE somaManutencao <> 0;
+		SUM(om.qtdFalhas) AS qtdFalhas,
+        SUM(om.somaManutencao) AS tempoManutencao,
+        maq.fkModelo,
+        m.modelo
+    FROM ordemManutencao AS om
+    JOIN maquinario AS maq ON fkMaquina = idMaquinario
+    JOIN modelo AS m ON m.idModelo = maq.fkModelo
+    WHERE somaManutencao <> 0
+	GROUP BY maq.fkModelo
     `
     console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
     return database.executar(instrucao)

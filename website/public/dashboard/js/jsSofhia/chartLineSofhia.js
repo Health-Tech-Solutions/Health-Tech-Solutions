@@ -9,7 +9,11 @@ function obterDadosSemanal(){
                 .then(
                     function(resposta){
                         console.log(resposta)
+                        
                         plotarGraficoSemanal(resposta)
+
+                        tituloGraficoLinhas.innerHTML = 'Quantidade de alertas (do último mês)'
+                        
 
                         graficoLinhaMes.style.backgroundColor = "#d3d3d3"
                         graficoLinhaAno.style.backgroundColor = ""
@@ -36,6 +40,8 @@ function obterDadosMensais(){
                     function(resposta){
                         console.log(resposta) 
                         plotarGrafico(resposta)
+
+                        tituloGraficoLinhas.innerHTML = 'Quantidade de alertas (do ano)'
 
                         graficoLinhaMes.style.backgroundColor = ""
                         graficoLinhaAno.style.backgroundColor = "#d3d3d3"

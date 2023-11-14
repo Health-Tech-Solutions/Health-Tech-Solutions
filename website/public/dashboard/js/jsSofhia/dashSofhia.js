@@ -7,6 +7,8 @@ function chamarComponenteComMaisAlertasDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
 
+                    tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
+
                     componenteDia.style.backgroundColor = "#d3d3d3"
                     componenteSemana.style.backgroundColor = ""
                     componenteMes.style.backgroundColor = ""
@@ -32,6 +34,8 @@ function chamarComponenteComMaisAlertasDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
 
+                    tituloKPI1.innerHTML = 'Componente com + alertas (da semana)'
+
                     componenteDia.style.backgroundColor = ""
                     componenteSemana.style.backgroundColor = "#d3d3d3"
                     componenteMes.style.backgroundColor = ""
@@ -55,6 +59,8 @@ function chamarComponenteComMaisAlertasDoMes() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
 
+                    tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 30 dias)'
+
                     componenteDia.style.backgroundColor = ""
                     componenteSemana.style.backgroundColor = ""
                     componenteMes.style.backgroundColor = "#d3d3d3"
@@ -77,7 +83,9 @@ function chamarComponenteComMaisAlertasDoAno() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
-                
+
+                    tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 365 dias)'
+
                     componenteDia.style.backgroundColor = ""
                     componenteSemana.style.backgroundColor = ""
                     componenteMes.style.backgroundColor = ""
@@ -101,6 +109,8 @@ function chamarTipoComMaisAlertasDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+                    tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (de hoje)'
 
                     tipoDia.style.backgroundColor = "#d3d3d3"
                     tipoSemana.style.backgroundColor = ""
@@ -126,6 +136,8 @@ function chamarTipoComMaisAlertasDaSemana() {
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
 
+                    tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (da semana)'
+
                     tipoDia.style.backgroundColor = ""
                     tipoSemana.style.backgroundColor = "#d3d3d3"
                     tipoMes.style.backgroundColor = ""
@@ -149,6 +161,8 @@ function chamarTipoComMaisAlertasDoMes() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+
+                    tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 30 dias)'
 
                     tipoDia.style.backgroundColor = ""
                     tipoSemana.style.backgroundColor = ""
@@ -174,6 +188,8 @@ function chamarTipoComMaisAlertasDoAno() {
                 
                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
 
+                    tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 365 dias)'
+
                     tipoDia.style.backgroundColor = ""
                     tipoSemana.style.backgroundColor = ""
                     tipoMes.style.backgroundColor = ""
@@ -197,6 +213,8 @@ function chamarModeloComMaisAlertasDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+                
+                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (de hoje)'
 
                 modeloDia.style.backgroundColor = "#d3d3d3"
                 modeloSemana.style.backgroundColor = ""
@@ -222,6 +240,8 @@ function chamarModeloComMaisAlertasDaSemana() {
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
 
+                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (da semana)'
+
                 modeloDia.style.backgroundColor = ""
                 modeloSemana.style.backgroundColor = "#d3d3d3"
                 modeloMes.style.backgroundColor = ""
@@ -246,6 +266,8 @@ function chamarModeloComMaisAlertasDoMes() {
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
 
+                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do mês)'
+
                 modeloDia.style.backgroundColor = ""
                 modeloSemana.style.backgroundColor = ""
                 modeloMes.style.backgroundColor = "#d3d3d3"
@@ -269,6 +291,8 @@ function chamarModeloComMaisAlertasDoAno() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+
+                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do ano)'
 
                 modeloDia.style.backgroundColor = ""
                 modeloSemana.style.backgroundColor = ""

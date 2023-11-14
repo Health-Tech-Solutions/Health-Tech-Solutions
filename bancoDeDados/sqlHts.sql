@@ -107,7 +107,6 @@ create table chamado(
 CREATE TABLE ordemManutencao (
 	idOrdem INT PRIMARY KEY AUTO_INCREMENT,
 	estado VARCHAR(50),
-    dataInicioFunc DATETIME,
 	dataAbertura DATETIME,
 	dataFechamento DATETIME,
 	somaFuncionamento INT,
@@ -164,7 +163,8 @@ AS
 		m.modelo,
 		tr.nome,
 		tr.medida,
-		p.idPeca AS idPeca
+		p.idPeca AS idPeca,
+        p.nome AS nomePeca
 	FROM chamado AS c
 	JOIN registro AS r
 	JOIN maquinario AS maq
@@ -199,7 +199,7 @@ CREATE TRIGGER tr_abre_ordem
 AFTER INSERT ON maquinario
 FOR EACH ROW
 BEGIN 
-	INSERT INTO ordemManutencao(estado,dataInicioFunc,fkMaquina,qtdFalhas) VALUES ('funcionando',now(),new.idMaquinario, 0);
+	INSERT INTO ordemManutencao(estado,dataAbertura,fkMaquina,qtdFalhas) VALUES ('funcionando',now(),new.idMaquinario, 0);
 end
 $
 
@@ -215,7 +215,6 @@ BEGIN
 			UPDATE ordemManutencao SET estado = 'parado' ,
 										dataAbertura = now(),
                                         qtdFalhas = qtdFalhas + 1,
-                                        somaFuncionamento = subtrai_data(now(), dataInicioFunc),
                                         fkChamado = NEW.idChamado
 										WHERE fkMaquina = (SELECT 
 												fkMaquina 
@@ -243,7 +242,7 @@ BEGIN
                                 somaManutencao = subtrai_data(dataFechamento, dataAbertura)
 								WHERE fkMaquina = (SELECT 
 													  fkMaquina
-												   FROM registrox	
+												   FROM registro
 												   WHERE idRegistro = NEW.fkRegistro);
 END
 $
@@ -680,7 +679,68 @@ VALUES
 	(213,'2023-03-05 09:00:00', 1, 2),
 	(214,'2023-03-05 09:00:00', 1, 5),
 	(215,'2023-03-05 09:00:00', 1, 10),
-	(216,'2023-03-05 09:00:00', 1, 11);
+	(216,'2023-03-05 09:00:00', 1, 11),
+    (217,'2023-03-05 09:00:00', 4, 1),
+	(218,'2023-03-05 09:00:00', 4, 2),
+	(219,'2023-03-05 09:00:00', 4, 3),
+	(220,'2023-03-05 09:00:00', 4, 4),
+	(221,'2023-03-05 09:00:00', 4, 5),
+	(222,'2023-03-05 09:00:00', 4, 6),
+	(223,'2023-03-05 09:00:00', 4, 7),
+	(224,'2023-03-05 09:00:00', 4, 8),
+	(225,'2023-03-05 09:00:00', 4, 9),
+	(226,'2023-03-05 09:00:00', 4, 10),
+	(227,'2023-03-05 09:00:00', 4, 11),
+	(228,'2023-03-05 09:00:00', 4, 12),
+	(229,'2023-03-05 09:00:00', 4, 1),
+	(230,'2023-03-05 09:00:00', 4, 2),
+	(231,'2023-03-05 09:00:00', 4, 3),
+	(232,'2023-03-05 09:00:00', 4, 4),
+	(233,'2023-03-05 09:00:00', 4, 5),
+	(234,'2023-03-05 09:00:00', 4, 6),
+	(235,'2023-03-05 09:00:00', 4, 7),
+	(236,'2023-03-05 09:00:00', 4, 8),
+	(237,'2023-03-05 09:00:00', 4, 9),
+	(238,'2023-03-05 09:00:00', 4, 10),
+	(239,'2023-03-05 09:00:00', 4, 11),
+	(240,'2023-03-05 09:00:00', 4, 12),
+	(241,'2023-03-05 09:00:00', 4, 1),
+	(242,'2023-03-05 09:00:00', 4, 2),
+	(243,'2023-03-05 09:00:00', 4, 3),
+	(244,'2023-03-05 09:00:00', 4, 4),
+	(245,'2023-03-05 09:00:00', 4, 5),
+	(246,'2023-03-05 09:00:00', 4, 6),
+	(247,'2023-03-05 09:00:00', 4, 7),
+	(248,'2023-03-05 09:00:00', 4, 8),
+	(249,'2023-03-05 09:00:00', 4, 9),
+	(250,'2023-03-05 09:00:00', 4, 10),
+	(251,'2023-03-05 09:00:00', 4, 11),
+	(252,'2023-03-05 09:00:00', 4, 12),
+	(253,'2023-03-05 09:00:00', 4, 1),
+	(254,'2023-03-05 09:00:00', 4, 2),
+	(255,'2023-03-05 09:00:00', 4, 3),
+	(256,'2023-03-05 09:00:00', 4, 4),
+	(257,'2023-03-05 09:00:00', 4, 5),
+	(258,'2023-03-05 09:00:00', 4, 6),
+	(259,'2023-03-05 09:00:00', 4, 7),
+	(260,'2023-03-05 09:00:00', 4, 8),
+	(261,'2023-03-05 09:00:00', 4, 9),
+	(262,'2023-03-05 09:00:00', 4, 10),
+	(263,'2023-03-05 09:00:00', 4, 11),
+	(264,'2023-03-05 09:00:00', 4, 12),
+	(265,'2023-03-05 09:00:00', 4, 1),
+	(266,'2023-03-05 09:00:00', 4, 2),
+	(267,'2023-03-05 09:00:00', 4, 3),
+	(268,'2023-03-05 09:00:00', 4, 4),
+	(269,'2023-03-05 09:00:00', 4, 5),
+	(270,'2023-03-05 09:00:00', 4, 6),
+	(271,'2023-03-05 09:00:00', 4, 7),
+	(272,'2023-03-05 09:00:00', 4, 8),
+	(273,'2023-03-05 09:00:00', 4, 9),
+	(274,'2023-03-05 09:00:00', 4, 10),
+	(275,'2023-03-05 09:00:00', 4, 11),
+	(276,'2023-03-05 09:00:00', 4, 12);
+
 
 
 insert into 
@@ -834,17 +894,4 @@ AS
 
 DELIMITER $$
 
-call inserir_registros;
-SELECT COUNT(*) AS qtd,
-		nomePeca
-		FROM vw_vinicius
-        GROUP BY nomePeca
-
-
--- select count(*) from vw_vinicius where nomeTipo = 'Vital1' and idHospital = 1;
-
-
-
-
-
-
+call fechar_chamados();

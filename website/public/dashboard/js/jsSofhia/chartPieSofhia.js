@@ -42,6 +42,8 @@ function buscarAlertasDosComponentesDoDia() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (de hoje)'
+
                 graficoPizzaDia.style.backgroundColor = "#d3d3d3"
                 graficoPizzaSemana.style.backgroundColor = ""
                 graficoPizzaMes.style.backgroundColor = ""
@@ -66,6 +68,8 @@ function buscarAlertasDosComponentesDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (da semana)'
+
                 graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = "#d3d3d3"
                 graficoPizzaMes.style.backgroundColor = ""
@@ -88,6 +92,8 @@ function buscarAlertasDosComponentesDoMes() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
+
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (dos últimos 30 dias)'
 
                 graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = ""
@@ -113,6 +119,8 @@ function buscarAlertasDosComponentesDoAno() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
 
+                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (dos últimos 365 dias)'
+
                 graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = ""
                 graficoPizzaMes.style.backgroundColor = ""
@@ -128,19 +136,19 @@ function buscarAlertasDosComponentesDoAno() {
 }
 
 function plotarGraficoPizza(resposta){
-    let labels = []
-    dadosPizza.labels = labels
+    let labelsPie = []
+    
     dadosPizza.datasets[0].data = []
 
     for (let index = 0; index < resposta.length; index++) {
-        let cpu = resposta[index].Total_de_Chamados_CPU;
-        let ram = resposta[index].Total_de_Chamados_RAM;
-        let disco = resposta[index].Total_de_Chamados_Disco;
+        let qtdComponente = resposta[index].quantidade;
+        let nomePeca = resposta[index].nomePeca;
 
-        dadosPizza.datasets[0].data.push(cpu)
-        dadosPizza.datasets[0].data.push(ram)
-        dadosPizza.datasets[0].data.push(disco)
+        labelsPie.push(nomePeca)
+        dadosPizza.datasets[0].data.push(qtdComponente)
+       
     }
+    dadosPizza.labels = labelsPie
     graficoPizza.update()
 }
 

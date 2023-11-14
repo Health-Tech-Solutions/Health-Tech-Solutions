@@ -117,51 +117,49 @@ function desempenhoPorModelo(fkHospital) {
     return database.executar(instrucao)
 }
 
+function tiposDeMaquinasCadastradas(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        select idTipo,
+		nome from tipo
+        JOIN modelo on fkTipo = idTipo
+        JOIN maquinario on fkModelo = idModelo
+        group by idTipo 
+        order by idTipo asc; 
+        `
+    } else {
+        instrucao = `
+        select idTipo,
+		nome from tipo
+        JOIN modelo on fkTipo = idTipo
+        JOIN maquinario on fkModelo = idModelo where fkHospital = ${fkHospital}
+        group by idTipo 
+        order by idTipo asc; 
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
 
-// function tiposDeMaquinasCadastradas(fkHospital) {
-//     console.log("estou na buscarSemanal no chamadoModel")
-//     var instrucao = `
-//     `
-//     if (fkHospital == 'null') {
-//         instrucao = `
-//         select 
-// 	    t.nome,
-//         t.idTipo 
-//         from tipo as t
-//         JOIN modelo as m ON t.idTipo = m.fkTipo
-//         JOIN maquinario as maq ON m.idModelo = maq.fkModelo;
-//         `
-//     } else {
-//         instrucao = `
-//         select 
-//         t.nome,
-//         t.idTipo 
-//         from tipo as t
-//         JOIN modelo as m ON t.idTipo = m.fkTipo
-//         JOIN maquinario as maq ON m.idModelo = maq.fkModelo
-//         WHERE maq.fkHospital = ${fkHospital};	
-//         `
-//     }
-//     console.log("executando a seguinte instrução SQL " + instrucao)
-//     return database.executar(instrucao)
-// }
-
-// function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
-//     console.log("estou na buscarSemanal no chamadoModel")
-//     var instrucao = `
-//     `
-//     if (fkHospital == 'null') {
-//         instrucao = `
-//         select modelo,idModelo from modelo where fkTipo = ${fkTipo};
-//         `
-//     } else {
-//         instrucao = `
-//         select modelo,idModelo from modelo where fkTipo = ${fkTipo} and fkHospital = ${fkHospital};
-//         `
-//     }
-//     console.log("executando a seguinte instrução SQL " + instrucao)
-//     return database.executar(instrucao)
-// }
+function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
+    var instrucao = `
+    `
+    if (fkHospital == 'null') {
+        instrucao = `
+        select modelo,idModelo from modelo where fkTipo = ${fkTipo};
+        `
+    } else {
+        instrucao = `
+        select modelo,idModelo from modelo where fkTipo = ${fkTipo} and fkHospital = ${fkHospital};
+        `
+    }
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
 
 function dadosQuantidadeChamados(tipo,modelo,fkHospital) {
     var instrucao = `
@@ -190,6 +188,8 @@ module.exports = {
     chamadosAbertos,
     estadoMaquinas,
     desempenhoPorModelo,
-    dadosQuantidadeChamados
+    dadosQuantidadeChamados,
+    tiposDeMaquinasCadastradas,
+    modelosDeMaquinasCadastradas
     
 }

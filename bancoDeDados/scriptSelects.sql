@@ -98,3 +98,19 @@ select count(*) as maquinasOperando ,(select count(*) from vw_teste where estado
 
 select count(*) from vw_teste where idHospital = 1 and estado = 'funcionando';
 
+select count(*) as totalMaquinas,(select count(*) from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'funcionando' and fkHospital = 2) as maquinasOK from maquinario where fkHospital = 2;
+
+select modelo,idModelo from modelo where fkTipo = 1;
+
+select idModelo,modelo from modelo where fkTipo = 1;
+
+select idTipo,
+		nome from tipo
+JOIN modelo on fkTipo = idTipo
+JOIN maquinario on fkModelo = idModelo
+group by idTipo 
+order by idTipo asc;   
+
+

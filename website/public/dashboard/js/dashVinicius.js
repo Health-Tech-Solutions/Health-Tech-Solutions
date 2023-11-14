@@ -159,7 +159,7 @@ var data = [10,22,41,21,16,18,32,12]
 document.addEventListener('DOMContentLoaded', function() {
     // Dados iniciais
     var dadosBar = {
-      labels: ['Monitor de S.V', 'Monitor C.', 'Monitor F.', 'Desfibriladores', 'Cardioversores', 'Ultrassom', 'Máquina de A.', 'Máquinas ECG'],
+      labels: labels,
       datasets: [{
         label: 'Dados Iniciais',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -328,15 +328,15 @@ function plotarDadosPie(resposta) {
     chartPie.update()
 }
 
-// function plotarDadosBar(resposta) {
+function plotarDadosBar(resposta) {
 
-//     for (let i = 0; i < resposta.length; i++) {
-//         const element = resposta[i];
-//         labels.push(element.nome)
-//     }
+    for (let i = 0; i < resposta.length; i++) {
+        const element = resposta[i];
+        labels.push(element.nome)
+    }
 
-//     chartPie.update()
-// }
+    chartPie.update()
+}
 
 // function plotarDadosBar2(resposta) {
 

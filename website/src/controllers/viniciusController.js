@@ -82,24 +82,41 @@ function desempenhoPorModelo(req, res) {
 
 }
 
-function tiposDeMaquinasCadastradas(req, res) {
-    viniciusModel.tiposDeMaquinasCadastradas(req.params.fkHospital).then(
-        function (resultado) {
-            res.json(resultado);
-        }
-    )
-        .catch(
-            function (erro) {
-                console.log(erro);
-                console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
-                res.status(500).json(erro.sqlMessage);
-            }
-        )
+// function tiposDeMaquinasCadastradas(req, res) {
+//     viniciusModel.tiposDeMaquinasCadastradas(req.params.fkHospital).then(
+//         function (resultado) {
+//             res.json(resultado);
+//         }
+//     )
+//         .catch(
+//             function (erro) {
+//                 console.log(erro);
+//                 console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
+//                 res.status(500).json(erro.sqlMessage);
+//             }
+//         )
 
-}
+// }
 
-function modelosDeMaquinasCadastradas(req, res) {
-    viniciusModel.modelosDeMaquinasCadastradas(req.params.fkTipo,req.params.fkHospital).then(
+// function modelosDeMaquinasCadastradas(req, res) {
+//     viniciusModel.modelosDeMaquinasCadastradas(req.params.fkTipo,req.params.fkHospital).then(
+//         function (resultado) {
+//             res.json(resultado);
+//         }
+//     )
+//         .catch(
+//             function (erro) {
+//                 console.log(erro);
+//                 console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
+//                 res.status(500).json(erro.sqlMessage);
+//             }
+//         )
+
+// }
+
+
+function dadosQuantidadeChamados(req, res) {
+    viniciusModel.dadosQuantidadeChamados(req.params.tipo, req.params.modelo, req.params.fkHospital).then(
         function (resultado) {
             res.json(resultado);
         }
@@ -123,6 +140,7 @@ module.exports = {
     chamadosAbertos,
     estadoMaquinas,
     desempenhoPorModelo,
-    tiposDeMaquinasCadastradas,
-    modelosDeMaquinasCadastradas
+    // tiposDeMaquinasCadastradas,
+    // modelosDeMaquinasCadastradas,
+    dadosQuantidadeChamados
 }

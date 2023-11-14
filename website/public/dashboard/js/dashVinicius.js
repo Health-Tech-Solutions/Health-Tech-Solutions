@@ -4,7 +4,8 @@ let TotalChamados
 let totalChamadosModelo 
 let totalChamadosMaquina
 let nomeTipo
-
+let maquinasParadas
+let maquinasFuncionando
 
 
 
@@ -51,16 +52,7 @@ fetch(`/viniciusRoutes/estadoMaquinas/${fkHospital}`)
             response.json().then(function (resposta) {
                 resposta.reverse();
 
-                    for (let index = 0; index < resposta.length; index++) {
-                        let maquinasOperando = resposta[index].maquinasOperando;
-                        let maquinasParadas = resposta[index].maquinasParadas;
-                
-                        dadosPie.datasets[0].data.push(maquinasOperando)
-                        dadosPie.datasets[0].data.push(maquinasParadas)
-                
-                        console.log(maquinasOperando, maquinasParadas)
-                
-                    }
+                plotarDadosPie(resposta)
                 
                     chartPie.update()
 
@@ -141,20 +133,39 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
+    // fetch(`/viniciusRoutes/dadosQuantidadeChamados/${tipo}/${modelo}/${fkHospital}`)
+    // .then(function (response) {
+    //     console.log(response)
+    //     if (response.ok) {
+    //         response.json().then(function (resposta) {
+    //             resposta.reverse();
+    //             totalChamadosMaquina = resposta[0].chamadosPorMaquina
+    //             totalChamadosModelo  = resposta[0].chamadosPorModelo
+                
+    //             plotarDadosBar2(resposta)
+
+    //         });
+    //     } else {
+    //         console.error('Nenhum dado encontrado ou erro na API');
+    //     }
+    // })
+
+
 
 // Grafico de barras
 const ctx = document.getElementById('desempenhoModelo');
 var labels = []
+var data = [10,22,41,21,16,18,32,12]
 document.addEventListener('DOMContentLoaded', function() {
     // Dados iniciais
     var dadosBar = {
-      labels: labels,
+      labels: ['Monitor de S.V', 'Monitor C.', 'Monitor F.', 'Desfibriladores', 'Cardioversores', 'Ultrassom', 'Máquina de A.', 'Máquinas ECG'],
       datasets: [{
         label: 'Dados Iniciais',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
-        data: dadosBar
+        data: data
       }]
     };
 
@@ -187,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1,
               data: dadosBar.datasets[0].data.map(function(value) {
-                return value * -1;
+                return value * 2;
               })
             }]
           };
@@ -306,26 +317,36 @@ var chartPie = new Chart(configPie, {
 
 function plotarDadosPie(resposta) {
     for (let index = 0; index < resposta.length; index++) {
-        let maquinasOperando = resposta[index].maquinasOperando;
+        let maquinasFuncionando = resposta[index].maquinasFuncionando;
         let maquinasParadas = resposta[index].maquinasParadas;
 
-        dadosPie.datasets[0].data.push(maquinasOperando)
+        dadosPie.datasets[0].data.push(maquinasFuncionando)
         dadosPie.datasets[0].data.push(maquinasParadas)
 
-        console.log(maquinasOperando, maquinasParadas)
+        console.log("DADOS MAQUINAA " + maquinasFuncionando, maquinasParadas)
 
     }
 
     chartPie.update()
 }
 
-function plotarDadosBar(resposta) {
+// function plotarDadosBar(resposta) {
 
-    for (let i = 0; i < resposta.length; i++) {
-        const element = resposta[i];
-        labels.push(element.nome)
-    }
+//     for (let i = 0; i < resposta.length; i++) {
+//         const element = resposta[i];
+//         labels.push(element.nome)
+//     }
 
-    chartPie.update()
-}
+//     chartPie.update()
+// }
+
+// function plotarDadosBar2(resposta) {
+
+//     for (let i = 0; i < resposta.length; i++) {
+//         const element = resposta[i];
+//         data.push(element.chamadosPorModelo)
+//     }
+
+//     chartPie.update()
+// }
 

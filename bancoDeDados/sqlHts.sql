@@ -279,7 +279,7 @@ END WHILE;
 END$$
 
 DELIMITER ;
-
+select * from peca;
 delimiter $$
 DROP PROCEDURE IF EXISTS inserir_registros_temperatura$$
 
@@ -833,7 +833,12 @@ AS
     AND maq.fkHospital = e.idEmpresa;
 
 DELIMITER $$
-    
+
+call inserir_registros;
+SELECT COUNT(*) AS qtd,
+		nomePeca
+		FROM vw_vinicius
+        GROUP BY nomePeca
 
 
 -- select count(*) from vw_vinicius where nomeTipo = 'Vital1' and idHospital = 1;

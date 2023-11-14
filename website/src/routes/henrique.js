@@ -7,4 +7,8 @@ router.get(`/pegarModelos`, (req,res) =>{
     henriqueController.pegarModelos(req,res)
 })
 
+router.get('buscarSomaFuncionamento', (req,res) => {
+    henriqueController.buscarSomaFuncionamento(req,res)
+})
+
 module.exports = router;

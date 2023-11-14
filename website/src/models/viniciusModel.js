@@ -29,15 +29,15 @@ function taxaMaquinasOperando(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        Select count(*) as totalMaquinas,(SELECT COUNT(*) 
-        FROM vw_chamados
-        WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR)) as maquinasOperando from maquinario;
+        select count(*) as totalMaquinas,(select count(*) from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'funcionando') as maquinasOK from maquinario;
         `
     } else {
         instrucao = `
-        Select count(*) as totalMaquinas,(SELECT COUNT(*) 
-        FROM vw_chamados
-        WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR)) as maquinasOperando from maquinario where fkHospital = ${fkHospital};
+        select count(*) as totalMaquinas,(select count(*) from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'funcionando' and fkHospital = ${fkHospital}) as maquinasOK from maquinario where fkHospital = ${fkHospital};
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)

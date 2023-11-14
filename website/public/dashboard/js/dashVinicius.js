@@ -1,5 +1,5 @@
 let totalMaquinas
-let maquinasOperando
+let maquinasOK
 let TotalChamados
 let totalChamadosModelo 
 let totalChamadosMaquina
@@ -70,9 +70,9 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
             response.json().then(function (resposta) {
                 resposta.reverse();
                 totalMaquinas = resposta[0].totalMaquinas
-                maquinasOperando = resposta[0].maquinasOperando
+                maquinasOK = resposta[0].maquinasOK
 
-                let porcentagemExibicao = (maquinasOperando / totalMaquinas) * 100
+                let porcentagemExibicao = (maquinasOK / totalMaquinas) * 100
 
                 if (totalMaquinas == 0) {
                     porcentagemExibicao = 0
@@ -322,8 +322,6 @@ function plotarDadosPie(resposta) {
 
         dadosPie.datasets[0].data.push(maquinasFuncionando)
         dadosPie.datasets[0].data.push(maquinasParadas)
-
-        console.log("DADOS MAQUINAA " + maquinasFuncionando, maquinasParadas)
 
     }
 

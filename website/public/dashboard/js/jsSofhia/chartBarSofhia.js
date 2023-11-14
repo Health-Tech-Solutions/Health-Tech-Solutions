@@ -38,6 +38,8 @@ function obterDadosGraficoBarraDoDia() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
+                
+                tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (de hoje)'
 
                 graficoBarrasDia.style.backgroundColor = "#d3d3d3"
                 graficoBarrasSemana.style.backgroundColor = ""
@@ -62,6 +64,8 @@ function obterDadosGraficoBarraDaSemana() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
 
+                tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (da semana)'
+
                 graficoBarrasDia.style.backgroundColor = ""
                 graficoBarrasSemana.style.backgroundColor = "#d3d3d3"
                 graficoBarrasMes.style.backgroundColor = ""
@@ -85,6 +89,8 @@ function obterDadosGraficoBarraDoMes() {
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
 
+                tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (dos últimos 30 dias)'
+
                 graficoBarrasDia.style.backgroundColor = ""
                 graficoBarrasSemana.style.backgroundColor = ""
                 graficoBarrasMes.style.backgroundColor = "#d3d3d3"
@@ -107,6 +113,8 @@ function obterDadosGraficoBarraDoAno() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoBarra(resposta);
+
+                tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (dos últimos 365 dias)'
 
                 graficoBarrasDia.style.backgroundColor = ""
                 graficoBarrasSemana.style.backgroundColor = ""

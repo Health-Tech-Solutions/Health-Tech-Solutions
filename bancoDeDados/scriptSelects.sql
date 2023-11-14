@@ -39,7 +39,7 @@ SELECT (SUM(horaAberto) - SUM(horaFechado)) AS mtbf FROM vw_confiabilidade;
 				idMaquina AS quantidade, 
 				tipo FROM 
 				vw_chamados group by quantidade, tipo;
-                
+-- inserts e selects henrique
 USE hts;
 SELECT * FROM maquinario;
 
@@ -75,6 +75,9 @@ UPDATE chamado SET estado = 'fechado' WHERE idChamado = 559;
 
 INSERT INTO ordemManutencao(mediaFuncionamento) VALUES(subtrai_data(NOW(),'2023-11-11 00:00:00'));
 DROP TRIGGER tr_atualiza_ordem;
+
+-- Henrique
+
 
 select count(*) from vw_vinicius where modelo = 'DD15';
 select count(*) from vw_vinicius where nomeTipo = 'Desfibriladores';

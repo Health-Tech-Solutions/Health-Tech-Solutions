@@ -67,15 +67,21 @@ function estadoMaquinas(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select count(*) as maquinasOperando ,
-        (select count(*) from vw_vinicius where estado = 'parado' and idHospital = '4') as maquinasParadas
-         from vw_vinicius where estado = 'funcionando' and idHospital = '4';
+        select count(*) as maquinasFuncionando,( select count(*) from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'parado') as maquinasParadas from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'funcionando';
         `
     } else {
         instrucao = `
-        select count(*) as maquinasOperando ,
-        (select count(*) from vw_vinicius where estado = 'parado' and idHospital = ${fkHospital}) as maquinasParadas
-         from vw_vinicius where estado = 'funcionando' and idHospital = ${fkHospital};
+        select count(*) as maquinasFuncionando,( select count(*) from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'parado'
+        and maquinario.fkHospital = ${fkHospital}) as maquinasParadas from ordemManutencao
+        JOIN maquinario on idMaquinario = fkMaquina
+        where estado = 'funcionando'
+        and maquinario.fkHospital = ${fkHospital};
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -112,45 +118,65 @@ function desempenhoPorModelo(fkHospital) {
 }
 
 
-function tiposDeMaquinasCadastradas(fkHospital) {
-    console.log("estou na buscarSemanal no chamadoModel")
-    var instrucao = `
-    `
-    if (fkHospital == 'null') {
-        instrucao = `
-        select 
-	    t.nome,
-        t.idTipo 
-        from tipo as t
-        JOIN modelo as m ON t.idTipo = m.fkTipo
-        JOIN maquinario as maq ON m.idModelo = maq.fkModelo;
-        `
-    } else {
-        instrucao = `
-        select 
-        t.nome,
-        t.idTipo 
-        from tipo as t
-        JOIN modelo as m ON t.idTipo = m.fkTipo
-        JOIN maquinario as maq ON m.idModelo = maq.fkModelo
-        WHERE maq.fkHospital = ${fkHospital};	
-        `
-    }
-    console.log("executando a seguinte instrução SQL " + instrucao)
-    return database.executar(instrucao)
-}
+// function tiposDeMaquinasCadastradas(fkHospital) {
+//     console.log("estou na buscarSemanal no chamadoModel")
+//     var instrucao = `
+//     `
+//     if (fkHospital == 'null') {
+//         instrucao = `
+//         select 
+// 	    t.nome,
+//         t.idTipo 
+//         from tipo as t
+//         JOIN modelo as m ON t.idTipo = m.fkTipo
+//         JOIN maquinario as maq ON m.idModelo = maq.fkModelo;
+//         `
+//     } else {
+//         instrucao = `
+//         select 
+//         t.nome,
+//         t.idTipo 
+//         from tipo as t
+//         JOIN modelo as m ON t.idTipo = m.fkTipo
+//         JOIN maquinario as maq ON m.idModelo = maq.fkModelo
+//         WHERE maq.fkHospital = ${fkHospital};	
+//         `
+//     }
+//     console.log("executando a seguinte instrução SQL " + instrucao)
+//     return database.executar(instrucao)
+// }
 
-function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
-    console.log("estou na buscarSemanal no chamadoModel")
+// function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
+//     console.log("estou na buscarSemanal no chamadoModel")
+//     var instrucao = `
+//     `
+//     if (fkHospital == 'null') {
+//         instrucao = `
+//         select modelo,idModelo from modelo where fkTipo = ${fkTipo};
+//         `
+//     } else {
+//         instrucao = `
+//         select modelo,idModelo from modelo where fkTipo = ${fkTipo} and fkHospital = ${fkHospital};
+//         `
+//     }
+//     console.log("executando a seguinte instrução SQL " + instrucao)
+//     return database.executar(instrucao)
+// }
+
+function dadosQuantidadeChamados(tipo,modelo,fkHospital) {
     var instrucao = `
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select modelo,idModelo from modelo where fkTipo = ${fkTipo};
+        select count(*) as chamadosPorMaquina,
+        (select count(*) from vw_chamados where tipo = '${tipo}' and idHospital = ${fkHospital}) as chamadosPorModelo 
+        from vw_chamados where modelo = '${modelo}' and idHospital = ${fkHospital};
         `
     } else {
         instrucao = `
-        select modelo,idModelo from modelo where fkTipo = 1 and fkHospital = ${fkHospital};
+        select count(*) as chamadosPorMaquina,
+        (select count(*) from vw_chamados where tipo = '${tipo}') as chamadosPorModelo 
+        from vw_chamados where modelo = '${modelo}';
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -164,7 +190,6 @@ module.exports = {
     chamadosAbertos,
     estadoMaquinas,
     desempenhoPorModelo,
-    tiposDeMaquinasCadastradas,
-    modelosDeMaquinasCadastradas
+    dadosQuantidadeChamados
     
 }

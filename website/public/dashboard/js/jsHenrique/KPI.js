@@ -1,13 +1,13 @@
 
-
-fetch("/henrique/buscarSomaFuncionamento", { cache: 'no-store'})
+var fkModelo = null
+fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
     .then(function (resposta) {
         if (resposta.ok) {
         resposta.json()
         .then(function (resposta) {
             resposta.reverse();
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            calcularMTBF(resposta)
+            calcularConfiabilidade(resposta)
             
         });
     } else {
@@ -19,11 +19,18 @@ fetch("/henrique/buscarSomaFuncionamento", { cache: 'no-store'})
     });
 
 var qtdFalhas = [] 
-var somaManutencao = []
-function calcularMTBF(resposta){
-   
-    resposta.forEach(element => {
-        qtdFalhas.push(element.qtdFalhas)
-        somaManutencao.push(element.tempoManutencao)
-    });
+var somaFuncionamento = []
+
+function calcularConfiabilidade(resposta){
+    
+    let tempoFuncionamento = resposta[0].tempoFuncionamento
+    let tempoManutencao = resposta[0].tempoManutencao
+    let qtdFalhas = resposta[0].qtdFalhas
+
+    mtbf.innerHTML = `${tratarTempo(tempoFuncionamento) / qtdFalhas} Horas`
+    mttr.innerHTML = `${tratarTempo(tempoManutencao) / qtdFalhas} Horas`
+}
+
+function tratarTempo(tempo){
+    return (tempo / 60).toFixed(0)
 }

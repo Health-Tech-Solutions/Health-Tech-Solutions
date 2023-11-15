@@ -23,7 +23,7 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="../assets/js/perfilFuncionario.js"></script> -->
-    <script src="js/funcoesIndex"></script>
+   
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
   <style>
@@ -34,14 +34,8 @@
 </head>
 
 <body id="page-top" onload="
-listarEquipamentos(1),
-maquinasInstaveis(),
-obterChamadosEmAberto(),
-obterDadosMensais(),
-totalMaquinas(),
-MaquinasPorTipoChamadoAberto(),
-chamarModeloComMaisAlertas(),
-mostrarDados()
+mostrarDados(),
+listarEquipamentos(1)
 ">
     <!-- Page Wrapper -->
 
@@ -581,11 +575,10 @@ mostrarDados()
 
 <script>
 
-    usuario_nome.innerHTML = sessionStorage.NOME_USUARIO;
+    // usuario_nome.innerHTML = sessionStorage.NOME_USUARIO;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/index.js"></script>
 <script src="js/dados.js"></script>
 <script src="js/jsHenrique/chartLineHenrique.js"></script>
 <script src="js/chartPieIndex.js"></script>

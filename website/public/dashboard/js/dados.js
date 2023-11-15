@@ -22,5 +22,10 @@ function mostrarDados(){
       )
     }
   })
+  .catch(
+    err => {
+      console.error("Deu erro")
+    }
+  )
 }
 

@@ -1,4 +1,3 @@
-function obterDadosMensais(){
     var fkHospital = sessionStorage.FK_HOSPITAL
     fetch(`/chamados/buscarMensal/${fkHospital}`)
     .then(
@@ -19,7 +18,7 @@ function obterDadosMensais(){
             console.log("ERRO " + err)
         }
     )
-}
+
 
 function obterDadosSemanal(){
 
@@ -118,7 +117,6 @@ var lineChart = new Chart(ctx, {
     }
 });
 
-// 16 - 2
 function predicao(){
     var dadosReais = dados.datasets[0].data
     var vetorAux = []

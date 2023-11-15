@@ -29,7 +29,22 @@ function buscarSomaFuncionamento(fkModelo){
     `    
     } else {
         instrucao = `
-    SELECT
+        SELECT
+        ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
+        ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
+        ROUND(AVG(om.somaManutencao)) AS tempoManutencao
+    FROM ordemManutencao AS om
+    WHERE om.qtdFalhas <> 0;
+   
+    `
+    }
+    
+    
+    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
+    return database.executar(instrucao)
+}
+/* 
+ SELECT
 		SUM(om.qtdFalhas) AS qtdFalhas,
         SUM(om.somaFuncionamento) AS tempoManutencao,
         maq.fkModelo,
@@ -40,14 +55,7 @@ function buscarSomaFuncionamento(fkModelo){
     WHERE somaFuncionamento <> 0
     AND maq.fkModelo = 3
 	GROUP BY maq.fkModelo;
-    `
-    }
-    
-    
-    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
-    return database.executar(instrucao)
-}
-
+*/
 module.exports = {
     pegarModelos,
     buscarSomaFuncionamento

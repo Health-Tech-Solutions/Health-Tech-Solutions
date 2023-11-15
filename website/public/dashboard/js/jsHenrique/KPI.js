@@ -1,5 +1,6 @@
 
-var fkModelo = null
+
+var fkModelo = 'null'
 fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
     .then(function (resposta) {
         if (resposta.ok) {
@@ -18,17 +19,22 @@ fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
         console.error(`Erro na obtenção dos dados: ${error.message}`);
     });
 
-var qtdFalhas = [] 
-var somaFuncionamento = []
+// var qtdFalhas = [] 
+// var somaFuncionamento = []
 
 function calcularConfiabilidade(resposta){
-    
-    let tempoFuncionamento = resposta[0].tempoFuncionamento
+    let tempoFuncionamento = Number(resposta[0].tempoFuncionamento)
     let tempoManutencao = resposta[0].tempoManutencao
     let qtdFalhas = resposta[0].qtdFalhas
+    let mtbf = tratarTempo(tempoFuncionamento / qtdFalhas)
+    let taxaFalhas = 1 / mtbf
+    let confiabilidade = (2.71 ** (-taxaFalhas * 2)) * 100 
+   
 
-    mtbf.innerHTML = `${tratarTempo(tempoFuncionamento) / qtdFalhas} Horas`
-    mttr.innerHTML = `${tratarTempo(tempoManutencao) / qtdFalhas} Horas`
+    mtbf_id.innerHTML = `${mtbf} Horas`
+    mttr_id.innerHTML = `${tratarTempo(tempoManutencao) / qtdFalhas} Horas`
+
+    alert(confiabilidade)
 }
 
 function tratarTempo(tempo){

@@ -34,7 +34,8 @@ function calcularConfiabilidade(resposta){
     mtbf_id.innerHTML = `${mtbf} Horas`
     mttr_id.innerHTML = `${tratarTempo(tempoManutencao) / qtdFalhas} Horas`
 
-    alert(confiabilidade)
+    confiabilidade_id.innerHTML = confiabilidade.toFixed(2),"%";
+    barraConfiabilidade.style.width =   `${(confiabilidade)}%`
 }
 
 function tratarTempo(tempo){

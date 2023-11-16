@@ -363,7 +363,6 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                     <div class="dropdown-header">Alertas:</div>
-                                                    <a class="dropdown-item pointer" id="componenteDia" onclick="chamarComponenteComMaisAlertasDoDia()">de Hoje</a>
                                                     <a class="dropdown-item pointer" id="componenteSemana" onclick="chamarComponenteComMaisAlertasDaSemana()">da Semana</a>
                                                     <a class="dropdown-item pointer" id="componenteMes" onclick="chamarComponenteComMaisAlertasDoMes()">dos últimos 30 dias</a>
                                                     <a class="dropdown-item pointer" id="componenteAno"  onclick="chamarComponenteComMaisAlertasDoAno()">dos últimos 365 dias</a>
@@ -392,7 +391,6 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                     <div class="dropdown-header">Alertas:</div>
-                                                    <a class="dropdown-item pointer" id="tipoDia" onclick="chamarTipoComMaisAlertasDoDia()">de Hoje</a>
                                                     <a class="dropdown-item pointer" id="tipoSemana" onclick="chamarTipoComMaisAlertasDaSemana()">da Semana</a>
                                                     <a class="dropdown-item pointer" id="tipoMes" onclick="chamarTipoComMaisAlertasDoMes()">dos últimos 30 dias</a>
                                                     <a class="dropdown-item pointer" id="tipoAno" onclick="chamarTipoComMaisAlertasDoAno()">dos últimos 365 dias</a>
@@ -422,7 +420,6 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                     <div class="dropdown-header">Alertas:</div>
-                                                    <a class="dropdown-item pointer" id="modeloDia" onclick="chamarModeloComMaisAlertasDoDia()">de Hoje</a>
                                                     <a class="dropdown-item pointer" id="modeloSemana" onclick="chamarModeloComMaisAlertasDaSemana()">da Semana</a>
                                                     <a class="dropdown-item pointer" id="modeloMes" onclick="chamarModeloComMaisAlertasDoMes()">dos últimos 30 dias</a>
                                                     <a class="dropdown-item pointer" id="modeloAno"
@@ -474,7 +471,6 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas</div>
-                                                <a class="dropdown-item pointer" id="graficoPizzaDia"  onclick="buscarAlertasDosComponentesDoDia()">de Hoje</a>
                                                 <a class="dropdown-item pointer" id="graficoPizzaSemana" onclick="buscarAlertasDosComponentesDaSemana()">da Semana</a>
                                                 <a class="dropdown-item pointer" id="graficoPizzaMes" onclick="buscarAlertasDosComponentesDoMes()">dos últimos 30 dias</a>
                                                 <a class="dropdown-item pointer" id="graficoPizzaAno" onclick="buscarAlertasDosComponentesDoAno()">dos últimos 365 dias</a>
@@ -521,7 +517,6 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                                                 <div class="dropdown-header">Alertas:</div>
-                                                <a class="dropdown-item pointer" id="graficoBarrasDia" onclick="obterDadosGraficoBarraDoDia()">de Hoje</a>
                                                 <a class="dropdown-item pointer" id="graficoBarrasSemana" onclick="obterDadosGraficoBarraDaSemana()">da Semana</a>
                                                 <a class="dropdown-item pointer" id="graficoBarrasMes" onclick="obterDadosGraficoBarraDoMes()">dos últimos 30 dias</a>
                                                 <a class="dropdown-item pointer" id="graficoBarrasAno" onclick="obterDadosGraficoBarraDoAno()">dos últimos 365 dias</a>
@@ -619,14 +614,14 @@
     nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     function funcoes() {
-        chamarComponenteComMaisAlertasDaSemana(),
+        chamarComponenteComMaisAlertasDoMes(),
         // chamarTipoComMaisAlertas(),
-        chamarTipoComMaisAlertasDaSemana(),
-        chamarModeloComMaisAlertasDaSemana(),
+        chamarTipoComMaisAlertasDoMes(),
+        chamarModeloComMaisAlertasDoMes(),
         mostrarDados(),
         obterDadosSemanal(),
-        buscarAlertasDosComponentesDaSemana(),
-        obterDadosGraficoBarraDaSemana(),
+        buscarAlertasDosComponentesDoMes(),
+        obterDadosGraficoBarraDoMes(),
         obterDadosGrafico()
     }
 </script>

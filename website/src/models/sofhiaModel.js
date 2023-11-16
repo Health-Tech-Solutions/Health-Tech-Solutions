@@ -480,12 +480,10 @@ function buscarAlertaComponenteDoDia(fkHospital) {
             nomePeca
         FROM vw_chamados c
         WHERE c.dataHora = CURDATE()
-        GROUP BY nomePeca;
-        
+        GROUP BY nomePeca;   
     `
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
-
     } else {
         var instrucao = `
         SELECT COUNT(*) AS quantidade,

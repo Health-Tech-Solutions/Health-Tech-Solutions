@@ -27,6 +27,7 @@ function chamarComponenteComMaisAlertasDoDia() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(componenteComMaisAlertas.value == undefined){
+            tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
         }
        
@@ -56,6 +57,7 @@ function chamarComponenteComMaisAlertasDaSemana() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(componenteComMaisAlertas.value == undefined){
+            tituloKPI1.innerHTML = 'Componente com + alertas (da semana)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
         }
 }
@@ -84,6 +86,7 @@ function chamarComponenteComMaisAlertasDoMes() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(componenteComMaisAlertas.value == undefined){
+            tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 30 dias)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
         }
     
@@ -113,6 +116,7 @@ function chamarComponenteComMaisAlertasDoAno() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(componenteComMaisAlertas.value == undefined){
+            tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 365 dias)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
         }
 }
@@ -142,6 +146,7 @@ function chamarTipoComMaisAlertasDoDia() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(tipoComMaisAlertas.value == undefined){
+            tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (de hoje)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
         }
 }
@@ -171,6 +176,7 @@ function chamarTipoComMaisAlertasDaSemana() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(tipoComMaisAlertas.value == undefined){
+            tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (da semana)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
         }
 }
@@ -200,6 +206,7 @@ function chamarTipoComMaisAlertasDoMes() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(tipoComMaisAlertas.value == undefined){
+            tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 30 dias)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
         }
 }
@@ -229,6 +236,7 @@ function chamarTipoComMaisAlertasDoAno() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(tipoComMaisAlertas.value == undefined){
+            tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 365 dias)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
         }
 }
@@ -258,6 +266,7 @@ function chamarModeloComMaisAlertasDoDia() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(modeloComMaisAlertas.value == undefined){
+            tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (de hoje)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
         }
 }
@@ -287,6 +296,7 @@ function chamarModeloComMaisAlertasDaSemana() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(modeloComMaisAlertas.value == undefined){
+            tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (da semana)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
         }
 }
@@ -316,6 +326,7 @@ function chamarModeloComMaisAlertasDoMes() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(modeloComMaisAlertas.value == undefined){
+            tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do mês)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
         }
 }
@@ -345,18 +356,10 @@ function chamarModeloComMaisAlertasDoAno() {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
         if(modeloComMaisAlertas.value == undefined){
+            tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do ano)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
         }
 }
-
-// function mudarTituloGraficoBarras(fkHospital) {
-//     var fkHospital = sessionStorage.FK_HOSPITAL
-//     if (fkHospital == 'null') {
-//         tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital'
-//     } else {
-//         tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada componente'
-//     }
-// }
 
 
 if(sessionStorage.FK_HOSPITAL == undefined){
@@ -380,7 +383,7 @@ function listarHospitais(){
                         dropdown_menu.innerHTML = ""
                         dropdown_menu.innerHTML = `<option class="dropdown-item" value = "null;null">-----------</option>`; 
                         dropdown_menu.innerHTML += `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos Hospitais</option>`;
-                        // dropdown_menu.innerHTML = `<option class="dropdown-item" value = "${dropdown_menu.value}">Todos</option>`; 
+                  
                         for (let i = 0; i < resposta.length; i++) {
                             let nome = resposta[i].nomeFantasia
                             let id = resposta[i].idEmpresa
@@ -400,7 +403,6 @@ function listarHospitais(){
 }
 
 function trocarHospital(){  
-
     let teste = dropdown_menu.value.split(';')
     let id = teste[0]
     let nome = teste[1]

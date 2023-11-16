@@ -41,26 +41,22 @@ function buscarAlertasDosComponentesDoDia() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
-
                 tituloGraficoPizza.innerHTML = 'Alertas de cada componente (de hoje)'
 
                 graficoPizzaDia.style.backgroundColor = "#d3d3d3"
                 graficoPizzaSemana.style.backgroundColor = ""
                 graficoPizzaMes.style.backgroundColor = ""
                 graficoPizzaAno.style.backgroundColor = ""
-
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
     })
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados: ${error.message}`);
-    });
-    if(tituloGraficoPizza.value == undefined){
-        tituloGraficoPizza.innerHTML = 'Nenhum componente em alerta!'
-        chartPie.style.display = 'none'
-    }
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados: ${error.message}`);
+        });
+        
+    
 }
 
 function buscarAlertasDosComponentesDaSemana() {

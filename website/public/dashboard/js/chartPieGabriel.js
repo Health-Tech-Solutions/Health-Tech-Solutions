@@ -34,6 +34,9 @@ var dadosPizza = {
         borderWidth: 1
     }]
 }
+
+
+
 var graficoPizza = new Chart(configPie, {
     type: 'pie',
     data: dadosPizza,
@@ -52,6 +55,13 @@ var graficoPizza = new Chart(configPie, {
         }
     }
 });
+
+setInterval(updateGraficoPizza, 5000)
+
+function updateGraficoPizza() {
+    graficoPizza.update()
+}
+
 console.log("PIIZZZZZAAAAAAAAAAAAAAAA")
 function graficoPizza1(){
     var fkHospital = sessionStorage.FK_HOSPITAL
@@ -79,28 +89,6 @@ function graficoPizza1(){
     })
 }
 
-// function plotarGraficoPizza(resposta){
-//     let labels = []
-//     let cores = []
-//     dadosPizza.labels = labels
-//     dadosPizza.datasets[0].data = []
-//     for (let i = 0; i <= 5; i++) {
-//         let element = resposta[i];
-//         if(element.nivel == 'Baixo'){
-//             cores.push('#1cc88a')
-//         } else if(element.nivel == 'Médio'){
-//             cores.push('#f6c23e')
-//         } else {
-//             cores.push('#e74a3b')
-//         }
-//         dadosPizza.labels.push(element.nivel)
-//         dadosPizza.datasets[0].data.push(element.qtdChamado)
-//     }
-
-//     dadosPizza.datasets[0].backgroundColor = cores
-//     graficoPizza.update()
-    
-// }
 
 
 function plotarGraficoPizza(resposta) {
@@ -134,52 +122,3 @@ function plotarGraficoPizza(resposta) {
 
 
 
-// var posicao = 0
-// var equipamentos = []
-// var tipos = []
-// function listarEquipamentos(numero){
-//     equipamentos = []
-//     tipos = []
-//     var fkHospital = sessionStorage.FK_HOSPITAL
-//     fetch(`/chamados/listarModelos/${fkHospital}`)
-//         .then(
-//             resposta => {
-//                 if(resposta.ok){
-//                     resposta.json()
-//                     .then(
-//                         resposta => {
-//                             console.log(resposta)
-//                             for (let i = 0; i < resposta.length; i++) {
-//                                 const element = resposta[i];
-//                                 console.log(element)
-//                                 equipamentos.push(element.tipo) 
-//                                 tipos.push(element.idTipo)
-//                             }   
-//                             mudarEquipamento(numero, equipamentos, tipos)    
-               
-//                         }
-//                     )
-//                 }
-//             }
-//         )
-//         .catch(
-//             err =>{
-//                 console.log("ERRO " + err)
-//             }
-//         )  
-
-       
-// }
-
-// function mudarEquipamento(numero, equipamentos, tipos){
-//     if((posicao == 0 && numero == -1) || (posicao == equipamentos.length && numero == 1)){
-//         numero = 0 
-//     }
-//     posicao += numero 
-//     sessionStorage.POSICAO_EQUIPAMENTO = posicao
-//     if(posicao == 0){
-//         posicao = 1
-//     }
-//     nome_equipamento.innerHTML = equipamentos[posicao - 1]
-//     buscarGravidade(tipos[posicao -1])
-// }

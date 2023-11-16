@@ -11,11 +11,25 @@ var dadosAlterados = {}
 let nomeTipo2
 let idTipo
 let totalChamadosTipo = []
-
-
 var fkHospital = sessionStorage.getItem("FK_HOSPITAL");
 var tipo = "Monitor de S.V";
 var nomeModelo = "IntelliVue MP5SC"
+
+ //faça o fetch da função pegarDadosMaquinas
+
+
+ fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
+ .then(function (response) {
+     console.log(response)
+     if (response.ok) {
+         response.json().then(function (resposta) {
+             resposta.reverse();
+             componenteComMaisAlertas.innerHTML = resposta[0].total
+         });
+     } else {
+         console.error('Nenhum dado encontrado ou erro na API');
+     }
+ })
 
 
 fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)

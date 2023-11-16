@@ -60,7 +60,9 @@ router.get(`/totalChamadosPorTipo/:fkHospital`,(req,res) => {
     funcionarioController.totalChamadosPorTipo(req,res);
 });
 
-
+router.get(`/totalChamadosPorModelo/:fkHospital`,(req,res) => {
+    funcionarioController.totalChamadosPorModelo(req,res);
+});
 
 
 

@@ -131,7 +131,7 @@ function totalChamadosPorTipo(req, res) {
 }
 
 function totalChamadosPorModelo(req, res) {
-    viniciusModel.totalChamadosPorModelo(req.params.fkHospital).then(
+    viniciusModel.totalChamadosPorModelo(req.params.fkTipo, req.params.fkHospital).then(
         function (resultado) {
             res.json(resultado);
         }

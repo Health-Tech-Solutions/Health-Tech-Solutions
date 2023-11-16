@@ -145,10 +145,8 @@ function calcularCoeficientes(dataset){
 
    const valoresX = Array.from({ length: dataset.length }, (_, index) => index + 1);
    
-
-   const mediaX = calcularMedia(valoresX);
-   
-
+    const mediaX = calcularMedia(valoresX);
+        
    let numeradorM = 0;
    let denominadorM = 0;
    

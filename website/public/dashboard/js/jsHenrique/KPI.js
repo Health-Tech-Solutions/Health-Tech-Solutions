@@ -14,9 +14,9 @@ fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
         console.error('Nenhum dado encontrado ou erro na API');
     }
 })
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados: ${error.message}`);
-    });
+.catch(function (error) {
+    console.error(`Erro na obtenção dos dados: ${error.message}`);
+});
 
 
 function calcularConfiabilidade(resposta){
@@ -29,7 +29,7 @@ function calcularConfiabilidade(resposta){
     let mttr = Number(tratarTempo(tempoManutencao) / qtdFalhas).toFixed(2)
 
     mtbf_id.innerHTML = `${mtbf} Horas`
-    mttr_id.innerHTML = `${mttr} Horas`
+    mttr_id.innerHTML = `${mttr} Horas` 
 
     confiabilidade_id.innerHTML = confiabilidade.toFixed(2),"%";
     barraConfiabilidade.style.width =   `${(confiabilidade)}%`

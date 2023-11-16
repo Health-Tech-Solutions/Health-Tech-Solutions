@@ -59,13 +59,16 @@ function plotarGraficoSemanal(resposta){
         labels.push(ocorrencia.dia + '/' + mes)
         data.push(ocorrencia.quantidade)
     }
-
+    
     dados.labels = labels
     dados.datasets[0].data = data
   
     lineChart.update()
 }
 
+
+
+var dataRegressao = []
 function plotarGrafico(resposta){
 
     labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
@@ -76,9 +79,17 @@ function plotarGrafico(resposta){
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }
 
+
+    dadosRegressao = dados.datasets[0].data
+    calcularCoeficientes(dadosRegressao)
+   
+   
     dados.labels = labels
     lineChart.update()
 }
+
+
+
 
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const ctx = document.getElementById('chartLinha');
@@ -120,15 +131,46 @@ var lineChart = new Chart(ctx, {
 function predicao(){
     var dadosReais = dados.datasets[0].data
     var vetorAux = []
+    var coeficientes = calcularCoeficientes(vetorAux)
+    var angular = coeficientes[0]
+    var linear = coeficientes[1]
+   
     for(let i = 0; i < dadosReais.length; i++){
         // let formula = dadosReais[i] - 16.6  + 2 * i
-        let formula = diferenca(dadosReais[i],393) + 1.4 * i
+        let formula = diferenca(dadosReais[i],linear) + angular * i
         // let formula = 393 + 1.4 * i
         vetorAux.push(formula)
+    }
+    dados.datasets[0].data = vetorAux
+    lineChart.update()
 }
-dados.datasets[0].data = vetorAux
-lineChart.update()
 
+function calcularCoeficientes(dataset){
+    const mediaY = dadosRegressao.reduce((acc, val) => acc + val, 0) / dadosRegressao.length;
+
+   const valoresX = Array.from({ length: dadosRegressao.length }, (_, index) => index + 1);
+   
+
+   const mediaX = calcularMedia(valoresX);
+   
+
+   let numeradorM = 0;
+   let denominadorM = 0;
+   
+   for (let i = 0; i < valoresX.length; i++) {
+     numeradorM += (valoresX[i] - mediaX) * (dadosRegressao[i] - mediaY);
+     denominadorM += Math.pow(valoresX[i] - mediaX, 2);
+   }
+
+   const angular = numeradorM / denominadorM;
+   
+
+   const linear = mediaY - angular * mediaX;
+   return [angular,linear]
+}
+
+function calcularMedia(dados) {
+    return dados.reduce((acc, val) => acc + val, 0) / dados.length;
 }
 
 function diferenca(num1, num2){

@@ -47,3 +47,23 @@ function trocarHospital(){
     sessionStorage.NOME_HOSPITAL = nome
     location.reload()
 }
+
+function obterChamadosEmAberto(){
+    var fkHospital = sessionStorage.FK_HOSPITAL
+    fetch(`/chamados/quantidadeChamadosAberto/${fkHospital}`)
+    .then(resposta => {
+      if(resposta.ok){
+        resposta.json()
+        .then(
+          resposta =>{
+            console.log(resposta)
+            qtd_chamados.innerHTML = resposta[0].quantidade
+          }
+        )
+      }
+    }).catch(erro =>{
+      console.log("ERRO " + erro)
+    }
+    )
+  }
+  

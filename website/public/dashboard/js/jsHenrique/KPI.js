@@ -26,10 +26,10 @@ function calcularConfiabilidade(resposta){
     let mtbf = tratarTempo(tempoFuncionamento / qtdFalhas)
     let taxaFalhas = 1 / mtbf
     let confiabilidade = (2.71 ** (-taxaFalhas * 2)) * 100 
-   
+    let mttr = Number(tratarTempo(tempoManutencao) / qtdFalhas).toFixed(2)
 
     mtbf_id.innerHTML = `${mtbf} Horas`
-    mttr_id.innerHTML = `${tratarTempo(tempoManutencao) / qtdFalhas} Horas`
+    mttr_id.innerHTML = `${mttr} Horas`
 
     confiabilidade_id.innerHTML = confiabilidade.toFixed(2),"%";
     barraConfiabilidade.style.width =   `${(confiabilidade)}%`

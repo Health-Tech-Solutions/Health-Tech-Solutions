@@ -154,7 +154,7 @@ function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
         `
     } else {
         instrucao = `
-        select modelo,idModelo from modelo where fkTipo = ${fkTipo} and fkHospital = ${fkHospital};
+        select modelo,idModelo from modelo JOIN maquinario on idModelo = fkModelo where fkTipo = ${fkTipo} and fkHospital = ${fkHospital} group by idModelo;
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)

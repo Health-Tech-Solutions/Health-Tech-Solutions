@@ -54,9 +54,13 @@ function buscarAlertasDosComponentesDoDia() {
             console.error('Nenhum dado encontrado ou erro na API');
         }
     })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados: ${error.message}`);
+    });
+    if(tituloGraficoPizza.value == undefined){
+        tituloGraficoPizza.innerHTML = 'Nenhum componente em alerta!'
+        chartPie.style.display = 'none'
+    }
 }
 
 function buscarAlertasDosComponentesDaSemana() {
@@ -67,7 +71,6 @@ function buscarAlertasDosComponentesDaSemana() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
-
                 tituloGraficoPizza.innerHTML = 'Alertas de cada componente (da semana)'
 
                 graficoPizzaDia.style.backgroundColor = ""
@@ -82,6 +85,8 @@ function buscarAlertasDosComponentesDaSemana() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        
+    
 }
 
 function buscarAlertasDosComponentesDoMes() {
@@ -108,6 +113,7 @@ function buscarAlertasDosComponentesDoMes() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        
 }
 
 function buscarAlertasDosComponentesDoAno() {
@@ -133,6 +139,7 @@ function buscarAlertasDosComponentesDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        
 }
 
 function plotarGraficoPizza(resposta){

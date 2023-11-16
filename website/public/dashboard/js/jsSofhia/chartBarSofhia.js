@@ -31,13 +31,20 @@ var dadosBarra = {
 };
 
 function obterDadosGraficoBarraDoDia() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDoDia`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
                 
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (de hoje)'
 
@@ -56,14 +63,21 @@ function obterDadosGraficoBarraDoDia() {
 }
 
 function obterDadosGraficoBarraDaSemana() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDaSemana`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
-
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
+                
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (da semana)'
 
                 graficoBarrasDia.style.backgroundColor = ""
@@ -81,13 +95,20 @@ function obterDadosGraficoBarraDaSemana() {
 }
 
 function obterDadosGraficoBarraDoMes() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDoMes`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
 
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (dos últimos 30 dias)'
 
@@ -106,13 +127,20 @@ function obterDadosGraficoBarraDoMes() {
 }
 
 function obterDadosGraficoBarraDoAno() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDoAno`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
 
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (dos últimos 365 dias)'
 
@@ -128,6 +156,7 @@ function obterDadosGraficoBarraDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
+        
 }
 
 function limparGraficoBarra() {

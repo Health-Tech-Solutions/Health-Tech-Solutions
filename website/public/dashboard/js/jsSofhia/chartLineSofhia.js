@@ -27,6 +27,9 @@ function obterDadosSemanal(){
             console.log("ERRO " + err)
         }
     )
+    if(tituloGraficoLinhas.value == undefined){
+        tituloGraficoLinhas.innerHTML = 'Nenhum alerta no último mês!'
+    }
 }
 
 function obterDadosMensais(){
@@ -55,6 +58,10 @@ function obterDadosMensais(){
             console.log("ERRO " + err)
         }
     )
+    if(tituloGraficoLinhas.value == undefined){
+        tituloGraficoLinhas.innerHTML = 'Nenhum alerta no ano!'
+    }
+    
 }
 
 

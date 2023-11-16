@@ -508,8 +508,8 @@
 
                         <div class="row">
 
-                            <!-- Area Chart -->
-                            <div class="col-xl-6 col-lg-2">
+                            <!-- Bar Chart -->
+                            <div class="col-xl-6 col-lg-2" id="graficoDeBarras">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->
                                     <div
@@ -619,14 +619,14 @@
     nomeUsuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     function funcoes() {
-        chamarComponenteComMaisAlertasDoDia(),
+        chamarComponenteComMaisAlertasDaSemana(),
         // chamarTipoComMaisAlertas(),
-        chamarTipoComMaisAlertasDoDia(),
-        chamarModeloComMaisAlertasDoDia(),
+        chamarTipoComMaisAlertasDaSemana(),
+        chamarModeloComMaisAlertasDaSemana(),
         mostrarDados(),
         obterDadosSemanal(),
-        buscarAlertasDosComponentesDoDia(),
-        obterDadosGraficoBarraDoDia(),
+        buscarAlertasDosComponentesDaSemana(),
+        obterDadosGraficoBarraDaSemana(),
         obterDadosGrafico()
     }
 </script>

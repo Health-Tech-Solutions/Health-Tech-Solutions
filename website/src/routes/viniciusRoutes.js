@@ -52,7 +52,7 @@ router.get(`/tiposDeMaquinasCadastradas/:fkHospital`,(req,res) => {
     funcionarioController.tiposDeMaquinasCadastradas(req,res);
 });
 
-router.get(`/modelosDeMaquinasCadastradas/:fkHospital`,(req,res) => {
+router.get(`/modelosDeMaquinasCadastradas/:fkTipo/:fkHospital`,(req,res) => {
     funcionarioController.modelosDeMaquinasCadastradas(req,res);
 });
 

@@ -77,12 +77,7 @@ function plotarGrafico(resposta){
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
-    }
-
-
-    dadosRegressao = dados.datasets[0].data
-    calcularCoeficientes(dadosRegressao)
-   
+    }   
    
     dados.labels = labels
     lineChart.update()
@@ -131,10 +126,10 @@ var lineChart = new Chart(ctx, {
 function predicao(){
     var dadosReais = dados.datasets[0].data
     var vetorAux = []
-    var coeficientes = calcularCoeficientes(vetorAux)
-    var angular = coeficientes[0]
-    var linear = coeficientes[1]
-   
+    var coeficientes = calcularCoeficientes(dadosReais)
+    var angular = coeficientes[0].toFixed(0)
+    var linear = coeficientes[1].toFixed(0)
+  
     for(let i = 0; i < dadosReais.length; i++){
         // let formula = dadosReais[i] - 16.6  + 2 * i
         let formula = diferenca(dadosReais[i],linear) + angular * i
@@ -146,9 +141,9 @@ function predicao(){
 }
 
 function calcularCoeficientes(dataset){
-    const mediaY = dadosRegressao.reduce((acc, val) => acc + val, 0) / dadosRegressao.length;
+    const mediaY = dataset.reduce((acc, val) => acc + val, 0) / dataset.length;
 
-   const valoresX = Array.from({ length: dadosRegressao.length }, (_, index) => index + 1);
+   const valoresX = Array.from({ length: dataset.length }, (_, index) => index + 1);
    
 
    const mediaX = calcularMedia(valoresX);
@@ -158,7 +153,7 @@ function calcularCoeficientes(dataset){
    let denominadorM = 0;
    
    for (let i = 0; i < valoresX.length; i++) {
-     numeradorM += (valoresX[i] - mediaX) * (dadosRegressao[i] - mediaY);
+     numeradorM += (valoresX[i] - mediaX) * (dataset[i] - mediaY);
      denominadorM += Math.pow(valoresX[i] - mediaX, 2);
    }
 

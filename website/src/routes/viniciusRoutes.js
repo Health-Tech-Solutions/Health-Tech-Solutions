@@ -56,8 +56,8 @@ router.get(`/modelosDeMaquinasCadastradas/:fkTipo/:fkHospital`,(req,res) => {
     funcionarioController.modelosDeMaquinasCadastradas(req,res);
 });
 
-router.get(`/dadosQuantidadeChamados/:idTipo/:idModelo/:fkHospital`,(req,res) => {
-    funcionarioController.dadosQuantidadeChamados(req,res);
+router.get(`/totalChamadosPorTipo/:fkHospital`,(req,res) => {
+    funcionarioController.totalChamadosPorTipo(req,res);
 });
 
 

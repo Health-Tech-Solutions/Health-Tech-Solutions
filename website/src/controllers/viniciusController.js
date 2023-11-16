@@ -114,9 +114,8 @@ function modelosDeMaquinasCadastradas(req, res) {
 
 }
 
-
-function dadosQuantidadeChamados(req, res) {
-    viniciusModel.dadosQuantidadeChamados(req.params.tipo, req.params.modelo, req.params.fkHospital).then(
+function totalChamadosPorTipo(req, res) {
+    viniciusModel.totalChamadosPorTipo(req.params.fkHospital).then(
         function (resultado) {
             res.json(resultado);
         }
@@ -133,7 +132,6 @@ function dadosQuantidadeChamados(req, res) {
 
 
 
-
 module.exports = {
     pegarDadosMaquinas,
     taxaMaquinasOperando,
@@ -142,5 +140,5 @@ module.exports = {
     desempenhoPorModelo,
     tiposDeMaquinasCadastradas,
     modelosDeMaquinasCadastradas,
-    dadosQuantidadeChamados
+    totalChamadosPorTipo
 }

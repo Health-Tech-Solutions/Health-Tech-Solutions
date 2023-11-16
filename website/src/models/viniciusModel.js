@@ -161,20 +161,17 @@ function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
     return database.executar(instrucao)
 }
 
-function dadosQuantidadeChamados(tipo,modelo,fkHospital) {
+function totalChamadosPorTipo(fkHospital) {
+    console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select count(*) as chamadosPorMaquina,
-        (select count(*) from vw_chamados where tipo = '${tipo}' and idHospital = ${fkHospital}) as chamadosPorModelo 
-        from vw_chamados where modelo = '${modelo}' and idHospital = ${fkHospital};
+        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius group by idTipo;
         `
     } else {
         instrucao = `
-        select count(*) as chamadosPorMaquina,
-        (select count(*) from vw_chamados where tipo = '${tipo}') as chamadosPorModelo 
-        from vw_chamados where modelo = '${modelo}';
+        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius where idHospital = ${fkHospital} group by idTipo;
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -188,8 +185,8 @@ module.exports = {
     chamadosAbertos,
     estadoMaquinas,
     desempenhoPorModelo,
-    dadosQuantidadeChamados,
     tiposDeMaquinasCadastradas,
-    modelosDeMaquinasCadastradas
+    modelosDeMaquinasCadastradas,
+    totalChamadosPorTipo
     
 }

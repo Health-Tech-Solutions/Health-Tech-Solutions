@@ -8,6 +8,9 @@ let maquinasParadas
 let maquinasFuncionando
 let fkTipo
 var dadosAlterados = {}
+let nomeTipo2
+let idTipo
+let totalChamadosTipo = []
 
 
 var fkHospital = sessionStorage.getItem("FK_HOSPITAL");
@@ -23,21 +26,6 @@ fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
                 resposta.reverse();
                 TotalChamados = resposta[0].totalChamados
                 totalChamados.innerHTML = TotalChamados
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-
-fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
-    .then(function (response) {
-        console.log(response)
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta[0])}`);
-                console.log(componenteComMaisAlertas)
-                componenteComMaisAlertas.innerHTML = resposta[0].total
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
@@ -131,11 +119,28 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
+    fetch(`/viniciusRoutes/totalChamadosPorTipo/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                
+                plotarDadosBarChamadosTipo(resposta)
+                
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+
+    console.log('total: '+ totalChamadosTipo)
+
 // Grafico de barras
 const ctx = document.getElementById('desempenhoModelo');
 var labels = []
 var labels2 = []
-var data = [10,22,41,21,16,18,32,12]
+var dataTipo = []
 var myChart
 document.addEventListener('DOMContentLoaded', function() {
     // Dados iniciais
@@ -146,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
-        data: data
+        data: dataTipo
       }]
     };
 
@@ -441,6 +446,18 @@ function plotarDadosBar2(resposta) {
     }
 
     myChart.data = dadosAlterados;
+    myChart.update();
+
+}
+
+function plotarDadosBarChamadosTipo(resposta) {
+
+    for (let i = 0; i < resposta.length; i++) {
+        const element = resposta[i].totalChamadosTipo;
+        console.log(element)
+        dataTipo.push(element)
+    }
+
     myChart.update();
 
 }

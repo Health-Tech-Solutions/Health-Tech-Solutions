@@ -863,7 +863,7 @@ CALL fechar_chamados();
 CREATE OR REPLACE VIEW vw_vinicius
 AS
 	SELECT 
-		r.fkMaquina AS idMaquina,
+	r.fkMaquina AS idMaquina,
 		c.dataHora AS dataHora,
 		c.idChamado AS idChamado,
 		c.nivel,
@@ -875,6 +875,7 @@ AS
 		t.nome AS tipo,
 		t.idTipo,	
 		m.modelo,
+        m.idModelo,
 		tr.nome,
 		tr.medida,
         p.idPeca AS idPeca,

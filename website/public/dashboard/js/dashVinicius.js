@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var dadosBar = {
         labels: labels,
         datasets: [{
-            label: 'Dados Iniciais',
+            label: 'Dados por modelo',
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
@@ -176,15 +176,20 @@ document.addEventListener('DOMContentLoaded', function () {
         type: 'bar',
         data: dadosBar,
         options: {
+            blockClicks: false,
             onHover: function (event, elements) {
-                if (elements && elements[0]) {
+                if (this.options.blockClicks) {
+                    document.getElementById('myChart').style.cursor = 'default';
+                } else if (elements && elements[0]) {
                     document.getElementById('myChart').style.cursor = 'pointer';
                 } else {
                     document.getElementById('myChart').style.cursor = 'default';
                 }
-
             },
             onClick: function (event, elements) {
+                if (this.options.blockClicks) {
+                    return;
+                }
                 console.log(elements)
                 console.log("Evento onClick disparado");
                 clicou = true
@@ -194,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     var clickedIndex = elements[0].index;
                     fkTipo = clickedIndex
                     if (clickedIndex == 0) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -201,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -209,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 1) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -216,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -224,6 +231,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 2) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -231,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -239,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 3) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -246,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -254,6 +263,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 4) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -261,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -269,6 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 5) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -276,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -284,6 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 6) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -291,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
-                                label: 'Dados Alterados',
+                                label: 'Dados por maquina',
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
@@ -299,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }]
                         }
                     } else if (clickedIndex == 7) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
@@ -360,6 +373,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Função para restaurar os dados primordiais
     window.restaurarDados = function () {
+        myChart.options.blockClicks = false;
         dataTipo2 = []
         myChart.data = dadosBar;
         myChart.update();

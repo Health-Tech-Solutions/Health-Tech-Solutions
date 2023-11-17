@@ -1,37 +1,37 @@
-function chamarComponenteComMaisAlertasDoDia() {
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+// function chamarComponenteComMaisAlertasDoDia() {
+//     var fkHospital = sessionStorage.FK_HOSPITAL
+//     fetch(`/sofhiaRoute/buscarComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
         
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+//         if (response.ok) {
+//             response.json().then(function (resposta) {
+//                 resposta.reverse();
+//                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
         
-                        componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
+//                         componenteComMaisAlertas.innerHTML = resposta[0].Nome_da_Peca
                  
 
-                    tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
+//                     tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
 
-                    componenteDia.style.backgroundColor = "#d3d3d3"
-                    componenteSemana.style.backgroundColor = ""
-                    componenteMes.style.backgroundColor = ""
-                    componenteAno.style.backgroundColor = ""
+//                     componenteDia.style.backgroundColor = "#d3d3d3"
+//                     componenteSemana.style.backgroundColor = ""
+//                     componenteMes.style.backgroundColor = ""
+//                     componenteAno.style.backgroundColor = ""
                 
 
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
-        if(componenteComMaisAlertas.value == undefined){
-            tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
-            componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
-        }
+//             });
+//         } else {
+//             console.error('Nenhum dado encontrado ou erro na API');
+//         }
+//     })
+//         .catch(function (error) {
+//             console.error(`Erro na obtenção dos dados: ${error.message}`);
+//         });
+//         if(componenteComMaisAlertas.value == undefined){
+//             tituloKPI1.innerHTML = 'Componente com + alertas (de hoje)'
+//             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+//         }
        
-}
+// }
 
 function chamarComponenteComMaisAlertasDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
@@ -44,7 +44,7 @@ function chamarComponenteComMaisAlertasDaSemana() {
 
                     tituloKPI1.innerHTML = 'Componente com + alertas (da semana)'
 
-                    componenteDia.style.backgroundColor = ""
+                    // componenteDia.style.backgroundColor = ""
                     componenteSemana.style.backgroundColor = "#d3d3d3"
                     componenteMes.style.backgroundColor = ""
                     componenteAno.style.backgroundColor = ""
@@ -73,7 +73,7 @@ function chamarComponenteComMaisAlertasDoMes() {
 
                     tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 30 dias)'
 
-                    componenteDia.style.backgroundColor = ""
+                    // componenteDia.style.backgroundColor = ""
                     componenteSemana.style.backgroundColor = ""
                     componenteMes.style.backgroundColor = "#d3d3d3"
                     componenteAno.style.backgroundColor = ""
@@ -103,7 +103,7 @@ function chamarComponenteComMaisAlertasDoAno() {
 
                     tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 365 dias)'
 
-                    componenteDia.style.backgroundColor = ""
+                    // componenteDia.style.backgroundColor = ""
                     componenteSemana.style.backgroundColor = ""
                     componenteMes.style.backgroundColor = ""
                     componenteAno.style.backgroundColor = "#d3d3d3"
@@ -121,35 +121,35 @@ function chamarComponenteComMaisAlertasDoAno() {
         }
 }
 
-function chamarTipoComMaisAlertasDoDia() {
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarTipoDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+// function chamarTipoComMaisAlertasDoDia() {
+//     var fkHospital = sessionStorage.FK_HOSPITAL
+//     fetch(`/sofhiaRoute/buscarTipoDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (resposta) {
+//                 resposta.reverse();
+//                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 
-                    tipoComMaisAlertas.innerHTML = resposta[0].tipo;
+//                     tipoComMaisAlertas.innerHTML = resposta[0].tipo;
 
-                    tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (de hoje)'
+//                     tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (de hoje)'
 
-                    tipoDia.style.backgroundColor = "#d3d3d3"
-                    tipoSemana.style.backgroundColor = ""
-                    tipoMes.style.backgroundColor = ""
-                    tipoAno.style.backgroundColor = ""
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
-        if(tipoComMaisAlertas.value == undefined){
-            tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (de hoje)'
-            tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
-        }
-}
+//                     tipoDia.style.backgroundColor = "#d3d3d3"
+//                     tipoSemana.style.backgroundColor = ""
+//                     tipoMes.style.backgroundColor = ""
+//                     tipoAno.style.backgroundColor = ""
+//             });
+//         } else {
+//             console.error('Nenhum dado encontrado ou erro na API');
+//         }
+//     })
+//         .catch(function (error) {
+//             console.error(`Erro na obtenção dos dados: ${error.message}`);
+//         });
+//         if(tipoComMaisAlertas.value == undefined){
+//             tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (de hoje)'
+//             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+//         }
+// }
 
 function chamarTipoComMaisAlertasDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
@@ -163,7 +163,7 @@ function chamarTipoComMaisAlertasDaSemana() {
 
                     tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (da semana)'
 
-                    tipoDia.style.backgroundColor = ""
+                    // tipoDia.style.backgroundColor = ""
                     tipoSemana.style.backgroundColor = "#d3d3d3"
                     tipoMes.style.backgroundColor = ""
                     tipoAno.style.backgroundColor = ""
@@ -193,7 +193,7 @@ function chamarTipoComMaisAlertasDoMes() {
 
                     tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 30 dias)'
 
-                    tipoDia.style.backgroundColor = ""
+                    // tipoDia.style.backgroundColor = ""
                     tipoSemana.style.backgroundColor = ""
                     tipoMes.style.backgroundColor = "#d3d3d3"
                     tipoAno.style.backgroundColor = ""
@@ -223,7 +223,7 @@ function chamarTipoComMaisAlertasDoAno() {
 
                     tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 365 dias)'
 
-                    tipoDia.style.backgroundColor = ""
+                    // tipoDia.style.backgroundColor = ""
                     tipoSemana.style.backgroundColor = ""
                     tipoMes.style.backgroundColor = ""
                     tipoAno.style.backgroundColor = "#d3d3d3"
@@ -241,35 +241,35 @@ function chamarTipoComMaisAlertasDoAno() {
         }
 }
 
-function chamarModeloComMaisAlertasDoDia() {
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarModeloDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+// function chamarModeloComMaisAlertasDoDia() {
+//     var fkHospital = sessionStorage.FK_HOSPITAL
+//     fetch(`/sofhiaRoute/buscarModeloDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (resposta) {
+//                 resposta.reverse();
+//                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                modeloComMaisAlertas.innerHTML = resposta[0].modelo;
+//                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
                 
-                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (de hoje)'
+//                 tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (de hoje)'
 
-                modeloDia.style.backgroundColor = "#d3d3d3"
-                modeloSemana.style.backgroundColor = ""
-                modeloMes.style.backgroundColor = ""
-                modeloAno.style.backgroundColor = ""
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
-        if(modeloComMaisAlertas.value == undefined){
-            tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (de hoje)'
-            modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
-        }
-}
+//                 modeloDia.style.backgroundColor = "#d3d3d3"
+//                 modeloSemana.style.backgroundColor = ""
+//                 modeloMes.style.backgroundColor = ""
+//                 modeloAno.style.backgroundColor = ""
+//             });
+//         } else {
+//             console.error('Nenhum dado encontrado ou erro na API');
+//         }
+//     })
+//         .catch(function (error) {
+//             console.error(`Erro na obtenção dos dados: ${error.message}`);
+//         });
+//         if(modeloComMaisAlertas.value == undefined){
+//             tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (de hoje)'
+//             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+//         }
+// }
 
 function chamarModeloComMaisAlertasDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
@@ -283,7 +283,7 @@ function chamarModeloComMaisAlertasDaSemana() {
 
                 tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (da semana)'
 
-                modeloDia.style.backgroundColor = ""
+                // modeloDia.style.backgroundColor = ""
                 modeloSemana.style.backgroundColor = "#d3d3d3"
                 modeloMes.style.backgroundColor = ""
                 modeloAno.style.backgroundColor = ""
@@ -313,7 +313,7 @@ function chamarModeloComMaisAlertasDoMes() {
 
                 tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do mês)'
 
-                modeloDia.style.backgroundColor = ""
+                // modeloDia.style.backgroundColor = ""
                 modeloSemana.style.backgroundColor = ""
                 modeloMes.style.backgroundColor = "#d3d3d3"
                 modeloAno.style.backgroundColor = ""
@@ -343,7 +343,7 @@ function chamarModeloComMaisAlertasDoAno() {
 
                 tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do ano)'
 
-                modeloDia.style.backgroundColor = ""
+                // modeloDia.style.backgroundColor = ""
                 modeloSemana.style.backgroundColor = ""
                 modeloMes.style.backgroundColor = ""
                 modeloAno.style.backgroundColor = "#d3d3d3"

@@ -781,3 +781,100 @@ values
 	(3,15, 85),
 	(9,15, 85),
 	(12,15, 85);
+
+    EXEC inserir_registros;
+
+    INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro)
+VALUES
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2023-01-15 12:00:00', 120), 'O disco está cheio', 11),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2023-02-20 14:30:00', 120), 'O disco está cheio', 22),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2023-03-10 09:15:00', 120), 'CPU esta passando dos limites', 33),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2023-04-05 16:45:00', 120), 'CPU esta passando dos limites', 44),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2023-05-30 08:00:00', 120), 'CPU esta passando dos limites', 55),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2023-06-10 14:00:00', 120), 'CPU esta passando dos limites', 11),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2023-07-15 09:30:00', 120), 'CPU esta passando dos limites', 22),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2023-08-22 17:15:00', 120), 'CPU esta passando dos limites', 33),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2023-09-05 13:45:00', 120), 'RAM esta passando dos limites', 44),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2023-10-18 11:30:00', 120), 'RAM esta passando dos limites', 55),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2023-11-25 10:20:00', 120), 'RAM esta passando dos limites', 11),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2023-12-29 15:00:00', 120), 'RAM esta passando dos limites', 22),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2024-01-07 12:45:00', 120), 'RAM esta passando dos limites', 33),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2024-02-09 09:10:00', 120), 'RAM esta passando dos limites', 44),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2024-03-14 14:30:00', 120), 'RAM esta passando dos limites', 55),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2024-04-22 10:00:00', 120), 'RAM esta passando dos limites', 11),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2024-05-28 15:20:00', 120), 'RAM esta passando dos limites', 22),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2024-06-05 09:45:00', 120), 'RAM esta passando dos limites', 33),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2024-07-11 16:30:00', 120), 'RAM esta passando dos limites', 44),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2024-08-20 12:10:00', 120), 'RAM esta passando dos limites', 55),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2024-09-27 14:15:00', 120), 'RAM esta passando dos limites', 11),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2024-10-30 11:30:00', 120), 'RAM esta passando dos limites', 22),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2024-11-05 10:25:00', 120), 'RAM esta passando dos limites', 33),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2024-12-15 15:40:00', 120), 'RAM esta passando dos limites', 44),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2025-01-18 13:00:00', 120), 'RAM esta passando dos limites', 55),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2025-02-20 08:45:00', 120), 'RAM esta passando dos limites', 11),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2025-03-25 14:15:00', 120), 'RAM esta passando dos limites', 22),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2025-04-02 10:30:00', 120), 'RAM esta passando dos limites', 33),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2025-05-12 15:10:00', 120), 'RAM esta passando dos limites', 44),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2025-06-15 11:30:00', 120), 'RAM esta passando dos limites', 55),
+('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2025-07-19 09:45:00', 120), 'O disco está cheio', 11),
+('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2025-08-28 14:30:00', 120), 'O disco está cheio', 22),
+('Baixo', 'Aberto', '10 horas', CONVERT(datetime, '2025-09-02 10:15:00', 120), 'O disco está cheio', 33);
+
+insert into
+	chamado (nivel, estado, sla,dataHora, descricao, fkRegistro)
+select 
+	case when r.valor > 95
+		then 'Alto'
+		else case when r.valor > 90
+			then 'Médio'
+			else 'Baixo'
+		end
+	end nivel,
+	'Aberto' estado,
+	case when r.valor > 95
+		then '2 horas'
+		else case when r.valor > 90
+			then '6 horas'
+			else '10 horas'
+		end
+	end sla,
+	dataHora,
+	'' descricao,
+	r.idRegistro
+from registro AS r where r.valor > 85;
+
+
+EXEC fechar_chamados;
+
+
+CREATE VIEW vw_vinicius
+AS
+    SELECT 
+        r.fkMaquina AS idMaquina,
+        c.dataHora AS dataHora,
+        c.idChamado AS idChamado,
+        c.nivel,
+        c.estado,
+        c.sla,
+        c.descricao,
+        e.idEmpresa AS idHospital,
+        e.nomeFantasia AS hospital,
+        t.nome AS tipo,
+        t.idTipo,
+        m.modelo,
+        tr.nome,
+        tr.medida,
+        p.idPeca AS idPeca,
+        t.nome AS nomeTipo,
+        p.nome AS nomePeca
+    FROM chamado AS c
+    JOIN registro AS r ON c.fkRegistro = r.idRegistro
+    JOIN maquinario AS maq ON r.fkMaquina = maq.idMaquinario
+    JOIN modelo AS m ON maq.fkModelo = m.idModelo
+    JOIN empresa AS e ON maq.fkHospital = e.idEmpresa
+    JOIN tipoRegistro AS tr ON r.idTipoRegistro = tr.idTipoRegistro
+    JOIN tipo AS t ON tr.fkTipo = t.idTipo
+    JOIN peca AS p ON r.idPeca = p.idPeca;
+
+
+EXEC fechar_chamados;

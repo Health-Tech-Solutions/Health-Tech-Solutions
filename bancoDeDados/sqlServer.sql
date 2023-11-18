@@ -165,9 +165,9 @@ AS
 	JOIN maquinario AS maq ON r.fkMaquina = maq.idMaquinario
 	JOIN modelo AS m ON maq.fkModelo = m.idModelo
 	JOIN empresa AS e ON maq.fkHospital = e.idEmpresa
-	JOIN tipoRegistro AS tr ON p.fkTipoRegistro = tr.idTipoRegistro
 	JOIN tipo AS t ON m.fkTipo = t.idTipo
-	JOIN peca AS p ON r.fkPeca = p.idPeca;
+	JOIN peca AS p ON r.fkPeca = p.idPeca
+	JOIN tipoRegistro AS tr ON p.fkTipoRegistro = tr.idTipoRegistro;
 
 -- Criação da função subtrai_data
 CREATE FUNCTION subtrai_data(@data1 DATETIME, @data2 DATETIME)
@@ -238,10 +238,10 @@ BEGIN
 
     WHILE @i <= 300
     BEGIN
-        SET @dataHora = DATEADD(DAY, ROUND(RAND() * 365), '2023-01-01');
+        SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
         SET @valor = 85 + (RAND() * 15);
-        SET @fkPeca = ROUND(RAND() * 13) + 1;
-        SET @fkMaquina = ROUND(RAND() * 216) + 1;
+        SET @fkPeca = FLOOR(RAND() * 13) + 1;
+        SET @fkMaquina = FLOOR(RAND() * 216) + 1;
 
         INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
         VALUES (@dataHora, @valor, @fkMaquina, @fkPeca);
@@ -258,9 +258,9 @@ BEGIN
 
     WHILE @i <= 300
     BEGIN
-        SET @dataHora = DATEADD(DAY, ROUND(RAND() * 365), '2023-01-01');
+        SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
         SET @valor = 85 + (RAND() * 15);
-        SET @fkPeca = ROUND(RAND() * 13) + 1;
+        SET @fkPeca = FLOOR(RAND() * 13) + 1;
 
         INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
         VALUES (@dataHora, @valor, 5, @fkPeca);
@@ -272,15 +272,21 @@ END;
 -- Criação da stored procedure fechar_chamados
 CREATE PROCEDURE fechar_chamados
 AS
-BEGIN 
-    DECLARE @i INT = 0, @quantidade FLOAT = ROUND(RAND() * (SELECT COUNT(*) FROM chamado WHERE estado = 'Aberto')), @idFechado FLOAT;
-    
+BEGIN
+    DECLARE
+        @i INT,
+        @quantidade INT,
+        @idFechado INT;
+
+    SET @i = 0;
+    SET @quantidade = FLOOR(RAND() * (SELECT COUNT(*) FROM chamado WHERE estado = 'Aberto'));
+
     WHILE @i <= @quantidade
     BEGIN
         SET @idFechado = RAND() * @quantidade;
-        UPDATE chamado SET estado = 'fechado' WHERE idChamado = ROUND(@idFechado);
+        UPDATE chamado SET estado = 'fechado' WHERE idChamado = FLOOR(@idFechado);
         SET @i = @i + 1;
-    END;
+    END
 END;
 
 -- Criação da stored procedure inserir_Registros2
@@ -291,10 +297,10 @@ BEGIN
 
     WHILE @i <= 216
     BEGIN
-        SET @dataHora = DATEADD(DAY, ROUND(RAND() * 365), '2023-01-01');
+        SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
         SET @valor = 85 + (RAND() * 15);
-        SET @fkTipoRegistro = ROUND(RAND() * 3) + 1;
-        SET @fkMaquina = ROUND(RAND() * 216) + 1;
+        SET @fkTipoRegistro = FLOOR(RAND() * 3) + 1;
+        SET @fkMaquina = FLOOR(RAND() * 216) + 1;
         SET @counter = 1;
 
         WHILE @counter <= 50
@@ -304,7 +310,7 @@ BEGIN
             WHILE @counter2 <= 3
             BEGIN
                 INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
-                VALUES (DATEADD(SECOND, ROUND(RAND() * 31536000), '2023-12-08 00:00:00'), ROUND(RAND() * 100), @i, @counter2);
+                VALUES (DATEADD(SECOND, FLOOR(RAND() * 31536000), '2023-12-08 00:00:00'), FLOOR(RAND() * 100), @i, @counter2);
                 SET @counter2 = @counter2 + 1;
             END;
 

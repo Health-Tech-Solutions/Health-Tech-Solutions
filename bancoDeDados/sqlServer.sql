@@ -57,8 +57,7 @@ CREATE TABLE maquinario(
     fkHospital INT,
     FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa),
     fkModelo INT,
-    FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo),
-    PRIMARY KEY(fkModelo)
+    FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo)
 );
 
 CREATE TABLE tipoRegistro(
@@ -185,15 +184,19 @@ END;
 
 GO
 -- Criação do trigger tr_abre_ordem
-CREATE TRIGGER tr_abre_ordem
+
+CREATE TRIGGER tr_abre_ordemm
 ON maquinario
 AFTER INSERT
 AS 
 BEGIN 
-	INSERT INTO ordemManutencao(estado, dataInicioFunc, fkMaquina, qtdFalhas) VALUES 
-	('funcionando', GETDATE(), INSERTED.idMaquinario, 0);
-END;
+    SET NOCOUNT ON;
 
+    -- Inserir na tabela ordemManutencao com base nos dados inseridos na tabela maquinario
+    INSERT INTO ordemManutencao (estado, dataInicioFunc, fkMaquina, qtdFalhas)
+    SELECT 'funcionando', GETDATE(), idMaquinario, 0
+    FROM INSERTED;
+END;
 GO
 
 -- Criação do trigger tr_atualiza_ordem
@@ -896,8 +899,3 @@ GO
 EXEC fechar_chamados;
 
 GO 
-  
-    
-
-    
-    

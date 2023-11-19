@@ -52,13 +52,13 @@ CREATE TABLE modelo(
 );
 
 CREATE TABLE maquinario(
-    idMaquinario INT,
+    idMaquinario INT PRIMARY KEY,
     dataCadastramento DATETIME,
     fkHospital INT,
     FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa),
     fkModelo INT,
     FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo),
-    PRIMARY KEY(idMaquinario, fkModelo)
+    PRIMARY KEY(fkModelo)
 );
 
 CREATE TABLE tipoRegistro(
@@ -134,12 +134,12 @@ CREATE TABLE ordemManutencao (
     somaManutencao INT,
     fkMaquina INT,
     fkChamado INT,
-    qtdFalhas INT,
+	qtdFalhas INT,
     FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
     FOREIGN KEY (fkChamado) REFERENCES chamado(idChamado)
 );
 
-
+GO
 -- Criação da view vw_chamados
 CREATE VIEW vw_chamados
 AS
@@ -169,6 +169,8 @@ AS
 	JOIN peca AS p ON r.fkPeca = p.idPeca
 	JOIN tipoRegistro AS tr ON p.fkTipoRegistro = tr.idTipoRegistro;
 
+GO
+
 -- Criação da função subtrai_data
 CREATE FUNCTION subtrai_data(@data1 DATETIME, @data2 DATETIME)
 RETURNS INT
@@ -181,14 +183,18 @@ BEGIN
     RETURN @minutos;
 END;
 
+GO
 -- Criação do trigger tr_abre_ordem
 CREATE TRIGGER tr_abre_ordem
 ON maquinario
 AFTER INSERT
 AS 
 BEGIN 
-	INSERT INTO ordemManutencao(estado, dataInicioFunc, fkMaquina, qtdFalhas) VALUES ('funcionando', GETDATE(), INSERTED.idMaquinario, 0);
+	INSERT INTO ordemManutencao(estado, dataInicioFunc, fkMaquina, qtdFalhas) VALUES 
+	('funcionando', GETDATE(), INSERTED.idMaquinario, 0);
 END;
+
+GO
 
 -- Criação do trigger tr_atualiza_ordem
 CREATE TRIGGER tr_atualiza_ordem
@@ -216,6 +222,8 @@ BEGIN
     END;
 END;
 
+GO
+
 -- Criação do trigger tr_fechamento_chamado
 CREATE TRIGGER tr_fechamento_chamado
 ON chamado
@@ -229,6 +237,8 @@ BEGIN
 						FROM registro
 						WHERE idRegistro = INSERTED.fkRegistro);
 END;
+
+GO
 
 -- Criação da stored procedure inserir_registros
 CREATE PROCEDURE inserir_registros
@@ -250,6 +260,8 @@ BEGIN
     END;
 END;
 
+GO
+
 -- Criação da stored procedure inserir_registros_temperatura
 CREATE PROCEDURE inserir_registros_temperatura
 AS
@@ -268,6 +280,8 @@ BEGIN
         SET @i = @i + 1;
     END;
 END;
+
+GO
 
 -- Criação da stored procedure fechar_chamados
 CREATE PROCEDURE fechar_chamados
@@ -288,6 +302,8 @@ BEGIN
         SET @i = @i + 1;
     END
 END;
+
+GO
 
 -- Criação da stored procedure inserir_Registros2
 CREATE PROCEDURE inserir_Registros2
@@ -845,36 +861,43 @@ from registro AS r where r.valor > 85;
 
 
 EXEC fechar_chamados;
-
-
+GO
+-- Criação da vw_vinicius
 CREATE VIEW vw_vinicius
 AS
-    SELECT 
-        r.fkMaquina AS idMaquina,
-        c.dataHora AS dataHora,
-        c.idChamado AS idChamado,
-        c.nivel,
-        c.estado,
-        c.sla,
-        c.descricao,
-        e.idEmpresa AS idHospital,
-        e.nomeFantasia AS hospital,
-        t.nome AS tipo,
-        t.idTipo,
-        m.modelo,
-        tr.nome,
-        tr.medida,
+	SELECT 
+	r.fkMaquina AS idMaquina,
+		c.dataHora AS dataHora,
+		c.idChamado AS idChamado,
+		c.nivel,
+		c.estado,
+		c.sla,
+		c.descricao,
+		e.idEmpresa AS idHospital,
+		e.nomeFantasia AS hospital,
+		t.nome AS tipo,
+		t.idTipo,	
+		m.modelo,
+        m.idModelo,
+		tr.nome,
+		tr.medida,
         p.idPeca AS idPeca,
-        t.nome AS nomeTipo,
-        p.nome AS nomePeca
-    FROM chamado AS c
+        t.nome as nomeTipo,
+		p.nome as nomePeca
+	FROM chamado AS c
     JOIN registro AS r ON c.fkRegistro = r.idRegistro
-    JOIN maquinario AS maq ON r.fkMaquina = maq.idMaquinario
+    JOIN maquinario AS maq ON fkMaquina = idMaquinario 
     JOIN modelo AS m ON maq.fkModelo = m.idModelo
     JOIN empresa AS e ON maq.fkHospital = e.idEmpresa
-    JOIN tipoRegistro AS tr ON r.idTipoRegistro = tr.idTipoRegistro
-    JOIN tipo AS t ON tr.fkTipo = t.idTipo
-    JOIN peca AS p ON r.idPeca = p.idPeca;
-
-
+    JOIN tipoRegistro AS tr ON fkRegistro = idRegistro
+    JOIN tipo AS t ON m.fkTipo = t.idTipo
+    JOIN peca AS p ON r.fkPeca = p.idPeca;
+GO
 EXEC fechar_chamados;
+
+GO 
+  
+    
+
+    
+    

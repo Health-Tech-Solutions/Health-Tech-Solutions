@@ -4,25 +4,34 @@ function buscarSemanal(fkHospital){
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
-    if(fkHospital == 'null'){
-        instrucao = `
-        SELECT 
-            DAYOFMONTH(dataHora) AS dia,
-            COUNT(*) AS quantidade	
-        FROM vw_chamados
-        GROUP BY dia
-        ORDER BY dia;
-        `
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        if(fkHospital == 'null'){
+            instrucao = `
+            SELECT 
+                DAYOFMONTH(dataHora) AS dia,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            GROUP BY dia
+            ORDER BY dia;
+            `
+        } else {
+            instrucao = `
+            SELECT 
+                DAYOFMONTH(dataHora) AS dia,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            WHERE idHospital = ${fkHospital}
+            GROUP BY dia
+            ORDER BY dia;
+            `
+        }
     } else {
-        instrucao = `
-        SELECT 
-            DAYOFMONTH(dataHora) AS dia,
-            COUNT(*) AS quantidade	
-        FROM vw_chamados
-        WHERE idHospital = ${fkHospital}
-        GROUP BY dia
-        ORDER BY dia;
-        `
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
     return database.executar(instrucao)

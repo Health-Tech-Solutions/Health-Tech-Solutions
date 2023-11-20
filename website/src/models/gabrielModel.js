@@ -12,10 +12,20 @@ function listarTiposMaquinas(){
 
 
  function listarMeses(){
-    
-     const instrucao = `
+    var instrucao = ""
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+         instrucao = `
      select month(dataTemperatura) as mes from dadosTemperatura group by mes order by mes desc;
      `
+    }else if (process.env.AMBIENTE_PROCESSO == "producao") {
+         instrucao = `
+        SELECT MONTH(dataTemperatura) AS mes FROM dadosTemperatura 
+        GROUP BY MONTH(dataTemperatura) 
+        ORDER BY MONTH(dataTemperatura) DESC;
+        `
+    }
+    
+     
 
 
      return database.executar(instrucao)
@@ -26,38 +36,93 @@ function listarTiposMaquinas(){
 function mediaTemperatura(idMes, fkHospital){
     var instrucao = ""
 
-    if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
-        instrucao = `
-        SELECT year(dataTemperatura) as ano,  round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
-FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado
-group by ano;
-        `
-    }else if(fkHospital == "null" && idMes > 0){
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
+            instrucao = `
+            SELECT year(dataTemperatura) as ano,  round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
+    FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado
+    group by ano;
+            `
+        }else if(fkHospital == "null" && idMes > 0){
+        
+            instrucao = `
+            SELECT year(dataTemperatura) as ano, month(dataTemperatura) as mes, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
+    FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where month(dataTemperatura) = ${idMes}
+    group by ano , mes;
+            `
     
-        instrucao = `
-        SELECT year(dataTemperatura) as ano, month(dataTemperatura) as mes, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
-FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where month(dataTemperatura) = ${idMes}
-group by ano , mes;
-        `
-
-    } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
-
-        instrucao = `
-        SELECT year(dataTemperatura) as ano, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
-FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where idEmpresa = ${fkHospital}
-group by ano;
-        `
-
-    }else {
-
-        instrucao = `
-        SELECT year(dataTemperatura) as ano, month(dataTemperatura) as mes, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura, dadosTemperatura.estado
-        FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where month(dataTemperatura) = ${idMes} and idEmpresa = ${fkHospital}
-        group by ano , mes, estado;
-        `
-
+        } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
+    
+            instrucao = `
+            SELECT year(dataTemperatura) as ano, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura
+    FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where idEmpresa = ${fkHospital}
+    group by ano;
+            `
+    
+        }else {
+    
+            instrucao = `
+            SELECT year(dataTemperatura) as ano, month(dataTemperatura) as mes, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as mediaTemperatura, dadosTemperatura.estado
+            FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado where month(dataTemperatura) = ${idMes} and idEmpresa = ${fkHospital}
+            group by ano , mes, estado;
+            `
+    
+        }
+        
+        
+    }else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
+            instrucao = `
+            SELECT YEAR(dT.dataTemperatura) AS ano, ROUND((AVG(dT.temperaturaMax) + AVG(dT.temperaturaMin)) / 2,0) AS mediaTemperatura
+            FROM endereco E
+            JOIN empresa EM ON E.idEndereco = EM.fkEndereco
+            JOIN dadosTemperatura dT ON E.estado = dT.estado
+            GROUP BY YEAR(dT.dataTemperatura);
+            `
+        }else if(fkHospital == "null" && idMes > 0){
+        
+            instrucao = `
+            SELECT YEAR(dataTemperatura) AS ano,
+            MONTH(dataTemperatura) AS mes,
+            ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2,0) AS mediaTemperatura
+            FROM endereco
+            JOIN empresa ON idEndereco = fkEndereco
+            JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado
+            WHERE MONTH(dataTemperatura) = ${idMes}
+            GROUP BY YEAR(dataTemperatura), MONTH(dataTemperatura);
+            `
+    
+        } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
+    
+            instrucao = `
+            SELECT YEAR(dt.dataTemperatura) AS ano,
+            ROUND((AVG(dt.temperaturaMax) + AVG(dt.temperaturaMin)) / 2,0) AS mediaTemperatura
+            FROM endereco e
+            JOIN empresa emp ON e.idEndereco = emp.fkEndereco
+            JOIN dadosTemperatura dt ON e.estado = dt.estado
+            WHERE emp.idEmpresa = ${fkHospital}
+            GROUP BY YEAR(dt.dataTemperatura);
+            `
+    
+        }else {
+    
+            instrucao = `
+            SELECT YEAR(dataTemperatura) AS ano, 
+            MONTH(dataTemperatura) AS mes, 
+            ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2,0) AS mediaTemperatura, 
+            dadosTemperatura.estado
+            FROM endereco 
+            JOIN empresa ON idEndereco = fkEndereco 
+            JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado 
+            WHERE MONTH(dataTemperatura) = ${idMes} AND idEmpresa = ${fkHospital}
+            GROUP BY YEAR(dataTemperatura), MONTH(dataTemperatura), dadosTemperatura.estado;
+            `
+    
+        }
+        
     }
-    
+
+   
     
 
 

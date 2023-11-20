@@ -394,19 +394,35 @@ function totalMaquinasPorTipo(fkHospital) {
 function graficoLinha(fkHospital,maquina){
     var instrucao = ""
 
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
 
-    if(fkHospital > 0 && maquina > 0){
-        var instrucao = `
-        select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
-        from registro 
-        join maquinario on registro.fkMaquina = idMaquinario 
-        join empresa on maquinario.fkHospital = idEmpresa 
-        join dadosTemperatura on dataHora = dataTemperatura  
-        where fkMaquina = ${maquina} and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
-        group by fkHospital, fkMaquina, dataTemperatura, valor;
-        `
+        if(fkHospital > 0 && maquina > 0){
+             instrucao = `
+            select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2) as temperaturaMedia, valor
+            from registro 
+            join maquinario on registro.fkMaquina = idMaquinario 
+            join empresa on maquinario.fkHospital = idEmpresa 
+            join dadosTemperatura on dataHora = dataTemperatura  
+            where fkMaquina = ${maquina} and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
+            group by fkHospital, fkMaquina, dataTemperatura, valor;
+            `
+        }
+        
+    }else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        
+        if(fkHospital > 0 && maquina > 0){
+             instrucao = `
+            select fkHospital, fkMaquina, dataTemperatura, round((avg(temperaturaMax) + avg(temperaturaMin)) / 2,0) as temperaturaMedia, valor
+            from registro 
+            join maquinario on registro.fkMaquina = idMaquinario 
+            join empresa on maquinario.fkHospital = idEmpresa 
+            join dadosTemperatura on dataHora = dataTemperatura  
+            where fkMaquina = ${maquina} and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
+            group by fkHospital, fkMaquina, dataTemperatura, valor;
+            `
+        }
+
     }
-
     
 
     console.log("Executando a seguinte instrução sql" + instrucao)
@@ -418,111 +434,250 @@ function graficoLinha(fkHospital,maquina){
 //Gráfico de pizza 
 function graficoPizza(idMes, fkHospital){   
     console.log(idMes, fkHospital)
-   
 
-    if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
-        instrucao = `
-        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) < 13 group by ano, nivel;
-        `
-    }else if(fkHospital == "null" && idMes > 0){
+
+
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+
+        if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
+            instrucao = `
+            select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) < 13 group by ano, nivel;
+            `
+        }else if(fkHospital == "null" && idMes > 0){
+        
+            instrucao = `
+            select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) = ${idMes}  group by ano, nivel;
+            `
     
-        instrucao = `
-        select count(idChamado) as qntChamado,  year(dataHora) as ano, nivel from chamado where year(dataHora) = '2023' and month(dataHora) = ${idMes}  group by ano, nivel;
-        `
-
-    } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
-
-        instrucao = `
+        } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
+    
+            instrucao = `
+            SELECT
+            t.ano,
+            t.mediaTemperatura,
+            e.qntChamado,
+            e.nivel
+        FROM
+            (
+               SELECT
+                    YEAR(dataTemperatura) as ano,
+                    ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2) as mediaTemperatura
+                FROM
+                    empresa 
+                join
+                    registroTemperatura
+                on
+                    idEmpresa = fkHospital
+                join
+                    dadosTemperatura
+                on
+                    fkDadosTemperatura = idDadosTemperatura
+                    where fkHospital = ${fkHospital}
+                GROUP BY
+                    ano
+            ) t
+        JOIN
+            (
+        select 
+            count(idChamado) as qntChamado, nivel 
+        from 
+            endereco 
+        join 
+            empresa on idEndereco = fkEndereco 
+        join 
+            maquinario on idEmpresa = fkHospital 
+        join 
+            registro on idMaquinario = fkMaquina
+        join chamado on idRegistro = fkRegistro
+          where fkHospital = ${fkHospital} and month(chamado.dataHora) < 13 group by nivel
+            ) e;
+            `
+    
+         }else {
+             instrucao = `
+             SELECT
+         t.ano,
+         t.mes,
+         t.mediaTemperatura,
+         e.qntChamado,
+         e.nivel
+     FROM
+         (
+            SELECT
+                 YEAR(dataTemperatura) as ano,
+                 MONTH(dataTemperatura) as mes,
+                 ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2) as mediaTemperatura
+             FROM
+                 empresa 
+             join
+                 registroTemperatura
+             on
+                 idEmpresa = fkHospital
+             join
+                 dadosTemperatura
+             on
+                 fkDadosTemperatura = idDadosTemperatura
+                 where month(dataTemperatura) = ${idMes} and fkHospital = ${fkHospital}
+             GROUP BY
+                 ano,
+                 mes
+         ) t
+     JOIN
+         (
+     select 
+         count(idChamado) as qntChamado, nivel 
+     from 
+         endereco 
+     join 
+         empresa on idEndereco = fkEndereco 
+     join 
+         maquinario on idEmpresa = fkHospital 
+     join 
+         registro on idMaquinario = fkMaquina
+     join chamado on idRegistro = fkRegistro
+       where month(registro.dataHora) = ${idMes} and fkHospital = ${fkHospital} group by nivel
+         ) e;
+             `
+    
+         }
+        
+    }else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        
+        if (fkHospital == "null" && idMes == 'Todos' || idMes == 'undefined') {
+            instrucao = `
+            SELECT COUNT(idChamado) AS qntChamado, YEAR(dataHora) AS ano, nivel
+            FROM chamado
+            WHERE YEAR(dataHora) = 2023 AND MONTH(dataHora) <= 12
+            GROUP BY YEAR(dataHora), nivel;
+            `
+        }else if(fkHospital == "null" && idMes > 0){
+            instrucao = `
+            SELECT COUNT(idChamado) AS qntChamado, YEAR(dataHora) AS ano, nivel 
+            FROM chamado 
+            WHERE YEAR(dataHora) = 2023 AND MONTH(dataHora) = ${idMes}
+            GROUP BY YEAR(dataHora), nivel;
+            `
+        } else if(fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined'){
+    
+            instrucao = `
+            SELECT
+    t.ano,
+    t.mediaTemperatura,
+    e.qntChamado,
+    e.nivel
+FROM
+    (
         SELECT
-        t.ano,
-        t.mediaTemperatura,
-        e.qntChamado,
-        e.nivel
-    FROM
-        (
-           SELECT
-                YEAR(dataTemperatura) as ano,
-                ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2) as mediaTemperatura
-            FROM
-                empresa 
-            join
-                registroTemperatura
-            on
-                idEmpresa = fkHospital
-            join
-                dadosTemperatura
-            on
-                fkDadosTemperatura = idDadosTemperatura
-                where fkHospital = ${fkHospital}
-            GROUP BY
-                ano
-        ) t
-    JOIN
-        (
-    select 
-        count(idChamado) as qntChamado, nivel 
-    from 
-        endereco 
-    join 
-        empresa on idEndereco = fkEndereco 
-    join 
-        maquinario on idEmpresa = fkHospital 
-    join 
-        registro on idMaquinario = fkMaquina
-    join chamado on idRegistro = fkRegistro
-      where fkHospital = ${fkHospital} and month(chamado.dataHora) < 13 group by nivel
-        ) e;
-        `
-
-     }else {
-         instrucao = `
-         SELECT
-     t.ano,
-     t.mes,
-     t.mediaTemperatura,
-     e.qntChamado,
-     e.nivel
- FROM
-     (
-        SELECT
-             YEAR(dataTemperatura) as ano,
-             MONTH(dataTemperatura) as mes,
-             ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2) as mediaTemperatura
+            YEAR(dataTemperatura) as ano,
+            ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2, 0) as mediaTemperatura
+        FROM
+            empresa 
+        JOIN
+            registroTemperatura
+        ON
+            idEmpresa = fkHospital
+        JOIN
+            dadosTemperatura
+        ON
+            fkDadosTemperatura = idDadosTemperatura
+        WHERE
+            fkHospital = ${fkHospital}
+        GROUP BY
+            YEAR(dataTemperatura)
+    ) t
+JOIN
+    (
+        SELECT 
+            COUNT(idChamado) as qntChamado, 
+            nivel 
+        FROM 
+            endereco 
+        JOIN 
+            empresa 
+        ON 
+            idEndereco = fkEndereco 
+        JOIN 
+            maquinario 
+        ON 
+            idEmpresa = fkHospital 
+        JOIN 
+            registro 
+        ON 
+            idMaquinario = fkMaquina
+        JOIN 
+            chamado 
+        ON 
+            idRegistro = fkRegistro
+        WHERE 
+            fkHospital = ${fkHospital}
+            AND MONTH(chamado.dataHora) < 13 
+        GROUP BY 
+            nivel
+    ) e
+ON 
+    1 = 1;
+            `
+    
+         }else {
+             instrucao = `
+             SELECT
+             t.ano,
+             t.mes,
+             t.mediaTemperatura,
+             e.qntChamado,
+             e.nivel
          FROM
- 			empresa 
-         join
- 			registroTemperatura
-         on
- 			idEmpresa = fkHospital
-         join
-             dadosTemperatura
- 		on
- 			fkDadosTemperatura = idDadosTemperatura
-             where month(dataTemperatura) = ${idMes} and fkHospital = ${fkHospital}
-         GROUP BY
-             ano,
-             mes
-     ) t
- JOIN
-     (
- select 
- 	count(idChamado) as qntChamado, nivel 
- from 
- 	endereco 
- join 
- 	empresa on idEndereco = fkEndereco 
- join 
- 	maquinario on idEmpresa = fkHospital 
- join 
- 	registro on idMaquinario = fkMaquina
- join chamado on idRegistro = fkRegistro
-   where month(registro.dataHora) = ${idMes} and fkHospital = ${fkHospital} group by nivel
-     ) e;
-         `
+             (
+                 SELECT
+                     YEAR(dataTemperatura) as ano,
+                     MONTH(dataTemperatura) as mes,
+                     ROUND((AVG(temperaturaMax) + AVG(temperaturaMin)) / 2, 2) as mediaTemperatura
+                 FROM
+                     empresa 
+                 INNER JOIN
+                     registroTemperatura
+                 ON
+                     idEmpresa = fkHospital
+                 INNER JOIN
+                     dadosTemperatura
+                 ON
+                     fkDadosTemperatura = idDadosTemperatura
+                 WHERE
+                     MONTH(dataTemperatura) = ${idMes} AND fkHospital = ${fkHospital}
+                 GROUP BY
+                     YEAR(dataTemperatura),
+                     MONTH(dataTemperatura)
+             ) t
+         JOIN
+             (
+                 SELECT 
+                     COUNT(idChamado) as qntChamado,
+                     nivel 
+                 FROM 
+                     endereco 
+                 INNER JOIN 
+                     empresa ON idEndereco = fkEndereco 
+                 INNER JOIN 
+                     maquinario ON idEmpresa = fkHospital 
+                 INNER JOIN 
+                     registro ON idMaquinario = fkMaquina
+                 INNER JOIN 
+                     chamado ON idRegistro = fkRegistro
+                 WHERE 
+                     MONTH(registro.dataHora) = ${idMes} AND fkHospital = ${fkHospital}
+                 GROUP BY 
+                     nivel
+             ) e
+         ON
+             1=1;
+             `
+    
+         }
 
-     }
+    }
 
 
+   
     
     console.log("Executando a seguinte instrução sql " + instrucao)
     return database.executar(instrucao)

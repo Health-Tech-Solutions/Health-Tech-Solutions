@@ -133,75 +133,163 @@ return database.executar(instrucao)
 function mediaDesempenho(idMes, fkHospital, idTipo){
     var instrucao = ""
 
-    if(fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo == 'null'){
-        var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro join maquinario on fkMaquina = idMaquinario 
-join modelo on maquinario.fkModelo = modelo.idModelo 
-join tipo on fkTipo = idTipo where year(dataHora) = 2023;
-        `
-    }else if(fkHospital == "null" && idMes > 0 && idTipo == 'null'){
-
-        var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
-        join maquinario on fkMaquina = idMaquinario 
-        join empresa on fkHospital = idEmpresa
-        where month(dataHora) = ${idMes} and year(registro.dataHora) = 2023;
-        `
-
-    }else if (fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined' && idTipo == 'null') {
-
-        var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
-        join maquinario on fkMaquina = idMaquinario 
-        join empresa on fkHospital = idEmpresa
-        where idEmpresa = ${fkHospital} and year(registro.dataHora) = 2023;
-        `
-
-    }
-    
-    else if(fkHospital != "null" && idMes > 0 && idTipo == 'null'){
-
-        var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
-        join maquinario on fkMaquina = idMaquinario 
-        join empresa on fkHospital = idEmpresa
-        where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes} and year(dataHora) = 2023;
-        `
-    }else if (fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         
-        var instrucao = `  select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro join maquinario on fkMaquina = idMaquinario 
-        join modelo on maquinario.fkModelo = modelo.idModelo 
-        join tipo on fkTipo = idTipo where year(dataHora) = 2023 and fkPeca = ${idTipo};`
+        if(fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo == 'null'){
+            var instrucao = `
+            select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro join maquinario on fkMaquina = idMaquinario 
+    join modelo on maquinario.fkModelo = modelo.idModelo 
+    join tipo on fkTipo = idTipo where year(dataHora) = 2023;
+            `
+        }else if(fkHospital == "null" && idMes > 0 && idTipo == 'null'){
+    
+            var instrucao = `
+            select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
+            join maquinario on fkMaquina = idMaquinario 
+            join empresa on fkHospital = idEmpresa
+            where month(dataHora) = ${idMes} and year(registro.dataHora) = 2023;
+            `
+    
+        }else if (fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined' && idTipo == 'null') {
+    
+            var instrucao = `
+            select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+            join maquinario on fkMaquina = idMaquinario 
+            join empresa on fkHospital = idEmpresa
+            where idEmpresa = ${fkHospital} and year(registro.dataHora) = 2023;
+            `
+    
+        }
+        
+        else if(fkHospital != "null" && idMes > 0 && idTipo == 'null'){
+    
+            var instrucao = `
+            select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+            join maquinario on fkMaquina = idMaquinario 
+            join empresa on fkHospital = idEmpresa
+            where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes} and year(dataHora) = 2023;
+            `
+        }else if (fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+            
+            var instrucao = `  select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro join maquinario on fkMaquina = idMaquinario 
+            join modelo on maquinario.fkModelo = modelo.idModelo 
+            join tipo on fkTipo = idTipo where year(dataHora) = 2023 and fkPeca = ${idTipo};`
+    
+        }else if (fkHospital != "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+    
+            var instrucao = `select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+            join maquinario on fkMaquina = idMaquinario 
+            join empresa on fkHospital = idEmpresa
+            where idEmpresa = ${fkHospital} and year(registro.dataHora) = 2023 and fkPeca = ${idTipo};`
+    
+        }else if (fkHospital == "null" && idMes > 0 && idTipo > 0) {
+            var instrucao = `
+            select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
+            join maquinario on fkMaquina = idMaquinario 
+            join empresa on fkHospital = idEmpresa
+            where month(dataHora) = ${idMes} and year(registro.dataHora) = 2023 and fkPeca = ${idTipo};
+            `
+        }else{
+            var instrucao = `
+            select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
+            join maquinario on fkMaquina = idMaquinario 
+            join empresa on fkHospital = idEmpresa
+            where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes} and year(dataHora) = 2023 and fkPeca = ${idTipo};
+            `
+        }
 
-    }else if (fkHospital != "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+    }else if(process.env.AMBIENTE_PROCESSO == "producao"){
 
-        var instrucao = `select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
-        join maquinario on fkMaquina = idMaquinario 
-        join empresa on fkHospital = idEmpresa
-        where idEmpresa = ${fkHospital} and year(registro.dataHora) = 2023 and fkPeca = ${idTipo};`
+        if(fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo == 'null'){
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho
+            FROM registro
+            INNER JOIN maquinario ON fkMaquina = idMaquinario 
+            INNER JOIN modelo ON maquinario.fkModelo = modelo.idModelo 
+            INNER JOIN tipo ON fkTipo = idTipo 
+            WHERE YEAR(dataHora) = 2023;
+            `
+        }else if(fkHospital == "null" && idMes > 0 && idTipo == 'null'){
+    
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho
+            FROM registro
+            JOIN maquinario ON fkMaquina = idMaquinario
+            JOIN empresa ON fkHospital = idEmpresa
+            WHERE MONTH(dataHora) = 1 AND YEAR(registro.dataHora) = 2023;
+            `
+    
+        }else if (fkHospital != "null" && idMes == 'Todos' || idMes == 'undefined' && idTipo == 'null') {
+    
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho, empresa.nomeFantasia 
+            FROM registro 
+            INNER JOIN maquinario ON maquinario.idMaquinario = registro.fkMaquina 
+            INNER JOIN empresa ON empresa.idEmpresa = maquinario.fkHospital 
+            WHERE empresa.idEmpresa = ${fkHospital} AND YEAR(registro.dataHora) = 2023
+            GROUP BY empresa.nomeFantasia;
+            `
+    
+        }else if(fkHospital != "null" && idMes > 0 && idTipo == 'null'){
+    
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho, empresa.nomeFantasia
+            FROM registro
+            JOIN maquinario ON maquinario.idMaquinario = registro.fkMaquina
+            JOIN empresa ON empresa.idEmpresa = maquinario.fkHospital
+            WHERE empresa.idEmpresa = ${fkHospital}
+                AND MONTH(dataHora) = ${idMes}
+                AND YEAR(dataHora) = 2023
+            GROUP BY empresa.nomeFantasia;
+            `
+        }else if (fkHospital == "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+            
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 2) AS mediaDeDesempenho
+            FROM registro
+            INNER JOIN maquinario ON fkMaquina = idMaquinario
+            INNER JOIN modelo ON maquinario.fkModelo = modelo.idModelo
+            INNER JOIN tipo ON fkTipo = idTipo
+            WHERE YEAR(dataHora) = 2023
+            AND fkPeca = ${idTipo};
+            `
+    
+        }else if (fkHospital != "null" && (idMes == 'Todos' || idMes == 'undefined') && idTipo > 0){
+    
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho, empresa.nomeFantasia
+            FROM registro
+            JOIN maquinario ON registro.fkMaquina = maquinario.idMaquinario
+            JOIN empresa ON maquinario.fkHospital = empresa.idEmpresa
+            WHERE empresa.idEmpresa = ${fkHospital}
+            AND YEAR(registro.dataHora) = 2023
+            AND registro.fkPeca = ${idTipo}
+            GROUP BY empresa.nomeFantasia;
+            `
+    
+        }else if (fkHospital == "null" && idMes > 0 && idTipo > 0) {
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho
+            FROM registro 
+            JOIN maquinario ON fkMaquina = idMaquinario 
+            JOIN empresa ON fkHospital = idEmpresa
+            WHERE MONTH(dataHora) = ${idMes} AND YEAR(registro.dataHora) = 2023 AND fkPeca = ${idTipo};
+            `
+        }else{
+            var instrucao = `
+            SELECT ROUND(SUM(valor) / COUNT(valor), 0) AS mediaDeDesempenho, empresa.nomeFantasia
+            FROM registro
+            INNER JOIN maquinario ON maquinario.idMaquinario = registro.fkMaquina
+            INNER JOIN empresa ON empresa.idEmpresa = maquinario.fkHospital
+            WHERE empresa.idEmpresa = ${fkHospital}
+            AND MONTH(dataHora) = ${idMes}
+            AND YEAR(dataHora) = 2023
+            AND registro.fkPeca = ${idTipo}
+            GROUP BY empresa.nomeFantasia;
+            `
+        }
 
-    }else if (fkHospital == "null" && idMes > 0 && idTipo > 0) {
-        var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho from registro 
-        join maquinario on fkMaquina = idMaquinario 
-        join empresa on fkHospital = idEmpresa
-        where month(dataHora) = ${idMes} and year(registro.dataHora) = 2023 and fkPeca = ${idTipo};
-        `
     }
-    
-    
-    
-    else{
-
-        var instrucao = `
-        select round(sum(valor)/ count(valor)) as mediaDeDesempenho, nomeFantasia from registro 
-        join maquinario on fkMaquina = idMaquinario 
-        join empresa on fkHospital = idEmpresa
-        where idEmpresa = ${fkHospital} and month(dataHora) = ${idMes} and year(dataHora) = 2023 and fkPeca = ${idTipo};
-        `
-
-    }
-    
 
 
     console.log("Executando a seguinte instrução sql" + instrucao)

@@ -298,10 +298,24 @@ function mediaDesempenho(idMes, fkHospital, idTipo){
 
 
 function listarMaquina(fkHospital){
+
+    var instrucao = ""
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+         instrucao = `
+        select idMaquinario, nome from maquinario join modelo on fkModelo = idModelo join tipo on fkTipo = idTipo where fkHospital = ${fkHospital} order by idMaquinario;
+        `
+    }else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucao = `
+        SELECT m.idMaquinario, t.nome 
+        FROM maquinario m
+        JOIN modelo mo ON mo.idModelo = m.fkModelo 
+        JOIN tipo t ON t.idTipo = mo.fkTipo 
+        WHERE m.fkHospital = ${fkHospital} 
+        ORDER BY m.idMaquinario;
+        `
+    }
   
-     var instrucao = `
-     select idMaquinario, nome from maquinario join modelo on fkModelo = idModelo join tipo on fkTipo = idTipo where fkHospital = ${fkHospital} order by idMaquinario;
-     `
+    
 
     return database.executar(instrucao)
 }
@@ -313,32 +327,64 @@ function listarMaquina(fkHospital){
 function totalMaquinasPorTipoChamadoAberto(fkHospital,hospital) { 
     console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' )
     var instrucao = ""
-    if (fkHospital != "null") {
-         instrucao = `
-         select nome,idMaquinario, count(estado) from tipo join modelo on idTipo = fkTipo join maquinario on idModelo = fkModelo join registro on idMaquinario = fkMaquina join chamado on idRegistro = fkRegistro where estado = "aberto" and fkHospital = '${fkHospital}'  group by nome,idMaquinario;
 
-             ` 
-    }else{
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        
+        if (fkHospital != "null") {
+            instrucao = `
+            select nome,idMaquinario, count(estado) from tipo join modelo on idTipo = fkTipo join maquinario on idModelo = fkModelo join registro on idMaquinario = fkMaquina join chamado on idRegistro = fkRegistro where estado = "aberto" and fkHospital = '${fkHospital}'  group by nome,idMaquinario;
+   
+                ` 
+       }else{
+           instrucao = `
+           select nome,idMaquinario, count(estado) from tipo join modelo on idTipo = fkTipo join maquinario on idModelo = fkModelo join registro on idMaquinario = fkMaquina join chamado on idRegistro = fkRegistro where estado = "aberto" group by nome,idMaquinario;
+               ` 
+       }
+
+   }else if (process.env.AMBIENTE_PROCESSO == "producao") {
+       
+    if (fkHospital != "null") {
         instrucao = `
-        select nome,idMaquinario, count(estado) from tipo join modelo on idTipo = fkTipo join maquinario on idModelo = fkModelo join registro on idMaquinario = fkMaquina join chamado on idRegistro = fkRegistro where estado = "aberto" group by nome,idMaquinario;
+        SELECT nome, idMaquinario, COUNT(estado)
+        FROM tipo
+        JOIN modelo ON idTipo = fkTipo
+        JOIN maquinario ON idModelo = fkModelo
+        JOIN registro ON idMaquinario = fkMaquina
+        JOIN chamado ON idRegistro = fkRegistro
+        WHERE estado = 'aberto' AND fkHospital = ${fkHospital}
+        GROUP BY nome, idMaquinario;
             ` 
-    }
+   }else{
+       instrucao = `
+       SELECT nome, idMaquinario, COUNT(estado) 
+       FROM tipo 
+       JOIN modelo ON idTipo = fkTipo 
+       JOIN maquinario ON idModelo = fkModelo 
+       JOIN registro ON idMaquinario = fkMaquina 
+       JOIN chamado ON idRegistro = fkRegistro 
+       WHERE estado = 'aberto' 
+       GROUP BY nome, idMaquinario;
+           ` 
+   }
+
+   }
+
 
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)
 }
 
 function totalMaquinasPorTipo(fkHospital) { 
-    var instrucao = ""
-    if (fkHospital != "null"){
-        instrucao = `
-        SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo where fkHospital = ${fkHospital};
-            `
-    }else{
-        instrucao = `
-        SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo;
-            `
-    }
+    var instrucao = "" 
+        if (fkHospital != "null"){
+            instrucao = `
+            SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo where fkHospital = ${fkHospital};
+                `
+        }else{
+            instrucao = `
+            SELECT * FROM modelo JOIN maquinario on idModelo = fkModelo;
+                `
+        }
 
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)

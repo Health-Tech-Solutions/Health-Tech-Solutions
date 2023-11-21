@@ -1,7 +1,7 @@
 let totalMaquinas
 let maquinasOK
 let TotalChamados
-let totalChamadosModelo 
+let totalChamadosModelo
 let totalChamadosMaquina
 let nomeTipo
 let maquinasParadas
@@ -15,21 +15,21 @@ var fkHospital = sessionStorage.getItem("FK_HOSPITAL");
 var tipo = "Monitor de S.V";
 var nomeModelo = "IntelliVue MP5SC"
 
- //faça o fetch da função pegarDadosMaquinas
+//faça o fetch da função pegarDadosMaquinas
 
 
- fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
- .then(function (response) {
-     console.log(response)
-     if (response.ok) {
-         response.json().then(function (resposta) {
-             resposta.reverse();
-             componenteComMaisAlertas.innerHTML = resposta[0].total
-         });
-     } else {
-         console.error('Nenhum dado encontrado ou erro na API');
-     }
- })
+fetch(`/viniciusRoutes/pegarDadosMaquinas/${fkHospital}`)
+    .then(function (response) {
+        console.log(response)
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                resposta.reverse();
+                componenteComMaisAlertas.innerHTML = resposta[0].total
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
 
 
 fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
@@ -55,8 +55,8 @@ fetch(`/viniciusRoutes/estadoMaquinas/${fkHospital}`)
                 resposta.reverse();
 
                 plotarDadosPie(resposta)
-                
-                    chartPie.update()
+
+                chartPie.update()
 
             });
         } else {
@@ -104,7 +104,7 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
-    fetch(`/viniciusRoutes/tiposDeMaquinasCadastradas/${fkHospital}`)
+fetch(`/viniciusRoutes/tiposDeMaquinasCadastradas/${fkHospital}`)
     .then(function (response) {
         console.log(response)
         if (response.ok) {
@@ -119,7 +119,7 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
-    fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
+fetch(`/viniciusRoutes/chamadosAbertos/${fkHospital}`)
     .then(function (response) {
         console.log(response)
         if (response.ok) {
@@ -133,121 +133,189 @@ fetch(`/viniciusRoutes/taxaMaquinasOperando/${fkHospital}`)
         }
     })
 
-    fetch(`/viniciusRoutes/totalChamadosPorTipo/${fkHospital}`)
+fetch(`/viniciusRoutes/totalChamadosPorTipo/${fkHospital}`)
     .then(function (response) {
         console.log(response)
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
-                
+
                 plotarDadosBarChamadosTipo(resposta)
-                
+
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
         }
     })
 
-    console.log('total: '+ totalChamadosTipo)
 
 // Grafico de barras
 const ctx = document.getElementById('desempenhoModelo');
 var labels = []
 var labels2 = []
 var dataTipo = []
+var dataTipo2 = []
 var myChart
-document.addEventListener('DOMContentLoaded', function() {
+var clicou = false
+document.addEventListener('DOMContentLoaded', function () {
     // Dados iniciais
     var dadosBar = {
-      labels: labels,
-      datasets: [{
-        label: 'Dados Iniciais',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-        data: dataTipo
-      }]
+        labels: labels,
+        datasets: [{
+            label: 'Dados por modelo',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            data: dataTipo
+        }]
     };
 
     // Configurações iniciais do gráfico
-  var ctx = document.getElementById('myChart').getContext('2d');
-   myChart = new Chart(ctx, {
-    type: 'bar',
-    data: dadosBar,
-    options: {
-        onHover: function (event, elements) {
-            if (elements && elements[0]) {
-                document.getElementById('myChart').style.cursor = 'pointer';
-            } else {
-                document.getElementById('myChart').style.cursor = 'default';
-            }
-        
-    },
-      onClick: function(event, elements) {
-        console.log(elements)
-        console.log("Evento onClick disparado");
-        // Verifica se algum elemento foi clicado'
-        if (elements.length > 0) {
-          var clickedIndex = elements[0].index;
-          if(clickedIndex == 0){
-            labels2 = []
-            console.log(clickedIndex)
-            fkTipo = 1
-          dadosAlterados = {
-            labels: labels2,
-            datasets: [{
-              label: 'Dados Alterados',
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1,
-              data: [10,22,41,21,16,18,32,12]
-            }]
-          }} else if (clickedIndex == 1){
-            labels2 = []
-            console.log(clickedIndex)
-            fkTipo = 2
-            dadosAlterados = {
-                labels: labels2,
-                datasets: [{
-                    label: 'Dados Alterados',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1,
-                    data: [10,22,41,21,16,18,32,12]
-                }]
-            }
-            } else if (clickedIndex == 2){
-                labels2 = []
-                console.log(clickedIndex)
-                fkTipo = 3
-                dadosAlterados = {
-                    labels: labels2,
-                    datasets: [{
-                        label: 'Dados Alterados',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        data: [10,22,41,21,16,18,32,12]
-                    }]
+    var ctx = document.getElementById('myChart').getContext('2d');
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: dadosBar,
+        options: {
+            blockClicks: false,
+            onHover: function (event, elements) {
+                if (this.options.blockClicks) {
+                    document.getElementById('myChart').style.cursor = 'default';
+                } else if (elements && elements[0]) {
+                    document.getElementById('myChart').style.cursor = 'pointer';
+                } else {
+                    document.getElementById('myChart').style.cursor = 'default';
                 }
-                } else if (clickedIndex == 3){
-                    labels2 = []
-                    console.log(clickedIndex)
-                    fkTipo = 4
-                    dadosAlterados = {
-                        labels: labels2,
-                        datasets: [{
-                            label: 'Dados Alterados',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            data: [10,22,41,21,16,18,32,12]
-                        }]
-                    }
-                    } else if (clickedIndex == 4){
+            },
+            onClick: function (event, elements) {
+                if (this.options.blockClicks) {
+                    return;
+                }
+                console.log(elements)
+                console.log("Evento onClick disparado");
+                clicou = true
+                
+                // Verifica se algum elemento foi clicado'
+                if (elements.length > 0) {
+                    var clickedIndex = elements[0].index;
+                    fkTipo = clickedIndex
+                    if (clickedIndex == 0) {
+                        myChart.options.blockClicks = true;
                         labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 1
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 1) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 2
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 2) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 3
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 3) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 4
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 4) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
                         console.log(clickedIndex)
                         fkTipo = 5
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 5) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 6
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 6) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 7
+                        dadosAlterados = {
+                            labels: labels2,
+                            datasets: [{
+                                label: 'Dados por maquina',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                data: dataTipo2
+                            }]
+                        }
+                    } else if (clickedIndex == 7) {
+                        myChart.options.blockClicks = true;
+                        labels2 = []
+                        dataTipo2 = []
+                        console.log(clickedIndex)
+                        fkTipo = 8
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -255,83 +323,63 @@ document.addEventListener('DOMContentLoaded', function() {
                                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                                 borderColor: 'rgba(255, 99, 132, 1)',
                                 borderWidth: 1,
-                                data: [10,22,41,21,16,18,32,12]
+                                data: dataTipo2
                             }]
                         }
-                        } else if (clickedIndex == 5){
-                            labels2 = []
-                            console.log(clickedIndex)
-                            fkTipo = 6
-                            dadosAlterados = {
-                                labels: labels2,
-                                datasets: [{
-                                    label: 'Dados Alterados',
-                                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                    borderColor: 'rgba(255, 99, 132, 1)',
-                                    borderWidth: 1,
-                                    data: [10,22,41,21,16,18,32,12]
-                                }]
+                    }
+
+
+                    fetch(`/viniciusRoutes/modelosDeMaquinasCadastradas/${fkTipo}/${fkHospital}`)
+                        .then(function (response) {
+                            console.log(response)
+                            console.log(fkTipo, fkHospital)
+                            if (response.ok) {
+                                response.json().then(function (resposta) {
+                                    resposta.reverse();
+                                    plotarDadosBar2(resposta)
+
+                                });
+                            } else {
+                                console.error('Nenhum dado encontrado ou erro na API');
                             }
-                            } else if (clickedIndex == 6){
-                                labels2 = []
-                                console.log(clickedIndex)
-                                fkTipo = 7
-                                dadosAlterados = {
-                                    labels: labels2,
-                                    datasets: [{
-                                        label: 'Dados Alterados',
-                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                        borderColor: 'rgba(255, 99, 132, 1)',
-                                        borderWidth: 1,
-                                        data: [10,22,41,21,16,18,32,12]
-                                    }]
-                                }
-                                } else if (clickedIndex == 7){
-                                    labels2 = []
-                                    console.log(clickedIndex)
-                                    fkTipo = 8
-                                    dadosAlterados = {
-                                        labels: labels2,
-                                        datasets: [{
-                                            label: 'Dados Alterados',
-                                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                            borderColor: 'rgba(255, 99, 132, 1)',
-                                            borderWidth: 1,
-                                            data: [10,22,41,21,16,18,32,12]
-                                        }]
-                                    }}
+                        })
 
-                                            
-        fetch(`/viniciusRoutes/modelosDeMaquinasCadastradas/${fkTipo}/${fkHospital}`)
-        .then(function (response) {
-            console.log(response)
-            console.log(fkTipo, fkHospital)
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    resposta.reverse();
-                    plotarDadosBar2(resposta)
-    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
+                        fetch(`/viniciusRoutes/totalChamadosPorModelo/${fkTipo}/${fkHospital}`)
+                    .then(function (response) {
+                        console.log(response)
+                        if (response.ok) {
+                            response.json().then(function (resposta) {
+                                resposta.reverse();
+
+                                plotarDadosBarChamadosModelo(resposta)
+
+                            });
+                        } else {
+                            console.error('Nenhum dado encontrado ou erro na API');
+                        }
+                    })
+
+
+                    // Atualiza o gráfico com os novos dados
+                    myChart.data = dadosAlterados;
+                    myChart.update();
+
+                    mudarNomeGraficoBarras();
+                }
             }
-        })
-
-          // Atualiza o gráfico com os novos dados
-          myChart.data = dadosAlterados;
-          myChart.update();
-
         }
-      }
-    }
     });
 
 
-  // Função para restaurar os dados primordiais
-  window.restaurarDados = function() {
-    myChart.data = dadosBar;
-    myChart.update();
-  };
+    // Função para restaurar os dados primordiais
+    window.restaurarDados = function () {
+        myChart.options.blockClicks = false;
+        dataTipo2 = []
+        myChart.data = dadosBar;
+        myChart.update();
+        clicou = false
+        mudarNomeGraficoBarras();
+    };
 });
 
 
@@ -404,7 +452,7 @@ var dadosPie = {
         backgroundColor: [
             '#1cc88a',
             '#e74a3b'
-           
+
         ],
         borderWidth: 1
     }]
@@ -475,4 +523,26 @@ function plotarDadosBarChamadosTipo(resposta) {
     myChart.update();
 
 }
+
+function plotarDadosBarChamadosModelo(resposta) {
+
+    for (let i = 0; i < resposta.length; i++) {
+        const element = resposta[i].totalModelo;
+        console.log(element)
+        dataTipo2.push(element)
+    }
+
+    myChart.update();
+
+}
+
+function mudarNomeGraficoBarras(){
+    if (clicou == false) {
+        tituloGraficoBarras.innerHTML = "Total de chamados por Modelo"
+    } else {
+        tituloGraficoBarras.innerHTML = "Total de chamados por Maquina"
+    }
+}
+
+console.log(clicou)
 

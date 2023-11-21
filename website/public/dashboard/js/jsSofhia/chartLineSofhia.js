@@ -27,6 +27,9 @@ function obterDadosSemanal(){
             console.log("ERRO " + err)
         }
     )
+    if(tituloGraficoLinhas.value == undefined){
+        tituloGraficoLinhas.innerHTML = 'Nenhum alerta no último mês!'
+    }
 }
 
 function obterDadosMensais(){
@@ -55,6 +58,10 @@ function obterDadosMensais(){
             console.log("ERRO " + err)
         }
     )
+    if(tituloGraficoLinhas.value == undefined){
+        tituloGraficoLinhas.innerHTML = 'Nenhum alerta no ano!'
+    }
+    
 }
 
 
@@ -91,8 +98,9 @@ function plotarGrafico(resposta){
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }
     dados.labels = labels
-    lineChart.update()
+    lineChart.update(setInterval(5000))
 }
+
 
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const constante = document.getElementById('chartLinha');

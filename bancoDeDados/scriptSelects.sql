@@ -233,5 +233,42 @@ GROUP BY nomePeca;
 	(57,'2023-03-05 09:00:00', 4, 9),
 	(58,'2023-03-05 09:00:00', 4, 10),
 	(59,'2023-03-05 09:00:00', 4, 11),
-	(60,'2023-03-05 09:00:00', 4, 12),
+	(60,'2023-03-05 09:00:00', 4, 12);
 
+
+select modelo,idModelo from modelo where fkTipo = 1;
+
+select idTipo,
+		nome from tipo
+        JOIN modelo on fkTipo = idTipo
+        JOIN maquinario on fkModelo = idModelo
+        group by idTipo 
+        order by idTipo asc;
+        
+select * from vw_vinicius;
+
+select modelo,idModelo,count(*) as totalModelo from vw_vinicius where idHospital = 3 and idTipo = 2 group by idModelo asc;
+
+SELECT modelo, idModelo, COUNT(*) as totalModelo
+FROM vw_vinicius
+WHERE idHospital = 3 AND idTipo = 2
+GROUP BY idModelo, modelo
+ORDER BY idModelo DESC;
+
+ SELECT modelo, idModelo, COUNT(*) as totalModelo
+        FROM vw_vinicius
+        WHERE idTipo = 2
+        GROUP BY idModelo, modelo
+        ORDER BY idModelo DESC;
+
+CALL inserir_registros;
+
+        SELECT COUNT(*) as total
+        FROM vw_chamados
+        WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR);
+
+select nomeTipo,idTipo,count(*) as totalTipo from vw_vinicius group by idTipo;
+
+ select nomeTipo,idTipo,count(*) as totalTipo from vw_vinicius group by idTipo;
+    
+select * from vw_vinicius;

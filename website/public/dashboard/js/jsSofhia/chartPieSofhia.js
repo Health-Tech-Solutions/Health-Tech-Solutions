@@ -33,31 +33,31 @@ var graficoPizza = new Chart(configPie, {
     }
 });
 
-function buscarAlertasDosComponentesDoDia() {
-    var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/sofhiaRoute/buscarAlertaComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoPizza(resposta)
+// function buscarAlertasDosComponentesDoDia() {
+//     var fkHospital = sessionStorage.FK_HOSPITAL
+//     fetch(`/sofhiaRoute/buscarAlertaComponenteDoDia/${fkHospital}`, { cache: 'no-store' }).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (resposta) {
+//                 resposta.reverse();
+//                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+//                 plotarGraficoPizza(resposta)
+//                 tituloGraficoPizza.innerHTML = 'Alertas de cada componente (de hoje)'
 
-                tituloGraficoPizza.innerHTML = 'Alertas de cada componente (de hoje)'
-
-                graficoPizzaDia.style.backgroundColor = "#d3d3d3"
-                graficoPizzaSemana.style.backgroundColor = ""
-                graficoPizzaMes.style.backgroundColor = ""
-                graficoPizzaAno.style.backgroundColor = ""
-
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados: ${error.message}`);
-        });
-}
+//                 graficoPizzaDia.style.backgroundColor = "#d3d3d3"
+//                 graficoPizzaSemana.style.backgroundColor = ""
+//                 graficoPizzaMes.style.backgroundColor = ""
+//                 graficoPizzaAno.style.backgroundColor = ""
+//             });
+//         } else {
+//             console.error('Nenhum dado encontrado ou erro na API');
+//         }
+//     })
+//         .catch(function (error) {
+//             console.error(`Erro na obtenção dos dados: ${error.message}`);
+//         });
+        
+    
+// }
 
 function buscarAlertasDosComponentesDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
@@ -67,10 +67,9 @@ function buscarAlertasDosComponentesDaSemana() {
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                 plotarGraficoPizza(resposta)
-
                 tituloGraficoPizza.innerHTML = 'Alertas de cada componente (da semana)'
 
-                graficoPizzaDia.style.backgroundColor = ""
+                // graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = "#d3d3d3"
                 graficoPizzaMes.style.backgroundColor = ""
                 graficoPizzaAno.style.backgroundColor = ""
@@ -82,6 +81,8 @@ function buscarAlertasDosComponentesDaSemana() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        
+    
 }
 
 function buscarAlertasDosComponentesDoMes() {
@@ -95,7 +96,7 @@ function buscarAlertasDosComponentesDoMes() {
 
                 tituloGraficoPizza.innerHTML = 'Alertas de cada componente (dos últimos 30 dias)'
 
-                graficoPizzaDia.style.backgroundColor = ""
+                // graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = ""
                 graficoPizzaMes.style.backgroundColor = "#d3d3d3"
                 graficoPizzaAno.style.backgroundColor = ""
@@ -108,6 +109,7 @@ function buscarAlertasDosComponentesDoMes() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        
 }
 
 function buscarAlertasDosComponentesDoAno() {
@@ -121,7 +123,7 @@ function buscarAlertasDosComponentesDoAno() {
 
                 tituloGraficoPizza.innerHTML = 'Alertas de cada componente (dos últimos 365 dias)'
 
-                graficoPizzaDia.style.backgroundColor = ""
+                // graficoPizzaDia.style.backgroundColor = ""
                 graficoPizzaSemana.style.backgroundColor = ""
                 graficoPizzaMes.style.backgroundColor = ""
                 graficoPizzaAno.style.backgroundColor = "#d3d3d3"
@@ -133,6 +135,7 @@ function buscarAlertasDosComponentesDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados: ${error.message}`);
         });
+        
 }
 
 function plotarGraficoPizza(resposta){

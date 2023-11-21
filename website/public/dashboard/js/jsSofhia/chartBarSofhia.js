@@ -30,43 +30,57 @@ var dadosBarra = {
         }]
 };
 
-function obterDadosGraficoBarraDoDia() {
-    fetch(`/sofhiaRoute/buscarHospitaisDoDia`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                limparGraficoBarra()
-                resposta.reverse();
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
-                
-                tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (de hoje)'
+// function obterDadosGraficoBarraDoDia() {
+//     var fkHospital = sessionStorage.FK_HOSPITAL
 
-                graficoBarrasDia.style.backgroundColor = "#d3d3d3"
-                graficoBarrasSemana.style.backgroundColor = ""
-                graficoBarrasMes.style.backgroundColor = ""
-                graficoBarrasAno.style.backgroundColor = ""
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-}
+//     fetch(`/sofhiaRoute/buscarHospitaisDoDia`, { cache: 'no-store' }).then(function (response) {
+//         if (response.ok) {
+//             response.json().then(function (resposta) {
+//                 limparGraficoBarra()
+//                 resposta.reverse();
+//                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+//                 if(fkHospital != "null") {
+//                     graficoDeBarras.style.display = "none"
+//                 } else {
+//                     graficoDeBarras.style.display = "block"
+//                     plotarGraficoBarra(resposta);
+//                 }
+                
+//                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (de hoje)'
+
+//                 graficoBarrasDia.style.backgroundColor = "#d3d3d3"
+//                 graficoBarrasSemana.style.backgroundColor = ""
+//                 graficoBarrasMes.style.backgroundColor = ""
+//                 graficoBarrasAno.style.backgroundColor = ""
+//             });
+//         } else {
+//             console.error('Nenhum dado encontrado ou erro na API');
+//         }
+//     })
+//         .catch(function (error) {
+//             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//         });
+// }
 
 function obterDadosGraficoBarraDaSemana() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDaSemana`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
-
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
+                
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (da semana)'
 
-                graficoBarrasDia.style.backgroundColor = ""
+                // graficoBarrasDia.style.backgroundColor = ""
                 graficoBarrasSemana.style.backgroundColor = "#d3d3d3"
                 graficoBarrasMes.style.backgroundColor = ""
                 graficoBarrasAno.style.backgroundColor = ""
@@ -81,17 +95,24 @@ function obterDadosGraficoBarraDaSemana() {
 }
 
 function obterDadosGraficoBarraDoMes() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDoMes`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
 
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (dos últimos 30 dias)'
 
-                graficoBarrasDia.style.backgroundColor = ""
+                // graficoBarrasDia.style.backgroundColor = ""
                 graficoBarrasSemana.style.backgroundColor = ""
                 graficoBarrasMes.style.backgroundColor = "#d3d3d3"
                 graficoBarrasAno.style.backgroundColor = ""
@@ -106,17 +127,24 @@ function obterDadosGraficoBarraDoMes() {
 }
 
 function obterDadosGraficoBarraDoAno() {
+    var fkHospital = sessionStorage.FK_HOSPITAL
+
     fetch(`/sofhiaRoute/buscarHospitaisDoAno`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (resposta) {
                 limparGraficoBarra()
                 resposta.reverse();
                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                plotarGraficoBarra(resposta);
+                if(fkHospital != "null") {
+                    graficoDeBarras.style.display = "none"
+                } else {
+                    graficoDeBarras.style.display = "block"
+                    plotarGraficoBarra(resposta);
+                }
 
                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (dos últimos 365 dias)'
 
-                graficoBarrasDia.style.backgroundColor = ""
+                // graficoBarrasDia.style.backgroundColor = ""
                 graficoBarrasSemana.style.backgroundColor = ""
                 graficoBarrasMes.style.backgroundColor = ""
                 graficoBarrasAno.style.backgroundColor = "#d3d3d3"
@@ -128,6 +156,7 @@ function obterDadosGraficoBarraDoAno() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
+        
 }
 
 function limparGraficoBarra() {

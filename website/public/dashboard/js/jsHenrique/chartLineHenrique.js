@@ -131,9 +131,7 @@ function predicao(){
     var linear = coeficientes[1].toFixed(0)
   
     for(let i = 0; i < dadosReais.length; i++){
-        // let formula = dadosReais[i] - 16.6  + 2 * i
         let formula = diferenca(dadosReais[i],linear) + angular * i
-        // let formula = 393 + 1.4 * i
         vetorAux.push(formula)
     }
     dados.datasets[0].data = vetorAux
@@ -146,7 +144,7 @@ function calcularCoeficientes(dataset){
    const valoresX = Array.from({ length: dataset.length }, (_, index) => index + 1);
    
     const mediaX = calcularMedia(valoresX);
-        
+
    let numeradorM = 0;
    let denominadorM = 0;
    
@@ -167,5 +165,6 @@ function calcularMedia(dados) {
 }
 
 function diferenca(num1, num2){
+    
     return (num1 + (num1 - num2)) 
 }

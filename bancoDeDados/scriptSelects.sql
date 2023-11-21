@@ -56,23 +56,21 @@ select * from ordemMAnutencao;
 
 SELECT * FROM maquinario;
 SELECT * FROM ordemManutencao;
-
-
+USE hts;
+CALL inserir_registros;
+	
+call fechar_chamados();
 SELECT * FROM ordemManutencao WHERE estado = 'parado';
 INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
 	VALUES (NOW(), 97 , 95, 3);
 
 SELECT
 		AVG(SUM(om.qtdFalhas)) AS qtdFalhas,
-        AVG(SUM(om.somaFuncionamento)) AS tempoManutencao,
-        maq.fkModelo,
-        m.modelo
+        AVG(SUM(om.somaFuncionamento)) AS tempoManutencao
     FROM ordemManutencao AS om
     JOIN maquinario AS maq ON fkMaquina = idMaquinario
     JOIN modelo AS m ON m.idModelo = maq.fkModelo
-    WHERE somaFuncionamento <> 0
-    AND maq.fkModelo = 3
-	GROUP BY maq.fkModelo;
+    WHERE somaFuncionamento <> 0;
     
     SELECT
 		SUM(om.qtdFalhas) AS qtdFalhas,
@@ -85,8 +83,15 @@ SELECT
     WHERE somaFuncionamento <> 0
     AND maq.fkModelo = 3
 	GROUP BY maq.fkModelo;
-
-
+select * from ordemManutencao;
+SELECT
+		ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
+        ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
+        ROUND(AVG(om.somaManutencao)) AS tempoManutencao
+    FROM ordemManutencao AS om
+    WHERE om.qtdFalhas <> 0;
+   
+CALL fechar_chamados;
 SELECT * FROM chamado ORDER BY idChamado DESC LIMIT 1;
 
 SELECT 

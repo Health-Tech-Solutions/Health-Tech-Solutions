@@ -126,7 +126,7 @@ public class Usuario {
 
         boolean loginValidado = false;
         for (Usuario u : login) {
-            if (u.getNome().equals(nomeLogin) && u.getSenha().equals(senhaLogin)) {
+            if (nomeLogin.equalsIgnoreCase(u.getNome()) && senhaLogin.equalsIgnoreCase(u.getSenha())) {
                 loginValidado = true;
                 System.out.println(negrito + "Entrando..." + padrao);
                 menuLogado();

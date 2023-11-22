@@ -2,140 +2,140 @@ CREATE DATABASE hts;
 USE hts;
 
 CREATE TABLE endereco(
-    idEndereco INT PRIMARY KEY IDENTITY,
-    cep CHAR(9),
-    numero VARCHAR(10),
-    complemento VARCHAR(40),
-    logradouro VARCHAR(45),
-    bairro VARCHAR(45),
-    cidade VARCHAR(45),
-    estado VARCHAR(45)
+	idEndereco INT PRIMARY KEY IDENTITY,
+	cep CHAR(9),
+	numero VARCHAR(10),
+	complemento VARCHAR(40),
+	logradouro VARCHAR(45),
+	bairro VARCHAR(45),
+	cidade VARCHAR(45),
+	estado VARCHAR(45)
 );
 
 CREATE TABLE empresa(
-    idEmpresa INT PRIMARY KEY IDENTITY,
-    nomeFantasia VARCHAR(45),
-    cnpj CHAR(14),
-    telefone CHAR(13),
-    fkEndereco INT,
-    filial INT,
-    FOREIGN KEY (filial) REFERENCES empresa(idEmpresa),
-    FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
+	idEmpresa INT PRIMARY KEY IDENTITY,
+	nomeFantasia VARCHAR(45),
+	cnpj CHAR(14),
+	telefone CHAR(13),
+	fkEndereco INT,
+	filial INT,
+	FOREIGN KEY (filial) REFERENCES empresa(idEmpresa),
+	FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
 );
 
 CREATE TABLE funcionario(
-    idFuncionario INT PRIMARY KEY IDENTITY,
-    nome VARCHAR(45),
-    email VARCHAR(60),
-    senha VARCHAR(45),
-    funcao VARCHAR(45),
-    tipo CHAR(1),
-    CPF CHAR(11),
-    foto VARCHAR(300),
-    fkIndustria INT,
-    FOREIGN KEY (fkIndustria) REFERENCES empresa(idEmpresa),
-    fkRepresentante INT,
-    FOREIGN KEY (fkRepresentante) REFERENCES funcionario(idFuncionario)
+	idFuncionario INT PRIMARY KEY IDENTITY,
+	nome VARCHAR(45),
+	email VARCHAR(60),
+	senha VARCHAR(45),
+	funcao VARCHAR(45),
+	tipo CHAR(1),
+	CPF CHAR(11),
+	foto VARCHAR(300),
+	fkIndustria INT,
+	FOREIGN KEY (fkIndustria) REFERENCES empresa(idEmpresa),
+	fkRepresentante INT,
+	FOREIGN KEY (fkRepresentante) REFERENCES funcionario(idFuncionario)
 );
 
 CREATE TABLE tipo(
-    idTipo INT PRIMARY KEY IDENTITY,
-    nome VARCHAR(45)
+	idTipo INT PRIMARY KEY IDENTITY,
+	nome VARCHAR(45)
 );
 
 CREATE TABLE modelo(
-    idModelo INT PRIMARY KEY IDENTITY,
-    modelo VARCHAR(45),
-    descricao VARCHAR(255),
-    fkTipo INT,
-    FOREIGN KEY (fkTipo) REFERENCES tipo(idTipo)
+	idModelo INT PRIMARY KEY IDENTITY,
+	modelo VARCHAR(45),
+	descricao VARCHAR(255),
+	fkTipo INT,
+	FOREIGN KEY (fkTipo) REFERENCES tipo(idTipo)
 );
 
 CREATE TABLE maquinario(
-    idMaquinario INT PRIMARY KEY,
-    dataCadastramento DATETIME,
-    fkHospital INT,
-    FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa),
-    fkModelo INT,
-    FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo)
+	idMaquinario INT PRIMARY KEY,
+	dataCadastramento DATETIME,
+	fkHospital INT,
+	FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa),
+	fkModelo INT,
+	FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo)
 );
 
 CREATE TABLE tipoRegistro(
-    idTipoRegistro INT PRIMARY KEY IDENTITY,
-    nome VARCHAR(45),
-    medida VARCHAR(45)
+	idTipoRegistro INT PRIMARY KEY IDENTITY,
+	nome VARCHAR(45),
+	medida VARCHAR(45)
 );
 
 CREATE TABLE peca(
-    idPeca INT PRIMARY KEY IDENTITY,
-    nome VARCHAR(45),
-    modelo VARCHAR(45),
-    fkTipoRegistro INT,
-    FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro)
+	idPeca INT PRIMARY KEY IDENTITY,
+	nome VARCHAR(45),
+	modelo VARCHAR(45),
+	fkTipoRegistro INT,
+	FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro)
 );
 
 CREATE TABLE registro(
-    idRegistro INT PRIMARY KEY IDENTITY,
-    dataHora DATETIME,
-    valor DECIMAL(7,2),
-    fkMaquina INT,
-    fkPeca INT,
-    FOREIGN KEY (fkPeca) REFERENCES peca(idPeca)
+	idRegistro INT PRIMARY KEY IDENTITY,
+	dataHora DATETIME,
+	valor DECIMAL(7,2),
+	fkMaquina INT,
+	fkPeca INT,
+	FOREIGN KEY (fkPeca) REFERENCES peca(idPeca)
 );
 
 CREATE TABLE chamado(
-    idChamado INT PRIMARY KEY IDENTITY,
-    nivel VARCHAR(45),
-    estado VARCHAR(45),
-    sla VARCHAR(45),
-    descricao VARCHAR(45),
-    dataHora DATETIME,
-    fkRegistro INT,
-    FOREIGN KEY(fkRegistro) REFERENCES registro(idRegistro)
+	idChamado INT PRIMARY KEY IDENTITY,
+	nivel VARCHAR(45),
+	estado VARCHAR(45),
+	sla VARCHAR(45),
+	descricao VARCHAR(45),
+	dataHora DATETIME,
+	fkRegistro INT,
+	FOREIGN KEY(fkRegistro) REFERENCES registro(idRegistro)
 );
 
 
 CREATE TABLE limite(
-    idLimite INT PRIMARY KEY IDENTITY,
-    valor DECIMAL(5,2),
-    fkPeca INT,
-    fkModelo INT,
-    FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo),
-    FOREIGN KEY (fkPeca) REFERENCES peca(idPeca)
+	idLimite INT PRIMARY KEY IDENTITY,
+	valor DECIMAL(5,2),
+	fkPeca INT,
+	fkModelo INT,
+	FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo),
+	FOREIGN KEY (fkPeca) REFERENCES peca(idPeca)
 );
 
 CREATE TABLE dadosTemperatura (
-    idDadosTemperatura INT PRIMARY KEY IDENTITY,
-    estado VARCHAR(25),
-    dataTemperatura DATE,
-    precipitacao DECIMAL(8,2),
-    pressaoMax DECIMAL(8,2),
-    pressaoMin DECIMAL(8,2),
-    temperaturaMax DECIMAL(8,2),
-    temperaturaMin DECIMAL(8,2)
+	idDadosTemperatura INT PRIMARY KEY IDENTITY,
+	estado VARCHAR(25),
+	dataTemperatura DATE,
+	precipitacao DECIMAL(8,2),
+	pressaoMax DECIMAL(8,2),
+	pressaoMin DECIMAL(8,2),
+	temperaturaMax DECIMAL(8,2),
+	temperaturaMin DECIMAL(8,2)
 );
 
 CREATE TABLE registroTemperatura(
-    fkDadosTemperatura INT,
-    fkHospital INT,
-    FOREIGN KEY (fkDadosTemperatura) REFERENCES dadosTemperatura(idDadosTemperatura),
-    FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa)
+	fkDadosTemperatura INT,
+	fkHospital INT,
+	FOREIGN KEY (fkDadosTemperatura) REFERENCES dadosTemperatura(idDadosTemperatura),
+	FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa)
 );
 
 
 CREATE TABLE ordemManutencao (
-    idOrdem INT PRIMARY KEY IDENTITY,
-    estado VARCHAR(50),
-    dataInicioFunc DATETIME,
-    dataAbertura DATETIME,
-    dataFechamento DATETIME,
-    somaFuncionamento INT,
-    somaManutencao INT,
-    fkMaquina INT,
-    fkChamado INT,
+	idOrdem INT PRIMARY KEY IDENTITY,
+	estado VARCHAR(50),
+	dataInicioFunc DATETIME,
+	dataAbertura DATETIME,
+	dataFechamento DATETIME,
+	somaFuncionamento INT,
+	somaManutencao INT,
+	fkMaquina INT,
+	fkChamado INT,
 	qtdFalhas INT,
-    FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
-    FOREIGN KEY (fkChamado) REFERENCES chamado(idChamado)
+	FOREIGN KEY (fkMaquina) REFERENCES maquinario(idMaquinario),
+	FOREIGN KEY (fkChamado) REFERENCES chamado(idChamado)
 );
 
 GO
@@ -158,7 +158,7 @@ AS
 		tr.nome,
 		tr.medida,
 		p.idPeca AS idPeca,
-        p.nome AS nomePeca
+		p.nome AS nomePeca
 	FROM chamado AS c
 	JOIN registro AS r ON c.fkRegistro = r.idRegistro
 	JOIN maquinario AS maq ON r.fkMaquina = maq.idMaquinario
@@ -170,75 +170,90 @@ AS
 
 GO
 
+
+DROP FUNCTION IF EXISTS subtrai_data
+GO
 -- Criação da função subtrai_data
 CREATE FUNCTION subtrai_data(@data1 DATETIME, @data2 DATETIME)
 RETURNS INT
 AS
 BEGIN
-    DECLARE @dataFinal INT;
-    DECLARE @minutos INT;
-    SET @dataFinal = DATEDIFF(SECOND, @data1, @data2);
-    SET @minutos = @dataFinal / 60;
-    RETURN @minutos;
+	DECLARE @dataFinal INT;
+	DECLARE @minutos INT;
+	SET @dataFinal = DATEDIFF(SECOND, @data1, @data2);
+	SET @minutos = @dataFinal / 60;
+	RETURN @minutos;
 END;
 
 GO
 -- Criação do trigger tr_abre_ordem
 
+GO
 CREATE TRIGGER tr_abre_ordemm
 ON maquinario
 AFTER INSERT
 AS 
 BEGIN 
-    SET NOCOUNT ON;
+	SET NOCOUNT ON;
 
-    -- Inserir na tabela ordemManutencao com base nos dados inseridos na tabela maquinario
-    INSERT INTO ordemManutencao (estado, dataInicioFunc, fkMaquina, qtdFalhas)
-    SELECT 'funcionando', GETDATE(), idMaquinario, 0
-    FROM INSERTED;
+	-- Inserir na tabela ordemManutencao com base nos dados inseridos na tabela maquinario
+	INSERT INTO ordemManutencao (estado, dataInicioFunc, fkMaquina, qtdFalhas)
+	SELECT 'funcionando', GETDATE(), idMaquinario, 0
+	FROM INSERTED;
 END;
-GO
 
+GO
+DROP TRIGGER tr_atualiza_ordem
+GO
 -- Criação do trigger tr_atualiza_ordem
 CREATE TRIGGER tr_atualiza_ordem
 ON chamado
 AFTER INSERT
 AS 
 BEGIN 
-    DECLARE @nivel VARCHAR(45), @fkMaquina INT, @fkRegistro INT;
-    SELECT @nivel = INSERTED.nivel, @fkRegistro = INSERTED.fkRegistro;
-    SELECT @fkMaquina = fkMaquina FROM registro WHERE idRegistro = @fkRegistro;
-
-    IF @nivel = 'Alto' 
-    BEGIN
-        UPDATE ordemManutencao SET estado = 'parado',
-            dataAbertura = GETDATE(),
-            qtdFalhas = qtdFalhas + 1,
-            somaFuncionamento = dbo.subtrai_data(GETDATE(), dataInicioFunc),
-            fkChamado = INSERTED.idChamado
-        WHERE fkMaquina = @fkMaquina;
-    END
-    ELSE
-    BEGIN
-        UPDATE ordemManutencao SET estado = 'funcionando'
-        WHERE fkMaquina = @fkMaquina;
-    END;
+	DECLARE @nivel VARCHAR(45), @fkRegistro INT,@idChamado INT;
+	SELECT @nivel = nivel FROM INSERTED;
+	SELECT @fkRegistro = fkRegistro FROM INSERTED;
+	SELECT @idChamado = idChamado FROM INSERTED;
+	
+	IF @nivel = 'Alto' 
+	BEGIN
+		UPDATE ordemManutencao SET estado = 'parado',
+			dataAbertura = GETDATE(),
+			qtdFalhas = qtdFalhas + 1,
+			somaFuncionamento = dbo.subtrai_data(GETDATE(), dataInicioFunc),
+			fkChamado = @idChamado
+		WHERE fkMaquina =(SELECT fkMaquina 
+								FROM registro 
+								WHERE idRegistro = @fkRegistro);
+	END
+	ELSE
+	BEGIN
+		UPDATE ordemManutencao SET estado = 'funcionando'
+		WHERE fkMaquina =(SELECT fkMaquina 
+									FROM registro
+									WHERE idRegistro = @fkRegistro)
+	END;
 END;
 
 GO
 
+GO
 -- Criação do trigger tr_fechamento_chamado
 CREATE TRIGGER tr_fechamento_chamado
 ON chamado
 AFTER UPDATE
 AS
 BEGIN
+	DECLARE @fkRegistro INT;
+	SELECT @fkRegistro = fkRegistro FROM INSERTED;
+
 	UPDATE ordemManutencao SET dataFechamento = GETDATE(),
 								estado = 'funcionando',
-                                somaManutencao = dbo.subtrai_data(dataFechamento, dataAbertura)
+								somaManutencao = dbo.subtrai_data(dataFechamento, dataAbertura)
 	WHERE fkMaquina = (SELECT fkMaquina
 						FROM registro
-						WHERE idRegistro = INSERTED.fkRegistro);
+						WHERE idRegistro = @fkRegistro);
 END;
 
 GO
@@ -247,156 +262,126 @@ GO
 CREATE PROCEDURE inserir_registros
 AS
 BEGIN
-    DECLARE @i INT = 1, @dataHora DATETIME, @valor FLOAT, @fkPeca INT, @fkMaquina INT;
+	DECLARE @i INT = 1, @dataHora DATETIME, @valor FLOAT, @fkPeca INT, @fkMaquina INT;
 
-    WHILE @i <= 300
-    BEGIN
-        SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
-        SET @valor = 85 + (RAND() * 15);
-        SET @fkPeca = FLOOR(RAND() * 13) + 1;
-        SET @fkMaquina = FLOOR(RAND() * 216) + 1;
+	WHILE @i <= 300
+	BEGIN
+		SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
+		SET @valor = 85 + (RAND() * 15);
+		SET @fkPeca = FLOOR(RAND() * 13) + 1;
+		SET @fkMaquina = FLOOR(RAND() * 216) + 1;
 
-        INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
-        VALUES (@dataHora, @valor, @fkMaquina, @fkPeca);
+		INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
+		VALUES (@dataHora, @valor, @fkMaquina, @fkPeca);
 
-        SET @i = @i + 1;
-    END;
+		SET @i = @i + 1;
+	END;
 END;
 
 GO
 
+GO
 -- Criação da stored procedure inserir_registros_temperatura
 CREATE PROCEDURE inserir_registros_temperatura
 AS
 BEGIN
-    DECLARE @i INT = 1, @dataHora DATETIME, @valor FLOAT, @fkPeca INT, @fkMaquina INT;
+	DECLARE @i INT = 1, @dataHora DATETIME, @valor FLOAT, @fkPeca INT, @fkMaquina INT;
 
-    WHILE @i <= 300
-    BEGIN
-        SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
-        SET @valor = 85 + (RAND() * 15);
-        SET @fkPeca = FLOOR(RAND() * 13) + 1;
+	WHILE @i <= 300
+	BEGIN
+		SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
+		SET @valor = 85 + (RAND() * 15);
+		SET @fkPeca = FLOOR(RAND() * 13) + 1;
 
-        INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
-        VALUES (@dataHora, @valor, 5, @fkPeca);
+		INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
+		VALUES (@dataHora, @valor, 5, @fkPeca);
 
-        SET @i = @i + 1;
-    END;
+		SET @i = @i + 1;
+	END;
 END;
 
 GO
 
+GO
 -- Criação da stored procedure fechar_chamados
 CREATE PROCEDURE fechar_chamados
 AS
 BEGIN
-    DECLARE
-        @i INT,
-        @quantidade INT,
-        @idFechado INT;
+	DECLARE
+		@i INT,
+		@quantidade INT,
+		@idFechado INT;
 
-    SET @i = 0;
-    SET @quantidade = FLOOR(RAND() * (SELECT COUNT(*) FROM chamado WHERE estado = 'Aberto'));
+	SET @i = 0;
+	SET @quantidade = FLOOR(RAND() * (SELECT COUNT(*) FROM chamado WHERE estado = 'Aberto'));
 
-    WHILE @i <= @quantidade
-    BEGIN
-        SET @idFechado = RAND() * @quantidade;
-        UPDATE chamado SET estado = 'fechado' WHERE idChamado = FLOOR(@idFechado);
-        SET @i = @i + 1;
-    END
+	WHILE @i <= @quantidade
+	BEGIN
+		SET @idFechado = RAND() * @quantidade;
+		UPDATE chamado SET estado = 'fechado' WHERE idChamado = FLOOR(@idFechado);
+		SET @i = @i + 1;
+	END
 END;
 
 GO
 
--- Criação da stored procedure inserir_Registros2
-CREATE PROCEDURE inserir_Registros2
-AS
-BEGIN
-    DECLARE @i INT = 1, @dataHora DATETIME, @valor FLOAT, @fkTipoRegistro INT, @fkMaquina INT, @counter INT, @counter2 INT;
 
-    WHILE @i <= 216
-    BEGIN
-        SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
-        SET @valor = 85 + (RAND() * 15);
-        SET @fkTipoRegistro = FLOOR(RAND() * 3) + 1;
-        SET @fkMaquina = FLOOR(RAND() * 216) + 1;
-        SET @counter = 1;
 
-        WHILE @counter <= 50
-        BEGIN
-            SET @counter2 = 1;
-
-            WHILE @counter2 <= 3
-            BEGIN
-                INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
-                VALUES (DATEADD(SECOND, FLOOR(RAND() * 31536000), '2023-12-08 00:00:00'), FLOOR(RAND() * 100), @i, @counter2);
-                SET @counter2 = @counter2 + 1;
-            END;
-
-            SET @counter = @counter + 1;
-        END;
-
-        INSERT INTO registro (dataHora, valor, fkMaquina, fkTipoRegistro)
-        VALUES (@dataHora, @valor, @fkMaquina, @fkTipoRegistro);
-
-        SET @i = @i + 1;
-    END;
-END;
 
 INSERT INTO endereco (
-    cep,
-    numero,
+	cep,
+	numero,
 	complemento,
-    logradouro,
-    bairro,
-    cidade,
-    estado
+	logradouro,
+	bairro,
+	cidade,
+	estado
 )
 VALUES
 (
-    '04571-011',
-    1747,
-    'Avenida Luis Carlos Berrini',
-    'Itaim Bibi',
-    'São Paulo',
-    '',
-    'SP'
+	'04571-011',
+	1747,
+	'Avenida Luis Carlos Berrini',
+	'Itaim Bibi',
+	'São Paulo',
+	'',
+	'SP'
 ),
 (
-    '01310-000',
-    200,
-    'Avenida Paulista',
-    'Bela Vista',
-    'São Paulo',
-    '',
-    'SP'
+	'01310-000',
+	200,
+	'Avenida Paulista',
+	'Bela Vista',
+	'São Paulo',
+	'',
+	'SP'
 ),
 (
-    '01431-000',
-    953,
-    'Avenida Brasil',
-    'Jardim América',
-    'São Paulo',
-    '',
-    'SP'
+	'01431-000',
+	953,
+	'Avenida Brasil',
+	'Jardim América',
+	'São Paulo',
+	'',
+	'SP'
 ),
 (
-    '09910-720',
-    605,
-    'Rua Manoel da Nóbrega',
-    'Centro',
-    'Diadema',
-    '',
-    'SP'
+	'09910-720',
+	605,
+	'Rua Manoel da Nóbrega',
+	'Centro',
+	'Diadema',
+	'',
+	'SP'
 ),
 (
-    '22630-010',
-    802,
-    '',
-    '',
-    'Barra da Tijuca',
-    '',
-    'RJ'
+	'22630-010',
+	802,
+	'',
+	'',
+	'Barra da Tijuca',
+	'',
+	'RJ'
 );
 
 insert into 
@@ -411,7 +396,7 @@ values
 	('04263-200','150', null),
 	('05652-900','701', null);
 
-    insert into
+	insert into
 	empresa
 	(nomeFantasia, cnpj,fkEndereco)
 values
@@ -420,7 +405,7 @@ values
 	('Hospital Santa Helena', '34128330000189',4),
 	('Hospital Rio de Janeiro', '23928730000185',5);
 
-    insert into
+	insert into
 	funcionario(nome, email, senha,funcao,tipo, fkIndustria)
 values		
 	('Isabela Mariana Olivia da Rosa','isabelamarianadarosa@imeio.com','123456','admin','0', 1),
@@ -444,7 +429,7 @@ values
 	('Gilberto Campos', 'gilberto@gmail.com', '123456', 'admin','0', 1),
 	('Sofhia Utaka', 'sofhia@gmail.com', '123456', 'admin','0', 1);
 
-    insert into
+	insert into
 	tipo(nome)
 values
 	('Ultrassom'),
@@ -484,7 +469,7 @@ values
 	('Vital2', '', 8),
 	('Vital3', '', 8);
 
-    INSERT INTO maquinario(idMaquinario,dataCadastramento, fkHospital, fkModelo)
+	INSERT INTO maquinario(idMaquinario,dataCadastramento, fkHospital, fkModelo)
 VALUES
 	(1,'2023-03-05 09:00:00', 3, 1),
 	(2,'2023-03-05 09:00:00', 3, 2),
@@ -702,7 +687,7 @@ VALUES
 	(214,'2023-03-05 09:00:00', 1, 5),
 	(215,'2023-03-05 09:00:00', 1, 10),
 	(216,'2023-03-05 09:00:00', 1, 11),
-    (217,'2023-03-05 09:00:00', 4, 1),
+	(217,'2023-03-05 09:00:00', 4, 1),
 	(218,'2023-03-05 09:00:00', 4, 2),
 	(219,'2023-03-05 09:00:00', 4, 3),
 	(220,'2023-03-05 09:00:00', 4, 4),
@@ -801,9 +786,9 @@ values
 	(9,15, 85),
 	(12,15, 85);
 
-    EXEC inserir_registros;
+	EXEC inserir_registros;
 
-    INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro)
+	INSERT INTO chamado (nivel, estado, sla, dataHora, descricao, fkRegistro)
 VALUES
 ('Alto', 'Aberto', '2 horas', CONVERT(datetime, '2023-01-15 12:00:00', 120), 'O disco está cheio', 11),
 ('Médio', 'Aberto', '6 horas', CONVERT(datetime, '2023-02-20 14:30:00', 120), 'O disco está cheio', 22),
@@ -857,7 +842,7 @@ select
 			else '10 horas'
 		end
 	end sla,
-	dataHora,
+	dataHora = GETDATE(),
 	'' descricao,
 	r.idRegistro
 from registro AS r where r.valor > 85;
@@ -881,20 +866,20 @@ AS
 		t.nome AS tipo,
 		t.idTipo,	
 		m.modelo,
-        m.idModelo,
+		m.idModelo,
 		tr.nome,
 		tr.medida,
-        p.idPeca AS idPeca,
-        t.nome as nomeTipo,
+		p.idPeca AS idPeca,
+		t.nome as nomeTipo,
 		p.nome as nomePeca
 	FROM chamado AS c
-    JOIN registro AS r ON c.fkRegistro = r.idRegistro
-    JOIN maquinario AS maq ON fkMaquina = idMaquinario 
-    JOIN modelo AS m ON maq.fkModelo = m.idModelo
-    JOIN empresa AS e ON maq.fkHospital = e.idEmpresa
-    JOIN tipoRegistro AS tr ON fkRegistro = idRegistro
-    JOIN tipo AS t ON m.fkTipo = t.idTipo
-    JOIN peca AS p ON r.fkPeca = p.idPeca;
+	JOIN registro AS r ON c.fkRegistro = r.idRegistro
+	JOIN maquinario AS maq ON fkMaquina = idMaquinario 
+	JOIN modelo AS m ON maq.fkModelo = m.idModelo
+	JOIN empresa AS e ON maq.fkHospital = e.idEmpresa
+	JOIN tipoRegistro AS tr ON fkRegistro = idRegistro
+	JOIN tipo AS t ON m.fkTipo = t.idTipo
+	JOIN peca AS p ON r.fkPeca = p.idPeca;
 GO
 EXEC fechar_chamados;
 

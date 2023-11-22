@@ -8,7 +8,7 @@ fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
             resposta.reverse();
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             calcularConfiabilidade(resposta)
-            
+
         });
     } else {
         console.error('Nenhum dado encontrado ou erro na API');

@@ -134,4 +134,9 @@ var lineChart = new Chart(constante, {
     }
 });
 
+setInterval(() => {
+    obterDadosMensais();
+    lineChart.update();
+}, 2000);
+
 

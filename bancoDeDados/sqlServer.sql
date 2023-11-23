@@ -180,7 +180,7 @@ AS
 BEGIN
 	DECLARE @dataFinal INT;
 	DECLARE @minutos INT;
-	SET @dataFinal = DATEDIFF(SECOND, @data1, @data2);
+	SET @dataFinal = DATEDIFF(SECOND, @data2, @data1);
 	SET @minutos = @dataFinal / 60;
 	RETURN @minutos;
 END;
@@ -201,14 +201,13 @@ BEGIN
 	SELECT 'funcionando', GETDATE(), idMaquinario, 0
 	FROM INSERTED;
 END;
+	
+GO
 
-GO
-DROP TRIGGER tr_atualiza_ordem
-GO
 -- Criação do trigger tr_atualiza_ordem
 CREATE TRIGGER tr_atualiza_ordem
 ON chamado
-AFTER INSERT
+FOR INSERT
 AS 
 BEGIN 
 	DECLARE @nivel VARCHAR(45), @fkRegistro INT,@idChamado INT;
@@ -217,23 +216,23 @@ BEGIN
 	SELECT @idChamado = idChamado FROM INSERTED;
 	
 	IF @nivel = 'Alto' 
-	BEGIN
-		UPDATE ordemManutencao SET estado = 'parado',
-			dataAbertura = GETDATE(),
-			qtdFalhas = qtdFalhas + 1,
-			somaFuncionamento = dbo.subtrai_data(GETDATE(), dataInicioFunc),
-			fkChamado = @idChamado
-		WHERE fkMaquina =(SELECT fkMaquina 
-								FROM registro 
-								WHERE idRegistro = @fkRegistro);
-	END
+		BEGIN
+			UPDATE ordemManutencao SET estado = 'parado',
+				dataAbertura = GETDATE(),
+				qtdFalhas = qtdFalhas + 1,
+				somaFuncionamento = dbo.subtrai_data(GETDATE(), dataInicioFunc),
+				fkChamado = @idChamado
+			WHERE fkMaquina =(SELECT fkMaquina 
+									FROM registro 
+									WHERE idRegistro = @fkRegistro);
+		END
 	ELSE
-	BEGIN
-		UPDATE ordemManutencao SET estado = 'funcionando'
-		WHERE fkMaquina =(SELECT fkMaquina 
-									FROM registro
-									WHERE idRegistro = @fkRegistro)
-	END;
+		BEGIN
+			UPDATE ordemManutencao SET estado = 'funcionando'
+			WHERE fkMaquina =(SELECT fkMaquina 
+										FROM registro
+										WHERE idRegistro = @fkRegistro)
+		END;
 END;
 
 GO

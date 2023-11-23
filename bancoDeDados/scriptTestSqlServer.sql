@@ -6,7 +6,7 @@ SELECT fkMaquina, count(*)
 		FROM registro 
 		WHERE valor >=95
 		GROUP BY fkMaquina;
-
+		 
 SELECT 
 	count(*) as total,
 	c.nivel,
@@ -56,3 +56,5 @@ select
 from registro AS r where r.valor > 85;
 
 
+SELECT @@SERVERNAME AS 'Nome do Servidor';
+SELECT CURRENT_USER AS 'Nome do Usuário Atual';

@@ -3,18 +3,31 @@ var sql = require('mssql');
 
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
-var sqlServerConfig = {
-    server: "SEU_SERVIDOR",
-    database: "SEU_BANCO_DE_DADOS",
-    user: "SEU_USUARIO",
-    password: "SUA_SENHA",
-    pool: {
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    },
+// var sqlServerConfig = {
+//     server: "SQLEXPRESS",
+//     database: "hts",
+//     user: "hts",
+//     password: "urubu100",
+//     pool: {
+//         max: 10,
+//         min: 0,
+//         idleTimeoutMillis: 30000
+//     },
+//     options: {
+//         encrypt: true, // for azure
+//     }
+// }
+
+const sqlServerConfig = {
+    port: parseInt(1433,10),
+    server: "localhost",
+    user: "hts",
+    password: "urubu100",
+    database:"hts",
+    stream: false,
     options: {
-        encrypt: true, // for azure
+        encrypt: false,
+        trustServerCertificate: false
     }
 }
 

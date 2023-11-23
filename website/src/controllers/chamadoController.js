@@ -171,7 +171,7 @@ function quantidadeChamadosAberto(req,res){
     )
     .catch( erro =>{
         console.log(erro)
-        comsole.log("Houve um erro ao tentar pegar a quantidade de chamados em aberto")
+        console.log("Houve um erro ao tentar pegar a quantidade de chamados em aberto")
         res.status(500).json(erro.sqlMessage)
     })
 }

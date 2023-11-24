@@ -25,7 +25,6 @@ function cadastrarLimites(valores, idModelo, idPeca){
 
 function listarTipos(){
     const sql = `select * from tipo`
-
     return database.executar(sql)
 }
 

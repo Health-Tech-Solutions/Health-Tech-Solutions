@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS htsJava;
 CREATE DATABASE htsJava;
 USE htsJava;
 
@@ -9,8 +10,6 @@ empresa VARCHAR(45),
 cargo VARCHAR(45)
 );
 
-SELECT * FROM usuario;
-
 CREATE TABLE maquina (
 idMaquina INT PRIMARY KEY AUTO_INCREMENT,
 tipo VARCHAR(45),
@@ -18,7 +17,7 @@ modelo VARCHAR(45),
 numeroSerie VARCHAR(45)
 ) AUTO_INCREMENT = 2000;
 
-SELECT * FROM maquina;
+INSERT INTO maquina VALUES(NULL,'ultrassom','u1000','0022');
 
 CREATE TABLE tipoRegistro (
 idTipoRegistro INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,41 +40,35 @@ INSERT INTO medidaRegistro (medida) VALUES ('GiB'),
 									
 
 CREATE TABLE peca (
-idPeca INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(45)
+	idPeca INT PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(45),
+    descricao VARCHAR(45),
+    fkTipoRegistro INT,
+    fkMaquinario INT,
+    FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro),
+    FOREIGN KEY (fkMaquinario) REFERENCES maquina(idMaquina)
+
 );
 
-INSERT INTO peca (nome) VALUES ('Memória'),
-							   ('CPU'),
-							   ('Disco');
-  							
-
+INSERT INTO peca (nome,fkTipoRegistro,fkMaquinario) VALUES ('Memória',1,2000),
+							   ('CPU',1,2000),
+							   ('Disco',1,2000);
+						
 
 CREATE TABLE registro (
-idRegistro INT PRIMARY KEY AUTO_INCREMENT,
-dataHora DATETIME,
-fkMaquina INT,
-FOREIGN KEY (fkMaquina) REFERENCES Maquina(idMaquina),
-fkPeca INT,
-FOREIGN KEY (fkPeca) REFERENCES Peca(idPeca),
-fkTipoRegistro INT,
-FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idtipoRegistro),
-valor DECIMAL(7,2),
-fkMedidaRegistro INT,
-FOREIGN KEY (fkMedidaRegistro) REFERENCES medidaRegistro(idMedidaRegistro)
+	idRegistro INT PRIMARY KEY AUTO_INCREMENT,
+	dataHora DATETIME,
+	fkMaquina INT,
+	FOREIGN KEY (fkMaquina) REFERENCES Maquina(idMaquina),
+	fkPeca INT,
+	FOREIGN KEY (fkPeca) REFERENCES Peca(idPeca),
+	fkTipoRegistro INT,
+	FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idtipoRegistro),
+	valor DECIMAL(7,2),
+	fkMedidaRegistro INT,
+	FOREIGN KEY (fkMedidaRegistro) REFERENCES medidaRegistro(idMedidaRegistro)
 );
 
-SELECT 
-    r.dataHora,
-    m.tipo AS 'Máquina',
-    p.nome AS 'Peça',
-    tr.tipo AS TipoRegistro,
-    r.valor,
-    mr.medida AS MedidaRegistro
-FROM registro AS r
-JOIN maquina AS m ON r.fkMaquina = m.idMaquina
-JOIN peca AS p ON r.fkPeca = p.idPeca
-JOIN tipoRegistro AS tr ON r.fkTipoRegistro = tr.idTipoRegistro
-JOIN medidaRegistro AS mr ON r.fkMedidaRegistro = mr.idMedidaRegistro;
-
+SELECT * FROM maquina;
+SELECT * FROM registro;
 

@@ -81,7 +81,9 @@ create table peca(
 	nome varchar(45),
 	modelo varchar(45),
 	fkTipoRegistro INT,
-	Foreign Key (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro)
+    fkMaquinario INT,
+	Foreign Key (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro),
+    FOREIGN KEY (fkMaquinario) REFERENCES maquinario(idMaquinario)
 );
 
 create table registro(
@@ -218,10 +220,10 @@ BEGIN
                                         qtdFalhas = qtdFalhas + 1,
                                         somaFuncionamento = subtrai_data(NOW(),dataInicioFunc),
                                         fkChamado = NEW.idChamado
-										WHERE fkMaquina = (SELECT 
-												fkMaquina 
-										FROM registro 
-										WHERE idRegistro = NEW.fkRegistro) ;
+											WHERE fkMaquina = (SELECT 
+													fkMaquina 
+											FROM registro 
+											WHERE idRegistro = NEW.fkRegistro) ;
 		else 
         UPDATE ordemManutencao SET estado = 'funcionando'
 							   WHERE fkMaquina = (SELECT 

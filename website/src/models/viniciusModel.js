@@ -5,45 +5,98 @@ function pegarDadosMaquinas(fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
-    if (fkHospital == 'null') {
-        instrucao = `
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        if (fkHospital == 'null') {
+            instrucao = `
         SELECT COUNT(*) as total
         FROM vw_chamados
         WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR);
         `
-    } else {
-        instrucao = `
+        } else {
+            instrucao = `
         SELECT COUNT(*) as total
         FROM vw_chamados
         WHERE nivel = 'Alto' AND dataHora >= DATE_SUB(NOW(), INTERVAL 24 HOUR) 
         AND idHospital = ${fkHospital};
         `
+        }
+        console.log("executando a seguinte instrução SQL " + instrucao)
+        return database.executar(instrucao)
+
     }
-    console.log("executando a seguinte instrução SQL " + instrucao)
-    return database.executar(instrucao)
+
+    else if (process.env.AMBIENTE_PROCESSO == "producao") {
+
+        if (fkHospital == 'null') {
+            instrucao = `
+        SELECT COUNT(*) as total
+        FROM vw_chamados
+        WHERE nivel = 'Alto' AND dataHora >= DATEADD(HOUR, -24, GETDATE());
+        `
+        } else {
+            instrucao = `
+        SELECT COUNT(*) as total
+        FROM vw_chamados
+        WHERE nivel = 'Alto' AND dataHora >= DATEADD(HOUR, -24, GETDATE()) 
+        AND idHospital = ${fkHospital};
+        `
+        }
+    }
+
+
+
 }
-
-
 
 function taxaMaquinasOperando(fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
-    if (fkHospital == 'null') {
-        instrucao = `
+    
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+
+        if (fkHospital == 'null') {
+            instrucao = `
         select count(*) as totalMaquinas,(select count(*) from ordemManutencao
         JOIN maquinario on idMaquinario = fkMaquina
         where estado = 'funcionando') as maquinasOK from maquinario;
         `
-    } else {
-        instrucao = `
+        } else {
+            instrucao = `
         select count(*) as totalMaquinas,(select count(*) from ordemManutencao
         JOIN maquinario on idMaquinario = fkMaquina
         where estado = 'funcionando' and fkHospital = ${fkHospital}) as maquinasOK from maquinario where fkHospital = ${fkHospital};
         `
+        }
+        console.log("executando a seguinte instrução SQL " + instrucao)
+        return database.executar(instrucao)
+
     }
-    console.log("executando a seguinte instrução SQL " + instrucao)
-    return database.executar(instrucao)
+
+    else if (process.env.AMBIENTE_PROCESSO == "producao") {
+
+        if (fkHospital == 'null') {
+            instrucao = `
+        SELECT COUNT(*) as totalMaquinas,
+        (SELECT COUNT(*) 
+         FROM ordemManutencao
+         JOIN maquinario on idMaquinario = fkMaquina
+         WHERE estado = 'funcionando') as maquinasOK 
+        FROM maquinario;
+        `
+        } else {
+            instrucao = `
+        SELECT COUNT(*) as totalMaquinas,
+        (SELECT COUNT(*) 
+         FROM ordemManutencao
+         JOIN maquinario on idMaquinario = fkMaquina
+         WHERE estado = 'funcionando' and fkHospital = ${fkHospital}) as maquinasOK 
+        FROM maquinario 
+        WHERE fkHospital = ${fkHospital};
+        `
+        }
+
+    }
+
 }
 
 function chamadosAbertos(fkHospital) {
@@ -146,7 +199,7 @@ function tiposDeMaquinasCadastradas(fkHospital) {
     return database.executar(instrucao)
 }
 
-function modelosDeMaquinasCadastradas(fkTipo,fkHospital) {
+function modelosDeMaquinasCadastradas(fkTipo, fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
@@ -180,7 +233,7 @@ function totalChamadosPorTipo(fkHospital) {
     return database.executar(instrucao)
 }
 
-function totalChamadosPorModelo(fkTipo ,fkHospital) {
+function totalChamadosPorModelo(fkTipo, fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
@@ -205,9 +258,9 @@ function totalChamadosPorModelo(fkTipo ,fkHospital) {
     return database.executar(instrucao)
 }
 
-function buscarSomaFuncionamento(fkModelo){
+function buscarSomaFuncionamento(fkModelo) {
     var instrucao;
-    if(fkModelo == 'null'){
+    if (fkModelo == 'null') {
         instrucao = `
         SELECT
             ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
@@ -215,7 +268,7 @@ function buscarSomaFuncionamento(fkModelo){
             ROUND(AVG(om.somaManutencao)) AS tempoManutencao
         FROM ordemManutencao AS om
         WHERE om.qtdFalhas <> 0;
-    `    
+    `
     } else {
         instrucao = `
         SELECT
@@ -227,8 +280,8 @@ function buscarSomaFuncionamento(fkModelo){
    
     `
     }
-    
-    
+
+
     console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
     return database.executar(instrucao)
 }
@@ -245,5 +298,5 @@ module.exports = {
     totalChamadosPorTipo,
     totalChamadosPorModelo,
     buscarSomaFuncionamento
-    
+
 }

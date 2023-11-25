@@ -12,7 +12,9 @@ public class Main {
 
         Maquina maq = new Maquina();
 //        maq.menu();
-        maq.pegarEnderecoMac();
+//        maq.pegarEnderecoMac();
+
+        System.out.println(maq.getMAC());
         // Usuario user = new Usuario();
         // user.menu();
     }

@@ -64,6 +64,7 @@ create table maquinario(
 	idMaquinario int,
 	dataCadastramento DATETIME,
 	fkHospital int,
+    macAdress VARCHAR(45),
 	foreign key (fkHospital) references empresa(idEmpresa),
 	fkModelo int,
 	foreign key (fkModelo) references modelo(idModelo),

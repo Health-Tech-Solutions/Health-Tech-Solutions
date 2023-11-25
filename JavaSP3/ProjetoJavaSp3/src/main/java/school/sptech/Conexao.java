@@ -8,7 +8,7 @@ public class Conexao {
     public Conexao(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/htsJava");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/hts");
         dataSource.setUsername("hts");
         dataSource.setPassword("urubu100");
 

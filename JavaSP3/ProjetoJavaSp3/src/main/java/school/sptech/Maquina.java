@@ -22,9 +22,10 @@ public class Maquina {
 
     public Maquina() {
         this.maquinaDAO = new MaquinaDAO();
+        this.MAC = pegarEnderecoMac();
     }
 
-    public void pegarEnderecoMac()  {
+    public String pegarEnderecoMac()  {
         StringBuilder enderecoMac = new StringBuilder();
         try{
             InetAddress ipLocal = InetAddress.getLocalHost();
@@ -34,11 +35,13 @@ public class Maquina {
             for (int i = 0;i < enderecoBytesMac.length; i++) {
                 enderecoMac.append(String.format("%02X%s", enderecoBytesMac[i], (i < enderecoBytesMac.length - 1) ? "-" : ""));
             }
+            maquinaDAO.inserirEnderecoMac(enderecoMac.toString());
         }catch (UnknownHostException  | SocketException exception){
             exception.printStackTrace();
         }
 
-        System.out.println(enderecoMac.toString());
+
+        return enderecoMac.toString();
     }
 
     public void menu(){
@@ -137,6 +140,14 @@ public class Maquina {
 
     public String getNumeroSerie() {
         return numeroSerie;
+    }
+
+    public String getMAC() {
+        return MAC;
+    }
+
+    public void setMAC(String MAC) {
+        this.MAC = MAC;
     }
 
     public void setIdMaquina(int idMaquina) {

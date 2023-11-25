@@ -1,19 +1,24 @@
 #!/bin/bash
 
-echo "Gostaria de instalar a API de captura? [s/n]" 
+PURPLE='0;35'
+NC='\033[0m' 
+VERSAO=11
+
+echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Olá Aluno, serei seu assistente para instalação da API de monitoramento!;"
+echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Gostaria de instalar a API de captura? [s/n];" 
 read get
 
 if [ -d "API-" ]; then
-    echo "O repositório já existe. Você gostaria de atualizá-lo? [s/n]"
+    echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) O repositório já existe. Você gostaria de atualizá-lo? [s/n];" 
     read update
 
     if [ "$update" == "s" ]; then
-        echo "Atualizando o repositório..."
+        echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Atualizando o repositório...;"
         cd API-
         git pull
         cd ..
     else
-        echo "Você optou por não atualizar o repositório."
+        echo  "$(tput setaf 10)[Bot assistant]:$(tput setaf 7) Você optou por não atualizar o repositório;"
     fi
 
 else
@@ -38,7 +43,6 @@ else
                 sudo apt install python3 -y
                 if [ $? -eq 0 ]; then
                     echo "Python 3 foi instalado com sucesso."
-
                 else
                     echo "Falha na instalação do Python."
                 fi
@@ -69,7 +73,6 @@ else
                             echo "Falha na instalação do pip."
                         fi
                     fi 
-
         }
 
         # Verifica se o Python 3 está instalado

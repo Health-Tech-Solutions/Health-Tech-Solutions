@@ -64,6 +64,10 @@ router.get(`/totalChamadosPorModelo/:fkTipo/:fkHospital`,(req,res) => {
     funcionarioController.totalChamadosPorModelo(req,res);
 });
 
+router.get('/buscarSomaFuncionamento/:fkModelo', (req,res) => {
+    funcionarioController.buscarSomaFuncionamento(req,res)
+})
+
 
 
 module.exports = router

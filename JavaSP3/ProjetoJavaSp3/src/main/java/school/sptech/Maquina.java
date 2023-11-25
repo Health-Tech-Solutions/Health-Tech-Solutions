@@ -12,6 +12,7 @@ public class Maquina {
     private String numeroSerie;
     private Scanner leitorInteiros = new Scanner(System.in);
     private Scanner leitorStrings = new Scanner(System.in);
+    private String MAC;
     private MaquinaDAO maquinaDAO;
 
     public Maquina() {
@@ -94,7 +95,10 @@ public class Maquina {
                     Modelo da máquina: %s
                     Número de série: %s
                     """,maquina.getIdMaquina(),maquina.getTipo(),maquina.getModelo(),maquina.getNumeroSerie());
-        };
+        }
+    }
+
+    public void verificarMAC(){
 
     }
 

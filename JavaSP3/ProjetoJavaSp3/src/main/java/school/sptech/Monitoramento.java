@@ -39,8 +39,7 @@ public class Monitoramento {
         this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
     }
 
-    Conexao conexao = new Conexao();
-    JdbcTemplate con = conexao.getConexao();
+
 
     public void tratarDados(){
         Long memoriaEmUso = memoria.getEmUso();
@@ -90,13 +89,12 @@ public class Monitoramento {
                 | Microarquitetura: %s     |
                 | Nº de CPUs Físicas: %s   |
                 | Nº de CPUs Lógicas: %s   |
-                | Frequência: %d GHz     |
+                | Frequência: %d GHz       |
                 | Em uso: %.0f%%           |
                 +--------------------------+
                 """,sistema,memEmUso,memDisp,memTotal,processador.getFabricante(),processador.getNome(),
                     processador.getNome(),processador.getIdentificador(),processador.getMicroarquitetura(),
                     processador.getNumeroCpusFisicas(),processador.getNumeroCpusLogicas(),freqCpu,cpuEmUso);
-
 
             for (Componente componenteMonitorado : this.componentesMonitorados) {
                 if(componenteMonitorado.getFkTipoRegistro() == 1){
@@ -134,7 +132,6 @@ public class Monitoramento {
     }
     public void listarProcessos() {
         System.out.println("\n" + " LISTA DE PROCESSOS ");
-
         System.out.println(grupoDeProcessos.getProcessos());
         System.out.println("Total de processos: " + grupoDeProcessos.getTotalProcessos());
     }

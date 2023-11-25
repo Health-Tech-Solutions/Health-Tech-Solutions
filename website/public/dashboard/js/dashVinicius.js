@@ -544,5 +544,42 @@ function mudarNomeGraficoBarras(){
     }
 }
 
-console.log(clicou)
+var fkModelo = 'null'
+fetch(`/viniciusRoutes/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
+    .then(function (resposta) {
+        if (resposta.ok) {
+        resposta.json()
+        .then(function (resposta) {
+            resposta.reverse();
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            calcularConfiabilidade(resposta)
+            
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+.catch(function (error) {
+    console.error(`Erro na obtenção dos dados: ${error.message}`);
+});
+
+
+function calcularConfiabilidade(resposta){
+    let tempoFuncionamento = resposta[0].tempoFuncionamento
+    let tempoManutencao = resposta[0].tempoManutencao
+    let qtdFalhas = resposta[0].qtdFalhas
+    let mtbf = tratarTempo(tempoFuncionamento / qtdFalhas)
+    let taxaFalhas = 1 / mtbf
+    let confiabilidade = (2.71 ** (-taxaFalhas * 2)) * 100 
+    let mttr = Number(tratarTempo(tempoManutencao) / qtdFalhas).toFixed(2)
+
+    modeloComMaisAlertas.innerHTML = `${mtbf} Horas`
+
+
+}
+
+function tratarTempo(tempo){
+    return (tempo / 60).toFixed(0)
+}
+
 

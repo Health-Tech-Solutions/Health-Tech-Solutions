@@ -23,6 +23,8 @@ function pegarDadosMaquinas(fkHospital) {
     return database.executar(instrucao)
 }
 
+
+
 function taxaMaquinasOperando(fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
@@ -203,6 +205,34 @@ function totalChamadosPorModelo(fkTipo ,fkHospital) {
     return database.executar(instrucao)
 }
 
+function buscarSomaFuncionamento(fkModelo){
+    var instrucao;
+    if(fkModelo == 'null'){
+        instrucao = `
+        SELECT
+            ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
+            ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
+            ROUND(AVG(om.somaManutencao)) AS tempoManutencao
+        FROM ordemManutencao AS om
+        WHERE om.qtdFalhas <> 0;
+    `    
+    } else {
+        instrucao = `
+        SELECT
+        ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
+        ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
+        ROUND(AVG(om.somaManutencao)) AS tempoManutencao
+    FROM ordemManutencao AS om
+    WHERE om.qtdFalhas <> 0;
+   
+    `
+    }
+    
+    
+    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
 
 module.exports = {
     pegarDadosMaquinas,
@@ -213,6 +243,7 @@ module.exports = {
     tiposDeMaquinasCadastradas,
     modelosDeMaquinasCadastradas,
     totalChamadosPorTipo,
-    totalChamadosPorModelo
+    totalChamadosPorModelo,
+    buscarSomaFuncionamento
     
 }

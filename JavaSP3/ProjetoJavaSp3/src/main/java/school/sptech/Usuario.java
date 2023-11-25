@@ -18,6 +18,8 @@ public class Usuario {
 
     UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+//    todo: Criar uma classe só p o menu
+
     public void menu(){
         System.out.println("Sistema de monitoramento");
 

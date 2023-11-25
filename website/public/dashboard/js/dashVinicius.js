@@ -14,6 +14,8 @@ let totalChamadosTipo = []
 var fkHospital = sessionStorage.getItem("FK_HOSPITAL");
 var tipo = "Monitor de S.V";
 var nomeModelo = "IntelliVue MP5SC"
+var usuarioNome = sessionStorage.getItem("NOME_USUARIO");
+usuario_nome.innerHTML = usuarioNome
 
 //faça o fetch da função pegarDadosMaquinas
 

@@ -3,11 +3,13 @@ const database = require("../database/config")
 
 
 function listarTiposMaquinas(){
-    const instrucao = `
+
+     var instrucao = `
         SELECT * FROM tipo;
     `
+    
     console.log("Executando a seguinte instrução no sql " + instrucao)
-    return database.executar(instrucao)
+ return database.executar(instrucao) 
 }
 
 

@@ -27,20 +27,35 @@ public class Monitoramento {
     private MonitoramentoDAO monitoramentoDAO;
     private List<Componente> componentesMonitorados;
 
-    private double memEmUso;
-    private double memDisp;
-    private double memTotal;
-    private double freqCpu;
+    private Long memEmUso;
+    private Long memDisp;
+    private Long memTotal;
+    private Long freqCpu;
     private double cpuEmUso;
     private double tamDisco;
 
     public Monitoramento() {
         this.monitoramentoDAO = new MonitoramentoDAO();
         this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
+        this.memEmUso = memoria.getEmUso();
+        this.memDisp = memoria.getDisponivel();
+        this.memTotal = memoria.getTotal();
+        this.freqCpu = processador.getFrequencia();
+        this.cpuEmUso = Math.round(processador.getUso());
+
     }
 
 
 
+
+    public Double tratarDados(Long variavel){
+        double variavelDouble = (double) variavel;
+        variavelDouble = variavelDouble / (Math.pow(10,9));
+        return variavelDouble;
+    }
+
+
+/*
     public void tratarDados(){
         Long memoriaEmUso = memoria.getEmUso();
         double memEmUsoDouble = (double) memoriaEmUso;
@@ -62,8 +77,13 @@ public class Monitoramento {
 
     }
 
+ */
+
     public void monitorarMaquinas(){
-        tratarDados();
+        Double memEmUso = tratarDados(this.memEmUso);
+        Double memDisp = tratarDados(this.memDisp);
+        Double memTotal = tratarDados(this.memTotal);
+        Double freqCpu = tratarDados(this.freqCpu);
         LocalDateTime dataHora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataFormatada = formatter.format(dataHora);

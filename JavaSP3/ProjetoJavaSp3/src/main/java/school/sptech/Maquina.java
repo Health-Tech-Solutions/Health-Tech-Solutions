@@ -3,6 +3,11 @@ package school.sptech;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import school.sptech.DAO.MaquinaDAO;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Maquina {
@@ -19,6 +24,22 @@ public class Maquina {
         this.maquinaDAO = new MaquinaDAO();
     }
 
+    public void pegarEnderecoMac()  {
+        StringBuilder enderecoMac = new StringBuilder();
+        try{
+            InetAddress ipLocal = InetAddress.getLocalHost();
+            NetworkInterface interfaceRede = NetworkInterface.getByInetAddress(ipLocal);
+            byte[] enderecoBytesMac = interfaceRede.getHardwareAddress();
+
+            for (int i = 0;i < enderecoBytesMac.length; i++) {
+                enderecoMac.append(String.format("%02X%s", enderecoBytesMac[i], (i < enderecoBytesMac.length - 1) ? "-" : ""));
+            }
+        }catch (UnknownHostException  | SocketException exception){
+            exception.printStackTrace();
+        }
+
+        System.out.println(enderecoMac.toString());
+    }
 
     public void menu(){
         while(true){

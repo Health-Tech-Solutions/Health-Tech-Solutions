@@ -11,7 +11,8 @@ public class Main {
 //        System.out.println(componentes.toString());
 
         Maquina maq = new Maquina();
-        maq.menu();
+//        maq.menu();
+        maq.pegarEnderecoMac();
         // Usuario user = new Usuario();
         // user.menu();
     }

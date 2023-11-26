@@ -26,15 +26,11 @@ public class MaquinaDAO {
     public void inserirCPU(int id){
         Processador processador = new Processador();
         String nomeProcessador = "CPU";
-        String descricao = processador.getNome();
-        con.update("INSERT INTO peca(nome,descricao,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,descricao,1,id);
+        String modelo = processador.getNome();
+        con.update("INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
     }
 
     public List<Maquina> listarMaquinas(){
         return con.query("SELECT * FROM maquinario", new MaquinaRowMapper());
-    }
-
-    public void inserirEnderecoMac(String MAC){
-        con.update("UPDATE maquinario SET macAdress = ? WHERE idMaquinario = 7", MAC);
     }
 }

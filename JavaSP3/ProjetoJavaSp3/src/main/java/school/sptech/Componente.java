@@ -5,7 +5,7 @@ public class Componente {
     private Integer idComponente;
     private Integer fkMaquina;
     private String nome;
-    private String descricao;
+    private String modelo;
     private Integer fkTipoRegistro;
 
     public Componente() {
@@ -36,12 +36,12 @@ public class Componente {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public Integer getFkTipoRegistro() {
@@ -58,7 +58,7 @@ public class Componente {
                 "idComponente=" + idComponente +
                 ", fkMaquina=" + fkMaquina +
                 ", nome='" + nome + '\'' +
-                ", descricao=" + descricao +
+                ", modelo=" + modelo +
                 ", fkTipoRegistro=" + fkTipoRegistro +
                 '}';
     }

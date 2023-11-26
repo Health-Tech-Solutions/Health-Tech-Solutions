@@ -27,34 +27,30 @@ public class Monitoramento {
     private MonitoramentoDAO monitoramentoDAO;
     private List<Componente> componentesMonitorados;
 
-    private Long memEmUso;
-    private Long memDisp;
-    private Long memTotal;
-    private Long freqCpu;
-    private double cpuEmUso;
-    private double tamDisco;
 
     public Monitoramento() {
         this.monitoramentoDAO = new MonitoramentoDAO();
         this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
-        this.memEmUso = memoria.getEmUso();
-        this.memDisp = memoria.getDisponivel();
-        this.memTotal = memoria.getTotal();
-        this.freqCpu = processador.getFrequencia();
-        this.cpuEmUso = Math.round(processador.getUso());
     }
 
-    public Double tratarDados(Long variavel){
-        double variavelDouble = (double) variavel;
-        variavelDouble = variavelDouble / (Math.pow(10,9));
-        return variavelDouble;
-    }
 
     public void monitorarMaquinas(int idMaquina) {
-        Double memEmUso = tratarDados(this.memEmUso);
-        Double memDisp = tratarDados(this.memDisp);
-        Double memTotal = tratarDados(this.memTotal);
-        Double freqCpu = tratarDados(this.freqCpu);
+        school.sptech.Looca looca = new school.sptech.Looca(
+                memoria.getEmUso(),
+                memoria.getDisponivel(),
+                memoria.getTotal(),
+                processador.getFrequencia(),
+                processador.getUso(),
+                grupoDeDiscos.getTamanhoTotal()
+        );
+
+        Double memEmUso = looca.castingMonitoramento(looca.getMemEmUso());
+        Double memDisp = looca.castingMonitoramento(looca.getMemDisp());
+        Double memTotal = looca.castingMonitoramento(looca.getMemTotal());
+        Double freqCpu = looca.castingMonitoramento(looca.getFreqCpu());
+        Double cpuEmUso = looca.getCpuEmUso();
+        Double tamDisco = looca.getTamDisco();
+
         LocalDateTime dataHora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String dataFormatada = formatter.format(dataHora);

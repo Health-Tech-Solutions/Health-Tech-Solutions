@@ -128,10 +128,9 @@ public class Monitoramento {
 
                 }
             } catch (InterruptedException e){
+
             }
-
         } while(true);
-
     }
     public void listarProcessos() {
         System.out.println("\n" + " LISTA DE PROCESSOS ");

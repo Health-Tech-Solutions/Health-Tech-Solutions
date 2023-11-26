@@ -1,12 +1,10 @@
 package school.sptech.DAO;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.Conexao;
 import school.sptech.Maquina;
-import school.sptech.MaquinaRowMapper;
+import school.sptech.RowMapper.MaquinaRowMapper;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class MaquinaDAO {

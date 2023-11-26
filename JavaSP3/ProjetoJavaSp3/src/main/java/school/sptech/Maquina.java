@@ -42,7 +42,7 @@ public class Maquina {
             for (int i = 0;i < enderecoBytesMac.length; i++) {
                 enderecoMac.append(String.format("%02X%s", enderecoBytesMac[i], (i < enderecoBytesMac.length - 1) ? "-" : ""));
             }
-            maquinaDAO.inserirEnderecoMac(enderecoMac.toString());
+//            maquinaDAO.inserirEnderecoMac(enderecoMac.toString());
         }catch (UnknownHostException  | SocketException exception){
             exception.printStackTrace();
         }
@@ -55,7 +55,6 @@ public class Maquina {
         boolean jaExiste = false;
         List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
         do{
-            this.setMAC("plaaaaaaaaauu");
             for (Maquina maquina : maquinas) {
                 if(maquina.getMAC() != null){
                     if(maquina.getMAC().equalsIgnoreCase(this.getMAC())){

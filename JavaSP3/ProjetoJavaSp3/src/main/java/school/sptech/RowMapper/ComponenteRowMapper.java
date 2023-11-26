@@ -1,6 +1,7 @@
-package school.sptech;
+package school.sptech.RowMapper;
 
 import org.springframework.jdbc.core.RowMapper;
+import school.sptech.Componente;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

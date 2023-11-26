@@ -2,7 +2,7 @@ package school.sptech.DAO;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.Componente;
-import school.sptech.ComponenteRowMapper;
+import school.sptech.RowMapper.ComponenteRowMapper;
 import school.sptech.Conexao;
 
 import java.util.List;

@@ -58,6 +58,7 @@ public class Maquina {
             for (Maquina maquina : maquinas) {
                 if(maquina.getMAC() != null){
                     if(maquina.getMAC().equalsIgnoreCase(this.getMAC())){
+                        this.setIdMaquina(maquina.getIdMaquina());
                         jaExiste = true;
                     }
                 }
@@ -68,8 +69,9 @@ public class Maquina {
                 monitoramento.monitorarMaquinas();
                 break;
             } else {
-                int id = maquinas.size() + 1;
-                maquinaDAO.inserirMaquinarioMac(id,1,1,this.MAC);
+                this.setIdMaquina(maquinas.size() + 1);
+
+                maquinaDAO.inserirMaquinarioMac(this.idMaquina,1,1,this.MAC);
             }
         } while (true);
     }
@@ -151,10 +153,6 @@ public class Maquina {
         }
     }
 
-    public void verificarMAC(){
-
-    }
-
     public int getIdMaquina() {
         return idMaquina;
     }
@@ -206,6 +204,4 @@ public class Maquina {
     public void setMaquinaDAO(MaquinaDAO maquinaDAO) {
         this.maquinaDAO = maquinaDAO;
     }
-
-
 }

@@ -45,9 +45,6 @@ public class Monitoramento {
 
     }
 
-
-
-
     public Double tratarDados(Long variavel){
         double variavelDouble = (double) variavel;
         variavelDouble = variavelDouble / (Math.pow(10,9));
@@ -93,8 +90,8 @@ public class Monitoramento {
 
                 if(!this.componentesMonitorados.isEmpty()){
                     for (Componente componenteMonitorado : this.componentesMonitorados) {
-                        if(componenteMonitorado.getFkTipoRegistro() == 1){
-                            monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, 2000, 1);
+                        if(componenteMonitorado.getFkTipoRegistro() == 1 && componenteMonitorado.getNome().equalsIgnoreCase("CPU")){
+                            monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(), 1);
                         } else if(componenteMonitorado.getFkTipoRegistro() == 2){
                             monitoramentoDAO.inserirRegistros(dataFormatada,memDisp ,2000, 2);
                         } else if(componenteMonitorado.getFkTipoRegistro() == 3){
@@ -108,9 +105,6 @@ public class Monitoramento {
                 } else {
                     System.out.println("A sua maquina não tem componentes cadastrados para ser monitorados");
                 }
-
-
-
 
                 for (Disco disco : discos) {
                     Long tamanhoDisco = disco.getTamanho();

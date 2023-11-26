@@ -8,7 +8,7 @@ public class ConexaoSQlServer {
     public ConexaoSQlServer(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSource.setUrl("jdbc:sqlserver://localHost:1433;databaseName=hts;encrypt=false");
+        dataSource.setUrl("jdbc:sqlserver://3.221.69.161:1433;databaseName=hts;encrypt=false");
         dataSource.setUsername("sa");
         dataSource.setPassword("urubu100");
 

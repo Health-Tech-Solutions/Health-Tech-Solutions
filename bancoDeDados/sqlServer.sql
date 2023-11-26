@@ -56,6 +56,7 @@ CREATE TABLE maquinario(
 	idMaquinario INT PRIMARY KEY,
 	dataCadastramento DATETIME,
 	fkHospital INT,
+	macAdress VARCHAR(45),
 	FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa),
 	fkModelo INT,
 	FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo)
@@ -889,4 +890,6 @@ GO
 EXEC fechar_chamados;
 
 GO 
+SELECT * FROM peca;
 
+SELECT * FROM registro ORDER BY idRegistro DESC;

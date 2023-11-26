@@ -3,13 +3,15 @@ package school.sptech.DAO;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.Conexoes.Conexao;
+import school.sptech.Conexoes.ConexaoSQlServer;
 import school.sptech.Usuario;
 
 import java.util.List;
 
 public class UsuarioDAO {
 
-    Conexao conexao = new Conexao();
+//    Conexao conexao = new Conexao();]
+    ConexaoSQlServer conexao = new ConexaoSQlServer();
     JdbcTemplate con = conexao.getConexao();
 
     public List<Usuario> listarUsuarios(){

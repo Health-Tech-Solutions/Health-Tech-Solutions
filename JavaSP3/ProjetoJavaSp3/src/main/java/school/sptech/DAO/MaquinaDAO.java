@@ -4,14 +4,15 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.Conexoes.Conexao;
+import school.sptech.Conexoes.ConexaoSQlServer;
 import school.sptech.Maquina;
 import school.sptech.RowMapper.MaquinaRowMapper;
 
 import java.util.List;
 
 public class MaquinaDAO {
-
-    Conexao conexao = new Conexao();
+    ConexaoSQlServer conexao = new ConexaoSQlServer();
+//    Conexao conexao = new Conexao();
     JdbcTemplate con = conexao.getConexao();
 
     public void inserirMaquinario(String tipo, String modeloMaquina, String numeroSerie){
@@ -19,7 +20,11 @@ public class MaquinaDAO {
     }
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
-        con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
+
+        con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
+
+//        con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
+
         this.inserirCPU(id);
     }
 

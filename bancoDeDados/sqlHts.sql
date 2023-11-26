@@ -81,6 +81,7 @@
 		idPeca int primary key auto_increment,
 		nome varchar(45),
 		descricao varchar(45),
+        modelo varchar(45),
 		fkTipoRegistro INT,
 		fkMaquinario INT,
 		Foreign Key (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro),

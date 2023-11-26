@@ -1,3 +1,4 @@
+
 CREATE DATABASE hts;
 USE hts;
 
@@ -70,8 +71,11 @@ CREATE TABLE peca(
 	idPeca INT PRIMARY KEY IDENTITY,
 	nome VARCHAR(45),
 	modelo VARCHAR(45),
-	fkTipoRegistro INT,
-	FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro)
+	descricao VARCHAR(45),
+	fkTipoRegistro INT,	
+	fkMaquinario INT,
+	FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro),
+	FOREIGN KEY (fkMaquinario) REFERENCES maquinario(idMaquinario)
 );
 
 CREATE TABLE registro(
@@ -752,7 +756,9 @@ VALUES
 insert into 
 	tipoRegistro(nome, medida)
 values
-	('Percentual de uso', '%');
+	('Percentual de uso', '%'),
+	('Quantidade disponivel', '%'),
+	('Frequencia', 'MHz');
 	
 insert into 
 	peca(nome, modelo, fkTipoRegistro)
@@ -883,3 +889,4 @@ GO
 EXEC fechar_chamados;
 
 GO 
+

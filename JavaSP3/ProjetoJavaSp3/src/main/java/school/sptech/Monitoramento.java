@@ -116,19 +116,25 @@ public class Monitoramento {
                     processador.getNome(),processador.getIdentificador(),processador.getMicroarquitetura(),
                     processador.getNumeroCpusFisicas(),processador.getNumeroCpusLogicas(),freqCpu,cpuEmUso);
 
-            for (Componente componenteMonitorado : this.componentesMonitorados) {
-                if(componenteMonitorado.getFkTipoRegistro() == 1){
-                    monitoramentoDAO.inserirRegistros( dataFormatada, 2000, 1, 1, memEmUso, 1);
-                } else if(componenteMonitorado.getFkTipoRegistro() == 2){
-                    monitoramentoDAO.inserirRegistros(dataFormatada, 2000, 1, 2, memDisp, 1);
-                } else if(componenteMonitorado.getFkTipoRegistro() == 3){
-                    monitoramentoDAO.inserirRegistros(dataFormatada, 2000, 1, 3, memTotal, 1);
-                } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
-                    monitoramentoDAO.inserirRegistros(dataFormatada, 2000, 2, 4, freqCpu, 2);
-                } else {
-                    monitoramentoDAO.inserirRegistros(dataFormatada, 2000, 2, 1, cpuEmUso, 3);
+            if(!this.componentesMonitorados.isEmpty()){
+                for (Componente componenteMonitorado : this.componentesMonitorados) {
+                    if(componenteMonitorado.getFkTipoRegistro() == 1){
+                        monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, 2000, 1);
+                    } else if(componenteMonitorado.getFkTipoRegistro() == 2){
+                        monitoramentoDAO.inserirRegistros(dataFormatada,memDisp ,2000, 2);
+                    } else if(componenteMonitorado.getFkTipoRegistro() == 3){
+                        monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, 2000, 3);
+                    } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
+                        monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, 2000, 4);
+                    } else {
+                        monitoramentoDAO.inserirRegistros(dataFormatada, cpuEmUso,2000, 2);
+                    }
                 }
+            } else {
+                System.out.println("A sua maquina não tem componentes cadastrados para ser monitorados");
             }
+
+
 
 
             for (Disco disco : discos) {
@@ -144,7 +150,7 @@ public class Monitoramento {
                                         
                     """, disco.getSerial(), disco.getNome(), disco.getModelo(), tamDisco);
 
-                monitoramentoDAO.inserirRegistros(dataFormatada, 2000, 3, 3, tamDisco, 4);
+//                monitoramentoDAO.inserirRegistros(dataFormatada,tamDisco, 2000, 3);
 
             }
         } while(true);

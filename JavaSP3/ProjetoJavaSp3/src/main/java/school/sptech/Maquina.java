@@ -54,21 +54,24 @@ public class Maquina {
     public void verificarExistenciaMaquina(){
         boolean jaExiste = false;
         List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
-        this.setMAC("plaaaaaaaaau");
-        for (Maquina maquina : maquinas) {
-            if(maquina.getMAC() != null){
-                if(maquina.getMAC().equalsIgnoreCase(this.getMAC())){
-                    jaExiste = true;
-
+        do{
+            this.setMAC("plaaaaaaaaauu");
+            for (Maquina maquina : maquinas) {
+                if(maquina.getMAC() != null){
+                    if(maquina.getMAC().equalsIgnoreCase(this.getMAC())){
+                        jaExiste = true;
+                    }
                 }
             }
-        }
-        System.out.println(jaExiste);
-        if(jaExiste){
-            System.out.println("Ta dando bom");
-        } else {
-            maquinaDAO.inserirMaquinarioMac(1,1,this.MAC);
-        }
+
+            if(jaExiste){
+                Monitoramento monitoramento  = new Monitoramento();
+                monitoramento.monitorarMaquinas();
+                break;
+            } else {
+                maquinaDAO.inserirMaquinarioMac(1,1,this.MAC);
+            }
+        } while (true);
     }
     public void menu(){
         while(true){

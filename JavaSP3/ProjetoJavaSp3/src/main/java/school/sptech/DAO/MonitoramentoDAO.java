@@ -11,9 +11,9 @@ public class MonitoramentoDAO {
     Conexao conexao = new Conexao();
     JdbcTemplate con = conexao.getConexao();
 
-    public void inserirRegistros(String data, int fkMaquina,int fkPeca,int fkTipoRegistro,double valor,int fkMedidaRegistro){
-        con.update(  "INSERT INTO registro (dataHora, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro ) VALUES (?, ?, ?, ?, ?, ? )",
-                data, fkMaquina, fkPeca, fkTipoRegistro, valor, fkMedidaRegistro);
+    public void inserirRegistros(String data,double valor, int fkMaquina,int fkPeca ){
+        con.update(  "INSERT INTO registro (dataHora, fkMaquina, fkPeca,  valor ) VALUES (?, ?, ?, ?)",
+                data, fkMaquina, fkPeca, valor);
     }
 
     public List<Componente> getComponentesMonitorados(){

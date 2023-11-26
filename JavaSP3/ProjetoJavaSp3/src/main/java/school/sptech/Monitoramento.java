@@ -79,7 +79,7 @@ public class Monitoramento {
 
  */
 
-    public void monitorarMaquinas(){
+    public void monitorarMaquinas() {
         Double memEmUso = tratarDados(this.memEmUso);
         Double memDisp = tratarDados(this.memDisp);
         Double memTotal = tratarDados(this.memTotal);
@@ -89,10 +89,10 @@ public class Monitoramento {
         String dataFormatada = formatter.format(dataHora);
 
         do{
-
-            System.out.println("MONITORAMENTO");
-
-            System.out.printf("""
+            try{
+                Thread.sleep(2000);
+                System.out.println("MONITORAMENTO");
+                System.out.printf("""
                 +--------------------------+
                 | Sistema:                 |
                 | %s                       |
@@ -113,36 +113,36 @@ public class Monitoramento {
                 | Em uso: %.0f%%           |
                 +--------------------------+
                 """,sistema,memEmUso,memDisp,memTotal,processador.getFabricante(),processador.getNome(),
-                    processador.getNome(),processador.getIdentificador(),processador.getMicroarquitetura(),
-                    processador.getNumeroCpusFisicas(),processador.getNumeroCpusLogicas(),freqCpu,cpuEmUso);
+                        processador.getNome(),processador.getIdentificador(),processador.getMicroarquitetura(),
+                        processador.getNumeroCpusFisicas(),processador.getNumeroCpusLogicas(),freqCpu,cpuEmUso);
 
-            if(!this.componentesMonitorados.isEmpty()){
-                for (Componente componenteMonitorado : this.componentesMonitorados) {
-                    if(componenteMonitorado.getFkTipoRegistro() == 1){
-                        monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, 2000, 1);
-                    } else if(componenteMonitorado.getFkTipoRegistro() == 2){
-                        monitoramentoDAO.inserirRegistros(dataFormatada,memDisp ,2000, 2);
-                    } else if(componenteMonitorado.getFkTipoRegistro() == 3){
-                        monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, 2000, 3);
-                    } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
-                        monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, 2000, 4);
-                    } else {
-                        monitoramentoDAO.inserirRegistros(dataFormatada, cpuEmUso,2000, 2);
+                if(!this.componentesMonitorados.isEmpty()){
+                    for (Componente componenteMonitorado : this.componentesMonitorados) {
+                        if(componenteMonitorado.getFkTipoRegistro() == 1){
+                            monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, 2000, 1);
+                        } else if(componenteMonitorado.getFkTipoRegistro() == 2){
+                            monitoramentoDAO.inserirRegistros(dataFormatada,memDisp ,2000, 2);
+                        } else if(componenteMonitorado.getFkTipoRegistro() == 3){
+                            monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, 2000, 3);
+                        } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
+                            monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, 2000, 4);
+                        } else {
+                            monitoramentoDAO.inserirRegistros(dataFormatada, cpuEmUso,2000, 2);
+                        }
                     }
+                } else {
+                    System.out.println("A sua maquina não tem componentes cadastrados para ser monitorados");
                 }
-            } else {
-                System.out.println("A sua maquina não tem componentes cadastrados para ser monitorados");
-            }
 
 
 
 
-            for (Disco disco : discos) {
-                Long tamanhoDisco = disco.getTamanho();
-                double tamDiscoDouble = (double) tamanhoDisco;
-                tamDisco = tamDiscoDouble / Math.pow(10, 9);
+                for (Disco disco : discos) {
+                    Long tamanhoDisco = disco.getTamanho();
+                    double tamDiscoDouble = (double) tamanhoDisco;
+                    tamDisco = tamDiscoDouble / Math.pow(10, 9);
 
-                System.out.printf("""
+                    System.out.printf("""
                     Serial: %s
                     Nome: %s
                     Modelo: %s
@@ -152,7 +152,11 @@ public class Monitoramento {
 
 //                monitoramentoDAO.inserirRegistros(dataFormatada,tamDisco, 2000, 3);
 
+                }
+            } catch (InterruptedException e){
+
             }
+
         } while(true);
 
     }

@@ -171,10 +171,17 @@ SELECT COUNT(*) AS qtd,
 		FROM vw_vinicius
         GROUP BY nomePeca;
     
-	INSERT INTO peca (nome,descricao,fkTipoRegistro,fkMaquinario) VALUES ('Teeeste','pimba', 1, 215);
+
+
+
 SELECT * FROM peca;
 
-SELECT * FROM registro ORDER BY idRegistro DESC;	
+SELECT * FROM registro ORDER BY idRegistro DESC;		
+
+INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES ('RAM','ddr4', 2,277);
+INSERT INTO peca (nome,modelo,fkTipoRegistro,fkMaquinario) VALUES ('RAM','ddr4', 1, 277);
+SELECT * FROM Peca;
+SELECT * FROM tipoRegistro;
 
 SELECT * FROM peca;
 SELECT * FROM limite;

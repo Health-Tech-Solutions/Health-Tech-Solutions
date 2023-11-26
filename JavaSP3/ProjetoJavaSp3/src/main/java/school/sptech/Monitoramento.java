@@ -89,20 +89,17 @@ public class Monitoramento {
 
                 if(!this.componentesMonitorados.isEmpty()){
                     for (Componente componenteMonitorado : this.componentesMonitorados) {
-//                        System.out.println(componenteMonitorado);
                         if(componenteMonitorado.getFkMaquina().equals(idMaquina)){
-                            if(componenteMonitorado.getFkTipoRegistro().equals(1)){
-//                                System.out.println(componenteMonitorado);
+                            if(componenteMonitorado.getFkTipoRegistro().equals(1)){ // Tipo registro é percentual de uso
                                 if(componenteMonitorado.getNome().equalsIgnoreCase("CPU")){
-                                    System.out.println(componenteMonitorado);
                                     monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
                                 } else if(componenteMonitorado.getNome().equalsIgnoreCase("RAM")){
-                                    System.out.println("Entrou no lugar errado");
                                     monitoramentoDAO.inserirRegistros(dataFormatada,cpuEmUso, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
                                 }
-                            }
-                            else if(componenteMonitorado.getFkTipoRegistro() == 2 && componenteMonitorado.getNome().equalsIgnoreCase("RAM")){
-                                monitoramentoDAO.inserirRegistros(dataFormatada,memDisp , componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                            } else if (componenteMonitorado.getFkTipoRegistro().equals(2)) { // Tipo de registro é percentual disponivel
+                                if(componenteMonitorado.getNome().equalsIgnoreCase("RAM")){
+                                    monitoramentoDAO.inserirRegistros(dataFormatada,memDisp , componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                                }
                             } else if(componenteMonitorado.getFkTipoRegistro() == 3){
                                 monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
                             } else if (componenteMonitorado.getFkTipoRegistro() == 4) {

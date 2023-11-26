@@ -2,10 +2,9 @@ package school.sptech.DAO;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import school.sptech.Conexao;
+import school.sptech.Conexoes.Conexao;
 import school.sptech.Usuario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {

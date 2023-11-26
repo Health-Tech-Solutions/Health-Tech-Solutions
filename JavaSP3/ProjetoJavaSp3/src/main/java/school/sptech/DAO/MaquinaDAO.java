@@ -3,8 +3,7 @@ package school.sptech.DAO;
 import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import org.springframework.jdbc.core.JdbcTemplate;
-import school.sptech.Conexao;
-import school.sptech.Looca;
+import school.sptech.Conexoes.Conexao;
 import school.sptech.Maquina;
 import school.sptech.RowMapper.MaquinaRowMapper;
 

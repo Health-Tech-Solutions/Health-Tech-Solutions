@@ -12,7 +12,7 @@ public class ComponenteRowMapper implements RowMapper<Componente> {
         Componente componente = new Componente();
         componente.setIdComponente(resultSet.getInt("idPeca"));
         componente.setNome(resultSet.getString("nome"));
-        componente.setDescricao(resultSet.getInt("descricao"));
+        componente.setDescricao(resultSet.getString("descricao"));
         componente.setFkMaquina(resultSet.getInt("fkMaquinario"));
         componente.setFkTipoRegistro(resultSet.getInt("fkTipoRegistro"));
         return componente;

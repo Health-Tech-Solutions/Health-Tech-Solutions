@@ -1,5 +1,7 @@
 package school.sptech;
 
+import school.sptech.DAO.MaquinaDAO;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -10,11 +12,12 @@ public class Main {
 //
 //        System.out.println(componentes.toString());
 
-        Maquina maq = new Maquina();
-//        maq.menu();
-//        maq.pegarEnderecoMac();
+         Maquina maq = new Maquina();
 
-        System.out.println(maq.getMAC());
+//        maq.menu();
+        maq.pegarEnderecoMac();
+
+//        System.out.println(maq.getMAC());
         // Usuario user = new Usuario();
         // user.menu();
     }

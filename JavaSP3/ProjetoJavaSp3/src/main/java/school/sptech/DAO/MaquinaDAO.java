@@ -1,7 +1,9 @@
 package school.sptech.DAO;
 
+import com.github.britooo.looca.api.group.processador.Processador;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.Conexao;
+import school.sptech.Looca;
 import school.sptech.Maquina;
 import school.sptech.RowMapper.MaquinaRowMapper;
 
@@ -17,8 +19,15 @@ public class MaquinaDAO {
     }
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
-//        int id = 4559;
         con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
+        inserirCPU(id);
+    }
+
+    public void inserirCPU(int id){
+        Processador processador = new Processador();
+        String nomeProcessador = "CPU";
+        String descricao = processador.getNome();
+        con.update("INSERT INTO peca(nome,descricao,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,descricao,1,id);
     }
 
     public List<Maquina> listarMaquinas(){

@@ -54,31 +54,6 @@ public class Monitoramento {
         return variavelDouble;
     }
 
-
-/*
-    public void tratarDados(){
-        Long memoriaEmUso = memoria.getEmUso();
-        double memEmUsoDouble = (double) memoriaEmUso;
-        memEmUso = memEmUsoDouble / (Math.pow(10,9));
-
-        Long memoriaDisponivel = memoria.getDisponivel();
-        double memDispDouble = (double) memoriaDisponivel;
-        memDisp = memDispDouble / (Math.pow(10,9));
-
-        Long memoriaTotal = memoria.getTotal();
-        double memTotalDouble = (double) memoriaTotal;
-        memTotal = memTotalDouble / Math.pow(10,9);
-
-        Long frequenciaCpu = processador.getFrequencia();
-        double freqCpuDouble = (double) frequenciaCpu;
-        freqCpu = freqCpuDouble / Math.pow(10,9);
-
-        cpuEmUso = Math.round(processador.getUso());
-
-    }
-
- */
-
     public void monitorarMaquinas() {
         Double memEmUso = tratarDados(this.memEmUso);
         Double memDisp = tratarDados(this.memDisp);

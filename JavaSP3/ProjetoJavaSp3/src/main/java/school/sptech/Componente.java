@@ -5,7 +5,7 @@ public class Componente {
     private Integer idComponente;
     private Integer fkMaquina;
     private String nome;
-    private Integer descricao;
+    private String descricao;
     private Integer fkTipoRegistro;
 
     public Componente() {
@@ -36,11 +36,11 @@ public class Componente {
         this.nome = nome;
     }
 
-    public Integer getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(Integer descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 

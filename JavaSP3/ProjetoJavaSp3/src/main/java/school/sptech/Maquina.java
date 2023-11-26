@@ -68,7 +68,8 @@ public class Maquina {
                 monitoramento.monitorarMaquinas();
                 break;
             } else {
-                maquinaDAO.inserirMaquinarioMac(1,1,this.MAC);
+                int id = maquinas.size() + 1;
+                maquinaDAO.inserirMaquinarioMac(id,1,1,this.MAC);
             }
         } while (true);
     }

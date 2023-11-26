@@ -16,8 +16,8 @@ public class MaquinaDAO {
         con.update("INSERT INTO maquinario (tipo,modelo,numeroSerie) VALUES (?, ?, ?);",tipo,modeloMaquina,numeroSerie);
     }
 
-    public void inserirMaquinarioMac(int fkModelo, int fkHospital, String mac){
-        int id = 4559;
+    public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
+//        int id = 4559;
         con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
     }
 

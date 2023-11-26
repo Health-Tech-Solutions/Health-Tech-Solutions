@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Maquina {
@@ -18,11 +19,17 @@ public class Maquina {
     private Scanner leitorInteiros = new Scanner(System.in);
     private Scanner leitorStrings = new Scanner(System.in);
     private String MAC;
+    private boolean isRowMapper;
     private MaquinaDAO maquinaDAO;
 
     public Maquina() {
         this.maquinaDAO = new MaquinaDAO();
         this.MAC = pegarEnderecoMac();
+        verificarExistenciaMaquina();
+    }
+
+    public Maquina(boolean isRowMapper) {
+        this.isRowMapper = isRowMapper;
     }
 
     public String pegarEnderecoMac()  {
@@ -44,6 +51,25 @@ public class Maquina {
         return enderecoMac.toString();
     }
 
+    public void verificarExistenciaMaquina(){
+        boolean jaExiste = false;
+        List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
+        this.setMAC("plaaaaaaaaau");
+        for (Maquina maquina : maquinas) {
+            if(maquina.getMAC() != null){
+                if(maquina.getMAC().equalsIgnoreCase(this.getMAC())){
+                    jaExiste = true;
+
+                }
+            }
+        }
+        System.out.println(jaExiste);
+        if(jaExiste){
+            System.out.println("Ta dando bom");
+        } else {
+            maquinaDAO.inserirMaquinarioMac(1,1,this.MAC);
+        }
+    }
     public void menu(){
         while(true){
             System.out.printf("""

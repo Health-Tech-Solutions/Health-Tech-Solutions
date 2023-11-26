@@ -58,7 +58,15 @@ SELECT * FROM maquinario;
 SELECT * FROM ordemManutencao;
 USE hts;
 CALL inserir_registros;
+
+SELECT * FROM maquinario ORDER BY idMaquinario DESC;
+
+INSERT INTO maquinario (idMaquinario, fkModelo, fkHospital,macAdress) VALUES (355,1,1,'efdd');
+
+UPDATE maquinario SET macAdress = 'dwdwdwdwdwdd' WHERE idMaquinario = 2;
 	
+    
+    
 call fechar_chamados();
 SELECT * FROM ordemManutencao WHERE estado = 'parado';
 INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)

@@ -66,7 +66,7 @@ public class Maquina {
 
             if(jaExiste){
                 Monitoramento monitoramento  = new Monitoramento();
-                monitoramento.monitorarMaquinas();
+                monitoramento.monitorarMaquinas(this.idMaquina);
                 break;
             } else {
                 this.setIdMaquina(maquinas.size() + 1);
@@ -99,7 +99,7 @@ public class Maquina {
                         break;
                     case 2:
                         Monitoramento informacoes = new Monitoramento();
-                        informacoes.monitorarMaquinas();
+                        informacoes.monitorarMaquinas(this.idMaquina);
                         break;
                     case 3:
                         Monitoramento processos = new Monitoramento();

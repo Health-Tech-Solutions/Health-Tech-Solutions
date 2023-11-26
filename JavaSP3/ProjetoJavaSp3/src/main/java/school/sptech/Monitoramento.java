@@ -51,7 +51,7 @@ public class Monitoramento {
         return variavelDouble;
     }
 
-    public void monitorarMaquinas() {
+    public void monitorarMaquinas(int idMaquina) {
         Double memEmUso = tratarDados(this.memEmUso);
         Double memDisp = tratarDados(this.memDisp);
         Double memTotal = tratarDados(this.memTotal);
@@ -90,16 +90,19 @@ public class Monitoramento {
 
                 if(!this.componentesMonitorados.isEmpty()){
                     for (Componente componenteMonitorado : this.componentesMonitorados) {
-                        if(componenteMonitorado.getFkTipoRegistro() == 1 && componenteMonitorado.getNome().equalsIgnoreCase("CPU")){
-                            monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(), 1);
-                        } else if(componenteMonitorado.getFkTipoRegistro() == 2){
-                            monitoramentoDAO.inserirRegistros(dataFormatada,memDisp ,2000, 2);
-                        } else if(componenteMonitorado.getFkTipoRegistro() == 3){
-                            monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, 2000, 3);
-                        } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
-                            monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, 2000, 4);
-                        } else {
-                            monitoramentoDAO.inserirRegistros(dataFormatada, cpuEmUso,2000, 2);
+                        System.out.println(componenteMonitorado);
+                        if(componenteMonitorado.getFkMaquina() == idMaquina){
+                            if(componenteMonitorado.getFkTipoRegistro() == 1 && componenteMonitorado.getNome().equalsIgnoreCase("CPU")){
+                                monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                            } else if(componenteMonitorado.getFkTipoRegistro() == 2 && componenteMonitorado.getNome().equalsIgnoreCase("RAM")){
+                                monitoramentoDAO.inserirRegistros(dataFormatada,memDisp , componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                            } else if(componenteMonitorado.getFkTipoRegistro() == 3){
+                                monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                            } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
+                                monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                            } else {
+                                monitoramentoDAO.inserirRegistros(dataFormatada, cpuEmUso, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                            }
                         }
                     }
                 } else {
@@ -123,7 +126,6 @@ public class Monitoramento {
 
                 }
             } catch (InterruptedException e){
-
             }
 
         } while(true);

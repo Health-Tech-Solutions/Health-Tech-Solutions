@@ -752,7 +752,9 @@
 	insert into 
 		tipoRegistro(nome, medida)
 	values
-		('Percentual de uso', '%');
+		('Percentual de uso', '%'),
+        ('Quantidade disponivel', '%'),
+        ('Frequencia', 'MHz');
 		
 	insert into 
 		peca(nome, modelo, fkTipoRegistro)

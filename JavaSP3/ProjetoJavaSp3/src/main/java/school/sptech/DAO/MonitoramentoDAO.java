@@ -19,5 +19,4 @@ public class MonitoramentoDAO {
     public List<Componente> getComponentesMonitorados(){
         return con.query("SELECT * FROM peca", new ComponenteRowMapper());
     }
-
 }

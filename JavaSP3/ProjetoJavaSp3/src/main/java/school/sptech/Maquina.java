@@ -46,15 +46,13 @@ public class Maquina {
         }catch (UnknownHostException  | SocketException exception){
             exception.printStackTrace();
         }
-
-
         return enderecoMac.toString();
     }
 
     public void verificarExistenciaMaquina(){
         boolean jaExiste = false;
         List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
-        do{
+
             for (Maquina maquina : maquinas) {
                 if(maquina.getMAC() != null){
                     if(maquina.getMAC().equalsIgnoreCase(this.getMAC())){
@@ -63,17 +61,15 @@ public class Maquina {
                     }
                 }
             }
-
+            Monitoramento monitoramento  = new Monitoramento();
             if(jaExiste){
-                Monitoramento monitoramento  = new Monitoramento();
                 monitoramento.monitorarMaquinas(this.idMaquina);
-                break;
             } else {
                 this.setIdMaquina(maquinas.size() + 1);
-
                 maquinaDAO.inserirMaquinarioMac(this.idMaquina,1,1,this.MAC);
+                monitoramento.monitorarMaquinas(this.idMaquina);
             }
-        } while (true);
+
     }
     public void menu(){
         while(true){
@@ -136,7 +132,6 @@ public class Maquina {
         maquinaDAO.inserirMaquinario(tipo,modeloMaquina,numeroSerie);
 
         System.out.println("Máquina cadastrada com sucesso");
-
     }
 
     public void listarMaquinas(){

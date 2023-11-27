@@ -21,7 +21,7 @@ var sql = require('mssql');
 const sqlServerConfig = {
     port: parseInt(1433,10),
     server: "localhost",
-    user: "hts",
+    user: "sa",
     password: "urubu100",
     database:"hts",
     stream: false,

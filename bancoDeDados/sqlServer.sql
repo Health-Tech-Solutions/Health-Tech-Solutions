@@ -890,6 +890,13 @@ GO
 EXEC fechar_chamados;
 
 GO 
-SELECT * FROM peca;
 
-SELECT * FROM registro ORDER BY idRegistro DESC;
+ SELECT 
+            COUNT(idChamado) AS numeroChamados,
+            tipo,
+            modelo
+        FROM vw_chamados c
+        WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
+        GROUP BY tipo,modelo
+        ORDER BY numeroChamados
+        LIMIT 15;

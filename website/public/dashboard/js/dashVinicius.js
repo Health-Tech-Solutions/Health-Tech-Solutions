@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 1
+                        fkTipo = 8
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 2
+                        fkTipo = 7
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 3
+                        fkTipo = 6
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 4
+                        fkTipo = 5
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 5
+                        fkTipo = 4
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 6
+                        fkTipo = 3
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 7
+                        fkTipo = 2
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         labels2 = []
                         dataTipo2 = []
                         console.log(clickedIndex)
-                        fkTipo = 8
+                        fkTipo = 1
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -520,6 +520,7 @@ function plotarDadosBarChamadosTipo(resposta) {
         const element = resposta[i].totalChamadosTipo;
         console.log(element)
         dataTipo.push(element)
+        console.log(element)
     }
 
     myChart.update();

@@ -11,4 +11,11 @@ router.get('/buscarSomaFuncionamento/:fkModelo', (req,res) => {
     henriqueController.buscarSomaFuncionamento(req,res)
 })
 
+router.get('/buscarMensal/:fkHospital', function (req,res){
+    henriqueController.buscarMensal(req,res)
+})
+
+router.get('/buscarSemanal/:fkHospital', (req,res) =>{
+    henriqueController.buscarSemanal(req,res);
+})
 module.exports = router;

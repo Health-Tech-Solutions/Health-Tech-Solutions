@@ -29,7 +29,7 @@ function buscarSemanal(fkHospital){
 }
 
 function buscarMensal(fkHospital){
-    var instrucao = ``
+    var instrucao;
 
     if(fkHospital == 'null'){
         instrucao = `
@@ -57,7 +57,6 @@ function buscarMensal(fkHospital){
     console.log("Executando a seguinte instrução sql" + instrucao)
     return database.executar(instrucao)
 }
-
 
 
 function buscarHospitais(fkHospital){

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class UsuarioDAO {
 
-//    Conexao conexao = new Conexao();]
-    ConexaoSQlServer conexao = new ConexaoSQlServer();
+    Conexao conexao = new Conexao();
+//    ConexaoSQlServer conexao = new ConexaoSQlServer();
     JdbcTemplate con = conexao.getConexao();
 
     public List<Usuario> listarUsuarios(){

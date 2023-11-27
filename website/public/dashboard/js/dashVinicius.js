@@ -16,6 +16,7 @@ var tipo = "Monitor de S.V";
 var nomeModelo = "IntelliVue MP5SC"
 var usuarioNome = sessionStorage.getItem("NOME_USUARIO");
 usuario_nome.innerHTML = usuarioNome
+var arrayValores = []
 
 //faça o fetch da função pegarDadosMaquinas
 
@@ -112,7 +113,9 @@ fetch(`/viniciusRoutes/tiposDeMaquinasCadastradas/${fkHospital}`)
         if (response.ok) {
             response.json().then(function (resposta) {
                 resposta.reverse();
+                arrayValores = resposta
                 plotarDadosBar(resposta)
+
 
                 // let idTipo = resposta[0].idTipo
             });
@@ -159,6 +162,8 @@ var dataTipo = []
 var dataTipo2 = []
 var myChart
 var clicou = false
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Dados iniciais
     var dadosBar = {
@@ -199,125 +204,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Verifica se algum elemento foi clicado'
                 if (elements.length > 0) {
                     var clickedIndex = elements[0].index;
-                    fkTipo = clickedIndex
-                    if (clickedIndex == 0) {
+                    fkTipo = arrayValores[clickedIndex].idTipo
+                    console.log(arrayValores, clickedIndex)
                         myChart.options.blockClicks = true;
                         labels2 = []
                         dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 8
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 1) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 7
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 2) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 6
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 3) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 5
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 4) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 4
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 5) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 3
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 6) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 2
-                        dadosAlterados = {
-                            labels: labels2,
-                            datasets: [{
-                                label: 'Dados por maquina',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                borderWidth: 1,
-                                data: dataTipo2
-                            }]
-                        }
-                    } else if (clickedIndex == 7) {
-                        myChart.options.blockClicks = true;
-                        labels2 = []
-                        dataTipo2 = []
-                        console.log(clickedIndex)
-                        fkTipo = 1
                         dadosAlterados = {
                             labels: labels2,
                             datasets: [{
@@ -328,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data: dataTipo2
                             }]
                         }
-                    }
 
 
                     fetch(`/viniciusRoutes/modelosDeMaquinasCadastradas/${fkTipo}/${fkHospital}`)
@@ -339,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 response.json().then(function (resposta) {
                                     resposta.reverse();
                                     plotarDadosBar2(resposta)
-
                                 });
                             } else {
                                 console.error('Nenhum dado encontrado ou erro na API');
@@ -352,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (response.ok) {
                             response.json().then(function (resposta) {
                                 resposta.reverse();
-
+                                
                                 plotarDadosBarChamadosModelo(resposta)
 
                             });
@@ -493,7 +382,7 @@ function plotarDadosPie(resposta) {
 }
 
 function plotarDadosBar(resposta) {
-
+    console.log('ARRAY', resposta)
     for (let i = 0; i < resposta.length; i++) {
         const element = resposta[i];
         labels.push(element.nome)

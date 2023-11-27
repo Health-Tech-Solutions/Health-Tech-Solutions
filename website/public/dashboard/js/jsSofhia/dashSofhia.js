@@ -59,6 +59,10 @@ function chamarComponenteComMaisAlertasDaSemana() {
         if(componenteComMaisAlertas.value == undefined){
             tituloKPI1.innerHTML = 'Componente com + alertas (da semana)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+
+            componenteSemana.style.backgroundColor = "#d3d3d3"
+            componenteMes.style.backgroundColor = ""
+            componenteAno.style.backgroundColor = ""
         }
 }
 
@@ -88,6 +92,10 @@ function chamarComponenteComMaisAlertasDoMes() {
         if(componenteComMaisAlertas.value == undefined){
             tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 30 dias)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+
+            componenteSemana.style.backgroundColor = ""
+            componenteMes.style.backgroundColor = "#d3d3d3"
+            componenteAno.style.backgroundColor = ""
         }
     
 }
@@ -118,6 +126,10 @@ function chamarComponenteComMaisAlertasDoAno() {
         if(componenteComMaisAlertas.value == undefined){
             tituloKPI1.innerHTML = 'Componente com + alertas (dos últimos 365 dias)'
             componenteComMaisAlertas.innerHTML = 'Nenhum componente em alerta!'
+
+            componenteSemana.style.backgroundColor = ""
+            componenteMes.style.backgroundColor = ""
+            componenteAno.style.backgroundColor = "#d3d3d3"
         }
 }
 
@@ -178,6 +190,11 @@ function chamarTipoComMaisAlertasDaSemana() {
         if(tipoComMaisAlertas.value == undefined){
             tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (da semana)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+
+            tipoSemana.style.backgroundColor = "#d3d3d3"
+            tipoMes.style.backgroundColor = ""
+            tipoAno.style.backgroundColor = ""
+            
         }
 }
 
@@ -208,6 +225,10 @@ function chamarTipoComMaisAlertasDoMes() {
         if(tipoComMaisAlertas.value == undefined){
             tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 30 dias)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+
+            tipoSemana.style.backgroundColor = ""
+            tipoMes.style.backgroundColor = "#d3d3d3"
+            tipoAno.style.backgroundColor = ""
         }
 }
 
@@ -238,6 +259,10 @@ function chamarTipoComMaisAlertasDoAno() {
         if(tipoComMaisAlertas.value == undefined){
             tituloKPI2.innerHTML = 'Tipo de máquina com + alertas (dos últimos 365 dias)'
             tipoComMaisAlertas.innerHTML = 'Nenhum tipo de máquina em alerta!'
+
+            tipoSemana.style.backgroundColor = ""
+            tipoMes.style.backgroundColor = ""
+            tipoAno.style.backgroundColor = "#d3d3d3"
         }
 }
 
@@ -298,6 +323,10 @@ function chamarModeloComMaisAlertasDaSemana() {
         if(modeloComMaisAlertas.value == undefined){
             tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (da semana)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+
+            modeloSemana.style.backgroundColor = "#d3d3d3"
+            modeloMes.style.backgroundColor = ""
+            modeloAno.style.backgroundColor = ""
         }
 }
 
@@ -328,6 +357,10 @@ function chamarModeloComMaisAlertasDoMes() {
         if(modeloComMaisAlertas.value == undefined){
             tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do mês)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+
+            modeloSemana.style.backgroundColor = ""
+            modeloMes.style.backgroundColor = "#d3d3d3"
+            modeloAno.style.backgroundColor = ""
         }
 }
 
@@ -358,6 +391,10 @@ function chamarModeloComMaisAlertasDoAno() {
         if(modeloComMaisAlertas.value == undefined){
             tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do ano)'
             modeloComMaisAlertas.innerHTML = 'Nenhum modelo de máquina em alerta!'
+            
+            modeloSemana.style.backgroundColor = ""
+            modeloMes.style.backgroundColor = ""
+            modeloAno.style.backgroundColor = "#d3d3d3"
         }
 }
 

@@ -1,10 +1,8 @@
 const database = require("../database/config")
 
 function pegarModelos(){
-
     var instrucao = ``
-
-    if(process.env.AMBIENTE_PROCESSO == "producao"){
+    if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
         instrucao = `
                 SELECT 
                     COUNT(idChamado) AS numeroChamados,
@@ -72,7 +70,60 @@ function buscarSomaFuncionamento(fkModelo){
     return database.executar(instrucao)
 }
 
+function buscarMensal(fkHospital){
+    
+    var instrucao;
+    if(process.env.AMBIENTE_PROCESSO = 'desenvolvimento'){
+        if(fkHospital == 'null'){
+            instrucao = `
+            SELECT 
+                MONTH(dataHora) AS mes,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            GROUP BY mes
+            ORDER BY mes;
+            `
+        } else {
+            instrucao = `
+            SELECT 
+                MONTH(dataHora) AS mes,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            WHERE idHospital = ${fkHospital}
+            GROUP BY mes
+            ORDER BY mes;
+        `
+        } 
+    } else {
+    
+        if(fkHospital == 'null'){
+            instrucao = `
+            SELECT 
+                MONTH(dataHora) AS mes,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            GROUP BY MONTH(dataHora)
+            ORDER BY mes;
+        
+            `
+        } else {
+            instrucao = `
+            SELECT 
+                MONTH(dataHora) AS mes,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            WHERE idHospital = ${fkHospital}
+            GROUP BY MONTH(dataHora)
+            ORDER BY mes;
+            `
+        }
+    }
+    console.log("Executando a seguinte instrução sql " + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     pegarModelos,
-    buscarSomaFuncionamento
+    buscarSomaFuncionamento,
+    buscarMensal
 }

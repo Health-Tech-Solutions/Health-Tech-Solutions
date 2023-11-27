@@ -1,5 +1,5 @@
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/chamados/buscarMensal/${fkHospital}`)
+    fetch(`/henrique/buscarMensal/${fkHospital}`)
     .then(
         function(resposta){
             if(resposta.ok){

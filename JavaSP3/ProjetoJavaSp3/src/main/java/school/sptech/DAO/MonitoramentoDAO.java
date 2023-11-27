@@ -9,14 +9,14 @@ import school.sptech.Conexoes.Conexao;
 import java.util.List;
 
 public class MonitoramentoDAO {
-//    Conexao conexao = new Conexao();
-    ConexaoSQlServer conexao = new ConexaoSQlServer();
+    Conexao conexao = new Conexao();
+//    ConexaoSQlServer conexao = new ConexaoSQlServer();
     JdbcTemplate con = conexao.getConexao();
 
     public void inserirRegistros(String data,double valor, int fkMaquina,int fkPeca ){
-//        con.update(  "INSERT INTO registro (dataHora, fkMaquina, fkPeca,  valor ) VALUES (?, ?, ?, ?)",
-//                data, fkMaquina, fkPeca, valor);
-        con.update("INSERT INTO registro (dataHora,fkMaquina,fkPeca,valor) VALUES (GETDATE(),?,?,?)",fkMaquina,fkPeca,valor);
+        con.update(  "INSERT INTO registro (dataHora, fkMaquina, fkPeca,  valor ) VALUES (?, ?, ?, ?)",
+                data, fkMaquina, fkPeca, valor);
+//        con.update("INSERT INTO registro (dataHora,fkMaquina,fkPeca,valor) VALUES (GETDATE(),?,?,?)",fkMaquina,fkPeca,valor);
     }
 
     public List<Componente> getComponentesMonitorados(){

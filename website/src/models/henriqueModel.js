@@ -122,8 +122,59 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
+function buscarSemanal(fkHospital){
+    var instrucao;
+    if(process.env.AMBIENTE_PROCESSO = 'desenvolvimento'){
+        if(fkHospital = 'null'){
+            instrucao = `
+            SELECT 
+                DAYOFMONTH(dataHora) AS dia,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            GROUP BY dia
+            ORDER BY dia;
+            `
+        } else {
+            instrucao = `
+            SELECT 
+                DAYOFMONTH(dataHora) AS dia,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            WHERE idHospital = ${fkHospital}
+            GROUP BY dia
+            ORDER BY dia;
+            `
+        }
+    } else {
+        if(fkHospital == 'null'){
+            instrucao = `
+            SELECT 
+                DAY(dataHora) AS dia,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            GROUP BY DAY(dataHora)
+            ORDER BY dia;
+            `
+        } else {
+            instrucao = `
+            SELECT 
+                DAY(dataHora) AS dia,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            WHERE idHospital = 3
+            GROUP BY DAY(dataHora)
+            ORDER BY dia;
+        
+            `
+        }
+    }
+    return database.executar(instrucao)
+}
+
+
 module.exports = {
     pegarModelos,
     buscarSomaFuncionamento,
-    buscarMensal
+    buscarMensal,
+    buscarSemanal
 }

@@ -23,7 +23,7 @@
 function obterDadosSemanal(){
 
     var fkHospital = sessionStorage.FK_HOSPITAL;
-    fetch(`/chamados/buscarSemanal/${fkHospital}`)
+    fetch(`/henrique/buscarSemanal/${fkHospital}`)
     .then(
         function(resposta){
             if(resposta.ok){

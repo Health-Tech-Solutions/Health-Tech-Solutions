@@ -1,4 +1,5 @@
-const henriqueModel = require("../models/henriqueModel")
+const henriqueModel = require("../models/henriqueModel");
+const { cadastrarFuncionario } = require("./usuarioController");
 
 
 function pegarModelos(req, res) {
@@ -51,10 +52,26 @@ function buscarMensal(req,res){
         })
 }
 
-
+function buscarSemanal(req,res){
+    const fkHospital = req.params.fkHospital
+    henriqueModel.buscarSemanal(fkHospital)
+        .then((resultado) =>{
+            if(resultado.length > 0){
+                res.status(200).json(resultado)
+            } else {
+                res.status(204).json([])
+            }
+        })
+        .catch((erro) => {
+            console.log(erro)
+            console.log("Houve um erro ao buscar o histórico semanal ", erro.sqlMessage)
+            res.status(500).json(erro.sqlMessage)
+        })
+}
 
 module.exports = {
     pegarModelos,
     buscarSomaFuncionamento,
-    buscarMensal
+    buscarMensal,
+    buscarSemanal
 }

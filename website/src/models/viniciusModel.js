@@ -222,11 +222,11 @@ function totalChamadosPorTipo(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius group by idTipo;
+        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius group by idTipo order by idTipo asc;
         `
     } else {
         instrucao = `
-        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius where idHospital = ${fkHospital} group by idTipo;
+        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius where idHospital = ${fkHospital} group by idTipo order by idTipo asc;
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)

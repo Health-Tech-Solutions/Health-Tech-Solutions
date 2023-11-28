@@ -209,35 +209,26 @@ END;
 	
 GO
 
+
 -- Criação do trigger tr_atualiza_ordem
 CREATE TRIGGER tr_atualiza_ordem
 ON chamado
 FOR INSERT
 AS 
 BEGIN 
-	DECLARE @nivel VARCHAR(45), @fkRegistro INT,@idChamado INT;
-	SELECT @nivel = nivel FROM INSERTED;
-	SELECT @fkRegistro = fkRegistro FROM INSERTED;
-	SELECT @idChamado = idChamado FROM INSERTED;
-	
-	IF @nivel = 'Alto' 
-		BEGIN
-			UPDATE ordemManutencao SET estado = 'parado',
-				dataAbertura = GETDATE(),
-				qtdFalhas = qtdFalhas + 1,
-				somaFuncionamento = dbo.subtrai_data(GETDATE(), dataInicioFunc),
-				fkChamado = @idChamado
-			WHERE fkMaquina =(SELECT fkMaquina 
-									FROM registro 
-									WHERE idRegistro = @fkRegistro);
-		END
-	ELSE
-		BEGIN
-			UPDATE ordemManutencao SET estado = 'funcionando'
-			WHERE fkMaquina =(SELECT fkMaquina 
-										FROM registro
-										WHERE idRegistro = @fkRegistro)
-		END;
+   SET NOCOUNT ON;
+
+   -- Atualizar todas as linhas inseridas de uma vez
+   UPDATE om
+   SET 
+      estado = 'parado',
+      dataAbertura = GETDATE(),
+      qtdFalhas = qtdFalhas + 1,
+      somaFuncionamento = dbo.subtrai_data(GETDATE(),dataInicioFunc),
+      fkChamado = i.idChamado
+   FROM ordemManutencao AS om
+   INNER JOIN INSERTED i ON om.fkMaquina = (SELECT fkMaquina FROM registro WHERE idRegistro = i.fkRegistro)
+   WHERE i.nivel = 'Alto';
 END;
 
 GO

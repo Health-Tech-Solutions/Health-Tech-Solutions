@@ -1,6 +1,10 @@
 
-var fkModelo = 'null'
-fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
+
+
+function buscarSomaFuncionamento(){
+    var fkModelo = 'null'
+
+    fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
     .then(function (resposta) {
         if (resposta.ok) {
         resposta.json()
@@ -17,6 +21,9 @@ fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
 .catch(function (error) {
     console.error(`Erro na obtenção dos dados: ${error.message}`);
 });
+}
+
+
 
 
 function calcularConfiabilidade(resposta){

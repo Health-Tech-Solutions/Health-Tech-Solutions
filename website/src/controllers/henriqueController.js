@@ -20,6 +20,7 @@ function pegarModelos(req, res) {
 
 function buscarSomaFuncionamento(req,res){
     var fkModelo = req.params.fkModelo
+    fkModelo = 'null'
     henriqueModel.buscarSomaFuncionamento(fkModelo)
         .then((resultado) => {
             if (resultado.length > 0) {

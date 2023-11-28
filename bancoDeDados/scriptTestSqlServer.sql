@@ -58,3 +58,25 @@ from registro AS r where r.valor > 85;
 
 SELECT @@SERVERNAME AS 'Nome do Servidor';
 SELECT CURRENT_USER AS 'Nome do Usuário Atual';
+
+USE hts;
+
+SELECT 
+    DAY(dataHora) AS dia,
+    COUNT(*) AS quantidade	
+FROM vw_chamados
+WHERE idHospital = 2
+GROUP BY DAY(dataHora)
+ORDER BY dia;
+
+
+		 SELECT
+					ROUND(AVG(om.qtdFalhas), 2) AS qtdFalhas,
+					ROUND(AVG(om.somaFuncionamento), 2) AS tempoFuncionamento,
+					ROUND(AVG(om.somaManutencao), 2) AS tempoManutencao
+				FROM ordemManutencao AS om
+				WHERE om.qtdFalhas <> 0;
+
+
+
+

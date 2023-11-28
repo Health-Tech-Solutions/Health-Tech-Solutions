@@ -66,8 +66,6 @@ function plotarGraficoSemanal(resposta){
     lineChart.update()
 }
 
-
-
 var dataRegressao = []
 function plotarGrafico(resposta){
 
@@ -82,9 +80,6 @@ function plotarGrafico(resposta){
     dados.labels = labels
     lineChart.update()
 }
-
-
-
 
 data = [0,0,0,0,0,0,0,0,0,0,0,0]
 const ctx = document.getElementById('chartLinha');

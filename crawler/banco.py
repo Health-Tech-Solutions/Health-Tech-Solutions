@@ -33,3 +33,6 @@ def registros(estado):
         conexao.commit()
     except mysql.connector.Error as Erro:
         print('Não tem todos os dados', Erro)  
+
+#comando.execute("INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital) SELECT idDadosTemperatura, idEmpresa FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado WHERE endereco.estado = %s;", (estado,))
+

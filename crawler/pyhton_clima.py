@@ -4,6 +4,7 @@ import gzip
 import zipfile
 import io
 import banco
+import bancoSqlServer
 import schedule
 import time
 import datetime
@@ -64,26 +65,22 @@ def Crawler():
          
         
          print(f" Estado {estado}\nData: {row[0]}\nPrecipitação: {row[2]}\nPressão Max: {row[4]}\nPressão Min: {row[5]}\nTemperatura Max: {row[9]}\nTemperatura Min: {row[10]}")
-         banco.dados(estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)
+         bancoSqlServer.dados(estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)
      else:
          print("0")
      print("\n")
 
 
 
-    nome = input("""Deseja fazer uma corelação entre os hospitais da região escolhida e
-             as informações de temperatura da região escolhida (S/N)""")
-    if (nome == "S"):
-     banco.registros(estado)
-     print("Informações mandadas para o banco")
-    else:
-        print("Fim da aplicação")
-
-if __name__ == "__main__":
-    schedule.every().wednesday.at("00:00:00").do(Crawler)
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
-
+    bancoSqlServer.registros(estado)
+    print("Informações mandadas para o banco")
     
 
+# if __name__ == "__main__":
+#     schedule.every().wednesday.at("00:00:00").do(Crawler)
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(1)
+
+    
+Crawler()

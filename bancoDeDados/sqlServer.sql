@@ -221,15 +221,15 @@ BEGIN
    -- Atualizar todas as linhas inseridas de uma vez
    UPDATE om
    SET 
-      estado = 'parado',
-      dataAbertura = GETDATE(),
-      qtdFalhas = qtdFalhas + 1,
-      somaFuncionamento = dbo.subtrai_data(GETDATE(),dataInicioFunc),
-      fkChamado = i.idChamado
+      om.estado = 'parado',
+      om.dataAbertura = GETDATE(),
+      om.qtdFalhas = qtdFalhas + 1,
+      om.somaFuncionamento = dbo.subtrai_data(GETDATE(),dataInicioFunc),
+      om.fkChamado = i.idChamado
    FROM ordemManutencao AS om
    INNER JOIN INSERTED i ON om.fkMaquina = (SELECT fkMaquina FROM registro WHERE idRegistro = i.fkRegistro)
    WHERE i.nivel = 'Alto';
-END;
+END; 
 
 GO
 

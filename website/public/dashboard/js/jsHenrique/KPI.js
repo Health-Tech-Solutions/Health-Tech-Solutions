@@ -4,13 +4,14 @@
 function buscarSomaFuncionamento(){
     var fkModelo = 'null'
 
-    fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`, { cache: 'no-store'})
+    fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`)
     .then(function (resposta) {
         if (resposta.ok) {
         resposta.json()
         .then(function (resposta) {
-            resposta.reverse();
-            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            // resposta.reverse();
+   
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`,"AAAA");
             calcularConfiabilidade(resposta)
 
         });

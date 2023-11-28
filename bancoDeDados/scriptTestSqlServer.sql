@@ -78,5 +78,21 @@ ORDER BY dia;
 				WHERE om.qtdFalhas <> 0;
 
 
+SELECT * FROM ordemManutencao
 
+INSERT INTO chamado (nivel,estado,sla,descricao,dataHora,fkRegistro)VALUES('alto','Aberto','2 horas','deu certo',GETDATE(),606);
 
+UPDATE chamado SET estado = 'fechado' WHERE idChamado = 2767
+
+SELECT fkMaquina FROM registro GROUP BY fkMAquina;
+
+select * FROM registro WHERE fkMaquina = 209;
+
+exec fechar_chamados
+
+ SELECT
+    ROUND(AVG(om.qtdFalhas), 2) AS qtdFalhas,
+    ROUND(AVG(om.somaFuncionamento), 2) AS tempoFuncionamento,
+    ROUND(AVG(om.somaManutencao), 2) AS tempoManutencao
+FROM ordemManutencao AS om
+WHERE om.qtdFalhas <> 0;

@@ -32,14 +32,15 @@ function pegarModelos(){
 
 function buscarSomaFuncionamento(fkModelo){
     var instrucao;
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     instrucao = `
-            SELECT
-            ROUND(AVG(om.qtdFalhas), 2) AS qtdFalhas,
-            ROUND(AVG(om.somaFuncionamento), 2) AS tempoFuncionamento,
-            ROUND(AVG(om.somaManutencao), 2) AS tempoManutencao
-        FROM ordemManutencao AS om
-        WHERE om.qtdFalhas <> 0;
-            `
+    SELECT
+    ROUND(AVG(om.qtdFalhas), 2) AS qtdFalhas,
+    ROUND(AVG(om.somaFuncionamento), 2) AS tempoFuncionamento,
+    ROUND(AVG(om.somaManutencao), 2) AS tempoManutencao
+FROM ordemManutencao AS om
+WHERE om.qtdFalhas <> 0;
+    `
 
 //     if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
 //         if(fkModelo == 'null'){
@@ -75,6 +76,7 @@ function buscarSomaFuncionamento(fkModelo){
 // }   
     
     console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
     return database.executar(instrucao)
 }
 

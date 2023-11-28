@@ -22,4 +22,9 @@ public class MonitoramentoDAO {
     public List<Componente> getComponentesMonitorados(){
         return con.query("SELECT * FROM peca", new ComponenteRowMapper());
     }
+
+    public List<Componente> getLimiteComponente(){
+        return con.query("SELECT * FROM limite", new ComponenteRowMapper());
+    }
+
 }

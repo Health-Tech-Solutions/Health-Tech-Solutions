@@ -7,6 +7,7 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.processos.ProcessoGrupo;
 import com.github.britooo.looca.api.group.sistema.Sistema;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.DAO.MonitoramentoDAO;
 
@@ -26,11 +27,15 @@ public class Monitoramento {
     private List<Disco> discos = grupoDeDiscos.getDiscos();
     private MonitoramentoDAO monitoramentoDAO;
     private List<Componente> componentesMonitorados;
+    private List<Componente> limitesComponente;
+    private double valor;
 
 
     public Monitoramento() {
         this.monitoramentoDAO = new MonitoramentoDAO();
         this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
+        this.limitesComponente = this.monitoramentoDAO.getLimiteComponente();
+        this.valor = valor;
     }
 
 
@@ -111,7 +116,6 @@ public class Monitoramento {
                     Long tamanhoDisco = disco.getTamanho();
                     double tamDiscoDouble = (double) tamanhoDisco;
                     tamDisco = tamDiscoDouble / Math.pow(10, 9);
-
                     System.out.printf("""
                     Serial: %s
                     Nome: %s
@@ -132,6 +136,12 @@ public class Monitoramento {
         System.out.println("\n" + " LISTA DE PROCESSOS ");
         System.out.println(grupoDeProcessos.getProcessos());
         System.out.println("Total de processos: " + grupoDeProcessos.getTotalProcessos());
+    }
+
+    public void abrirChamado() {
+//        todo: fazer a lógica para criar o chamado (pegar o valor da tabela LIMITE e
+//         comparar com o uso da CPU, RAM e disco)
+        IntegracaoJira.criarChamado();
     }
 }
 

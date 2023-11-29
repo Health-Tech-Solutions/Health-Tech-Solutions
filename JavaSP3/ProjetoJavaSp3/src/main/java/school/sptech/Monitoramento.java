@@ -111,7 +111,8 @@ public class Monitoramento {
                 } else {
                     System.out.println("A sua maquina não tem componentes cadastrados para ser monitorados");
                 }
-
+                IntegracaoJira integracaoJira = new IntegracaoJira();
+                integracaoJira.criarChamado();
                 for (Disco disco : discos) {
                     Long tamanhoDisco = disco.getTamanho();
                     double tamDiscoDouble = (double) tamanhoDisco;
@@ -139,9 +140,29 @@ public class Monitoramento {
     }
 
     public void abrirChamado() {
+        school.sptech.Looca looca = new school.sptech.Looca(
+                memoria.getEmUso(),
+                memoria.getDisponivel(),
+                memoria.getTotal(),
+                processador.getFrequencia(),
+                processador.getUso(),
+                grupoDeDiscos.getTamanhoTotal()
+        );
+
+        Double memEmUso = looca.castingMonitoramento(looca.getMemEmUso());
+        Double freqCpu = looca.castingMonitoramento(looca.getFreqCpu());
+
+        for (Componente limite : limitesComponente) {
+            if (memEmUso > limite.getValorLimite()) {
+                System.out.println("Limite de memória ultrapassado!");
+                IntegracaoJira.criarChamado();
+            } else if (freqCpu > limite.getValorLimite()) {
+                System.out.println("Limite de CPU ultrapassado!");
+                IntegracaoJira.criarChamado();
+            }
+        }
 //        todo: fazer a lógica para criar o chamado (pegar o valor da tabela LIMITE e
 //         comparar com o uso da CPU, RAM e disco)
-        IntegracaoJira.criarChamado();
     }
 }
 

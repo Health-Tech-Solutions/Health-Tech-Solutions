@@ -14,17 +14,17 @@ public class MonitoramentoDAO {
     JdbcTemplate con = conexao.getConexao();
 
     public void inserirRegistros(String data,double valor, int fkMaquina,int fkPeca ){
-        con.update(  "INSERT INTO registro (dataHora, fkMaquina, fkPeca,  valor ) VALUES (?, ?, ?, ?)",
+        con.update("INSERT INTO registro (dataHora, fkMaquina, fkPeca, valor) VALUES (?, ?, ?, ?)",
                 data, fkMaquina, fkPeca, valor);
 //        con.update("INSERT INTO registro (dataHora,fkMaquina,fkPeca,valor) VALUES (GETDATE(),?,?,?)",fkMaquina,fkPeca,valor);
     }
 
     public List<Componente> getComponentesMonitorados(){
-        return con.query("SELECT * FROM peca", new ComponenteRowMapper());
+        return con.query("SELECT * FROM peca JOIN limite ON fkPeca = idPeca;",  new ComponenteRowMapper());
     }
 
     public List<Componente> getLimiteComponente(){
-        return con.query("SELECT * FROM limite", new ComponenteRowMapper());
+        return con.query("SELECT * FROM peca JOIN limite ON fkPeca = idPeca;", new ComponenteRowMapper());
     }
 
 }

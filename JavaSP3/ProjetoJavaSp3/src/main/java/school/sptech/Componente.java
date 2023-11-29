@@ -7,6 +7,7 @@ public class Componente {
     private String nome;
     private String modelo;
     private Integer fkTipoRegistro;
+    private double valorLimite;
 
     public Componente() {
 
@@ -50,6 +51,14 @@ public class Componente {
 
     public void setFkTipoRegistro(Integer fkTipoRegistro) {
         this.fkTipoRegistro = fkTipoRegistro;
+    }
+
+    public double getValorLimite() {
+        return valorLimite;
+    }
+
+    public void setValorLimite(double valorLimite) {
+        this.valorLimite = valorLimite;
     }
 
     @Override

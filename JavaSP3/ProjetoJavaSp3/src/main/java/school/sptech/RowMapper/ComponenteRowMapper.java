@@ -15,6 +15,9 @@ public class ComponenteRowMapper implements RowMapper<Componente> {
         componente.setModelo(resultSet.getString("modelo"));
         componente.setFkMaquina(resultSet.getInt("fkMaquinario"));
         componente.setFkTipoRegistro(resultSet.getInt("fkTipoRegistro"));
+        componente.setValorLimite(resultSet.getDouble("valor"));
         return componente;
     }
+
+
 }

@@ -905,9 +905,3 @@
 
 	call fechar_chamados();
 
-
-SELECT * FROM peca JOIN limite ON fkPeca = idPeca where fkPeca = 10;
-select * from limite;
-
-
-UPDATE limite SET valor = 2 WHERE fkModelo >= 1 or fkModelo < 100;

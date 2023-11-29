@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+mysql:
+image: mysql:5.7
+container_name: ContainerBd
+environment:
+MYSQL_ROOT_PASSWORD: urubu100
+MYSQL_DATABASE: hts
+MYSQL_USER: hts
+MYSQL_PASSWORD: urubu100
+
+java:
+image: openjdk
+container_name: JAVA
+ports:
+- "8080:8080"
+volumes:
+- /home/ubuntu/Health-Tech-Solutions/JavaSP3/ProjetoJavaSp3-1.0-SNAPSHOT-jar-with-dependencies.jar:/Java/ProjetoJavaSp3-1.0-SNAPSHOT-jar-with-dependencies.jar
+command: ["java", "-jar", "/Java/ProjetoJavaSp3-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+

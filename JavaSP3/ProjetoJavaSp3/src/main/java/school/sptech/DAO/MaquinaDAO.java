@@ -33,6 +33,14 @@ public class MaquinaDAO {
         String nomeProcessador = "CPU";
         String modelo = processador.getNome();
         con.update("INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
+        inserirLimiteCPU(id);
+    }
+
+    public void inserirLimiteCPU(int id){
+        con.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca " +
+                                                                            "FROM peca " +
+                                                                            "ORDER BY idPeca DESC LIMIT 1))");
+
         inserirRAM(id);
     }
 
@@ -40,8 +48,12 @@ public class MaquinaDAO {
         Memoria memoria = new Memoria();
         String nomeMemoria = "RAM";
         con.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
+        inserirLimiteRAM();
     }
 
+    public void inserirLimiteRAM(){
+        con.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1))");
+    }
 
     public List<Maquina> listarMaquinas(){
         return con.query("SELECT * FROM maquinario", new MaquinaRowMapper());

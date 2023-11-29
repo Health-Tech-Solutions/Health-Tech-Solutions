@@ -51,7 +51,7 @@ public class Maquina {
     }
 
     public void verificarExistenciaMaquina(){
-//        this.setMAC(pegarEnderecoMac());
+
         boolean jaExiste = false;
         List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
             for (Maquina maquina : maquinas) {

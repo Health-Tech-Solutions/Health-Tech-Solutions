@@ -295,243 +295,238 @@
                 <!-- Begin Page Content -->
                 <div id="containerParametrizacao" class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Parametrização de máquinas</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Selecione uma máquina</h1>
 
-                    <h3 style="font-size: 25px;">Selecione um modelo</h3>
-                    <br>
-                    <div id="containerOpcoes">
+                    <div id="containerCheio">
 
-                        <a href="#" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(1)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Ultrassom</span>
-                        </a>
-                        <a href="#" class="btn btn-info btn-icon-split" onclick="obterDadosGrafico(2)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Máquina de Anestesia</span>
-                        </a>
-                        
-                        <a href="#" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(3)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Cardioversores</span>
-                        </a>
-
-                    
-                        <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
-
-                        <a href="#" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(4)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Máquinas de ECG</span>
-                        </a>
+                        <div id="containerFoto">
+                            <img id="imagemPC" src="../assets/PC branco.png"alt="">
                         </div>
-                        <div id="containerOpcoes">
-
-                        <a href="#" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
+                        <div id="containerSpan">
+                            <span>
+                                Máquina 1
                             </span>
-                            <span class="text">Desfibriladores</span>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(6)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Monitor Fetal</span>
-                        </a>
-                        
-                        <a href="#" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(7)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Monitor Cardíaco</span>
-                        </a>
-                        <a href="#" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(8)">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-arrow-right"></i>
-                            </span>
-                            <span class="text">Monitor de sinais vitais</span>
-                        </a>
-
                         </div>
-
-                    </div>    
-                    
-                    <style>
-
-                        #containerParametrizacao {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            flex-direction: column;
-                            width: 100%;
-                            height: 60vh;
-                        }
-
-                        #containerOpcoes {
-                            display: flex;
-                            align-items: center;
-                            padding: 10px;
-                            justify-content: space-around;
-                            width: 80%;
-
-                        }
-
-                    </style>
-
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
-            </div>
-            <!-- End of Content Wrapper -->
-
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo sair da conta?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="../login.html">Sair</a>
                     </div>
                 </div>
+
+
+
             </div>
-        </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
-
-        <script>
-            let limites = []
-            let tipo = 0
-
-            function addDropdownItem(i) {
-                const dropdown = document.getElementById("dropdown-items")
-
-                dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
-            }
-
-            function setDropdownValue(valor, nome) {
-                iptTipo.value = nome
-                tipo = valor
-            }
-
-            function cadastrar() {
-                const modelo = iptModelo.value
-                const descricao = iptDescricao.value
-
-                const totais = limites.map(i => i.valores.length)
-
-                if (modelo.trim() == '' || tipo == 0) {
-                    alert("Preencha os campos obrigatórios!")
+            <style>
+                #containerParametrizacao {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    width: 100%;
+                    height: 60vh;
                 }
-                else if (limites.length == 0 || totais.includes(0)) {
-                    alert("Os campos de métricas não foram preenchidos corretamente")
+
+                #containerOpcoes {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+                    justify-content: space-around;
+                    width: 80%;
+
+                }
+
+                #containerCheio {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    width: 200px;
+                    height: 225px;
+                    background-color: #620000;
+                    border-radius: 25px;
+                }
+
+                #containerFoto {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 70%;
+                    
+                }
+
+                #imagemPC {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                #containerSpan {
+                    display: flex;
+                    align-items: flex-end;
+                    align-items: center;
+                    width: 100%;
+                    justify-content: center;
+                    height: 40%;
+                    background-color: rgb(90, 1, 1);
+                    border-radius: 0px 0px 25px 25px;
+                }
+
+                #containerSpan span {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: white;
+                }
+
+
+
+
+            </style>
+
+        </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo sair da conta?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-primary" href="../login.html">Sair</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        let limites = []
+        let tipo = 0
+
+        function addDropdownItem(i) {
+            const dropdown = document.getElementById("dropdown-items")
+
+            dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
+        }
+
+        function setDropdownValue(valor, nome) {
+            iptTipo.value = nome
+            tipo = valor
+        }
+
+        function cadastrar() {
+            const modelo = iptModelo.value
+            const descricao = iptDescricao.value
+
+            const totais = limites.map(i => i.valores.length)
+
+            if (modelo.trim() == '' || tipo == 0) {
+                alert("Preencha os campos obrigatórios!")
+            }
+            else if (limites.length == 0 || totais.includes(0)) {
+                alert("Os campos de métricas não foram preenchidos corretamente")
+            }
+            else {
+                fetch("/maquinas/cadastrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "modelo": modelo,
+                        "descricao": descricao,
+                        "tipo": tipo,
+                        "limites": limites
+                    })
+                }).then(res => {
+                    if (res.status == 200) {
+                        Swal.fire({
+                            title: 'Máquina cadastrada com sucesso!',
+                            icon: 'success'
+                        })
+                    }
+                })
+            }
+        }
+
+        function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor) {
+            const index = limites.map(i => i.idLimite).indexOf(idLimite)
+            if (isPrincipal) {
+                if (index != -1) {
+                    limites[index].nome = valor
                 }
                 else {
-                    fetch("/maquinas/cadastrar", {
-                        method: "POST",
-                        headers: {
-                            "Content-type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            "modelo": modelo,
-                            "descricao": descricao,
-                            "tipo": tipo,
-                            "limites": limites
-                        })
-                    }).then(res => {
-                        if (res.status == 200) {
-                            Swal.fire({
-                                title: 'Máquina cadastrada com sucesso!',
-                                icon: 'success'
-                            })
-                        }
+                    limites.push({
+                        "idLimite": idLimite,
+                        "nome": valor,
+                        "valores": []
                     })
                 }
             }
+            else {
+                if (index != -1) {
+                    const indexValor = limites[index].valores
+                        .map(i => i.idValor)
+                        .indexOf(idValor)
 
-            function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor) {
-                const index = limites.map(i => i.idLimite).indexOf(idLimite)
-                if (isPrincipal) {
-                    if (index != -1) {
-                        limites[index].nome = valor
+                    if (indexValor != -1) {
+                        limites[index].valores[indexValor].valor = valor
                     }
                     else {
-                        limites.push({
-                            "idLimite": idLimite,
-                            "nome": valor,
-                            "valores": []
+                        limites[index].valores.push({
+                            "idValor": idValor,
+                            "valor": valor,
+                            "medida": medida
                         })
                     }
                 }
                 else {
-                    if (index != -1) {
-                        const indexValor = limites[index].valores
-                            .map(i => i.idValor)
-                            .indexOf(idValor)
-
-                        if (indexValor != -1) {
-                            limites[index].valores[indexValor].valor = valor
-                        }
-                        else {
-                            limites[index].valores.push({
-                                "idValor": idValor,
-                                "valor": valor,
-                                "medida": medida
-                            })
-                        }
-                    }
-                    else {
-                        if (valor) alert("Preencha o modelo da peça!")
-                    }
+                    if (valor) alert("Preencha o modelo da peça!")
                 }
             }
+        }
 
-            fetch("/maquinas/tipo")
-                .then((res) => res.json())
-                .then((res) => {
-                    res.tipos.map(addDropdownItem)
-                })
-        </script>
+        fetch("/maquinas/tipo")
+            .then((res) => res.json())
+            .then((res) => {
+                res.tipos.map(addDropdownItem)
+            })
+    </script>
 </body>
 
 </html>

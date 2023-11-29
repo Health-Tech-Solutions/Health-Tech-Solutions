@@ -11,6 +11,7 @@ import org.checkerframework.checker.units.qual.C;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.DAO.MonitoramentoDAO;
 
+import javax.sound.midi.spi.SoundbankReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 public class Monitoramento {
 
     Looca looca = new Looca();
+    private int fkMaquina;
     private Sistema sistema = new Sistema();
     private Memoria memoria = new Memoria();
     private Processador processador = new Processador();
@@ -28,18 +30,20 @@ public class Monitoramento {
     private MonitoramentoDAO monitoramentoDAO;
     private List<Componente> componentesMonitorados;
     private List<Componente> limitesComponente;
-    private double valor;
-
-
-    public Monitoramento() {
+    private Chamado chamado;
+    public Monitoramento(int idMaquina) {
+        this.fkMaquina = idMaquina;
         this.monitoramentoDAO = new MonitoramentoDAO();
         this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
         this.limitesComponente = this.monitoramentoDAO.getLimiteComponente();
-        this.valor = valor;
+        this.chamado = new Chamado();
     }
 
+    public Monitoramento() {
 
-    public void monitorarMaquinas(int idMaquina) {
+    }
+
+    public void monitorarMaquinas() {
         school.sptech.Looca looca = new school.sptech.Looca(
                 memoria.getEmUso(),
                 memoria.getDisponivel(),
@@ -87,32 +91,47 @@ public class Monitoramento {
                 """,sistema,memEmUso,memDisp,memTotal,processador.getFabricante(),processador.getNome(),
                         processador.getNome(),processador.getIdentificador(),processador.getMicroarquitetura(),
                         processador.getNumeroCpusFisicas(),processador.getNumeroCpusLogicas(),freqCpu,cpuEmUso);
-
+                this.componentesMonitorados = monitoramentoDAO.getComponentesMonitorados();
                 if(!this.componentesMonitorados.isEmpty()){
+
                     for (Componente componenteMonitorado : this.componentesMonitorados) {
-                        if(componenteMonitorado.getFkMaquina().equals(idMaquina)){
+                        System.out.println(componenteMonitorado.getFkMaquina());
+                        System.out.println(this.fkMaquina);
+                        if(componenteMonitorado.getFkMaquina().equals(this.fkMaquina)){
+                            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEEEEEEEEEE");
                             if(componenteMonitorado.getFkTipoRegistro().equals(1)){ // Tipo registro é percentual de uso
                                 if(componenteMonitorado.getNome().equalsIgnoreCase("CPU")){
-                                    monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                                    monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(),
+                                            componenteMonitorado.getIdComponente());
+                                    abrirChamado(componenteMonitorado, memEmUso);
                                 } else if(componenteMonitorado.getNome().equalsIgnoreCase("RAM")){
-                                    monitoramentoDAO.inserirRegistros(dataFormatada,cpuEmUso, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                                    monitoramentoDAO.inserirRegistros(dataFormatada,cpuEmUso, componenteMonitorado.getFkMaquina(),
+                                            componenteMonitorado.getIdComponente());
+                                    abrirChamado(componenteMonitorado, cpuEmUso);
                                 }
+
                             } else if (componenteMonitorado.getFkTipoRegistro().equals(2)) { // Tipo de registro é percentual disponivel
                                 if(componenteMonitorado.getNome().equalsIgnoreCase("RAM")){
-                                    monitoramentoDAO.inserirRegistros(dataFormatada,memDisp , componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                                    monitoramentoDAO.inserirRegistros(dataFormatada,memDisp , componenteMonitorado.getFkMaquina(),
+                                            componenteMonitorado.getIdComponente());
+                                    abrirChamado(componenteMonitorado,memDisp);
                                 }
                             } else if(componenteMonitorado.getFkTipoRegistro() == 3){
-                                monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                                monitoramentoDAO.inserirRegistros(dataFormatada, memTotal, componenteMonitorado.getFkMaquina(),
+                                        componenteMonitorado.getIdComponente());
+                                abrirChamado(componenteMonitorado, memTotal);
                             } else if (componenteMonitorado.getFkTipoRegistro() == 4) {
-                                monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, componenteMonitorado.getFkMaquina(), componenteMonitorado.getIdComponente());
+                                monitoramentoDAO.inserirRegistros(dataFormatada,freqCpu, componenteMonitorado.getFkMaquina(),
+                                        componenteMonitorado.getIdComponente());
+                                abrirChamado(componenteMonitorado,freqCpu);
                             }
+
                         }
                     }
                 } else {
                     System.out.println("A sua maquina não tem componentes cadastrados para ser monitorados");
                 }
-                IntegracaoJira integracaoJira = new IntegracaoJira();
-                integracaoJira.criarChamado();
+
                 for (Disco disco : discos) {
                     Long tamanhoDisco = disco.getTamanho();
                     double tamDiscoDouble = (double) tamanhoDisco;
@@ -139,28 +158,23 @@ public class Monitoramento {
         System.out.println("Total de processos: " + grupoDeProcessos.getTotalProcessos());
     }
 
-    public void abrirChamado() {
-        school.sptech.Looca looca = new school.sptech.Looca(
-                memoria.getEmUso(),
-                memoria.getDisponivel(),
-                memoria.getTotal(),
-                processador.getFrequencia(),
-                processador.getUso(),
-                grupoDeDiscos.getTamanhoTotal()
-        );
 
-        Double memEmUso = looca.castingMonitoramento(looca.getMemEmUso());
-        Double freqCpu = looca.castingMonitoramento(looca.getFreqCpu());
+    public void abrirChamado(Componente componenteMonitorado, double valor) {
 
-        for (Componente limite : limitesComponente) {
-            if (memEmUso > limite.getValorLimite()) {
-                System.out.println("Limite de memória ultrapassado!");
-                IntegracaoJira.criarChamado();
-            } else if (freqCpu > limite.getValorLimite()) {
-                System.out.println("Limite de CPU ultrapassado!");
-                IntegracaoJira.criarChamado();
-            }
+        if(valor < componenteMonitorado.getValorLimite()){
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAA " + valor + componenteMonitorado.getValorLimite());
+            chamado.abrirChamado("Alto", "Aberto", "2 Horas", "Memoria ultrapassada",componenteMonitorado.getIdComponente());
         }
+
+//        for (Componente limite : limitesComponente) {
+//            if (memEmUso > limite.getValorLimite()) {
+//                System.out.println("Limite de memória ultrapassado!");
+//                IntegracaoJira.criarChamado();
+//            } else if (freqCpu > limite.getValorLimite()) {
+//                System.out.println("Limite de CPU ultrapassado!");
+//                IntegracaoJira.criarChamado();
+//            }
+//        }
 //        todo: fazer a lógica para criar o chamado (pegar o valor da tabela LIMITE e
 //         comparar com o uso da CPU, RAM e disco)
     }

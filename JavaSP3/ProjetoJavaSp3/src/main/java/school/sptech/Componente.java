@@ -67,8 +67,9 @@ public class Componente {
                 "idComponente=" + idComponente +
                 ", fkMaquina=" + fkMaquina +
                 ", nome='" + nome + '\'' +
-                ", modelo=" + modelo +
+                ", modelo='" + modelo + '\'' +
                 ", fkTipoRegistro=" + fkTipoRegistro +
+                ", valorLimite=" + valorLimite +
                 '}';
     }
 }

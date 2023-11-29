@@ -757,21 +757,21 @@
         ('Frequencia', 'MHz');
 		
 	insert into 
-		peca(nome, modelo, fkTipoRegistro)
+		peca(nome, modelo, fkTipoRegistro, fkMaquinario)
 	values 
-		('CPU','i9 9900f',1),
-		('CPU', 'i7 13500k',1),
-		('CPU','i3 10900',1),
-		('CPU','i7 6900f',1),
-		('CPU','i9 5900f',1),
-		('CPU','i5 11900f',1),
-		('CPU','i3 5900f',1),
-		('RAM','8gb fury Kingston',1),
-		('RAM','12gb ram crucial',1),
-		('RAM','16gb Corsair',1),
-		('Disco','1tb hd seagate',1),
-		('Disco','500gb ssd samsung',1),
-		('Disco','450gb hd Adata',1);
+		('CPU','i9 9900f',1,200),
+		('CPU', 'i7 13500k',1,200),
+		('CPU','i3 10900',1,200),
+		('CPU','i7 6900f',1,200),
+		('CPU','i9 5900f',1,200),
+		('CPU','i5 11900f',1,200),
+		('CPU','i3 5900f',1,200),
+		('RAM','8gb fury Kingston',1,200),
+		('RAM','12gb ram crucial',1,200),
+		('RAM','16gb Corsair',1,200),
+		('Disco','1tb hd seagate',1,200),
+		('Disco','500gb ssd samsung',1,200),
+		('Disco','450gb hd Adata',1,200);
 
 	insert into 
 		limite(fkPeca, fkModelo, valor)
@@ -901,6 +901,13 @@
 		AND maq.fkModelo = m.idModelo
 		AND maq.fkHospital = e.idEmpresa;
 
-	DELIMITER $$
+	
 
 	call fechar_chamados();
+
+
+SELECT * FROM peca JOIN limite ON fkPeca = idPeca where fkPeca = 10;
+select * from limite;
+
+
+UPDATE limite SET valor = 2 WHERE fkModelo >= 1 or fkModelo < 100;

@@ -2,6 +2,7 @@ package school.sptech;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
+import org.springframework.jdbc.core.SqlOutParameter;
 import school.sptech.DAO.MaquinaDAO;
 
 import java.net.InetAddress;
@@ -45,10 +46,12 @@ public class Maquina {
         }catch (UnknownHostException  | SocketException exception){
             exception.printStackTrace();
         }
+
         return enderecoMac.toString();
     }
 
     public void verificarExistenciaMaquina(){
+//        this.setMAC(pegarEnderecoMac());
         boolean jaExiste = false;
         List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
             for (Maquina maquina : maquinas) {
@@ -59,12 +62,13 @@ public class Maquina {
                     }
                 }
             }
-            Monitoramento monitoramento  = new Monitoramento();
+
             if(jaExiste){
-                monitoramento.monitorarMaquinas(this.idMaquina);
+                Monitoramento monitoramento  = new Monitoramento(this.getIdMaquina());
+                monitoramento.monitorarMaquinas();
             } else {
                 this.setIdMaquina(maquinas.size() + 1);
-                maquinaDAO.inserirMaquinarioMac(this.idMaquina,1,1,this.MAC);
+                maquinaDAO.inserirMaquinarioMac(this.getIdMaquina(),1,1,this.MAC);
                 this.verificarExistenciaMaquina();
             }
     }
@@ -92,7 +96,7 @@ public class Maquina {
                         break;
                     case 2:
                         Monitoramento informacoes = new Monitoramento();
-                        informacoes.monitorarMaquinas(this.idMaquina);
+                        informacoes.monitorarMaquinas();
                         break;
                     case 3:
                         Monitoramento processos = new Monitoramento();

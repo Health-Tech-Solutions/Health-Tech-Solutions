@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import school.sptech.Looca;
+import school.sptech.Monitoramento;
 
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -16,7 +18,7 @@ import java.util.Base64;
 public class AbrirChamado {
 
     private static final String EMAIL = "monitoramento.hts@gmail.com";
-    private static final String API_KEY = "";
+    private static final String API_KEY = "ATATT3xFfGF09BmC_rlLIdmKHXT5AvaZgLoTcvq0BaF3yfmIlYYHy8FKFEoLEdZToALq59Req-U6W-6N6jttQnSBmZ7TDhxnMXdeuPQn_Z6XaZunbdHSPqBvgdkvzF-81PPlchdUEeHIDdoEGMUjeHJqlxHQzLhxOqmr2uZYbSAbm1O-0L0Ajm4=ECB31AFD";
     private static final String AUTH = EMAIL + ":" + API_KEY;
     private static final String AUTH_HEADER = "Basic " + Base64.getEncoder().encodeToString(AUTH.getBytes(StandardCharsets.UTF_8));
 
@@ -157,7 +159,7 @@ public class AbrirChamado {
     }
 
     public static void main(String[] args) {
-        AbrirChamado("MI-2", "CPU", 45.5, 1);
+        AbrirChamado("Sofhia", "CPU", 90.0, 1);
     }
 }
 

@@ -35,4 +35,5 @@ public class                                                                    
         return con.query("SELECT * FROM peca JOIN limite ON fkPeca = idPeca;", new ComponenteRowMapper());
     }
 
+
 }

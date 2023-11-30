@@ -7,9 +7,11 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.group.processos.ProcessoGrupo;
 import com.github.britooo.looca.api.group.sistema.Sistema;
+import org.checkerframework.checker.units.qual.A;
 import org.checkerframework.checker.units.qual.C;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.DAO.MonitoramentoDAO;
+import school.sptech.Jira.AbrirChamado;
 
 import javax.sound.midi.spi.SoundbankReader;
 import java.time.LocalDateTime;
@@ -31,12 +33,17 @@ public class Monitoramento {
     private List<Componente> componentesMonitorados;
     private List<Componente> limitesComponente;
     private Chamado chamado;
-    public Monitoramento(int idMaquina) {
+    private AbrirChamado chamadoJira;
+    private String macMaquina;
+    public Monitoramento(int idMaquina,String macMaquina) {
         this.fkMaquina = idMaquina;
         this.monitoramentoDAO = new MonitoramentoDAO();
         this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
         this.limitesComponente = this.monitoramentoDAO.getLimiteComponente();
         this.chamado = new Chamado();
+        this.chamadoJira = new AbrirChamado();
+        this.macMaquina = macMaquina;
+
     }
 
     public Monitoramento() {
@@ -44,6 +51,7 @@ public class Monitoramento {
     }
 
     public void monitorarMaquinas() {
+        AbrirChamado abrirChamado = new AbrirChamado();
         school.sptech.Looca looca = new school.sptech.Looca(
                 memoria.getEmUso(),
                 memoria.getDisponivel(),
@@ -164,6 +172,7 @@ public class Monitoramento {
         if(valor < componenteMonitorado.getValorLimite()){
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAA " + valor + componenteMonitorado.getValorLimite());
             chamado.abrirChamado("Alto", "Aberto", "2 Horas", "Memoria ultrapassada",componenteMonitorado.getIdComponente());
+        chamadoJira.AbrirChamado(macMaquina,componenteMonitorado.getNome(),valor,1);
         }
 
 //        for (Componente limite : limitesComponente) {
@@ -178,6 +187,10 @@ public class Monitoramento {
 //        todo: fazer a lógica para criar o chamado (pegar o valor da tabela LIMITE e
 //         comparar com o uso da CPU, RAM e disco)
     }
+
+
+
+
 }
 
 

@@ -14,7 +14,10 @@ public class MaquinaDAO extends DAO{
 
 
     public void inserirMaquinario(String tipo, String modeloMaquina, String numeroSerie){
-        con.update("INSERT INTO maquinario (tipo,modelo,numeroSerie) VALUES (?, ?, ?);",tipo,modeloMaquina,numeroSerie);
+        String insert = String.format("INSERT INTO maquinario (tipo,modelo,numeroSerie) VALUES (?, ?, ?);",tipo,modeloMaquina,numeroSerie);
+
+        con.update(insert);
+        conMySql.update(insert);
     }
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
@@ -30,14 +33,20 @@ public class MaquinaDAO extends DAO{
         Processador processador = new Processador();
         String nomeProcessador = "CPU";
         String modelo = processador.getNome();
-        con.update("INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
+        String insert = String.format("INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
         inserirLimiteCPU(id);
+
+        con.update(insert);
+        conMySql.update(insert);
     }
 
     public void inserirLimiteCPU(int id){
-        con.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca " +
+        conMySql.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca " +
                                                                             "FROM peca " +
                                                                             "ORDER BY idPeca DESC LIMIT 1))");
+        con.update("INSERT INTO limite(valor, fkPeca)\n" +
+                "SELECT 85, MAX(idPeca)\n" +
+                "FROM peca;");
 
         inserirRAM(id);
     }
@@ -45,12 +54,19 @@ public class MaquinaDAO extends DAO{
     public void inserirRAM(int id){
         Memoria memoria = new Memoria();
         String nomeMemoria = "RAM";
-        con.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
+        String insert = String.format("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
+
+        con.update(insert);
+        conMySql.update(insert);
+
         inserirLimiteRAM();
     }
 
     public void inserirLimiteRAM(){
-        con.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1))");
+        conMySql.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1))");
+        con.update("INSERT INTO limite(valor, fkPeca)\n" +
+                "SELECT 85, MAX(idPeca)\n" +
+                "FROM peca;");
     }
 
     public List<Maquina> listarMaquinas(){

@@ -8,7 +8,10 @@ public class ChamadoDAO extends DAO{
 
     public void inserirChamado(String nivel, String estado, String sla,
                                String descricao, int idPeca) {
-        con.update("INSERT INTO chamado (nivel, estado, sla, descricao, dataHora, fkRegistro) VALUES \n" +
+        String insert = String.format("INSERT INTO chamado (nivel, estado, sla, descricao, dataHora, fkRegistro) VALUES \n" +
                 "(?, ?, ?, ?, NOW(), (SELECT fkMaquinario FROM peca WHERE idPeca = ?));", nivel, estado, sla, descricao,idPeca);
+
+        con.update(insert);
+        conMySql.update(insert);
     }
 }

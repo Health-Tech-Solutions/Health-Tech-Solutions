@@ -235,3 +235,44 @@ select nomeTipo,idTipo,count(*) as totalTipo from vw_vinicius group by idTipo;
  select nomeTipo,idTipo,count(*) as totalTipo from vw_vinicius group by idTipo;
     
 select * from vw_vinicius;
+
+
+use hts;
+
+
+SELECT 
+            DAYOFMONTH(dataHora) AS dia,
+            COUNT(*) AS quantidade	
+        FROM vw_chamados
+        WHERE idHospital = 2
+        GROUP BY dia
+        ORDER BY dia;
+
+
+SELECT * FROM peca JOIN limite ON fkPeca = idPeca where fkPeca = 10;
+select * from limite;
+
+
+UPDATE limite SET valor = 2 WHERE fkModelo >= 1 or fkModelo < 100;
+
+INSERT INTO limite (valor,fkPeca) VALUES (85,(SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1 ));
+
+SELECT * FROM limite;
+
+SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1 ;
+SELECT * FROM peca
+		JOIN limite ON fkPeca = idPeca;
+SELECT * FROM peca;
+
+INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1));
+
+SELECT * FROM limite;
+
+SELECT * FROM chamado ORDER BY idChamado DESC;
+
+
+UPDATE limite SET valor = 1;
+
+
+
+

@@ -14,6 +14,7 @@ public class UsuarioDAO {
 //    ConexaoSQlServer conexao = new ConexaoSQlServer();
     JdbcTemplate con = conexao.getConexao();
 
+
     public List<Usuario> listarUsuarios(){
         List<Usuario> usuarios = con.query("SELECT * FROM usuario",new BeanPropertyRowMapper<>(Usuario.class));
         return usuarios;

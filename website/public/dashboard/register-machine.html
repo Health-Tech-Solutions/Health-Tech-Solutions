@@ -21,8 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-    <script src="js/dados.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
 
 </head>
 
@@ -302,20 +301,20 @@
                     <br>
                     <div id="containerOpcoes">
 
-                        <a href="#" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(1)">
+                        <a  onclick="Ultrasson()" href="selecionarMaquina copy.html" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(1)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span class="text">Ultrassom</span>
                         </a>
-                        <a href="#" class="btn btn-info btn-icon-split" onclick="obterDadosGrafico(2)">
+                        <a onclick="Anestesia()" href="selecionarMaquina copy.html" class="btn btn-info btn-icon-split" onclick="obterDadosGrafico(2)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text">Máquina de Anestesia</span>
+                            <span  class="text">Máquina de Anestesia</span>
                         </a>
                         
-                        <a href="#" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(3)">
+                        <a onclick="Cardioversores()"  href="selecionarMaquina copy.html" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(3)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -325,7 +324,7 @@
                     
                         <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
 
-                        <a href="#" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(4)">
+                        <a  onclick="ECG()" href="selecionarMaquina copy.html" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(4)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -334,26 +333,26 @@
                         </div>
                         <div id="containerOpcoes">
 
-                        <a href="#" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
+                        <a onclick="Desfibriladores()" href="selecionarMaquina copy.html" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text">Desfibriladores</span>
+                            <span  class="text">Desfibriladores</span>
                         </a>
-                        <a href="#" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(6)">
+                        <a onclick="Fetal()" href="selecionarMaquina copy.html" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(6)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text">Monitor Fetal</span>
+                            <span  class="text">Monitor Fetal</span>
                         </a>
                         
-                        <a href="#" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(7)">
+                        <a onclick="MonitorC()" href="selecionarMaquina copy.html" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(7)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
-                            <span class="text">Monitor Cardíaco</span>
+                            <span  class="text">Monitor Cardíaco</span>
                         </a>
-                        <a href="#" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(8)">
+                        <a onclick="MonitorSV()" href="selecionarMaquina copy.html" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(8)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -437,101 +436,10 @@
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+        <script src="js/jsComponente/selecionarTipo.js"></script>
+        <script src="js/jsComponente/selecionarMaquina.js"></script>
 
-        <script>
-            let limites = []
-            let tipo = 0
 
-            function addDropdownItem(i) {
-                const dropdown = document.getElementById("dropdown-items")
-
-                dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
-            }
-
-            function setDropdownValue(valor, nome) {
-                iptTipo.value = nome
-                tipo = valor
-            }
-
-            function cadastrar() {
-                const modelo = iptModelo.value
-                const descricao = iptDescricao.value
-
-                const totais = limites.map(i => i.valores.length)
-
-                if (modelo.trim() == '' || tipo == 0) {
-                    alert("Preencha os campos obrigatórios!")
-                }
-                else if (limites.length == 0 || totais.includes(0)) {
-                    alert("Os campos de métricas não foram preenchidos corretamente")
-                }
-                else {
-                    fetch("/maquinas/cadastrar", {
-                        method: "POST",
-                        headers: {
-                            "Content-type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            "modelo": modelo,
-                            "descricao": descricao,
-                            "tipo": tipo,
-                            "limites": limites
-                        })
-                    }).then(res => {
-                        if (res.status == 200) {
-                            Swal.fire({
-                                title: 'Máquina cadastrada com sucesso!',
-                                icon: 'success'
-                            })
-                        }
-                    })
-                }
-            }
-
-            function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor) {
-                const index = limites.map(i => i.idLimite).indexOf(idLimite)
-                if (isPrincipal) {
-                    if (index != -1) {
-                        limites[index].nome = valor
-                    }
-                    else {
-                        limites.push({
-                            "idLimite": idLimite,
-                            "nome": valor,
-                            "valores": []
-                        })
-                    }
-                }
-                else {
-                    if (index != -1) {
-                        const indexValor = limites[index].valores
-                            .map(i => i.idValor)
-                            .indexOf(idValor)
-
-                        if (indexValor != -1) {
-                            limites[index].valores[indexValor].valor = valor
-                        }
-                        else {
-                            limites[index].valores.push({
-                                "idValor": idValor,
-                                "valor": valor,
-                                "medida": medida
-                            })
-                        }
-                    }
-                    else {
-                        if (valor) alert("Preencha o modelo da peça!")
-                    }
-                }
-            }
-
-            fetch("/maquinas/tipo")
-                .then((res) => res.json())
-                .then((res) => {
-                    res.tipos.map(addDropdownItem)
-                })
-        </script>
 </body>
 
 </html>

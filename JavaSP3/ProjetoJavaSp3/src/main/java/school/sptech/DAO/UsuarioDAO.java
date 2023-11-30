@@ -8,11 +8,9 @@ import school.sptech.Usuario;
 
 import java.util.List;
 
-public class UsuarioDAO {
+public class UsuarioDAO extends DAO{
 
-    Conexao conexao = new Conexao();
-//    ConexaoSQlServer conexao = new ConexaoSQlServer();
-    JdbcTemplate con = conexao.getConexao();
+
 
 
     public List<Usuario> listarUsuarios(){
@@ -34,6 +32,9 @@ public class UsuarioDAO {
     public void inserirUsuario(String nome,String senha, String empresa, String cargo){
         con.update("INSERT INTO usuario (nome, senha, empresa, cargo) VALUES (?, ?, ?, ?);",
                 nome, senha, empresa, cargo);
+        conMySql.update("INSERT INTO usuario (nome, senha, empresa, cargo) VALUES (?, ?, ?, ?);",
+                nome, senha, empresa, cargo);
+
     }
 
     public boolean verificarSenha(String nome,String senha){

@@ -10,10 +10,8 @@ import school.sptech.RowMapper.MaquinaRowMapper;
 
 import java.util.List;
 
-public class MaquinaDAO {
-//    ConexaoSQlServer conexao = new ConexaoSQlServer();
-    Conexao conexao = new Conexao();
-    JdbcTemplate con = conexao.getConexao();
+public class MaquinaDAO extends DAO{
+
 
     public void inserirMaquinario(String tipo, String modeloMaquina, String numeroSerie){
         con.update("INSERT INTO maquinario (tipo,modelo,numeroSerie) VALUES (?, ?, ?);",tipo,modeloMaquina,numeroSerie);
@@ -21,9 +19,9 @@ public class MaquinaDAO {
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
 
-//        con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
+        con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
 
-        con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
+        conMySql.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
 
         this.inserirCPU(id);
     }

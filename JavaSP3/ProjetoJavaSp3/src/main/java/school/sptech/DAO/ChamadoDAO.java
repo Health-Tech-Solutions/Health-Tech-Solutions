@@ -3,10 +3,8 @@ package school.sptech.DAO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import school.sptech.Conexoes.Conexao;
 
-public class ChamadoDAO {
-    //    ConexaoSQlServer conexao = new ConexaoSQlServer();
-    Conexao conexao = new Conexao();
-    JdbcTemplate con = conexao.getConexao();
+public class ChamadoDAO extends DAO{
+
 
     public void inserirChamado(String nivel, String estado, String sla,
                                String descricao, int idPeca) {

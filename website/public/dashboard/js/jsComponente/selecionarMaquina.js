@@ -70,7 +70,7 @@ function listasPecas() {
 
                             for (let i = 0; i < resposta.length; i++) {
                                 const element = resposta[i];
-                                var id = element.idMaquinario;
+                                var id = element.idPeca;
                                 var nomePeca = element.nome;
                                 var descricao = element.descricao;
                                 var modelo = element.modelo;
@@ -89,6 +89,8 @@ function listasPecas() {
                                 <td id="Descrição">${descricao}</td>
                                 <td id="Modelo">${modelo}</td>
                                 <td id="limite">${limite}</td>
+                                <td id="AlterarLimiteInput"><input id="inputLimite" type="number"></td>
+                                <td id="AlterarLimiteButton"><button onclick="enviarLimite()">Enviar</button></td>
                                 `
                             }
 

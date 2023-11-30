@@ -1,7 +1,8 @@
-const viniciusModel = require("../models/componentesModel");
 
+const componentesModel = require("../models/componentesModel");
+    
 function modelosDeMaquinasCadastradas(req, res) {
-    viniciusModel.modelosDeMaquinasCadastradas(req.params.fkTipo).then(
+    componentesModel.modelosDeMaquinasCadastradas(req.params.fkTipo).then(
         function (resultado) {
             res.json(resultado);
         }

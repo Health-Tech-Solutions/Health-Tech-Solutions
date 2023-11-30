@@ -301,20 +301,20 @@
                     <br>
                     <div id="containerOpcoes">
 
-                        <a  onclick="Ultrasson()" href="selecionarMaquina copy.html" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(1)">
+                        <a  onclick="listar(1)" class="btn btn-success btn-icon-split" >
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span class="text">Ultrassom</span>
                         </a>
-                        <a onclick="Anestesia()" href="selecionarMaquina copy.html" class="btn btn-info btn-icon-split" onclick="obterDadosGrafico(2)">
+                        <a onclick="listar(5)" class="btn btn-info btn-icon-split" onclick="obterDadosGrafico(2)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span  class="text">Máquina de Anestesia</span>
                         </a>
                         
-                        <a onclick="Cardioversores()"  href="selecionarMaquina copy.html" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(3)">
+                        <a onclick="listar(2)"  class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(3)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -324,7 +324,7 @@
                     
                         <!-- <div style="display: flex; justify-content: space-around; margin-bottom: 2%;"> -->
 
-                        <a  onclick="ECG()" href="selecionarMaquina copy.html" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(4)">
+                        <a  onclick="listar(6)" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(4)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -333,26 +333,26 @@
                         </div>
                         <div id="containerOpcoes">
 
-                        <a onclick="Desfibriladores()" href="selecionarMaquina copy.html" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
+                        <a onclick="listar(3)" onclick="obterDadosGrafico(5)" class="btn btn-info btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span  class="text">Desfibriladores</span>
                         </a>
-                        <a onclick="Fetal()" href="selecionarMaquina copy.html" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(6)">
+                        <a onclick="listar(7)" class="btn btn-danger btn-icon-split" onclick="obterDadosGrafico(6)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span  class="text">Monitor Fetal</span>
                         </a>
                         
-                        <a onclick="MonitorC()" href="selecionarMaquina copy.html" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(7)">
+                        <a onclick="listar(4)" class="btn btn-success btn-icon-split" onclick="obterDadosGrafico(7)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
                             <span  class="text">Monitor Cardíaco</span>
                         </a>
-                        <a onclick="MonitorSV()" href="selecionarMaquina copy.html" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(8)">
+                        <a onclick="listar(8)" class="btn btn-warning btn-icon-split" onclick="obterDadosGrafico(8)">
                             <span class="icon text-white-50">
                                 <i class="fas fa-arrow-right"></i>
                             </span>
@@ -438,8 +438,16 @@
         <!-- Custom scripts for all pages-->
         <script src="js/jsComponente/selecionarTipo.js"></script>
         <script src="js/jsComponente/selecionarMaquina.js"></script>
+        <script src="js/dados.js"></script>
 
 
 </body>
+
+<script>
+    function listar(fkTipo){
+        sessionStorage.FK_TIPO = fkTipo;
+        window.location = "selecionarMaquina.html?fkTipo="+fkTipo;
+    }
+</script>
 
 </html>

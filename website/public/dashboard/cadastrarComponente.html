@@ -303,13 +303,25 @@
                             <div id="containerInput1">
                                 <input type="text" placeholder="Nome">
                                 <input type="text" placeholder="Modelo">
+                               
+                            </div>
+                            <div id="containerInput1">
                                 <input type="text" placeholder="Limite">
+                                <div class="dropdown">
+                                    <button id="dropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Tipo Registro
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a class="dropdown-item" href="#">Percentual</a>
+                                      <a class="dropdown-item" href="#">Mhz</a>
+                                    </div>
+                                  </div>
                             </div>
                             <div id="containerInput2">
 
                                 <textarea name="descricao" id="descricao" cols="10" rows="2"
                                     placeholder="Descrição (Máximo 255 caracteres)"
-                                    style="width: 700px; height: 75px; resize: none;">
+                                    style="resize: none;">
                             </textarea>
 
                             </div>
@@ -332,7 +344,8 @@
                                     <th>Descrição</th>
                                     <th>Modelo</th>
                                     <th>Limite</th>
-
+                                    <th>Alterar limite</th>
+                                    <th>Enviar</th>
                                 </tr>
 
                                 <tr>
@@ -358,7 +371,7 @@
                 align-items: center;
                 flex-direction: column;
                 width: 100%;
-                height: 150vh;
+                height: 225vh;
             }
 
             #divTabela {
@@ -440,7 +453,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 75.5%;
+                width: 45%;
                 height: 10vh;
                 justify-content: space-around;
             }
@@ -452,15 +465,37 @@
                 justify-content: space-around;
             }
 
+            #dropdown {
+                display: flex;
+                width: 200px;
+                height: 45px;
+                background-color: #620000;
+                font-weight: bold;
+                margin-top: -6px;
+                justify-content: center;
+                align-items: center;
+            }
 
+            #tabela {
+                width: 750px;
+            }
+
+            #inputLimite {
+                width: 100px;
+                height: 25px;
+                font-size: 12px;
+            }
 
             input {
+                height: 45px;
+                width: 200px;
                 border-radius: 5px;
                 border: rgb(83, 83, 83) 1px solid;
             }
 
             textarea {
                 border-radius: 5px;
+                width: 425px;
             }
 
             button {

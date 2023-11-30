@@ -168,7 +168,7 @@ public class Monitoramento {
 
 //        for (Componente limite : limitesComponente) {
 //            if (memEmUso > limite.getValorLimite()) {
-//                System.out.println("Limite de memória ultrapassado!");
+//                System.out.println("Limite de memória ultrapassado!");11
 //                IntegracaoJira.criarChamado();
 //            } else if (freqCpu > limite.getValorLimite()) {
 //                System.out.println("Limite de CPU ultrapassado!");

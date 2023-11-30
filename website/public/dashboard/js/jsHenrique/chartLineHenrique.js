@@ -69,6 +69,8 @@ function plotarGraficoSemanal(resposta){
 var dataRegressao = []
 function plotarGrafico(resposta){
 
+
+
     labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
     dados.datasets[0].data = []
     
@@ -76,7 +78,10 @@ function plotarGrafico(resposta){
         let registro = resposta[i];
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
     }   
-   
+    
+    var mediaDados = dados.datasets[0].data.reduce((acc, val) => acc = val,0) /dados.length
+    media.innerHTML = mediaDados
+
     dados.labels = labels
     lineChart.update()
 }
@@ -129,6 +134,9 @@ function predicao(){
         let formula = diferenca(dadosReais[i],linear) + angular * i
         vetorAux.push(formula)
     }
+
+    var mediaAux = vetorAux.reduce((acc,val) => acc + val, 0)/vetorAux.length
+    media.innerHTML = mediaAux
     dados.datasets[0].data = vetorAux
     lineChart.update()
 }

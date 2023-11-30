@@ -288,10 +288,17 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+
+
+
                 <div id="containerParametrizacao2" class="container-fluid">
 
                     <h1 class="h3 mb-4 text-gray-800">Selecione uma máquina</h1>
-                    
+
+                    <div id="divListaMaquinas">
+
+                    </div>
+
                 </div>
 
 
@@ -299,14 +306,31 @@
             </div>
 
             <style>
+                
+                #divListaMaquinas {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    width: 100%;
+                    justify-content: space-around;
+                    justify-content: space-evenly;
+                    gap: 20px;
+                }
+
+
+
                 #containerParametrizacao2 {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    flex-direction: column;
-                    width: 100%;
+                    width: 70%;
                     height: 60vh;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+
                 }
+
 
                 #containerOpcoes {
                     display: flex;
@@ -326,6 +350,7 @@
                     height: 225px;
                     background-color: #620000;
                     border-radius: 25px;
+                    cursor: pointer;
                 }
 
                 #containerFoto {
@@ -334,7 +359,7 @@
                     align-items: center;
                     justify-content: center;
                     height: 70%;
-                    
+
                 }
 
                 #imagemPC {
@@ -358,25 +383,21 @@
                     font-weight: bold;
                     color: white;
                 }
-
-
-
-
             </style>
 
         </div>
-        </div>
-        <!-- End of Main Content -->
+    </div>
+    <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
-                </div>
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
             </div>
-        </footer>
-        <!-- End of Footer -->
+        </div>
+    </footer>
+    <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->
@@ -419,7 +440,7 @@
     <script src="js/jsComponente/selecionarMaquina.js"></script>
     <!-- <script src="js/jsComponente/selecionarTipo.js"></script> -->
 
-   
+
 </body>
 
 </html>

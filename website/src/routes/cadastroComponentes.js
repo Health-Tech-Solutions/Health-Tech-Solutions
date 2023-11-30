@@ -7,4 +7,8 @@ router.get(`/modelosDeMaquinasCadastradas/:fkTipo/`,(req,res) => {
     componentesController.modelosDeMaquinasCadastradas(req,res);
 });
 
+router.get(`/obterDadosPeca/:idMaquinario`,(req,res) => {
+    componentesController.obterDadosPeca(req,res);
+});
+
 module.exports = router;

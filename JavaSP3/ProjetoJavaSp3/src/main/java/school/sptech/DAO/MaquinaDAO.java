@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MaquinaDAO extends DAO{
 
-
+/*
     public void inserirMaquinario(String tipo, String modeloMaquina, String numeroSerie){
         String insert = String.format("INSERT INTO maquinario (tipo,modelo,numeroSerie) VALUES (?, ?, ?);",tipo,modeloMaquina,numeroSerie);
 
@@ -20,8 +20,9 @@ public class MaquinaDAO extends DAO{
         conMySql.update(insert);
     }
 
-    public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
+ */
 
+    public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
         con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
 
         conMySql.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
@@ -34,10 +35,11 @@ public class MaquinaDAO extends DAO{
         String nomeProcessador = "CPU";
         String modelo = processador.getNome();
         String insert = String.format("INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
-        inserirLimiteCPU(id);
 
         con.update(insert);
         conMySql.update(insert);
+
+        inserirLimiteCPU(id);
     }
 
     public void inserirLimiteCPU(int id){

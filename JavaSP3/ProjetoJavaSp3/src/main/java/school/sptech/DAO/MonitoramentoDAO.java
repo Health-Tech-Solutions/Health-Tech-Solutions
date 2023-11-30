@@ -10,13 +10,7 @@ import java.util.List;
 
 
 
-
-
-
-
-
 public class MonitoramentoDAO extends DAO{
-
 
 
     public void inserirRegistros(String data,double valor, int fkMaquina,int fkPeca ){

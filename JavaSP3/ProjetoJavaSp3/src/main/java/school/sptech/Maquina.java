@@ -22,6 +22,7 @@ public class Maquina {
     private String MAC;
     private boolean isRowMapper;
     private MaquinaDAO maquinaDAO;
+    private Boolean jaExiste = false;
 
     public Maquina() {
         this.maquinaDAO = new MaquinaDAO();
@@ -46,13 +47,13 @@ public class Maquina {
         }catch (UnknownHostException  | SocketException exception){
             exception.printStackTrace();
         }
-
+        this.setMAC(enderecoMac.toString());
         return enderecoMac.toString();
     }
 
     public void verificarExistenciaMaquina(){
 
-        boolean jaExiste = false;
+
         List<Maquina> maquinas =  maquinaDAO.listarMaquinas();
             for (Maquina maquina : maquinas) {
                 if(maquina.getMAC() != null){
@@ -69,7 +70,8 @@ public class Maquina {
             } else {
                 this.setIdMaquina(maquinas.size() + 1);
                 maquinaDAO.inserirMaquinarioMac(this.getIdMaquina(),1,1,this.MAC);
-                this.verificarExistenciaMaquina();
+                jaExiste = true;
+                verificarExistenciaMaquina();
             }
     }
     public void menu(){
@@ -130,7 +132,7 @@ public class Maquina {
         System.out.println("Número de série: ");
         String numeroSerie = leitorStrings.nextLine();
 
-        maquinaDAO.inserirMaquinario(tipo,modeloMaquina,numeroSerie);
+//        maquinaDAO.inserirMaquinario(tipo,modeloMaquina,numeroSerie);
 
         System.out.println("Máquina cadastrada com sucesso");
     }

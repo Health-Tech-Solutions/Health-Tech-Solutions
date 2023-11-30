@@ -23,10 +23,11 @@
     <link href="css/sb-admin-2.css" rel="stylesheet">
     <script src="js/dados.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/jsComponente/selecionarMaquina.js"></script>
 
 </head>
 
-<body id="page-top" onload="mostrarDados()">
+<body id="page-top" onload="mostrarDados(), listasPecas()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -291,173 +292,190 @@
 
                 </nav>
                 <!-- End of Topbar -->
+                <div id="PaginaInteira">
+                    <!-- Begin Page Content -->
+                    <div id="containerParametrizacao" class="container-fluid">
 
-                <!-- Begin Page Content -->
-                <div id="containerParametrizacao" class="container-fluid">
+                        <div id="containerCadastro">
 
-                    <div id="containerCadastro">
+                            <h1 class="h3 mb-4 text-gray-800">Cadastrar novo componente</h1>
 
-                        <h1 class="h3 mb-4 text-gray-800">Cadastrar novo componente</h1>
+                            <div id="containerInput1">
+                                <input type="text" placeholder="Nome">
+                                <input type="text" placeholder="Modelo">
+                                <input type="text" placeholder="Limite">
+                            </div>
+                            <div id="containerInput2">
 
-                        <div id="containerInput1">
-                            <input type="text" placeholder="Nome">
-                            <input type="text" placeholder="Modelo">
-                            <input type="text" placeholder="Limite">
-                        </div>
-                        <div id="containerInput2">
-
-                            <textarea name="descricao" id="descricao" cols="10" rows="2"
-                                placeholder="Descrição (Máximo 255 carácteres)"
-                                style="width: 700px; height: 75px; resize: none;">
+                                <textarea name="descricao" id="descricao" cols="10" rows="2"
+                                    placeholder="Descrição (Máximo 255 caracteres)"
+                                    style="width: 700px; height: 75px; resize: none;">
                             </textarea>
 
+                            </div>
+
+                            <div id="containerBotao">
+                                <button>
+                                    Cadastrar
+                                </button>
+
+                            </div>
                         </div>
 
-                        <div id="containerBotao">
-                            <button>
-                                Cadastrar
-                            </button>
+                        <h1 id="tituloTabela" class="h3 mb-4 text-gray-800">Componentes cadastrados, Máquina 1</h1>
 
+                        <div id="divTabela">
+                            <table id="tabela">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Modelo</th>
+                                    <th>Limite</th>
+
+                                </tr>
+
+                                <tr>
+
+                                </tr>
+
+                            </table>
                         </div>
+
                     </div>
-
-                    <h1 class="h3 mb-4 text-gray-800">Componentes cadastrados, Máquina 1</h1>
-
-                    <div class="table" style="display: flex; justify-content: center; align-items: center;">
-                        <table id="tabela">
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Modelo</th>
-                                <th>Limite</th>
-
-                            </tr>
-
-                            <tr>
-
-
-                            </tr>
-                            
-                        </table>
-                    </div>
-
-                </div>
 
                 </div>
 
             </div>
 
-            <style>
-                #containerParametrizacao {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    width: 100%;
-                    height: 100vh;
-                }
-
-                #containerOpcoes {
-                    display: flex;
-                    align-items: center;
-                    padding: 10px;
-                    justify-content: space-around;
-                    width: 80%;
-
-                }
-
-                #containerCheio {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    width: 200px;
-                    height: 225px;
-                    background-color: #620000;
-                    border-radius: 25px;
-                }
-
-                #containerFoto {
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 70%;
-
-                }
-
-                #imagemPC {
-                    width: 100px;
-                    height: 100px;
-                }
-
-                #containerSpan {
-                    display: flex;
-                    align-items: flex-end;
-                    align-items: center;
-                    width: 100%;
-                    justify-content: center;
-                    height: 40%;
-                    background-color: rgb(90, 1, 1);
-                    border-radius: 0px 0px 25px 25px;
-                }
-
-                #containerSpan span {
-                    font-size: 20px;
-                    font-weight: bold;
-                    color: white;
-                }
-
-                #containerCadastro {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    width: 100%;
-                    padding-bottom: 50px;
-                }
-
-                #containerInput1 {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 75.5%;
-                    height: 10vh;
-                    justify-content: space-around;
-                }
-
-                #containerBotao {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    justify-content: space-around;
-                }
-
-
-
-                input {
-                    border-radius: 5px;
-                    border: rgb(83, 83, 83) 1px solid;
-                }
-
-                textarea {
-                    border-radius: 5px;
-                }
-
-                button {
-                    width: 100px;
-                    height: 40px;
-                    border-radius: 5px;
-                    border: none;
-                    background-color: #620000;
-                    color: white;
-                    font-weight: bold;
-                    margin-top: 15px;
-                }
-            </style>
-
         </div>
+
+        <style>
+
+            #PaginaInteira {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                height: 150vh;
+            }
+
+            #divTabela {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #containerParametrizacao {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                height: 100vh;
+            }
+
+            #containerOpcoes {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                justify-content: space-around;
+                width: 80%;
+
+            }
+
+            #containerCheio {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                width: 200px;
+                height: 225px;
+                background-color: #620000;
+                border-radius: 25px;
+            }
+
+            #containerFoto {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 70%;
+
+            }
+
+            #imagemPC {
+                width: 100px;
+                height: 100px;
+            }
+
+            #containerSpan {
+                display: flex;
+                align-items: flex-end;
+                align-items: center;
+                width: 100%;
+                justify-content: center;
+                height: 40%;
+                background-color: rgb(90, 1, 1);
+                border-radius: 0px 0px 25px 25px;
+            }
+
+            #containerSpan span {
+                font-size: 20px;
+                font-weight: bold;
+                color: white;
+            }
+
+            #containerCadastro {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                padding-bottom: 50px;
+            }
+
+            #containerInput1 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 75.5%;
+                height: 10vh;
+                justify-content: space-around;
+            }
+
+            #containerBotao {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                justify-content: space-around;
+            }
+
+
+
+            input {
+                border-radius: 5px;
+                border: rgb(83, 83, 83) 1px solid;
+            }
+
+            textarea {
+                border-radius: 5px;
+            }
+
+            button {
+                width: 100px;
+                height: 40px;
+                border-radius: 5px;
+                border: none;
+                background-color: #620000;
+                color: white;
+                font-weight: bold;
+                margin-top: 15px;
+            }
+        </style>
+
+    </div>
     </div>
     <!-- End of Main Content -->
 
@@ -511,99 +529,6 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <script>
-        let limites = []
-        let tipo = 0
-
-        function addDropdownItem(i) {
-            const dropdown = document.getElementById("dropdown-items")
-
-            dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
-        }
-
-        function setDropdownValue(valor, nome) {
-            iptTipo.value = nome
-            tipo = valor
-        }
-
-        function cadastrar() {
-            const modelo = iptModelo.value
-            const descricao = iptDescricao.value
-
-            const totais = limites.map(i => i.valores.length)
-
-            if (modelo.trim() == '' || tipo == 0) {
-                alert("Preencha os campos obrigatórios!")
-            }
-            else if (limites.length == 0 || totais.includes(0)) {
-                alert("Os campos de métricas não foram preenchidos corretamente")
-            }
-            else {
-                fetch("/maquinas/cadastrar", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "modelo": modelo,
-                        "descricao": descricao,
-                        "tipo": tipo,
-                        "limites": limites
-                    })
-                }).then(res => {
-                    if (res.status == 200) {
-                        Swal.fire({
-                            title: 'Máquina cadastrada com sucesso!',
-                            icon: 'success'
-                        })
-                    }
-                })
-            }
-        }
-
-        function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor) {
-            const index = limites.map(i => i.idLimite).indexOf(idLimite)
-            if (isPrincipal) {
-                if (index != -1) {
-                    limites[index].nome = valor
-                }
-                else {
-                    limites.push({
-                        "idLimite": idLimite,
-                        "nome": valor,
-                        "valores": []
-                    })
-                }
-            }
-            else {
-                if (index != -1) {
-                    const indexValor = limites[index].valores
-                        .map(i => i.idValor)
-                        .indexOf(idValor)
-
-                    if (indexValor != -1) {
-                        limites[index].valores[indexValor].valor = valor
-                    }
-                    else {
-                        limites[index].valores.push({
-                            "idValor": idValor,
-                            "valor": valor,
-                            "medida": medida
-                        })
-                    }
-                }
-                else {
-                    if (valor) alert("Preencha o modelo da peça!")
-                }
-            }
-        }
-
-        fetch("/maquinas/tipo")
-            .then((res) => res.json())
-            .then((res) => {
-                res.tipos.map(addDropdownItem)
-            })
-    </script>
 </body>
 
 </html>

@@ -2,17 +2,13 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Health Tech Solutions</title>
-
     <link rel="icon" href="img/logoBranca.png">
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -21,12 +17,11 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
-    <script src="js/dados.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 
-<body id="page-top" onload="mostrarDados()">
+<body id="page-top" onload="buscarModelos()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -293,21 +288,17 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div id="containerParametrizacao" class="container-fluid">
+
+
+
+                <div id="containerParametrizacao2" class="container-fluid">
 
                     <h1 class="h3 mb-4 text-gray-800">Selecione uma máquina</h1>
 
-                    <div id="containerCheio">
+                    <div id="divListaMaquinas">
 
-                        <div id="containerFoto">
-                            <img id="imagemPC" src="../assets/PC branco.png"alt="">
-                        </div>
-                        <div id="containerSpan">
-                            <span>
-                                Máquina 1
-                            </span>
-                        </div>
                     </div>
+
                 </div>
 
 
@@ -315,14 +306,31 @@
             </div>
 
             <style>
-                #containerParametrizacao {
+                
+                #divListaMaquinas {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    flex-direction: column;
+                    flex-wrap: wrap;
                     width: 100%;
-                    height: 60vh;
+                    justify-content: space-around;
+                    justify-content: space-evenly;
+                    gap: 20px;
                 }
+
+
+
+                #containerParametrizacao2 {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 70%;
+                    height: 60vh;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+
+                }
+
 
                 #containerOpcoes {
                     display: flex;
@@ -342,6 +350,7 @@
                     height: 225px;
                     background-color: #620000;
                     border-radius: 25px;
+                    cursor: pointer;
                 }
 
                 #containerFoto {
@@ -350,7 +359,7 @@
                     align-items: center;
                     justify-content: center;
                     height: 70%;
-                    
+
                 }
 
                 #imagemPC {
@@ -374,25 +383,21 @@
                     font-weight: bold;
                     color: white;
                 }
-
-
-
-
             </style>
 
         </div>
-        </div>
-        <!-- End of Main Content -->
+    </div>
+    <!-- End of Main Content -->
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
-                </div>
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
             </div>
-        </footer>
-        <!-- End of Footer -->
+        </div>
+    </footer>
+    <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->
@@ -432,101 +437,10 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/jsComponente/selecionarMaquina.js"></script>
+    <!-- <script src="js/jsComponente/selecionarTipo.js"></script> -->
 
-    <script>
-        let limites = []
-        let tipo = 0
 
-        function addDropdownItem(i) {
-            const dropdown = document.getElementById("dropdown-items")
-
-            dropdown.innerHTML += `<a class='dropdown-item' onclick='setDropdownValue(${i.idTipo}, "${i.nome}")'>${i.nome}</a>`
-        }
-
-        function setDropdownValue(valor, nome) {
-            iptTipo.value = nome
-            tipo = valor
-        }
-
-        function cadastrar() {
-            const modelo = iptModelo.value
-            const descricao = iptDescricao.value
-
-            const totais = limites.map(i => i.valores.length)
-
-            if (modelo.trim() == '' || tipo == 0) {
-                alert("Preencha os campos obrigatórios!")
-            }
-            else if (limites.length == 0 || totais.includes(0)) {
-                alert("Os campos de métricas não foram preenchidos corretamente")
-            }
-            else {
-                fetch("/maquinas/cadastrar", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        "modelo": modelo,
-                        "descricao": descricao,
-                        "tipo": tipo,
-                        "limites": limites
-                    })
-                }).then(res => {
-                    if (res.status == 200) {
-                        Swal.fire({
-                            title: 'Máquina cadastrada com sucesso!',
-                            icon: 'success'
-                        })
-                    }
-                })
-            }
-        }
-
-        function manipuladorLimite(isPrincipal, idLimite, valor, medida, idValor) {
-            const index = limites.map(i => i.idLimite).indexOf(idLimite)
-            if (isPrincipal) {
-                if (index != -1) {
-                    limites[index].nome = valor
-                }
-                else {
-                    limites.push({
-                        "idLimite": idLimite,
-                        "nome": valor,
-                        "valores": []
-                    })
-                }
-            }
-            else {
-                if (index != -1) {
-                    const indexValor = limites[index].valores
-                        .map(i => i.idValor)
-                        .indexOf(idValor)
-
-                    if (indexValor != -1) {
-                        limites[index].valores[indexValor].valor = valor
-                    }
-                    else {
-                        limites[index].valores.push({
-                            "idValor": idValor,
-                            "valor": valor,
-                            "medida": medida
-                        })
-                    }
-                }
-                else {
-                    if (valor) alert("Preencha o modelo da peça!")
-                }
-            }
-        }
-
-        fetch("/maquinas/tipo")
-            .then((res) => res.json())
-            .then((res) => {
-                res.tipos.map(addDropdownItem)
-            })
-    </script>
 </body>
 
 </html>

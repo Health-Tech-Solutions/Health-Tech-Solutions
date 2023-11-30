@@ -64,7 +64,7 @@ public class Maquina {
             }
 
             if(jaExiste){
-                Monitoramento monitoramento  = new Monitoramento(this.getIdMaquina());
+                Monitoramento monitoramento  = new Monitoramento(this.getIdMaquina(),this.getMAC());
                 monitoramento.monitorarMaquinas();
             } else {
                 this.setIdMaquina(maquinas.size() + 1);

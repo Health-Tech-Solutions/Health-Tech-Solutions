@@ -8,7 +8,7 @@ import school.sptech.Conexoes.Conexao;
 
 import java.util.List;
 
-public class                                                                                                              MonitoramentoDAO {
+public class MonitoramentoDAO {
     Conexao conexao = new Conexao();
 //    ConexaoSQlServer conexao = new ConexaoSQlServer();
     JdbcTemplate con = conexao.getConexao();
@@ -34,5 +34,6 @@ public class                                                                    
     public List<Componente> getLimiteComponente(){
         return con.query("SELECT * FROM peca JOIN limite ON fkPeca = idPeca;", new ComponenteRowMapper());
     }
+
 
 }

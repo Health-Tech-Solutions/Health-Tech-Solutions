@@ -255,17 +255,16 @@
 
 
 DELIMITER $
-	DROP PROCEDURE IF EXISTS inserir_limite ;
-    
+
     CREATE PROCEDURE hts.inserir_limite(
 	IN
-    DECLARE nome VARCHAR(45);
-    DECLARE modelo VARCHAR(300);
-    DECLARE fkTipoRegistro INT;
-    DECLARE fkMaquinario INT;
-    DECLARE valor VARCHAR(45);
-    DECLARE fkPeca INT;
-    DECLARE fkModelo INT;
+    nome VARCHAR(45),
+    modelo VARCHAR(300),
+    fkTipoRegistro INT,
+    fkMaquinario INT,
+    valor VARCHAR(45),
+    fkPeca INT,
+    fkModelo INT
     )
     BEGIN 
     

@@ -8,15 +8,10 @@ import school.sptech.Conexoes.Conexao;
 
 import java.util.List;
 
-<<<<<<< HEAD
-public class MonitoramentoDAO {
-    Conexao conexao = new Conexao();
-//    ConexaoSQlServer conexao = new ConexaoSQlServer();
-    JdbcTemplate con = conexao.getConexao();
-=======
+
 public class MonitoramentoDAO extends DAO{
 
->>>>>>> f184b393e09aab77e349a2843ccbf08a8264ef59
+
 
     public void inserirRegistros(String data,double valor, int fkMaquina,int fkPeca ){
         conMySql.update("INSERT INTO registro (dataHora, fkMaquina, fkPeca, valor) VALUES (?, ?, ?, ?)",

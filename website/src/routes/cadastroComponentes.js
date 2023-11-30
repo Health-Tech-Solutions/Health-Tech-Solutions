@@ -11,4 +11,8 @@ router.get(`/obterDadosPeca/:idMaquinario`,(req,res) => {
     componentesController.obterDadosPeca(req,res);
 });
 
+router.get(`/cadastrarPeca`,(req,res) => {
+    componentesController.obterDadosPeca(req,res);
+});
+
 module.exports = router;

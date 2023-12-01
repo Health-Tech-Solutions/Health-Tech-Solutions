@@ -2,10 +2,13 @@ package school.sptech.DAO;
 
 import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.processador.Processador;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import school.sptech.Componente;
 import school.sptech.Conexoes.Conexao;
 import school.sptech.Conexoes.ConexaoSQlServer;
 import school.sptech.Maquina;
+import school.sptech.RowMapper.ComponenteRowMapper;
 import school.sptech.RowMapper.MaquinaRowMapper;
 
 import java.util.List;
@@ -22,8 +25,18 @@ public class MaquinaDAO extends DAO{
 
  */
 
-    public int pegarPecas(){
-        return con.update("SELECT COUNT(*) FROM peca");
+    public synchronized int pegarPecas(){
+        List<Componente> count =  con.query("SELECT \n" +
+                "\tp.idPeca AS idPeca,\n" +
+                "    p.nome AS nome,\n" +
+                "    p.modelo AS modelo,\n" +
+                "    p.fkTipoRegistro AS fkTipoRegistro,\n" +
+                "    p.fkMaquinario AS fkMaquinario,\n" +
+                "    l.valor AS valor\n" +
+                " FROM peca AS p \n" +
+                " LEFT JOIN limite AS l ON l.fkPeca = p.idPeca "
+                , new ComponenteRowMapper());
+        return count.size();
     }
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
@@ -43,7 +56,6 @@ public class MaquinaDAO extends DAO{
         inserirCpuMysql(id);
         inserirLimiteCPU(id);
     }
-
 
     public void inserirLimiteCPU(int id){
 
@@ -96,7 +108,7 @@ public class MaquinaDAO extends DAO{
 
     public void inserirLimiteCpuMysql(int id){
 
-        conMySql.update("INSERT INTO limite(idPeca,valor,fkPeca) VALUES (85,(SELECT idPeca " +
+        conMySql.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca " +
                 "FROM peca " +
                 "ORDER BY idPeca DESC LIMIT 1))");
     }

@@ -63,7 +63,6 @@ public class MaquinaDAO extends DAO{
         inserirLimiteRAM();
     }
 
-
     public void inserirLimiteRAM(){
 
         con.update("INSERT INTO limite(valor, fkPeca)\n" +
@@ -73,12 +72,12 @@ public class MaquinaDAO extends DAO{
 
     public void inserirLimiteRamMySql(){
         conMySql.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca FROM peca ORDER BY idPeca DESC LIMIT 1))");
+
     }
+
     public List<Maquina> listarMaquinas(){
         return con.query("SELECT * FROM maquinario", new MaquinaRowMapper());
     }
-
-
 
     public void inserirMaquinarioMySql(int id,int fkModelo, int fkHospital, String mac){
         conMySql.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);

@@ -172,7 +172,7 @@ public class Monitoramento {
         if(valor < componenteMonitorado.getValorLimite()){
             System.out.println("AAAAAAAAAAAAAAAAAAAAAAA " + valor + componenteMonitorado.getValorLimite());
             chamado.abrirChamado("Alto", "Aberto", "2 Horas", "Memoria ultrapassada",componenteMonitorado.getIdComponente());
-        chamadoJira.AbrirChamado(macMaquina,componenteMonitorado.getNome(),valor,1);
+            chamadoJira.AbrirChamado(macMaquina,componenteMonitorado.getNome(),valor,1);
         }
 
 //        for (Componente limite : limitesComponente) {

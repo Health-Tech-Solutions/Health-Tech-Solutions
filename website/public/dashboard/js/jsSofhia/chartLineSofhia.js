@@ -71,7 +71,7 @@ function plotarGraficoSemanal(resposta){
     data = []
     var dataAtual = new Date()
     
-    var mes = dataAtual.getMonth() 
+    var mes = dataAtual.getMonth() +1
     
     for (let i = 0; i < resposta.length; i++) {
 
@@ -89,20 +89,25 @@ function plotarGraficoSemanal(resposta){
 
 function plotarGrafico(resposta){
 
-    labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov']
+    labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
     dados.datasets[0].data = []
     
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
         // console.log(registro.mes)
-        dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
+        dados.datasets[0].data[registro.mes-1] = (registro.quantidade)
     }
     dados.labels = labels
     lineChart.update(setInterval(5000))
+
+    setInterval(() => {
+        // obterDadosMensais();
+        lineChart.update();
+    }, 2000);
 }
 
 
-data = [0,0,0,0,0,0,0,0,0,0,0,0]
+data = [0,0,0,0,0,0,0,0,0,0,0]
 const constante = document.getElementById('chartLinha');
 labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov']
 // 12, 19, 3, 5, 2, 3, 4, 7, 1, 2, 4, 7
@@ -134,9 +139,6 @@ var lineChart = new Chart(constante, {
     }
 });
 
-setInterval(() => {
-    // obterDadosMensais();
-    lineChart.update();
-}, 2000);
+
 
 

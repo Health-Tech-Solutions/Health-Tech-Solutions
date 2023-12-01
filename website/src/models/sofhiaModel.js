@@ -11,6 +11,7 @@ function buscarSemanal(fkHospital) {
                     DAY(dataHora) AS dia,
                     COUNT(*) AS quantidade
                 FROM vw_chamados
+                WHERE DAYOFMONTH(dataHora) <> 31
                 GROUP BY DAY(dataHora)
                 ORDER BY dia;
             `
@@ -21,6 +22,7 @@ function buscarSemanal(fkHospital) {
                     COUNT(*) AS quantidade
                 FROM vw_chamados
                 WHERE idHospital = ${fkHospital}
+                    AND DAYOFMONTH(dataHora) <> 31
                 GROUP BY DAY(dataHora)
                 ORDER BY dia;
             `
@@ -32,6 +34,7 @@ function buscarSemanal(fkHospital) {
                     DAYOFMONTH(dataHora) AS dia,
                     COUNT(*) AS quantidade	
                 FROM vw_chamados
+                WHERE DAYOFMONTH(dataHora) <> 31
                 GROUP BY dia
                 ORDER BY dia;
             `
@@ -42,6 +45,7 @@ function buscarSemanal(fkHospital) {
                     COUNT(*) AS quantidade	
                 FROM vw_chamados
                 WHERE idHospital = ${fkHospital}
+                    AND DAYOFMONTH(dataHora) <> 31
                 GROUP BY dia
                 ORDER BY dia;
             `

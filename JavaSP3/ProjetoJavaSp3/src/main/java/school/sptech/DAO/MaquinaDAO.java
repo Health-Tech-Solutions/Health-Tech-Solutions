@@ -33,9 +33,8 @@ public class MaquinaDAO extends DAO{
         Processador processador = new Processador();
         String nomeProcessador = "CPU";
         String modelo = processador.getNome();
-        String insert = String.format("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)",nomeProcessador,1,id);
 
-        con.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)",nomeProcessador,1,id);
+        con.update("INSERT INTO peca(nome,modelo, fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
 
         inserirCpuMysql(id);
         inserirLimiteCPU(id);

@@ -103,10 +103,9 @@ public class Monitoramento {
                 if(!this.componentesMonitorados.isEmpty()){
 
                     for (Componente componenteMonitorado : this.componentesMonitorados) {
-                        System.out.println(componenteMonitorado.getFkMaquina());
-                        System.out.println(this.fkMaquina);
+
                         if(componenteMonitorado.getFkMaquina().equals(this.fkMaquina)){
-                            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEEEEEEEEEE");
+
                             if(componenteMonitorado.getFkTipoRegistro().equals(1)){ // Tipo registro é percentual de uso
                                 if(componenteMonitorado.getNome().equalsIgnoreCase("CPU")){
                                     monitoramentoDAO.inserirRegistros( dataFormatada,memEmUso, componenteMonitorado.getFkMaquina(),
@@ -170,7 +169,7 @@ public class Monitoramento {
     public void abrirChamado(Componente componenteMonitorado, double valor) {
 
         if(valor < componenteMonitorado.getValorLimite()){
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAA " + valor + componenteMonitorado.getValorLimite());
+
             chamado.abrirChamado("Alto", "Aberto", "2 Horas", "Memoria ultrapassada",componenteMonitorado.getIdComponente());
             chamadoJira.AbrirChamado(macMaquina,componenteMonitorado.getNome(),valor,1);
         }

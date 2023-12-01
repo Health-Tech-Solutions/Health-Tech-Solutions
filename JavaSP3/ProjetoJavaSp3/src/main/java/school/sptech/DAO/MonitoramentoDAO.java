@@ -19,7 +19,7 @@ public class MonitoramentoDAO extends DAO{
         con.update("INSERT INTO registro (dataHora,fkMaquina,fkPeca,valor) VALUES (GETDATE(),?,?,?)",fkMaquina,fkPeca,valor);
     }
 
-    public List<Componente> getComponentesMonitorados(){
+    public List<Componente> getComponentesMonitorados(int fkMaquinario){
         return con.query("SELECT \n" +
                 "\tp.idPeca AS idPeca,\n" +
                 "    p.nome AS nome,\n" +
@@ -28,7 +28,8 @@ public class MonitoramentoDAO extends DAO{
                 "    p.fkMaquinario AS fkMaquinario,\n" +
                 "    l.valor AS valor\n" +
                 " FROM peca AS p \n" +
-                " JOIN limite AS l ON l.fkPeca = p.idPeca ;",  new ComponenteRowMapper());
+                " JOIN limite AS l ON l.fkPeca = p.idPeca " +
+                "WHERE p.fkMaquinario = %d;".formatted(fkMaquinario), new ComponenteRowMapper());
     }
 
     public List<Componente> getLimiteComponente(){

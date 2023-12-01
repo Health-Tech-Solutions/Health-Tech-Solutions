@@ -38,7 +38,7 @@ public class Monitoramento {
     public Monitoramento(int idMaquina,String macMaquina) {
         this.fkMaquina = idMaquina;
         this.monitoramentoDAO = new MonitoramentoDAO();
-        this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados();
+        this.componentesMonitorados = this.monitoramentoDAO.getComponentesMonitorados(idMaquina);
         this.limitesComponente = this.monitoramentoDAO.getLimiteComponente();
         this.chamado = new Chamado();
         this.chamadoJira = new AbrirChamado();
@@ -99,7 +99,7 @@ public class Monitoramento {
                 """,sistema,memEmUso,memDisp,memTotal,processador.getFabricante(),processador.getNome(),
                         processador.getNome(),processador.getIdentificador(),processador.getMicroarquitetura(),
                         processador.getNumeroCpusFisicas(),processador.getNumeroCpusLogicas(),freqCpu,cpuEmUso);
-                this.componentesMonitorados = monitoramentoDAO.getComponentesMonitorados();
+                this.componentesMonitorados = monitoramentoDAO.getComponentesMonitorados(this.fkMaquina);
                 if(!this.componentesMonitorados.isEmpty()){
 
                     for (Componente componenteMonitorado : this.componentesMonitorados) {

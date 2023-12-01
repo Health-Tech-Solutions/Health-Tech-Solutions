@@ -15,4 +15,8 @@ router.get(`/cadastrarPeca`,(req,res) => {
     componentesController.obterDadosPeca(req,res);
 });
 
+router.get(`/updateLimite/:fkPeca/:valor`,(req,res) => {
+    componentesController.updateLimite(req,res);
+});
+
 module.exports = router;

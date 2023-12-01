@@ -75,8 +75,8 @@ function listasPecas() {
                                 var descricao = element.descricao;
                                 var modelo = element.modelo;
                                 var limite = element.limite;
-                              
-
+                                var idInput = "inputLimite" + i;
+                                
                                 let tabela = document.getElementById('tabela');
 
                                 let tituloTabela = document.getElementById('tituloTabela');
@@ -89,8 +89,8 @@ function listasPecas() {
                                 <td id="Descrição">${descricao}</td>
                                 <td id="Modelo">${modelo}</td>
                                 <td id="limite">${limite}</td>
-                                <td id="AlterarLimiteInput"><input id="inputLimite" type="number"></td>
-                                <td id="AlterarLimiteButton"><button onclick="enviarLimite()">Enviar</button></td>
+                                <td id="AlterarLimiteInput"><input id="${idInput}" type="number"></td>
+                                <td id="AlterarLimiteButton"><button onclick="enviarLimite(${id})">Enviar</button></td>
                                 `
                             }
 
@@ -107,5 +107,30 @@ function listasPecas() {
             console.log("ERRO" + err)
         }
     )
+}
+
+
+function enviarLimite() {
+    var fkPeca = []
+    var limite = []
+    function teste() {
+        enviarLimite.value 
+    }
+    
+    fetch(`/cadastroComponentes/updateLimite/${fkPeca}/${valor}`)      
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    resposta.reverse();
+                    listarMaquinas(resposta)
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error('Erro na chamada de API:', error);
+        });
+
 }
 

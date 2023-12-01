@@ -24,8 +24,20 @@ function obterDadosPeca(idMaquinario) {
     return database.executar(instrucao)
 }
 
+function updateLimite(fkPeca,valor) {
+    console.log("estou na buscarSemanal no chamadoModel")
+   
+    var instrucao = `
+    update limite set valor = ${valor} where fkpeca = ${fkPeca};
+    `
+    
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     modelosDeMaquinasCadastradas,
-    obterDadosPeca
+    obterDadosPeca,
+    updateLimite
   
 }

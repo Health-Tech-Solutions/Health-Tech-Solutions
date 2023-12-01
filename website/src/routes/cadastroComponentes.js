@@ -19,4 +19,10 @@ router.get(`/updateLimite/:fkPeca/:valor`,(req,res) => {
     componentesController.updateLimite(req,res);
 });
 
+router.post(`/cadastrarPeca/:nome/:descricao/:modelo/:fkTipoRegistro/:fkMaquinario`,(req,res) => {
+    componentesController.cadastrarPeca(req,res);
+});
+
+
+
 module.exports = router;

@@ -1,3 +1,5 @@
+//const { join } = require("path");
+
 var nome;
 var idMaquinario;
 
@@ -69,13 +71,13 @@ function listasPecas() {
 
 
                             for (let i = 0; i < resposta.length; i++) {
-                                const element = resposta[i];
+                                let element = resposta[i];
                                 var id = element.idPeca;
                                 var nomePeca = element.nome;
                                 var descricao = element.descricao;
                                 var modelo = element.modelo;
                                 var limite = element.limite;
-                                var idInput = "inputLimite" + i;
+                                var idInput = "inputLimite" + id;
                                 
                                 let tabela = document.getElementById('tabela');
 
@@ -92,6 +94,9 @@ function listasPecas() {
                                 <td id="AlterarLimiteInput"><input id="${idInput}" type="number"></td>
                                 <td id="AlterarLimiteButton"><button onclick="enviarLimite(${id})">Enviar</button></td>
                                 `
+                                console.log("VAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
+                             console.log(idInput)
+                            console.log(id)
                             }
 
                         }
@@ -110,19 +115,17 @@ function listasPecas() {
 }
 
 
-function enviarLimite() {
-    var fkPeca = []
-    var limite = []
-    function teste() {
-        enviarLimite.value 
-    }
+function enviarLimite(id) {
+    let valor = document.getElementById("inputLimite"+id).value
+    let fkPeca = id
+   
     
     fetch(`/cadastroComponentes/updateLimite/${fkPeca}/${valor}`)      
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
-                    resposta.reverse();
-                    listarMaquinas(resposta)
+                    
+                    
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

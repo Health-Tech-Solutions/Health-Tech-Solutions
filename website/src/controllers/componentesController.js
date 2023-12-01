@@ -34,7 +34,23 @@ function obterDadosPeca(req, res) {
 }
 
 function updateLimite(req, res) {
-    componentesModel.obterDadosPeca(req.params.fkPeca,req.params.valor).then(
+    componentesModel.updateLimite(req.params.fkPeca,req.params.valor).then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
+
+}
+
+function cadastrarPeca(req, res) {
+    componentesModel.cadastrarPeca(req.params.fkPeca,req.params.valor).then(
         function (resultado) {
             res.json(resultado);
         }
@@ -52,6 +68,7 @@ function updateLimite(req, res) {
 module.exports = {
     modelosDeMaquinasCadastradas,
     obterDadosPeca,
-    updateLimite
+    updateLimite,
+    cadastrarPeca
 
 }

@@ -1,6 +1,7 @@
 const database = require("../database/config")
 
 
+
 function pegarDadosMaquinas(fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
@@ -51,9 +52,6 @@ function taxaMaquinasOperando(fkHospital) {
     console.log("estou na buscarSemanal no chamadoModel")
     var instrucao = `
     `
-    
-    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-
         if (fkHospital == 'null') {
             instrucao = `
         select count(*) as totalMaquinas,(select count(*) from ordemManutencao
@@ -69,33 +67,6 @@ function taxaMaquinasOperando(fkHospital) {
         }
         console.log("executando a seguinte instrução SQL " + instrucao)
         return database.executar(instrucao)
-
-    }
-
-    else if (process.env.AMBIENTE_PROCESSO == "producao") {
-
-        if (fkHospital == 'null') {
-            instrucao = `
-        SELECT COUNT(*) as totalMaquinas,
-        (SELECT COUNT(*) 
-         FROM ordemManutencao
-         JOIN maquinario on idMaquinario = fkMaquina
-         WHERE estado = 'funcionando') as maquinasOK 
-        FROM maquinario;
-        `
-        } else {
-            instrucao = `
-        SELECT COUNT(*) as totalMaquinas,
-        (SELECT COUNT(*) 
-         FROM ordemManutencao
-         JOIN maquinario on idMaquinario = fkMaquina
-         WHERE estado = 'funcionando' and fkHospital = ${fkHospital}) as maquinasOK 
-        FROM maquinario 
-        WHERE fkHospital = ${fkHospital};
-        `
-        }
-
-    }
 
 }
 
@@ -122,11 +93,11 @@ function estadoMaquinas(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select count(*) as maquinasFuncionando,( select count(*) from ordemManutencao
-        JOIN maquinario on idMaquinario = fkMaquina
-        where estado = 'parado') as maquinasParadas from ordemManutencao
-        JOIN maquinario on idMaquinario = fkMaquina
-        where estado = 'funcionando';
+            select count(*) as maquinasFuncionando,( select count(*) from ordemManutencao
+            JOIN maquinario on idMaquinario = fkMaquina
+            where estado = 'parado') as maquinasParadas from ordemManutencao
+            JOIN maquinario on idMaquinario = fkMaquina
+            where estado = 'funcionando';
         `
     } else {
         instrucao = `
@@ -178,12 +149,12 @@ function tiposDeMaquinasCadastradas(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select idTipo,
-		nome from tipo
-        JOIN modelo on fkTipo = idTipo
-        JOIN maquinario on fkModelo = idModelo
-        group by idTipo 
-        order by idTipo asc; 
+        SELECT tipo.idTipo, tipo.nome
+        FROM tipo
+        JOIN modelo ON tipo.idTipo = modelo.fkTipo
+        JOIN maquinario ON modelo.idModelo = maquinario.fkModelo
+        GROUP BY tipo.idTipo, tipo.nome
+        ORDER BY tipo.idTipo ASC;
         `
     } else {
         instrucao = `
@@ -191,8 +162,8 @@ function tiposDeMaquinasCadastradas(fkHospital) {
 		nome from tipo
         JOIN modelo on fkTipo = idTipo
         JOIN maquinario on fkModelo = idModelo where fkHospital = ${fkHospital}
-        group by idTipo 
-        order by idTipo asc; 
+        GROUP BY tipo.idTipo, tipo.nome
+        ORDER BY tipo.idTipo ASC;
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -209,7 +180,11 @@ function modelosDeMaquinasCadastradas(fkTipo, fkHospital) {
         `
     } else {
         instrucao = `
-        select modelo,idModelo from modelo JOIN maquinario on idModelo = fkModelo where fkTipo = ${fkTipo} and fkHospital = ${fkHospital} group by idModelo;
+        SELECT modelo.modelo, idModelo
+        FROM modelo
+        JOIN maquinario ON idModelo = fkModelo
+        WHERE fkTipo = ${fkTipo} AND fkHospital = ${fkHospital}
+        GROUP BY modelo.modelo, idModelo;
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -222,11 +197,20 @@ function totalChamadosPorTipo(fkHospital) {
     `
     if (fkHospital == 'null') {
         instrucao = `
-        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius group by idTipo order by idTipo asc;
+        SELECT nomeTipo, idTipo, COUNT(*) AS totalChamadosTipo
+        FROM vw_vinicius
+        GROUP BY nomeTipo, idTipo
+        ORDER BY idTipo ASC;
+
         `
     } else {
         instrucao = `
-        select nomeTipo,idTipo,count(*) as totalChamadosTipo from vw_vinicius where idHospital = ${fkHospital} group by idTipo order by idTipo asc;
+        SELECT nomeTipo, idTipo, COUNT(*) AS totalChamadosTipo
+        FROM vw_vinicius
+        WHERE idHospital = ${fkHospital}
+        GROUP BY nomeTipo, idTipo
+        ORDER BY idTipo ASC;
+
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)

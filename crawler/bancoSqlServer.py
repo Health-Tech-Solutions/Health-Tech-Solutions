@@ -6,6 +6,9 @@ dados_conexao = (
     "Driver={SQL Server};"
     "Server=localhost;"
     "Database=hts;"
+    "UID=sa;"
+    "PWD=urubu100;"
+    "TrustServerCertificate=yes;"
 )
 
 conexao = pyodbc.connect(dados_conexao)

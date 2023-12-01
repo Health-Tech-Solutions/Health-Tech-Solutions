@@ -918,5 +918,5 @@ INSERT INTO maquinario(idMaquinario, macAdress, dataCadastramento, fkHospital, f
 
 
 	call fechar_chamados();
-
+use hts;
 select * from peca;

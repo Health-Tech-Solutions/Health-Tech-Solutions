@@ -34,7 +34,7 @@ function obterDadosPeca(req, res) {
 }
 
 function updateLimite(req, res) {
-    componentesModel.obterDadosPeca(req.params.fkPeca,req.params.valor).then(
+    componentesModel.updateLimite(req.params.fkPeca,req.params.valor).then(
         function (resultado) {
             res.json(resultado);
         }

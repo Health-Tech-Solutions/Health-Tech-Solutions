@@ -29,8 +29,6 @@ public class MaquinaDAO extends DAO{
 
     }
 
-
-
     public void inserirCPU(int id){
         Processador processador = new Processador();
         String nomeProcessador = "CPU";
@@ -39,7 +37,7 @@ public class MaquinaDAO extends DAO{
 
         con.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)",nomeProcessador,1,id);
 
-
+        inserirCpuMysql(id);
         inserirLimiteCPU(id);
     }
 
@@ -49,7 +47,7 @@ public class MaquinaDAO extends DAO{
         con.update("INSERT INTO limite(valor, fkPeca)\n" +
                 "SELECT 85, MAX(idPeca)\n" +
                 "FROM peca;");
-
+        inserirLimiteCpuMysql(id);
         inserirRAM(id);
     }
 
@@ -61,15 +59,15 @@ public class MaquinaDAO extends DAO{
 
         con.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
 
-
+        inserirRamMySql(id);
         inserirLimiteRAM();
     }
 
     public void inserirLimiteRAM(){
-
         con.update("INSERT INTO limite(valor, fkPeca)\n" +
                 "SELECT 85, MAX(idPeca)\n" +
                 "FROM peca;");
+        inserirLimiteRamMySql();
     }
 
     public void inserirLimiteRamMySql(){
@@ -82,7 +80,7 @@ public class MaquinaDAO extends DAO{
     }
 
     public void inserirMaquinarioMySql(int id,int fkModelo, int fkHospital, String mac){
-        conMySql.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?)",id,fkModelo,fkHospital,mac);
+        conMySql.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,now(),?,?,?);",id,fkModelo,fkHospital,mac);
     }
 
     public void inserirCpuMysql(int id){
@@ -100,8 +98,8 @@ public class MaquinaDAO extends DAO{
     public void inserirRamMySql(int id){
         Memoria memoria = new Memoria();
         String nomeMemoria = "RAM";
-        String insert = String.format("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
-        conMySql.update(insert);
+
+        conMySql.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
     }
 
 }

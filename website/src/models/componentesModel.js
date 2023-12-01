@@ -17,7 +17,7 @@ function obterDadosPeca(idMaquinario) {
     console.log("estou na buscarSemanal no chamadoModel")
    
     var instrucao = `
-    select * from peca where fkMaquinario = ${idMaquinario};
+    select * from peca JOIN limite on fkPeca = idPeca where fkMaquinario = ${idMaquinario};
     `
     
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -35,9 +35,35 @@ function updateLimite(fkPeca,valor) {
     return database.executar(instrucao)
 }
 
+function cadastrarPeca(nome, descricao, modelo, fkTipoRegistro, fkMaquinario) {
+    console.log("estou na buscarSemanal no chamadoModel")
+   
+    var instrucao = `
+    INSERT INTO peca (nome, descricao, modelo, fkTipoRegistro, fkMaquinario) 
+    VALUES ('${nome}', '${descricao}', '${modelo}', ${fkTipoRegistro}, ${fkMaquinario});
+    `
+    
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
+function cadastrarLimite(valor, fkPeca) {
+    console.log("estou na buscarSemanal no chamadoModel")
+   
+    var instrucao = `
+    INSERT INTO limite (valor, fkPeca) 
+    VALUES (${valor}, ${fkPeca});
+    `
+    
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
+}
+
 module.exports = {
     modelosDeMaquinasCadastradas,
     obterDadosPeca,
-    updateLimite
+    updateLimite,
+    cadastrarPeca,
+    cadastrarLimite
   
 }

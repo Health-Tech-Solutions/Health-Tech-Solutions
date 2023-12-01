@@ -210,7 +210,6 @@ function totalChamadosPorTipo(fkHospital) {
         WHERE idHospital = ${fkHospital}
         GROUP BY nomeTipo, idTipo
         ORDER BY idTipo ASC;
-
         `
     }
     console.log("executando a seguinte instrução SQL " + instrucao)
@@ -264,7 +263,6 @@ function buscarSomaFuncionamento(fkModelo) {
    
     `
     }
-
 
     console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
     return database.executar(instrucao)

@@ -301,25 +301,25 @@
                             <h1 class="h3 mb-4 text-gray-800">Cadastrar novo componente</h1>
 
                             <div id="containerInput1">
-                                <input type="text" placeholder="Nome">
-                                <input type="text" placeholder="Modelo">
+                                <input id="nome" type="text" placeholder="Nome">
+                                <input id="modelo" type="text" placeholder="Modelo">
                                
                             </div>
                             <div id="containerInput1">
-                                <input type="text" placeholder="Limite">
+                                <input id="valor" type="text" placeholder="Limite">
                                 <div class="dropdown">
                                     <button id="dropdown" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Tipo Registro
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Percentual</a>
-                                      <a class="dropdown-item" href="#">Mhz</a>
+                                      <p onclick="selecionarOpcao(1)" href="#">Percentual</p>
+                                      <p onclick="selecionarOpcao(2)" href="#">Mhz</p>
                                     </div>
                                   </div>
                             </div>
                             <div id="containerInput2">
 
-                                <textarea name="descricao" id="descricao" cols="10" rows="2"
+                                <textarea id="descricao" name="descricao" id="descricao" cols="10" rows="2"
                                     placeholder="Descrição (Máximo 255 caracteres)"
                                     style="resize: none;">
                             </textarea>
@@ -327,7 +327,7 @@
                             </div>
 
                             <div id="containerBotao">
-                                <button>
+                                <button onclick="cadastrarPeca()">
                                     Cadastrar
                                 </button>
 

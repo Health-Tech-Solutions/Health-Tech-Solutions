@@ -1,7 +1,6 @@
-//const { join } = require("path");
-
 var nome;
 var idMaquinario;
+var fkTipoRegistro;
 
 function buscarModelos() {
     let fkTipo = sessionStorage.FK_TIPO;
@@ -76,7 +75,7 @@ function listasPecas() {
                                 var nomePeca = element.nome;
                                 var descricao = element.descricao;
                                 var modelo = element.modelo;
-                                var limite = element.limite;
+                                var limite = element.valor;    
                                 var idInput = "inputLimite" + id;
                                 
                                 let tabela = document.getElementById('tabela');
@@ -94,9 +93,6 @@ function listasPecas() {
                                 <td id="AlterarLimiteInput"><input id="${idInput}" type="number"></td>
                                 <td id="AlterarLimiteButton"><button onclick="enviarLimite(${id})">Enviar</button></td>
                                 `
-                                console.log("VAIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII")
-                             console.log(idInput)
-                            console.log(id)
                             }
 
                         }
@@ -135,5 +131,34 @@ function enviarLimite(id) {
             console.error('Erro na chamada de API:', error);
         });
 
+        window.location.reload();
+
+}
+
+function selecionarOpcao(valor) {
+    fkTipoRegistro = valor;
+    console.log(fkTipoRegistro);
+    // Ou então, você pode fazer algo com base no valor selecionado
+    // Por exemplo, enviar para algum lugar, atualizar variáveis, etc.
+}
+
+
+function cadastrarPeca() {
+    fetch (`/cadastroComponentes/cadastrarPeca`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nome: document.getElementById("nome").value,
+            descricao: document.getElementById("descricao").value,
+            modelo: document.getElementById("modelo").value,
+            fkTipoRegistro: fkTipoRegistro,
+            fkMaquinario: sessionStorage.FK_MAQUINA,
+            valor: document.getElementById("valor").value
+        })
+        
+    })
+    alert("Cadastrado com sucesso!")
 }
 

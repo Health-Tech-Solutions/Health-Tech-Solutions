@@ -22,6 +22,10 @@ public class MaquinaDAO extends DAO{
 
  */
 
+    public int pegarPecas(){
+        return con.update("SELECT COUNT(*) FROM peca");
+    }
+
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
         con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
         inserirMaquinarioMySql(id,fkModelo,fkHospital,mac);
@@ -86,19 +90,21 @@ public class MaquinaDAO extends DAO{
         Processador processador = new Processador();
         String nomeProcessador = "CPU";
         String modelo = processador.getNome();
-        conMySql.update("INSERT INTO peca(nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
+        int idPeca = this.pegarPecas() + 1;
+        conMySql.update("INSERT INTO peca(idPeca,nome,modelo,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?,?)",idPeca,nomeProcessador,modelo,1,id);
     }
 
     public void inserirLimiteCpuMysql(int id){
-        conMySql.update("INSERT INTO limite(valor,fkPeca) VALUES (85,(SELECT idPeca " +
+
+        conMySql.update("INSERT INTO limite(idPeca,valor,fkPeca) VALUES (85,(SELECT idPeca " +
                 "FROM peca " +
                 "ORDER BY idPeca DESC LIMIT 1))");
     }
     public void inserirRamMySql(int id){
         Memoria memoria = new Memoria();
         String nomeMemoria = "RAM";
-
-        conMySql.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
+        int idPeca = this.pegarPecas() +1;
+        conMySql.update("INSERT INTO peca(idPeca,nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)", idPeca,nomeMemoria,1,id);
     }
 
 }

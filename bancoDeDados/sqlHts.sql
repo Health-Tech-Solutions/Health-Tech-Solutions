@@ -78,7 +78,7 @@
 	);
 
 	create table peca(
-		idPeca int primary key auto_increment,
+		idPeca int primary key,
 		nome varchar(45),
 		descricao varchar(45),
         modelo varchar(100),
@@ -93,8 +93,7 @@
 		dataHora datetime,
 		valor decimal(7,2),
 		fkMaquina int,
-		fkPeca INT,
-		Foreign Key (fkPeca) REFERENCES peca(idPeca)
+		fkPeca INT
 	);
 		
 	create table chamado(
@@ -773,21 +772,21 @@ INSERT INTO maquinario(idMaquinario, macAdress, dataCadastramento, fkHospital, f
         ('Frequencia', 'MHz');
 		
 	insert into 
-		peca(nome, modelo, fkTipoRegistro, fkMaquinario)
+		peca(idPeca,nome, modelo, fkTipoRegistro, fkMaquinario)
 	values 
-		('CPU','i9 9900f',1,200),
-		('CPU', 'i7 13500k',1,200),
-		('CPU','i3 10900',1,200),
-		('CPU','i7 6900f',1,200),
-		('CPU','i9 5900f',1,200),
-		('CPU','i5 11900f',1,200),
-		('CPU','i3 5900f',1,200),
-		('RAM','8gb fury Kingston',1,200),
-		('RAM','12gb ram crucial',1,200),
-		('RAM','16gb Corsair',1,200),
-		('Disco','1tb hd seagate',1,200),
-		('Disco','500gb ssd samsung',1,200),
-		('Disco','450gb hd Adata',1,200);
+		(1,'CPU','i9 9900f',1,200),
+		(2,'CPU', 'i7 13500k',1,200),
+		(3,'CPU','i3 10900',1,200),
+		(4,'CPU','i7 6900f',1,200),
+		(5,'CPU','i9 5900f',1,200),
+		(6,'CPU','i5 11900f',1,200),
+		(7,'CPU','i3 5900f',1,200),
+		(8,'RAM','8gb fury Kingston',1,200),
+		(9,'RAM','12gb ram crucial',1,200),
+		(10,'RAM','16gb Corsair',1,200),
+		(11,'Disco','1tb hd seagate',1,200),
+		(12,'Disco','500gb ssd samsung',1,200),
+		(13, 'Disco','450gb hd Adata',1,200);
 
 	insert into 
 		limite(fkPeca, fkModelo, valor)
@@ -920,3 +919,4 @@ INSERT INTO maquinario(idMaquinario, macAdress, dataCadastramento, fkHospital, f
 
 	call fechar_chamados();
 
+select * from peca;

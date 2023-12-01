@@ -14,6 +14,7 @@ public class MonitoramentoDAO extends DAO{
 
 
     public void inserirRegistros(String data,double valor, int fkMaquina,int fkPeca ){
+        System.out.println(fkPeca);
         conMySql.update("INSERT INTO registro (dataHora, fkMaquina, fkPeca, valor) VALUES (?, ?, ?, ?)",
                 data, fkMaquina, fkPeca, valor);
         con.update("INSERT INTO registro (dataHora,fkMaquina,fkPeca,valor) VALUES (GETDATE(),?,?,?)",fkMaquina,fkPeca,valor);

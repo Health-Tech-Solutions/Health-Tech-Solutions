@@ -24,7 +24,9 @@ public class MaquinaDAO extends DAO{
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
         con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
+        inserirMaquinarioMySql(id,fkModelo,fkHospital,mac);
         this.inserirCPU(id);
+
     }
 
 

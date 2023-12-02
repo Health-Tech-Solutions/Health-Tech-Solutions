@@ -4,7 +4,7 @@ import csv
 
 dados_conexao = (
     "Driver={SQL Server};"
-    "Server=localhost;"
+    "Server=;"
     "Database=hts;"
     "UID=sa;"
     "PWD=urubu100;"
@@ -23,18 +23,23 @@ def dados(estado, data, precipitacao, pressao_max, pressao_min, temperatura_max,
         pressao_min = pressao_min.replace(',', '.')
         temperatura_max = temperatura_max.replace(',', '.')
         temperatura_min = temperatura_min.replace(',', '.')
+        data = data.replace('/','-')
 
-        cursor.execute("INSERT INTO dadosTemperatura (estado,dataTemperatura, precipitacao, pressaoMax, pressaoMin, temperaturaMax, temperaturaMin) VALUES (%s, %s, %s, %s, %s, %s, %s);", (estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)) 
+        valores = (estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min)
+       
+        cursor.execute("INSERT INTO dadosTemperatura (estado, dataTemperatura, precipitacao, pressaoMax, pressaoMin, temperaturaMax, temperaturaMin) VALUES (?, CONVERT(date, ?), ?, ?, ?, ?, ?);", valores) 
         cursor.commit()
-    except:
-        print('Não tem todos os dados')   
+    except pyodbc.Error as e:
+        print(e)  
 
 def registros(estado):
     try:
-        cursor.execute("INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital) SELECT idDadosTemperatura, idEmpresa FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado WHERE endereco.estado = %s;", (estado,))
+
+        valor = (estado)
+        cursor.execute("INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital) SELECT idDadosTemperatura, idEmpresa FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado WHERE endereco.estado = %s;", valor)
         cursor.commit()
-    except:
-        print('Não tem todos os dados')  
+    except pyodbc.Error as e2:
+        print(e2)  
 
 
 

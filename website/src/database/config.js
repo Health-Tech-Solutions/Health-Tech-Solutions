@@ -27,7 +27,7 @@ const sqlServerConfig = {
     stream: false,
     options: {
         encrypt: false,
-        trustServerCertificate: false
+        trustServerCertificate: true
     }
 }
 

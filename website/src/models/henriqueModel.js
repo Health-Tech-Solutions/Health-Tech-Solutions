@@ -43,11 +43,12 @@ function buscarSomaFuncionamento(fkModelo){
 //     `
 
 
-    instrucao = `SELECT
-                    ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
-                    ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
-                 FROM ordemManutencao AS om
-                WHERE om.qtdFalhas <> 0`
+    instrucao = `  SELECT
+    ROUND(AVG(om.qtdFalhas), 0) AS qtdFalhas,
+    ROUND(AVG(om.somaFuncionamento), 0) AS tempoFuncionamento,
+    ROUND(AVG(om.somaManutencao), 0) AS tempoManutencao
+FROM ordemManutencao AS om
+WHERE om.qtdFalhas <> 0;`
 //     if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
 //         if(fkModelo == 'null'){
 //             instrucao = `

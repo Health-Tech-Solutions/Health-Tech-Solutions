@@ -882,12 +882,4 @@ EXEC fechar_chamados;
 
 GO 
 
- SELECT 
-            COUNT(idChamado) AS numeroChamados,
-            tipo,
-            modelo
-        FROM vw_chamados c
-        WHERE DATE(c.dataHora) BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 YEAR) AND CURDATE()
-        GROUP BY tipo,modelo
-        ORDER BY numeroChamados
-        LIMIT 15;
+SELECT * FROM ordemManutencao

@@ -19,7 +19,7 @@ var sql = require('mssql');
 // }
 
 const sqlServerConfig = {
-    port: parseInt(1433,10),
+    port: 1433,
     server: "localhost",
     user: "sa",
     password: "urubu100",

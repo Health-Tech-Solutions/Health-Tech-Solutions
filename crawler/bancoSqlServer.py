@@ -15,6 +15,26 @@ conexao = pyodbc.connect(dados_conexao)
 
 cursor = conexao.cursor()
 
+def excluirRegistroTemperatura():
+    try:
+        cursor.execute("drop table registroTemperatura;")
+        cursor.commit()
+    except pyodbc.Error as e:
+        print(e)
+
+def excluirDadosTemperatura():
+    try:
+        cursor.execute("TRUNCATE TABLE dadosTemperatura;")
+        cursor.commit()
+    except pyodbc.Error as e:
+        print(e)
+def criandoTabela():
+    try:
+        cursor.execute("CREATE TABLE registroTemperatura( fkDadosTemperatura INT, fkHospital INT, FOREIGN KEY (fkDadosTemperatura) REFERENCES dadosTemperatura(idDadosTemperatura),FOREIGN KEY (fkHospital) REFERENCES empresa(idEmpresa));")
+        cursor.commit()
+    except pyodbc.Error as e:
+        print(e)
+
 def dados(estado, data, precipitacao, pressao_max, pressao_min, temperatura_max, temperatura_min):
     try:
        # Substitua a vírgula pelo ponto
@@ -40,6 +60,3 @@ def registros(estado):
         cursor.commit()
     except pyodbc.Error as e2:
         print(e2)  
-
-
-

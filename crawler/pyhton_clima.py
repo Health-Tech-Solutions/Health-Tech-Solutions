@@ -45,7 +45,9 @@ def Crawler():
     my_list = list(cr)
 
 
-
+    bancoSqlServer.excluirRegistroTemperatura()
+    bancoSqlServer.excluirDadosTemperatura()
+    bancoSqlServer.criandoTabela()
     for row in my_list:
      contador = contador + 1
 
@@ -76,9 +78,8 @@ def Crawler():
     
 
 if __name__ == "__main__":
-       schedule.every().wednesday.at("00:00:00").do(Crawler)
-       while True:
-           schedule.run_pending()
-           time.sleep(1)
-
+        schedule.every().wednesday.at("00:00:00").do(Crawler)
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
 

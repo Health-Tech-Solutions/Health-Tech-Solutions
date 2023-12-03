@@ -133,8 +133,32 @@ function predicao(){
     var angular = coeficientes[0].toFixed(0)
     var linear = coeficientes[1].toFixed(0)
     for(let i = 0; i < dadosReais.length; i++){
-        let formula = diferenca(dadosReais[i],linear) + angular * i
-        vetorAux.push(formula)
+        // let formula = linearidade(dadosReais[i],linear,dadosReais) + angular * i
+        // let formulaDif = diferenca(dadosReais[i],linear) + angular * i                   
+        // let formulaDif = dadosReais[i]
+
+        let formula = Number(linear) + Number(angular) * i
+
+
+        // alert(dadosReais[i])
+        // alert(formula)
+
+        if(dadosReais[i] < formula){
+            if(dadosReais[i] < (formula * 0.8)){
+                dadosReais[i] = formula * 0.8
+            }
+        } else if(dadosReais[i] > formula){
+            if(dadosReais[i] > (formula * 1.1)){
+                dadosReais[i] = formula * 1.1
+            }
+        }
+ 
+        // if(formulaDif > formula * 1.15 || formulaDif < formula){
+        //     formulaDif = formula * 1.15 
+        // }
+     
+        // if()
+        vetorAux.push(dadosReais[i])
     }
     var mediaAux = vetorAux.reduce((acc,val) => acc + val, 0)/vetorAux.length
     media.innerHTML = `Média prevista: ${mediaAux.toFixed(0)}`
@@ -168,7 +192,18 @@ function calcularMedia(dados) {
     return dados.reduce((acc, val) => acc + val, 0) / dados.length;
 }
 
-function diferenca(num1, num2){
-    
+function linearidade(dado, coef, array){
+    let mediaArray = calcularMedia(array)
+    let outLiers = 0;
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i];
+        if(element ){}
+        
+    }
+
     return (num1 + (num1 - num2)) 
+}
+
+function diferenca(num1, num2) {
+    return (num1 + (num1 - num2))
 }

@@ -35,7 +35,7 @@ var graficoPizza = new Chart(configPie, {
 function buscarGravidade(idTipo){
     var fkHospital = sessionStorage.FK_HOSPITAL
     var fks = fkHospital + ',' + idTipo
-    fetch(`/chamados/buscarGravidade/${fks}`)
+    fetch(`/henrique/buscarGravidade/${fks}`)
     .then(
         resposta => {
             if(resposta.ok){

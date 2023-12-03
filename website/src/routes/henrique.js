@@ -22,4 +22,9 @@ router.get('/buscarSemanal/:fkHospital', (req,res) =>{
 router.get('/listarModelos/:fkHospital', (req,res) => {
     henriqueController.listarModelos(req,res);
 })
+
+router.get(`/buscarGravidade/:fks`, (req,res) => {
+    henriqueController.buscarGravidade(req,res);
+})
+
 module.exports = router;

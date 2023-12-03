@@ -31,6 +31,7 @@ function pegarModelos() {
     return database.executar(instrucao)
 }
 
+/* CHART PIE */
 function listarModelos(fkHospital) {
     var instrucao;
     console.log("Estou no listar modelos")
@@ -52,6 +53,36 @@ function listarModelos(fkHospital) {
     GROUP BY tipo, idTipo;    
         `
     }
+    return database.executar(instrucao)
+}
+
+function buscarGravidade(idTipo,fkHospital){
+    var instrucao = ``
+    console.log("Estou no buscar gravidade")
+    if(fkHospital == 'null'){
+        instrucao = `
+        SELECT 
+            COUNT(nivel) AS qtdNivel,
+            nivel 
+        FROM vw_chamados 
+        WHERE idTipo = ${idTipo}
+        GROUP BY nivel
+        ORDER BY nivel;
+        
+        `
+    } else {
+        instrucao = `
+        SELECT 
+            COUNT(nivel) AS qtdNivel,
+            nivel 
+        FROM vw_chamados 
+        WHERE idTipo = ${idTipo}
+        AND idHospital = ${fkHospital}
+        GROUP BY nivel;
+    `
+    }
+    
+    console.log("Executando a seguinte instrução sql " + instrucao)
     return database.executar(instrucao)
 }
 
@@ -202,5 +233,6 @@ module.exports = {
     buscarSomaFuncionamento,
     listarModelos,
     buscarMensal,
+    buscarGravidade,
     buscarSemanal
 }

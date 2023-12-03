@@ -1,5 +1,5 @@
 
-var fkHospital = sessionStorage.FK_HOSPITAL 
+var fkHospital = sessionStorage.FK_HOSPITAL     
 function obterDadosMensais(){
  
     fetch(`/henrique/buscarMensal/${fkHospital}`)
@@ -22,11 +22,8 @@ function obterDadosMensais(){
         }
     )
 }
-    
-
 
 function obterDadosSemanal(){
-
     var fkHospital = sessionStorage.FK_HOSPITAL;
     fetch(`/henrique/buscarSemanal/${fkHospital}`)
     .then(
@@ -54,7 +51,6 @@ function plotarGraficoSemanal(resposta){
     labels = []
     data = []
     var dataAtual = new Date()
-    
     var mes = dataAtual.getMonth() + 1
     
     for (let i = 0; i < resposta.length; i++) {
@@ -74,17 +70,17 @@ function plotarGraficoSemanal(resposta){
 var dataRegressao = []
 function plotarGrafico(resposta){
 
-
-
     labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
     dados.datasets[0].data = []
-    
+    var dadosMedia = []
     for (let i = 0; i < resposta.length; i++) {
         let registro = resposta[i];
         dados.datasets[0].data[registro.mes - 1] = (registro.quantidade)
+        dadosMedia.push(registro.quantidade)
     }   
     
-    var mediaDados = dados.datasets[0].data.reduce((acc, val) => acc = val,0) /dados.length
+    var mediaDados = dadosMedia.reduce((acc, val) => acc = val,0) /dadosMedia.length
+
     media.innerHTML = mediaDados
 
     dados.labels = labels
@@ -134,12 +130,10 @@ function predicao(){
     var coeficientes = calcularCoeficientes(dadosReais)
     var angular = coeficientes[0].toFixed(0)
     var linear = coeficientes[1].toFixed(0)
-  
     for(let i = 0; i < dadosReais.length; i++){
         let formula = diferenca(dadosReais[i],linear) + angular * i
         vetorAux.push(formula)
     }
-
     var mediaAux = vetorAux.reduce((acc,val) => acc + val, 0)/vetorAux.length
     media.innerHTML = mediaAux
     dados.datasets[0].data = vetorAux

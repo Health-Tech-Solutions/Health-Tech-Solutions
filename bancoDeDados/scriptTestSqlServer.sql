@@ -105,3 +105,14 @@ EXEC fechar_chamados
             FROM vw_chamados
             GROUP BY MONTH(dataHora)
             ORDER BY mes;
+SELECT TOP 15
+    COUNT(idChamado) AS numeroChamados,
+    tipo,
+    modelo
+FROM vw_chamados c
+WHERE CAST(c.dataHora AS DATE) BETWEEN DATEADD(YEAR, -1, GETDATE()) AND GETDATE()
+GROUP BY tipo, modelo
+ORDER BY numeroChamados; 
+
+SELECT COUNT(*) FROM chamado;
+EXEC inserir_registros

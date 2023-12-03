@@ -265,7 +265,7 @@ BEGIN
 		SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 335), '2023-01-01');
 		SET @valor = 85 + (RAND() * 15);
 		SET @fkPeca = FLOOR(RAND() * 13) + 1;
-		SET @fkMaquina = FLOOR(RAND() * 216) + 1;
+		SET @fkMaquina = FLOOR(RAND() * 276) + 1;
 
 		INSERT INTO registro (dataHora, valor, fkMaquina, fkPeca)
 		VALUES (@dataHora, @valor, @fkMaquina, @fkPeca);
@@ -840,7 +840,7 @@ select
 			else '10 horas'
 		end
 	end sla,
-	dataHora = GETDATE(),
+	dataHora,
 	'' descricao,
 	r.idRegistro
 from registro AS r where r.valor > 85;

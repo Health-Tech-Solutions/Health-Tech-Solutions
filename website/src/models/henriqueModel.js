@@ -1,9 +1,9 @@
 const database = require("../database/config")
 
-function pegarModelos(){
+function pegarModelos() {
     console.log("entrei no pegar modelos")
     var instrucao = ``
-    if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucao = `
                 SELECT 
                     COUNT(idChamado) AS numeroChamados,
@@ -14,7 +14,7 @@ function pegarModelos(){
                 GROUP BY tipo,modelo
                 ORDER BY numeroChamados
                 LIMIT 15;
-        ` 
+        `
     } else {
         instrucao = `
             SELECT TOP 15
@@ -27,15 +27,39 @@ function pegarModelos(){
             ORDER BY numeroChamados;    
         `
     }
-    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL \n" + instrucao)   
+    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL \n" + instrucao)
     return database.executar(instrucao)
 }
 
-function buscarSomaFuncionamento(fkModelo){
+function listarModelos(fkHospital) {
+    var instrucao;
+    console.log("Estou no listar modelos")
+    if (fkHospital == 'null') {
+        instrucao = `
+        SELECT 
+            tipo,
+            idTipo
+        FROM vw_chamados
+        GROUP BY tipo,idTipo
+        `
+    } else {
+        instrucao = `
+        SELECT 
+        tipo,
+        idTipo 
+    FROM vw_chamados 
+    WHERE idHospital = ${fkHospital}
+    GROUP BY tipo, idTipo;    
+        `
+    }
+    return database.executar(instrucao)
+}
+
+function buscarSomaFuncionamento(fkModelo) {
     var instrucao;
 
-    if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
-        if(fkModelo == 'null'){
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        if (fkModelo == 'null') {
             instrucao = `
             SELECT
                 ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
@@ -43,7 +67,7 @@ function buscarSomaFuncionamento(fkModelo){
                 ROUND(AVG(om.somaManutencao)) AS tempoManutencao
             FROM ordemManutencao AS om
             WHERE om.qtdFalhas <> 0;
-        `    
+        `
         } else {
             instrucao = `
             SELECT
@@ -55,7 +79,7 @@ function buscarSomaFuncionamento(fkModelo){
         `
         }
     } else {
-        if(fkModelo == 'null'){
+        if (fkModelo == 'null') {
             instrucao = `
             SELECT
             ROUND(AVG(om.qtdFalhas), 0) AS qtdFalhas,
@@ -64,18 +88,18 @@ function buscarSomaFuncionamento(fkModelo){
         FROM ordemManutencao AS om
         WHERE om.qtdFalhas <> 0;
             `
+        }
     }
-}   
-    
+
     console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)
     return database.executar(instrucao)
 }
 
-function buscarMensal(fkHospital){
-    
+function buscarMensal(fkHospital) {
+
     var instrucao;
-    if(process.env.AMBIENTE_PROCESSO == 'desenvolvimento'){
-        if(fkHospital == 'null'){
+    if (process.env.AMBIENTE_PROCESSO == 'desenvolvimento') {
+        if (fkHospital == 'null') {
             instrucao = `
             SELECT 
                 MONTH(dataHora) AS mes,
@@ -94,10 +118,10 @@ function buscarMensal(fkHospital){
             GROUP BY mes
             ORDER BY mes;
         `
-        } 
+        }
     } else {
-    
-        if(fkHospital == 'null'){
+
+        if (fkHospital == 'null') {
             instrucao = `
             SELECT 
                 MONTH(dataHora) AS mes,
@@ -123,10 +147,10 @@ function buscarMensal(fkHospital){
     return database.executar(instrucao)
 }
 
-function buscarSemanal(fkHospital){
+function buscarSemanal(fkHospital) {
     var instrucao;
-    if(process.env.AMBIENTE_PROCESSO == 'desenvolvimento'){
-        if(fkHospital = 'null'){
+    if (process.env.AMBIENTE_PROCESSO == 'desenvolvimento') {
+        if (fkHospital = 'null') {
             instrucao = `
             SELECT 
                 DAYOFMONTH(dataHora) AS dia,
@@ -147,7 +171,7 @@ function buscarSemanal(fkHospital){
             `
         }
     } else {
-        if(fkHospital == 'null'){
+        if (fkHospital == 'null') {
             instrucao = `
             SELECT 
                 DAY(dataHora) AS dia,
@@ -176,6 +200,7 @@ function buscarSemanal(fkHospital){
 module.exports = {
     pegarModelos,
     buscarSomaFuncionamento,
+    listarModelos,
     buscarMensal,
     buscarSemanal
 }

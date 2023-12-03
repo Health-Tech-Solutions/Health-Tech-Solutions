@@ -18,6 +18,24 @@ function pegarModelos(req, res) {
         });
 }
 
+function listarModelos(req,res){
+    var fkHospital	= req.params.fkHospital;
+    henriqueModel.listarModelos(fkHospital)
+        .then(
+            (resultado) => {
+                if(resultado.length > 0){
+                    res.status(200).json(resultado)
+                } else {
+                    res.status(204).json([])
+                }
+            }
+        )
+        .catch(erro =>{
+            console.log(erro)
+            console.log("Houve um erro ao tentar listar os modelos de equipamentos", erro.sqlMessage)
+        })
+}
+
 function buscarSomaFuncionamento(req,res){
     var fkModelo = req.params.fkModelo
     fkModelo = 'null'
@@ -74,5 +92,6 @@ module.exports = {
     pegarModelos,
     buscarSomaFuncionamento,
     buscarMensal,
-    buscarSemanal
+    buscarSemanal,
+    listarModelos
 }

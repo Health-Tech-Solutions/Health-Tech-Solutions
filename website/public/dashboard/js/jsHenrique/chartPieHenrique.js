@@ -84,7 +84,7 @@ function listarEquipamentos(numero){
     equipamentos = []
     tipos = []
     var fkHospital = sessionStorage.FK_HOSPITAL
-    fetch(`/chamados/listarModelos/${fkHospital}`)
+    fetch(`/henrique/listarModelos/${fkHospital}`)
         .then(
             resposta => {
                 if(resposta.ok){

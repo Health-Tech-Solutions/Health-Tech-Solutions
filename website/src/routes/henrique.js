@@ -18,4 +18,8 @@ router.get('/buscarMensal/:fkHospital', function (req,res){
 router.get('/buscarSemanal/:fkHospital', (req,res) =>{
     henriqueController.buscarSemanal(req,res);
 })
+
+router.get('/listarModelos/:fkHospital', (req,res) => {
+    henriqueController.listarModelos(req,res);
+})
 module.exports = router;

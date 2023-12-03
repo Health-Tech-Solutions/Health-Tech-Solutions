@@ -141,7 +141,7 @@ function buscarMensal(fkHospital){
 
 function buscarSemanal(fkHospital){
     var instrucao;
-    if(process.env.AMBIENTE_PROCESSO = 'desenvolvimento'){
+    if(process.env.AMBIENTE_PROCESSO == 'desenvolvimento'){
         if(fkHospital = 'null'){
             instrucao = `
             SELECT 

@@ -29,7 +29,7 @@ function buscarSomaFuncionamento() {
 
 
 function calcularConfiabilidade(resposta) {
-    alert(JSON.stringify(resposta))
+
     let tempoFuncionamento = resposta[0].tempoFuncionamento
     let tempoManutencao = resposta[0].tempoManutencao
     let qtdFalhas = resposta[0].qtdFalhas

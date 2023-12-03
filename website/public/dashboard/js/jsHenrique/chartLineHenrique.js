@@ -60,6 +60,9 @@ function plotarGraficoSemanal(resposta){
         labels.push(ocorrencia.dia + '/' + mes)
         data.push(ocorrencia.quantidade)
     }
+
+    let mediaSemanal = data.reduce((acc,val) => acc = val,0) / data.length  
+    media.innerHTML = 'Média de chamados por dia: ' + mediaSemanal.toFixed(0)
     
     dados.labels = labels
     dados.datasets[0].data = data
@@ -69,7 +72,7 @@ function plotarGraficoSemanal(resposta){
 
 var dataRegressao = []
 function plotarGrafico(resposta){
-
+    
     labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
     dados.datasets[0].data = []
     var dadosMedia = []
@@ -80,8 +83,7 @@ function plotarGrafico(resposta){
     }   
     
     var mediaDados = dadosMedia.reduce((acc, val) => acc = val,0) /dadosMedia.length
-
-    media.innerHTML += ': ' + mediaDados
+    media.innerHTML = 'Média de chamados por mês: ' + mediaDados.toFixed(0)
 
     dados.labels = labels
     lineChart.update()
@@ -135,7 +137,7 @@ function predicao(){
         vetorAux.push(formula)
     }
     var mediaAux = vetorAux.reduce((acc,val) => acc + val, 0)/vetorAux.length
-    media.innerHTML = mediaAux
+    media.innerHTML = `Média prevista: ${mediaAux.toFixed(0)}`
     dados.datasets[0].data = vetorAux
     lineChart.update()
 }

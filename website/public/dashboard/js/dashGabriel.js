@@ -155,7 +155,7 @@ function listarMeses(){
                             }else if (mes == 3){
                                 nomeMes = "Março"
                             }else if (mes == 4){
-                                nomeMes = "Abriu"
+                                nomeMes = "Abril"
                             }else if (mes == 5){
                                 nomeMes = "Maio"
                             }else if (mes == 6){

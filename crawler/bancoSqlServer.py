@@ -36,7 +36,7 @@ def registros(estado):
     try:
 
         valor = (estado)
-        cursor.execute("INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital) SELECT idDadosTemperatura, idEmpresa FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado WHERE endereco.estado = %s;", valor)
+        cursor.execute("INSERT INTO registroTemperatura (fkDadosTemperatura, fkHospital) SELECT idDadosTemperatura, idEmpresa FROM endereco JOIN empresa ON idEndereco = fkEndereco JOIN dadosTemperatura ON endereco.estado = dadosTemperatura.estado WHERE endereco.estado = ?;", valor)
         cursor.commit()
     except pyodbc.Error as e2:
         print(e2)  

@@ -76,9 +76,9 @@ def Crawler():
     
 
 if __name__ == "__main__":
-      schedule.every().wednesday.at("00:00:00").do(Crawler)
-      while True:
-          schedule.run_pending()
-          time.sleep(1)
+       schedule.every().wednesday.at("00:00:00").do(Crawler)
+       while True:
+           schedule.run_pending()
+           time.sleep(1)
 
 

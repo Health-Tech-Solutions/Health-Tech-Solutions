@@ -254,6 +254,7 @@ END;
 GO
 
 -- Criação da stored procedure inserir_registros
+
 CREATE PROCEDURE inserir_registros
 AS
 BEGIN
@@ -261,7 +262,7 @@ BEGIN
 
 	WHILE @i <= 300
 	BEGIN
-		SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 365), '2023-01-01');
+		SET @dataHora = DATEADD(DAY, FLOOR(RAND() * 335), '2023-01-01');
 		SET @valor = 85 + (RAND() * 15);
 		SET @fkPeca = FLOOR(RAND() * 13) + 1;
 		SET @fkMaquina = FLOOR(RAND() * 216) + 1;
@@ -879,7 +880,8 @@ AS
 	JOIN peca AS p ON r.fkPeca = p.idPeca;
 GO
 EXEC fechar_chamados;
-
 GO 
+EXEC inserir_registros
+
 
 SELECT * FROM ordemManutencao

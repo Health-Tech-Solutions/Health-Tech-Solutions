@@ -90,9 +90,18 @@ select * FROM registro WHERE fkMaquina = 209;
 
 exec fechar_chamados
 
- SELECT
-    ROUND(AVG(om.qtdFalhas), 2) AS qtdFalhas,
-    ROUND(AVG(om.somaFuncionamento), 2) AS tempoFuncionamento,
-    ROUND(AVG(om.somaManutencao), 2) AS tempoManutencao
-FROM ordemManutencao AS om
-WHERE om.qtdFalhas <> 0;
+	 SELECT
+		ROUND(AVG(om.qtdFalhas), 0) AS qtdFalhas,
+		ROUND(AVG(om.somaFuncionamento), 0) AS tempoFuncionamento,
+		ROUND(AVG(om.somaManutencao), 0) AS tempoManutencao
+	FROM ordemManutencao AS om
+	;
+
+EXEC fechar_chamados
+
+ SELECT 
+                MONTH(dataHora) AS mes,
+                COUNT(*) AS quantidade	
+            FROM vw_chamados
+            GROUP BY MONTH(dataHora)
+            ORDER BY mes;

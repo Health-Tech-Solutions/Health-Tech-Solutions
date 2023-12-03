@@ -1,6 +1,7 @@
 const database = require("../database/config")
 
 function pegarModelos(){
+    console.log("entrei no pegar modelos")
     var instrucao = ``
     if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
         instrucao = `
@@ -26,7 +27,7 @@ function pegarModelos(){
             ORDER BY numeroChamados;    
         `
     }
-   
+    console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL \n" + instrucao)   
     return database.executar(instrucao)
 }
 

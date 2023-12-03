@@ -81,7 +81,7 @@ function plotarGrafico(resposta){
     
     var mediaDados = dadosMedia.reduce((acc, val) => acc = val,0) /dadosMedia.length
 
-    media.innerHTML = mediaDados
+    media.innerHTML += ': ' + mediaDados
 
     dados.labels = labels
     lineChart.update()

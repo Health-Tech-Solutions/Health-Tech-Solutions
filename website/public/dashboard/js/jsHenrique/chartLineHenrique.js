@@ -1,4 +1,7 @@
-    var fkHospital = sessionStorage.FK_HOSPITAL
+
+var fkHospital = sessionStorage.FK_HOSPITAL 
+function obterDadosMensais(){
+ 
     fetch(`/henrique/buscarMensal/${fkHospital}`)
     .then(
         function(resposta){
@@ -18,6 +21,8 @@
             console.log("ERRO " + err)
         }
     )
+}
+    
 
 
 function obterDadosSemanal(){

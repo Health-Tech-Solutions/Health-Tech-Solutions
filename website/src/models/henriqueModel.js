@@ -86,6 +86,8 @@ function buscarGravidade(idTipo,fkHospital){
     return database.executar(instrucao)
 }
 
+/* Fim do chart pie */
+
 function buscarSomaFuncionamento(fkModelo) {
     var instrucao;
 
@@ -227,6 +229,11 @@ function buscarSemanal(fkHospital) {
     return database.executar(instrucao)
 }
 
+function quantidadeChamados(){
+    console.log("Estou verificando a quantidade de chamados")
+    var instrucao = 'SELECT COUNT(*) AS qtdChamados FROM chamado'
+    return database.executar(instrucao)
+}
 
 module.exports = {
     pegarModelos,
@@ -234,5 +241,6 @@ module.exports = {
     listarModelos,
     buscarMensal,
     buscarGravidade,
+    quantidadeChamados, 
     buscarSemanal
 }

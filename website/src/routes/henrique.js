@@ -27,4 +27,7 @@ router.get(`/buscarGravidade/:fks`, (req,res) => {
     henriqueController.buscarGravidade(req,res);
 })
 
+router.get(`/quantidadeChamados`, (req,res) => {
+    henriqueController.quantidadeChamados(req,res);
+});
 module.exports = router;

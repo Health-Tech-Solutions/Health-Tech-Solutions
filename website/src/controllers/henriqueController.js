@@ -57,6 +57,24 @@ function buscarGravidade(req, res) {
         })
 }
 
+function quantidadeChamados(req, res) {
+    henriqueModel.quantidadeChamados()
+        .then(
+            resultado => {
+                if(resultado.length > 0) {
+                    res.status(200).json(resultado)
+                } else {
+                    res.status(204).json([])
+                }
+            }
+        )
+        .catch( err => {
+            console.log(err);
+            console.log("Houve um erro ao tentar pegar a gravidade dos chamados", err.sqlMessage)
+            res.status(500).json(err.sqlMessage)   
+        })
+}
+
 function buscarSomaFuncionamento(req, res) {
     var fkModelo = req.params.fkModelo
     fkModelo = 'null'
@@ -115,5 +133,6 @@ module.exports = {
     buscarMensal,
     buscarGravidade,
     buscarSemanal,
+    quantidadeChamados,
     listarModelos
 }

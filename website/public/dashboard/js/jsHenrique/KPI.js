@@ -1,6 +1,4 @@
 
-
-
 function buscarSomaFuncionamento() {
     var fkModelo = 'null'
 
@@ -25,8 +23,20 @@ function buscarSomaFuncionamento() {
         });
 }
 
-
-
+fetch(`/henrique/quantidadeChamados`)
+    .then(function(resposta) {
+        if(resposta.ok){
+            resposta.json()
+                .then(function(resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`, "AAAABBBBBBBBBBBBBBBBBBBBBBBB");
+                    
+                    qtd_chamados.innerHTML = resposta[0].qtdChamados
+                })
+        }  
+    })
+    .catch(function(err) {
+        console.log(`Erro na obtenção dos dados ${err.message}`)
+    })
 
 function calcularConfiabilidade(resposta) {
 

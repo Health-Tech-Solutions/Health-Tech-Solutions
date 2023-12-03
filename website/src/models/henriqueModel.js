@@ -90,7 +90,7 @@ WHERE om.qtdFalhas <> 0;`
 function buscarMensal(fkHospital){
     
     var instrucao;
-    if(process.env.AMBIENTE_PROCESSO = 'desenvolvimento'){
+    if(process.env.AMBIENTE_PROCESSO == 'desenvolvimento'){
         if(fkHospital == 'null'){
             instrucao = `
             SELECT 

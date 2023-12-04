@@ -1,3 +1,7 @@
 .pointer {
     cursor: pointer;
 }
+
+#btnGerarRelatorio:hover {
+    background-color: #9a0801;
+}

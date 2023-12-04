@@ -30,38 +30,6 @@ var dadosBarra = {
         }]
 };
 
-// function obterDadosGraficoBarraDoDia() {
-//     var fkHospital = sessionStorage.FK_HOSPITAL
-
-//     fetch(`/sofhiaRoute/buscarHospitaisDoDia`, { cache: 'no-store' }).then(function (response) {
-//         if (response.ok) {
-//             response.json().then(function (resposta) {
-//                 limparGraficoBarra()
-//                 resposta.reverse();
-//                 console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-//                 if(fkHospital != "null") {
-//                     graficoDeBarras.style.display = "none"
-//                 } else {
-//                     graficoDeBarras.style.display = "block"
-//                     plotarGraficoBarra(resposta);
-//                 }
-                
-//                 tituloGraficoBarras.innerHTML = 'Quantidade de alertas de cada hospital (de hoje)'
-
-//                 graficoBarrasDia.style.backgroundColor = "#d3d3d3"
-//                 graficoBarrasSemana.style.backgroundColor = ""
-//                 graficoBarrasMes.style.backgroundColor = ""
-//                 graficoBarrasAno.style.backgroundColor = ""
-//             });
-//         } else {
-//             console.error('Nenhum dado encontrado ou erro na API');
-//         }
-//     })
-//         .catch(function (error) {
-//             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-//         });
-// }
-
 function obterDadosGraficoBarraDaSemana() {
     var fkHospital = sessionStorage.FK_HOSPITAL
 

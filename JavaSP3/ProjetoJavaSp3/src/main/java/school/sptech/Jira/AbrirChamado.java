@@ -18,7 +18,7 @@ import java.util.Base64;
 public class AbrirChamado {
 
     private static final String EMAIL = "monitoramento.hts@gmail.com";
-    private static final String API_KEY = "ATATT3xFfGF09BmC_rlLIdmKHXT5AvaZgLoTcvq0BaF3yfmIlYYHy8FKFEoLEdZToALq59Req-U6W-6N6jttQnSBmZ7TDhxnMXdeuPQn_Z6XaZunbdHSPqBvgdkvzF-81PPlchdUEeHIDdoEGMUjeHJqlxHQzLhxOqmr2uZYbSAbm1O-0L0Ajm4=ECB31AFD";
+    private static final String API_KEY = "";
     private static final String AUTH = EMAIL + ":" + API_KEY;
     private static final String AUTH_HEADER = "Basic " + Base64.getEncoder().encodeToString(AUTH.getBytes(StandardCharsets.UTF_8));
 

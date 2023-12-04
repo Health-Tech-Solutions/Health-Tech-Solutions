@@ -277,7 +277,7 @@ function chamarModeloComMaisAlertasDoMes() {
                 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
                 
-                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do mês)'
+                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (dos últimos 30 dias)'
                 
                 modeloSemana.style.backgroundColor = ""
                 modeloMes.style.backgroundColor = "#d3d3d3"
@@ -315,7 +315,7 @@ function chamarModeloComMaisAlertasDoAno() {
 
                 modeloComMaisAlertas.innerHTML = resposta[0].modelo;
 
-                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (do ano)'
+                tituloKPI3.innerHTML = 'Modelo de máquina com + alertas (dos últimos 365 dias)'
                 
                 modeloSemana.style.backgroundColor = ""
                 modeloMes.style.backgroundColor = ""

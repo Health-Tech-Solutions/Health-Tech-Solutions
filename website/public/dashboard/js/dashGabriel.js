@@ -264,6 +264,14 @@ function MaquinasPorTipoChamadoAberto() {
                             console.log(situacaoMaquinas)
                             console.log("AAAAAAAAAAAAAAAAAAAAAA!!!!!!!!!! ")
                             console.log(situacaoMaquinas)
+                            Ultrassom = 0
+                            Cardioversores = 0
+                            Desfibriladores = 0
+                            MonitorCardiaco = 0
+                            MaquinaAnestesia = 0
+                            MaquinaECG = 0
+                            MonitorFetal = 0
+                            MonitorSinaisVitais = 0
 
                             for (let index = 0; index < situacaoMaquinas.length; index++) {
 
@@ -324,7 +332,16 @@ function MaquinasPorTipo() {
                     .then(
                         function (resposta) {
                             informacoesMaquinasHospital2 = resposta;
+                            console.log("------------------------------------------------------------------------------------------------------------------------------------------------------------")
                             console.log(informacoesMaquinasHospital2)
+                            qntFktipo1 = 0
+                            qntFktipo2 = 0
+                            qntFktipo3 = 0
+                            qntFktipo4 = 0
+                            qntFktipo5 = 0
+                            qntFktipo6 = 0
+                            qntFktipo7 = 0
+                            qntFktipo8 = 0
 
                             for (let index = 0; index < informacoesMaquinasHospital2.length; index++) {
                                 if (resposta[index].fkTipo == 1) {
@@ -366,6 +383,7 @@ function MaquinasPorTipo() {
 var linha1, linha2, linha3, linha4, linha5, linha6, linha7, linha8 = 0
 
 function calculoGraficoSituacaoGeral() {
+    linha1, linha2, linha3, linha4, linha5, linha6, linha7, linha8 = 0
 
     linhaCasoDerNull = 0
     linha1 = ((Ultrassom / qntFktipo1) * 100).toFixed(2)
@@ -561,6 +579,13 @@ function calculoGraficoSituacaoGeral() {
     //Não tem MonitorSinaisVitais
 
 }
+
+
+function updateMaquinasPorTipoChamadoAberto(){
+    MaquinasPorTipoChamadoAberto().update()
+}
+
+setInterval(MaquinasPorTipoChamadoAberto, 5000)
 
 
 function mediaTemperatura(){

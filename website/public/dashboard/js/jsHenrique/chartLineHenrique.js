@@ -82,7 +82,7 @@ function plotarGrafico(resposta) {
         dadosMedia.push(registro.quantidade)
     }
 
-    var mediaDados = dadosMedia.reduce((acc, val) => acc = val, 0) / dadosMedia.length
+    var mediaDados = calcularMedia(dadosMedia)
     media.innerHTML = 'Média de chamados por mês: ' + mediaDados.toFixed(0)
 
     dados.labels = labels

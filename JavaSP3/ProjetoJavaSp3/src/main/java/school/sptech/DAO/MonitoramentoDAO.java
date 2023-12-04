@@ -8,8 +8,6 @@ import school.sptech.Conexoes.Conexao;
 
 import java.util.List;
 
-
-
 public class MonitoramentoDAO extends DAO{
 
 

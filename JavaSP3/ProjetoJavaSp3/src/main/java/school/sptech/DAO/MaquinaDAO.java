@@ -15,15 +15,7 @@ import java.util.List;
 
 public class MaquinaDAO extends DAO{
 
-/*
-    public void inserirMaquinario(String tipo, String modeloMaquina, String numeroSerie){
-        String insert = String.format("INSERT INTO maquinario (tipo,modelo,numeroSerie) VALUES (?, ?, ?);",tipo,modeloMaquina,numeroSerie);
 
-        con.update(insert);
-        conMySql.update(insert);
-    }
-
- */
 
     public synchronized int pegarPecas(){
         List<Componente> count =  con.query("SELECT \n" +

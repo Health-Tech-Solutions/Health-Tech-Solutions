@@ -70,9 +70,9 @@ CREATE TABLE tipoRegistro(
 
 CREATE TABLE peca(
 	idPeca INT PRIMARY KEY IDENTITY,
-	nome VARCHAR(45),
-	modelo VARCHAR(45),
-	descricao VARCHAR(45),
+	nome VARCHAR(300s),
+	modelo VARCHAR(300),
+	descricao VARCHAR(300),
 	fkTipoRegistro INT,	
 	fkMaquinario INT,
 	FOREIGN KEY (fkTipoRegistro) REFERENCES tipoRegistro(idTipoRegistro),

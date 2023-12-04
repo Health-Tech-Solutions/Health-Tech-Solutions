@@ -56,5 +56,5 @@ function calcularConfiabilidade(resposta) {
 }
 
 function tratarTempo(tempo) {
-    return (tempo / 60).toFixed(0)
+    return (tempo / 60).toFixed(2)
 }

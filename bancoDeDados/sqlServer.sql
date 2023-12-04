@@ -883,5 +883,6 @@ EXEC fechar_chamados;
 GO 
 EXEC inserir_registros
 
-
+SELECT * FROM maquinario ORDER BY idMaquinario DESC
+SELECT * FROM peca
 SELECT * FROM ordemManutencao

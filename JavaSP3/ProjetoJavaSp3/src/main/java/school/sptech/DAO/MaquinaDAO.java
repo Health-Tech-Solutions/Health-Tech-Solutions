@@ -33,7 +33,7 @@ public class MaquinaDAO extends DAO{
 
     public void inserirMaquinarioMac(int id,int fkModelo, int fkHospital, String mac){
         con.update("INSERT INTO maquinario (idMaquinario, dataCadastramento,fkModelo, fkHospital,macAdress) VALUES (?,GETDATE(),?,?,?)",id,fkModelo,fkHospital,mac);
-        inserirMaquinarioMySql(id,fkModelo,fkHospital,mac);
+//        inserirMaquinarioMySql(id,fkModelo,fkHospital,mac);
         this.inserirCPU(id);
 
     }
@@ -45,7 +45,7 @@ public class MaquinaDAO extends DAO{
 
         con.update("INSERT INTO peca(nome,modelo, fkTipoRegistro,fkMaquinario) VALUES (?,?,?,?)",nomeProcessador,modelo,1,id);
 
-        inserirCpuMysql(id);
+//        inserirCpuMysql(id);
         inserirLimiteCPU(id);
     }
 
@@ -54,7 +54,7 @@ public class MaquinaDAO extends DAO{
         con.update("INSERT INTO limite(valor, fkPeca)\n" +
                 "SELECT 85, MAX(idPeca)\n" +
                 "FROM peca;");
-        inserirLimiteCpuMysql(id);
+//        inserirLimiteCpuMysql(id);
         inserirRAM(id);
     }
 
@@ -66,15 +66,15 @@ public class MaquinaDAO extends DAO{
 
         con.update("INSERT INTO peca(nome,fkTipoRegistro,fkMaquinario) VALUES (?,?,?)", nomeMemoria,1,id);
 
-        inserirRamMySql(id);
-        inserirLimiteRAM();
+//        inserirRamMySql(id);
+//        inserirLimiteRAM();
     }
 
     public void inserirLimiteRAM(){
         con.update("INSERT INTO limite(valor, fkPeca)\n" +
                 "SELECT 85, MAX(idPeca)\n" +
                 "FROM peca;");
-        inserirLimiteRamMySql();
+//        inserirLimiteRamMySql();
     }
 
     public void inserirLimiteRamMySql(){

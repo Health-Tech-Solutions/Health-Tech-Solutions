@@ -11,7 +11,7 @@ public class ChamadoDAO extends DAO{
 
         con.update("INSERT INTO chamado (nivel, estado, sla, descricao, dataHora, fkRegistro) VALUES \n" +
                 "(?, ?, ?, ?, GETDATE(), (SELECT TOP 1 idRegistro FROM registro WHERE fkPeca = ? ORDER BY idRegistro DESC));", nivel, estado, sla, descricao,idPeca);
-        conMySql.update("INSERT INTO chamado (nivel, estado, sla, descricao, dataHora, fkRegistro) VALUES \n" +
-                "(?, ?, ?, ?, NOW(), (SELECT idRegistro FROM registro WHERE fkPeca = ? ORDER BY idRegistro DESC LIMIT 1));", nivel, estado, sla, descricao,idPeca);
+//        conMySql.update("INSERT INTO chamado (nivel, estado, sla, descricao, dataHora, fkRegistro) VALUES \n" +
+//                "(?, ?, ?, ?, NOW(), (SELECT idRegistro FROM registro WHERE fkPeca = ? ORDER BY idRegistro DESC LIMIT 1));", nivel, estado, sla, descricao,idPeca);
     }
 }

@@ -70,4 +70,4 @@ router.get('/buscarSomaFuncionamento/:fkModelo', (req,res) => {
 
 
 
-module.exports = router
+module.exports = router;

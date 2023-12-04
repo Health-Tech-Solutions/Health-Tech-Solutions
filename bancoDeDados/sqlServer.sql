@@ -70,7 +70,7 @@ CREATE TABLE tipoRegistro(
 
 CREATE TABLE peca(
 	idPeca INT PRIMARY KEY IDENTITY,
-	nome VARCHAR(300s),
+	nome VARCHAR(300),
 	modelo VARCHAR(300),
 	descricao VARCHAR(300),
 	fkTipoRegistro INT,	

@@ -147,14 +147,15 @@ function totalChamadosPorModelo(req, res) {
 }
 
 
-function buscarSomaFuncionamento(req,res){
+function buscarSomaFuncionamento(req, res) {
     var fkModelo = req.params.fkModelo
+    fkModelo = 'null'
     viniciusModel.buscarSomaFuncionamento(fkModelo)
         .then((resultado) => {
             if (resultado.length > 0) {
                 res.status(200).json(resultado)
             } else {
-                res.status(204).json([])
+                res.status(204).json(resultado)
             }
         })
         .catch(function (erro) {
@@ -162,7 +163,6 @@ function buscarSomaFuncionamento(req,res){
             console.log("Houve um erro ao procurar os hospitais: ", erro.sqlMessage)
             res.status(500).json(erro.sqlMessage);
         });
-
 }
 
 

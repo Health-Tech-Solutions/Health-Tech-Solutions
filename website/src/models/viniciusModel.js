@@ -243,25 +243,38 @@ function totalChamadosPorModelo(fkTipo, fkHospital) {
 
 function buscarSomaFuncionamento(fkModelo) {
     var instrucao;
-    if (fkModelo == 'null') {
-        instrucao = `
-        SELECT
+
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        if (fkModelo == 'null') {
+            instrucao = `
+            SELECT
+                ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
+                ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
+                ROUND(AVG(om.somaManutencao)) AS tempoManutencao
+            FROM ordemManutencao AS om
+            WHERE om.qtdFalhas <> 0;
+        `
+        } else {
+            instrucao = `
+            SELECT
             ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
             ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
             ROUND(AVG(om.somaManutencao)) AS tempoManutencao
         FROM ordemManutencao AS om
         WHERE om.qtdFalhas <> 0;
-    `
+        `
+        }
     } else {
-        instrucao = `
-        SELECT
-        ROUND(AVG(om.qtdFalhas)) AS qtdFalhas,
-        ROUND(AVG(om.somaFuncionamento)) AS tempoFuncionamento,
-        ROUND(AVG(om.somaManutencao)) AS tempoManutencao
-    FROM ordemManutencao AS om
-    WHERE om.qtdFalhas <> 0;
-   
-    `
+        if (fkModelo == 'null') {
+            instrucao = `
+            SELECT
+            ROUND(AVG(om.qtdFalhas), 0) AS qtdFalhas,
+            ROUND(AVG(om.somaFuncionamento), 0) AS tempoFuncionamento,
+            ROUND(AVG(om.somaManutencao), 0) AS tempoManutencao
+        FROM ordemManutencao AS om
+        WHERE om.qtdFalhas <> 0;
+            `
+        }
     }
 
     console.log("VOU EXECUTAR A SEGUINTE INSTRUÇÃO SQL " + instrucao)

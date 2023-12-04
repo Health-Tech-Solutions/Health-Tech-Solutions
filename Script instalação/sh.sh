@@ -53,10 +53,13 @@ else
 
             # Instala as bibliotecas Python
                         echo "$(tput setaf 10)[HTS Assistente]:$(tput setaf 7) Instalando bibliotecas Python..."
-                        sudo pip install psutil
-                        sudo pip install mysql-connector-python
-                        sudo pip install tk
-                        sudo pip install requests
+                        python.exe -m pip install --upgrade pip
+                        pip install psutil
+                        pip install mysql-connector-python
+                        pip install tk            
+                        pip install requests
+                        pip install requests
+                        pip install schedule  
                         echo "$(tput setaf 10)[HTS Assistente]:$(tput setaf 7) Todas as bibliotecas foram instaladas com sucesso."
                     else
                         echo "$(tput setaf 10)[HTS Assistente]:$(tput setaf 7) O pip não está instalado. Instalando o PIP e as bibliotecas."
@@ -65,10 +68,13 @@ else
                         if [ $? -eq 0 ]; then
                             echo "$(tput setaf 10)[HTS Assistente]:$(tput setaf 7) O pip foi instalado com sucesso."
                             echo "$(tput setaf 10)[HTS Assistente]:$(tput setaf 7) Instalando bibliotecas Python..."
-                            sudo pip install psutil
-                            sudo pip install mysql-connector-python
-                            sudo pip install tk            
-                            sudo pip install requests  
+                            python.exe -m pip install --upgrade pip
+                            pip install psutil
+                            pip install mysql-connector-python
+                            pip install tk            
+                            pip install requests
+                            pip install requests
+                            pip install schedule  
         
                             echo "$(tput setaf 10)[HTS Assistente]:$(tput setaf 7) Todas as bibliotecas foram instaladas com sucesso."
                         else

@@ -21,9 +21,6 @@ function pegarDadosMaquinas(fkHospital) {
         AND idHospital = ${fkHospital};
         `
         }
-        console.log("executando a seguinte instrução SQL " + instrucao)
-        return database.executar(instrucao)
-
     }
 
     else if (process.env.AMBIENTE_PROCESSO == "producao") {
@@ -42,9 +39,12 @@ function pegarDadosMaquinas(fkHospital) {
         AND idHospital = ${fkHospital};
         `
         }
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
     }
-
-
+    console.log("executando a seguinte instrução SQL " + instrucao)
+    return database.executar(instrucao)
 
 }
 

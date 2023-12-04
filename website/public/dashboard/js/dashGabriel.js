@@ -581,11 +581,11 @@ function calculoGraficoSituacaoGeral() {
 }
 
 
-function updateMaquinasPorTipoChamadoAberto(){
-    MaquinasPorTipoChamadoAberto().update()
-}
 
-setInterval(MaquinasPorTipoChamadoAberto, 5000)
+setInterval(MaquinasPorTipoChamadoAberto,5000)
+setInterval(mediaDesempenho,5000)
+setInterval(mediaTemperatura,5000)
+
 
 
 function mediaTemperatura(){
@@ -615,6 +615,8 @@ function mediaTemperatura(){
        
 
 }
+
+
 
 function mediaDesempenho(){
     var idMes = sessionStorage.mes

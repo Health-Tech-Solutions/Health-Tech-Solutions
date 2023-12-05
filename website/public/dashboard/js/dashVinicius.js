@@ -438,11 +438,9 @@ function mudarNomeGraficoBarras(){
 
 
 function buscarSomaFuncionamento() {
-
-    console.log("ENTREEEEEEEI")
     var fkModelo = 'null'
 
-    fetch(`/viniciusRoutes/buscarSomaFuncionamento/${fkModelo}`)
+    fetch(`/henrique/buscarSomaFuncionamento/${fkModelo}`)
         .then(
             function (resposta) {
                 if (resposta.ok) {
@@ -473,16 +471,13 @@ function calcularConfiabilidade(resposta) {
     let confiabilidade = (2.71 ** (-taxaFalhas * 2)) * 100
     let mttr = Number(tratarTempo(tempoManutencao) / qtdFalhas).toFixed(2)
 
-    console.log(tempoManutencao, qtdFalhas)
-
-    console.log("AAAAAAAAAA" + mttr)
-
-   
+    // modeloComMaisAlertas.innerHTML = `${mtbf} Horas`
     modeloComMaisAlertas.innerHTML = `${mttr} Horas`
 
-
+    // confiabilidade_id.innerHTML = confiabilidade.toFixed(2), "%";
+    // barraConfiabilidade.style.width = `${(confiabilidade)}%`
 }
 
 function tratarTempo(tempo) {
-    return (tempo / 60).toFixed(0)
+    return (tempo / 60).toFixed(2)
 }

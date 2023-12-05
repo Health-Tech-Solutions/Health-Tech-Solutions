@@ -46,7 +46,7 @@ function calcularConfiabilidade(resposta) {
     let mtbf = tratarTempo(tempoFuncionamento / qtdFalhas)
     let taxaFalhas = 1 / mtbf
     let confiabilidade = (2.71 ** (-taxaFalhas * 2)) * 100
-    let mttr = Number(tratarTempo(tempoManutencao) / qtdFalhas).toFixed(2)
+    let mttr = Math.ceil(Number(tratarTempo(tempoManutencao) / qtdFalhas))
 
     mtbf_id.innerHTML = `${mtbf} Horas`
     mttr_id.innerHTML = `${mttr} Horas`

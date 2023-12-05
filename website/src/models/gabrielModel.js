@@ -405,7 +405,7 @@ function graficoLinha(fkHospital,maquina){
             join maquinario on registro.fkMaquina = idMaquinario 
             join empresa on maquinario.fkHospital = idEmpresa 
             join dadosTemperatura on dataHora = dataTemperatura  
-            where fkMaquina = ${maquina} and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
+            where fkMaquina = ${maquina} and month(dataTemperatura) < 13 and fkHospital = ${fkHospital}
             group by fkHospital, fkMaquina, dataTemperatura, valor;
             `
         }
@@ -419,7 +419,7 @@ function graficoLinha(fkHospital,maquina){
             join maquinario on registro.fkMaquina = idMaquinario 
             join empresa on maquinario.fkHospital = idEmpresa 
             join dadosTemperatura on dataHora = dataTemperatura  
-            where fkMaquina = ${maquina} and month(dataTemperatura) < 7 and fkHospital = ${fkHospital}
+            where fkMaquina = ${maquina} and month(dataTemperatura) < 13 and fkHospital = ${fkHospital}
             group by fkHospital, fkMaquina, dataTemperatura, valor;
             `
         }
